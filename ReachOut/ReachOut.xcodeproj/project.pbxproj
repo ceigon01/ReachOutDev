@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A403F3AD19393DE60039750B /* FAWBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3AC19393DE60039750B /* FAWBaseViewController.m */; };
-		A403F3B019393DFA0039750B /* FAWNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3AF19393DFA0039750B /* FAWNavigationController.m */; };
-		A403F3B319393E3A0039750B /* FAWRoleSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3B219393E3A0039750B /* FAWRoleSelectViewController.m */; };
-		A403F3BA19393EAB0039750B /* FAWFindMentorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3B919393EAB0039750B /* FAWFindMentorViewController.m */; };
-		A403F3BD19393EC70039750B /* FAWMentorFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3BC19393EC70039750B /* FAWMentorFoundViewController.m */; };
-		A403F3C4193947E00039750B /* FAWSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3C3193947E00039750B /* FAWSignupViewController.m */; };
-		A403F3C7193947EE0039750B /* FAWVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3C6193947EE0039750B /* FAWVerifyViewController.m */; };
-		A403F3CC193948F90039750B /* FAWRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3CB193948F90039750B /* FAWRootViewController.m */; };
+		A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3AC19393DE60039750B /* CEIBaseViewController.m */; };
+		A403F3B019393DFA0039750B /* CEINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3AF19393DFA0039750B /* CEINavigationController.m */; };
+		A403F3B319393E3A0039750B /* CEIRoleSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3B219393E3A0039750B /* CEIRoleSelectViewController.m */; };
+		A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3B919393EAB0039750B /* CEIFindMentorViewController.m */; };
+		A403F3BD19393EC70039750B /* CEIMentorFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3BC19393EC70039750B /* CEIMentorFoundViewController.m */; };
+		A403F3C4193947E00039750B /* CEISignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3C3193947E00039750B /* CEISignupViewController.m */; };
+		A403F3C7193947EE0039750B /* CEIVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3C6193947EE0039750B /* CEIVerifyViewController.m */; };
+		A403F3CC193948F90039750B /* CEIRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3CB193948F90039750B /* CEIRootViewController.m */; };
 		A440A18B1937F33900D7CC0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A440A18A1937F33900D7CC0D /* Foundation.framework */; };
 		A440A18D1937F33900D7CC0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A440A18C1937F33900D7CC0D /* CoreGraphics.framework */; };
 		A440A18F1937F33900D7CC0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A440A18E1937F33900D7CC0D /* UIKit.framework */; };
 		A440A1951937F33900D7CC0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A440A1931937F33900D7CC0D /* InfoPlist.strings */; };
 		A440A1971937F33900D7CC0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A440A1961937F33900D7CC0D /* main.m */; };
-		A440A19B1937F33900D7CC0D /* FAWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A440A19A1937F33900D7CC0D /* FAWAppDelegate.m */; };
+		A440A19B1937F33900D7CC0D /* CEIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A440A19A1937F33900D7CC0D /* CEIAppDelegate.m */; };
 		A440A19D1937F33900D7CC0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A440A19C1937F33900D7CC0D /* Images.xcassets */; };
 		A440A1A41937F33900D7CC0D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A440A1A31937F33900D7CC0D /* XCTest.framework */; };
 		A440A1A51937F33900D7CC0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A440A18A1937F33900D7CC0D /* Foundation.framework */; };
@@ -28,7 +28,7 @@
 		A440A1AE1937F33900D7CC0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A440A1AC1937F33900D7CC0D /* InfoPlist.strings */; };
 		A440A1B01937F33900D7CC0D /* ReachOutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A440A1AF1937F33900D7CC0D /* ReachOutTests.m */; };
 		A45E4B88193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A45E4B87193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard */; };
-		A45E4B8C193800CC008D7EA6 /* FAWHandies.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4B8B193800CC008D7EA6 /* FAWHandies.m */; };
+		A45E4B8C193800CC008D7EA6 /* CEIHandies.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4B8B193800CC008D7EA6 /* CEIHandies.m */; };
 		E66A90BE8A0D47ACB6621D37 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 224F1343C32B4C2496EC140A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -45,22 +45,22 @@
 /* Begin PBXFileReference section */
 		224F1343C32B4C2496EC140A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF810CB89BA4BC99C77774C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		A403F3AB19393DE60039750B /* FAWBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAWBaseViewController.h; sourceTree = "<group>"; };
-		A403F3AC19393DE60039750B /* FAWBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAWBaseViewController.m; sourceTree = "<group>"; };
-		A403F3AE19393DFA0039750B /* FAWNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAWNavigationController.h; sourceTree = "<group>"; };
-		A403F3AF19393DFA0039750B /* FAWNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAWNavigationController.m; sourceTree = "<group>"; };
-		A403F3B119393E3A0039750B /* FAWRoleSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAWRoleSelectViewController.h; sourceTree = "<group>"; };
-		A403F3B219393E3A0039750B /* FAWRoleSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAWRoleSelectViewController.m; sourceTree = "<group>"; };
-		A403F3B819393EAB0039750B /* FAWFindMentorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAWFindMentorViewController.h; sourceTree = "<group>"; };
-		A403F3B919393EAB0039750B /* FAWFindMentorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAWFindMentorViewController.m; sourceTree = "<group>"; };
-		A403F3BB19393EC70039750B /* FAWMentorFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAWMentorFoundViewController.h; sourceTree = "<group>"; };
-		A403F3BC19393EC70039750B /* FAWMentorFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAWMentorFoundViewController.m; sourceTree = "<group>"; };
-		A403F3C2193947E00039750B /* FAWSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAWSignupViewController.h; sourceTree = "<group>"; };
-		A403F3C3193947E00039750B /* FAWSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAWSignupViewController.m; sourceTree = "<group>"; };
-		A403F3C5193947EE0039750B /* FAWVerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAWVerifyViewController.h; sourceTree = "<group>"; };
-		A403F3C6193947EE0039750B /* FAWVerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAWVerifyViewController.m; sourceTree = "<group>"; };
-		A403F3CA193948F90039750B /* FAWRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAWRootViewController.h; sourceTree = "<group>"; };
-		A403F3CB193948F90039750B /* FAWRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAWRootViewController.m; sourceTree = "<group>"; };
+		A403F3AB19393DE60039750B /* CEIBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIBaseViewController.h; sourceTree = "<group>"; };
+		A403F3AC19393DE60039750B /* CEIBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIBaseViewController.m; sourceTree = "<group>"; };
+		A403F3AE19393DFA0039750B /* CEINavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEINavigationController.h; sourceTree = "<group>"; };
+		A403F3AF19393DFA0039750B /* CEINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEINavigationController.m; sourceTree = "<group>"; };
+		A403F3B119393E3A0039750B /* CEIRoleSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIRoleSelectViewController.h; sourceTree = "<group>"; };
+		A403F3B219393E3A0039750B /* CEIRoleSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIRoleSelectViewController.m; sourceTree = "<group>"; };
+		A403F3B819393EAB0039750B /* CEIFindMentorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIFindMentorViewController.h; sourceTree = "<group>"; };
+		A403F3B919393EAB0039750B /* CEIFindMentorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIFindMentorViewController.m; sourceTree = "<group>"; };
+		A403F3BB19393EC70039750B /* CEIMentorFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIMentorFoundViewController.h; sourceTree = "<group>"; };
+		A403F3BC19393EC70039750B /* CEIMentorFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIMentorFoundViewController.m; sourceTree = "<group>"; };
+		A403F3C2193947E00039750B /* CEISignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEISignupViewController.h; sourceTree = "<group>"; };
+		A403F3C3193947E00039750B /* CEISignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEISignupViewController.m; sourceTree = "<group>"; };
+		A403F3C5193947EE0039750B /* CEIVerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIVerifyViewController.h; sourceTree = "<group>"; };
+		A403F3C6193947EE0039750B /* CEIVerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIVerifyViewController.m; sourceTree = "<group>"; };
+		A403F3CA193948F90039750B /* CEIRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIRootViewController.h; sourceTree = "<group>"; };
+		A403F3CB193948F90039750B /* CEIRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIRootViewController.m; sourceTree = "<group>"; };
 		A440A1871937F33900D7CC0D /* ReachOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReachOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A440A18A1937F33900D7CC0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A440A18C1937F33900D7CC0D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -69,8 +69,8 @@
 		A440A1941937F33900D7CC0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A440A1961937F33900D7CC0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A440A1981937F33900D7CC0D /* ReachOut-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReachOut-Prefix.pch"; sourceTree = "<group>"; };
-		A440A1991937F33900D7CC0D /* FAWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FAWAppDelegate.h; sourceTree = "<group>"; };
-		A440A19A1937F33900D7CC0D /* FAWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FAWAppDelegate.m; sourceTree = "<group>"; };
+		A440A1991937F33900D7CC0D /* CEIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CEIAppDelegate.h; sourceTree = "<group>"; };
+		A440A19A1937F33900D7CC0D /* CEIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CEIAppDelegate.m; sourceTree = "<group>"; };
 		A440A19C1937F33900D7CC0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A440A1A21937F33900D7CC0D /* ReachOutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReachOutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A440A1A31937F33900D7CC0D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -78,8 +78,8 @@
 		A440A1AD1937F33900D7CC0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A440A1AF1937F33900D7CC0D /* ReachOutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReachOutTests.m; sourceTree = "<group>"; };
 		A45E4B87193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		A45E4B8A193800CC008D7EA6 /* FAWHandies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAWHandies.h; sourceTree = "<group>"; };
-		A45E4B8B193800CC008D7EA6 /* FAWHandies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAWHandies.m; sourceTree = "<group>"; };
+		A45E4B8A193800CC008D7EA6 /* CEIHandies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIHandies.h; sourceTree = "<group>"; };
+		A45E4B8B193800CC008D7EA6 /* CEIHandies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIHandies.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,12 +119,12 @@
 		A403F3A919393D750039750B /* Signup */ = {
 			isa = PBXGroup;
 			children = (
-				A403F3B119393E3A0039750B /* FAWRoleSelectViewController.h */,
-				A403F3B219393E3A0039750B /* FAWRoleSelectViewController.m */,
-				A403F3C2193947E00039750B /* FAWSignupViewController.h */,
-				A403F3C3193947E00039750B /* FAWSignupViewController.m */,
-				A403F3C5193947EE0039750B /* FAWVerifyViewController.h */,
-				A403F3C6193947EE0039750B /* FAWVerifyViewController.m */,
+				A403F3B119393E3A0039750B /* CEIRoleSelectViewController.h */,
+				A403F3B219393E3A0039750B /* CEIRoleSelectViewController.m */,
+				A403F3C2193947E00039750B /* CEISignupViewController.h */,
+				A403F3C3193947E00039750B /* CEISignupViewController.m */,
+				A403F3C5193947EE0039750B /* CEIVerifyViewController.h */,
+				A403F3C6193947EE0039750B /* CEIVerifyViewController.m */,
 				A403F3C1193943D30039750B /* MentorSignup */,
 				A403F3B719393E980039750B /* FollowerSignup */,
 			);
@@ -134,12 +134,12 @@
 		A403F3AA19393DD50039750B /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				A403F3AB19393DE60039750B /* FAWBaseViewController.h */,
-				A403F3AC19393DE60039750B /* FAWBaseViewController.m */,
-				A403F3AE19393DFA0039750B /* FAWNavigationController.h */,
-				A403F3AF19393DFA0039750B /* FAWNavigationController.m */,
-				A403F3CA193948F90039750B /* FAWRootViewController.h */,
-				A403F3CB193948F90039750B /* FAWRootViewController.m */,
+				A403F3AB19393DE60039750B /* CEIBaseViewController.h */,
+				A403F3AC19393DE60039750B /* CEIBaseViewController.m */,
+				A403F3AE19393DFA0039750B /* CEINavigationController.h */,
+				A403F3AF19393DFA0039750B /* CEINavigationController.m */,
+				A403F3CA193948F90039750B /* CEIRootViewController.h */,
+				A403F3CB193948F90039750B /* CEIRootViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -147,10 +147,10 @@
 		A403F3B719393E980039750B /* FollowerSignup */ = {
 			isa = PBXGroup;
 			children = (
-				A403F3B819393EAB0039750B /* FAWFindMentorViewController.h */,
-				A403F3B919393EAB0039750B /* FAWFindMentorViewController.m */,
-				A403F3BB19393EC70039750B /* FAWMentorFoundViewController.h */,
-				A403F3BC19393EC70039750B /* FAWMentorFoundViewController.m */,
+				A403F3B819393EAB0039750B /* CEIFindMentorViewController.h */,
+				A403F3B919393EAB0039750B /* CEIFindMentorViewController.m */,
+				A403F3BB19393EC70039750B /* CEIMentorFoundViewController.h */,
+				A403F3BC19393EC70039750B /* CEIMentorFoundViewController.m */,
 			);
 			path = FollowerSignup;
 			sourceTree = "<group>";
@@ -200,8 +200,8 @@
 				A45E4B8419380000008D7EA6 /* External */,
 				A45E4B861938008E008D7EA6 /* Storyboards */,
 				A45E4B8519380069008D7EA6 /* Code */,
-				A440A1991937F33900D7CC0D /* FAWAppDelegate.h */,
-				A440A19A1937F33900D7CC0D /* FAWAppDelegate.m */,
+				A440A1991937F33900D7CC0D /* CEIAppDelegate.h */,
+				A440A19A1937F33900D7CC0D /* CEIAppDelegate.m */,
 				A440A19C1937F33900D7CC0D /* Images.xcassets */,
 				A440A1911937F33900D7CC0D /* Supporting Files */,
 			);
@@ -264,8 +264,8 @@
 		A45E4B89193800C1008D7EA6 /* Handies */ = {
 			isa = PBXGroup;
 			children = (
-				A45E4B8A193800CC008D7EA6 /* FAWHandies.h */,
-				A45E4B8B193800CC008D7EA6 /* FAWHandies.m */,
+				A45E4B8A193800CC008D7EA6 /* CEIHandies.h */,
+				A45E4B8B193800CC008D7EA6 /* CEIHandies.m */,
 			);
 			path = Handies;
 			sourceTree = "<group>";
@@ -316,9 +316,9 @@
 		A440A17F1937F33900D7CC0D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = FAW;
+				CLASSPREFIX = CEI;
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "Far and Wide";
+				ORGANIZATIONNAME = CEIGON;
 				TargetAttributes = {
 					A440A1A11937F33900D7CC0D = {
 						TestTargetID = A440A1861937F33900D7CC0D;
@@ -402,17 +402,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A45E4B8C193800CC008D7EA6 /* FAWHandies.m in Sources */,
+				A45E4B8C193800CC008D7EA6 /* CEIHandies.m in Sources */,
 				A440A1971937F33900D7CC0D /* main.m in Sources */,
-				A403F3AD19393DE60039750B /* FAWBaseViewController.m in Sources */,
-				A440A19B1937F33900D7CC0D /* FAWAppDelegate.m in Sources */,
-				A403F3B019393DFA0039750B /* FAWNavigationController.m in Sources */,
-				A403F3C4193947E00039750B /* FAWSignupViewController.m in Sources */,
-				A403F3CC193948F90039750B /* FAWRootViewController.m in Sources */,
-				A403F3B319393E3A0039750B /* FAWRoleSelectViewController.m in Sources */,
-				A403F3BA19393EAB0039750B /* FAWFindMentorViewController.m in Sources */,
-				A403F3C7193947EE0039750B /* FAWVerifyViewController.m in Sources */,
-				A403F3BD19393EC70039750B /* FAWMentorFoundViewController.m in Sources */,
+				A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */,
+				A440A19B1937F33900D7CC0D /* CEIAppDelegate.m in Sources */,
+				A403F3B019393DFA0039750B /* CEINavigationController.m in Sources */,
+				A403F3C4193947E00039750B /* CEISignupViewController.m in Sources */,
+				A403F3CC193948F90039750B /* CEIRootViewController.m in Sources */,
+				A403F3B319393E3A0039750B /* CEIRoleSelectViewController.m in Sources */,
+				A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */,
+				A403F3C7193947EE0039750B /* CEIVerifyViewController.m in Sources */,
+				A403F3BD19393EC70039750B /* CEIMentorFoundViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

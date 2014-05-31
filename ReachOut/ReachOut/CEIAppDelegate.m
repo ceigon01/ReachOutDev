@@ -1,14 +1,14 @@
 //
-//  FAWAppDelegate.m
+//  CEIAppDelegate.m
 //  ReachOut
 //
-//  Created by czesio on 30.05.2014.
-//  Copyright (c) 2014 Far and Wide. All rights reserved.
+//  Created by Jason Smith on 30.05.2014.
+//  Copyright (c) 2014 CEIGON. All rights reserved.
 //
 
-#import "FAWAppDelegate.h"
+#import "CEIAppDelegate.h"
 
-@implementation FAWAppDelegate
+@implementation CEIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
 	

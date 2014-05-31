@@ -1,20 +1,20 @@
 //
-//  FAWRootViewController.m
+//  CEIRootViewController.m
 //  ReachOut
 //
-//  Created by czesio on 31.05.2014.
-//  Copyright (c) 2014 Far and Wide. All rights reserved.
+//  Created by Jason Smith on 31.05.2014.
+//  Copyright (c) 2014 CEIGON. All rights reserved.
 //
 
-#import "FAWRootViewController.h"
+#import "CEIRootViewController.h"
 
 static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifierRootSignup";
 
-@interface FAWRootViewController ()
+@interface CEIRootViewController ()
 
 @end
 
-@implementation FAWRootViewController
+@implementation CEIRootViewController
 	
 - (void)viewDidLoad{
 	
