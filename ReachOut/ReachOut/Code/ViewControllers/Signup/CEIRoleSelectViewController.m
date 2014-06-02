@@ -10,6 +10,12 @@
 
 @interface CEIRoleSelectViewController ()
 
+@property (nonatomic, weak) IBOutlet UILabel *labelTitle;
+@property (nonatomic, weak) IBOutlet UILabel *labelSubTitle;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIButton *buttonYes;
+@property (nonatomic, weak) IBOutlet UIButton *buttonNo;
+
 @end
 
 @implementation CEIRoleSelectViewController

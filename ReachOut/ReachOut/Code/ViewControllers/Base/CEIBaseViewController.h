@@ -10,4 +10,9 @@
 
 @interface CEIBaseViewController : UIViewController
 
+@property (nonatomic, assign, getter = shouldSlideToOriginAfterTap) BOOL slideToOriginAfterTap;
+
+- (void)slideViewToInputTextField:(UITextField *)textField;
+- (void)slideViewToOrigin;
+
 @end

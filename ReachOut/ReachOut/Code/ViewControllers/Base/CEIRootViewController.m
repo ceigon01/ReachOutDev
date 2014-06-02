@@ -8,19 +8,30 @@
 
 #import "CEIRootViewController.h"
 
-static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifierRootSignup";
+static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifier_Root_Signup";
 
 @interface CEIRootViewController ()
 
 @end
 
 @implementation CEIRootViewController
-	
+
 - (void)viewDidLoad{
+	[super viewDidLoad];
+	
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+	[super viewDidAppear:animated];
 	
 #warning TODO: check if we are registered
-	
 	[self performSegueWithIdentifier:kSegueIdentifierRootSignup sender:self];
+}
+
+#pragma mark - Navigation
+
+- (IBAction)unwindRegistration:(UIStoryboardSegue *)unwindSegue{
+	
 }
 
 @end

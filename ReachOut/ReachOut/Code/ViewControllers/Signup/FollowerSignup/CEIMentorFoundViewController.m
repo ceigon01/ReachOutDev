@@ -10,6 +10,13 @@
 
 @interface CEIMentorFoundViewController ()
 
+@property (nonatomic, weak) IBOutlet UILabel *labelTitle;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UILabel *labelPosition;
+@property (nonatomic, weak) IBOutlet UILabel *labelFullName;
+@property (nonatomic, weak) IBOutlet UIButton *buttonTryAgain;
+@property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
+
 @end
 
 @implementation CEIMentorFoundViewController
