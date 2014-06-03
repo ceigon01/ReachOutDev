@@ -10,12 +10,6 @@
 
 @implementation CEIProfilePreviewHeaderView
 
-- (void)awakeFromNib{
-	[super awakeFromNib];
-	
-
-}
-
 - (void)drawRect:(CGRect)rect{
 	[super drawRect:rect];
 

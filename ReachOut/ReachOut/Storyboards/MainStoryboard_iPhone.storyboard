@@ -355,66 +355,70 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view tag="687" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pRI-xS-bXf" customClass="CEIProfilePreviewHeaderView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="79" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="IIc-Jx-YVm"/>
+                                    <constraint firstAttribute="height" constant="100" id="MOq-7z-Wul"/>
+                                    <constraint firstAttribute="width" constant="320" id="ndS-e9-AiW"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oh9-ML-zn7">
-                                <rect key="frame" x="20" y="140" width="280" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oh9-ML-zn7">
+                                <rect key="frame" x="20" y="231" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="HHJ-RU-0kf"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <connections>
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="tEY-ZS-Omd"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4RH-Sx-7FB">
-                                <rect key="frame" x="20" y="190" width="280" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4RH-Sx-7FB">
+                                <rect key="frame" x="20" y="269" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="MwI-4y-8tD"/>
+                                    <constraint firstAttribute="height" constant="30" id="Mk8-KW-hgU"/>
+                                    <constraint firstAttribute="width" constant="280" id="fID-LM-MJX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                 <connections>
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="pMh-TG-aAT"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ5-4q-6Ty">
-                                <rect key="frame" x="20" y="240" width="135" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ5-4q-6Ty">
+                                <rect key="frame" x="20" y="307" width="135" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="135" id="8db-tY-wXo"/>
+                                    <constraint firstAttribute="height" constant="30" id="DQo-C1-6fs"/>
+                                    <constraint firstAttribute="width" constant="135" id="rK8-dW-E2N"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <connections>
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="4Ix-3J-0xM"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ptE-ac-pPU">
-                                <rect key="frame" x="170" y="240" width="130" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-type" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ptE-ac-pPU">
+                                <rect key="frame" x="170" y="307" width="130" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="130" id="3Zl-Mc-K4x"/>
+                                    <constraint firstAttribute="height" constant="30" id="2gW-Nc-bgM"/>
+                                    <constraint firstAttribute="width" constant="130" id="Na7-y2-oKS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="YDt-Y3-iBz"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j90-Wc-C6O">
-                                <rect key="frame" x="110" y="278" width="100" height="40"/>
+                                <rect key="frame" x="110" y="345" width="100" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="U4k-5G-nsd"/>
-                                    <constraint firstAttribute="height" constant="40" id="gmD-rB-p3Z"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="tG4-Tq-d9o"/>
-                                    <constraint firstAttribute="width" constant="100" id="vEs-0E-G2L"/>
+                                    <constraint firstAttribute="height" constant="40" id="1Vs-QP-aE1"/>
+                                    <constraint firstAttribute="width" constant="100" id="LHY-ZT-sko"/>
                                 </constraints>
                                 <state key="normal" title="CONTINUE">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -426,21 +430,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oh9-ML-zn7" firstAttribute="leading" secondItem="Fyc-ZO-edu" secondAttribute="leading" constant="20" id="1NI-1h-dFR"/>
-                            <constraint firstAttribute="trailing" secondItem="pRI-xS-bXf" secondAttribute="trailing" id="3qG-6f-1H9"/>
-                            <constraint firstItem="oh9-ML-zn7" firstAttribute="top" secondItem="pRI-xS-bXf" secondAttribute="bottom" constant="20" id="C5C-Mb-PfY"/>
-                            <constraint firstAttribute="trailing" secondItem="oh9-ML-zn7" secondAttribute="trailing" constant="20" id="GL3-QG-JxZ"/>
-                            <constraint firstAttribute="trailing" secondItem="4RH-Sx-7FB" secondAttribute="trailing" constant="20" id="JyM-vf-9XM"/>
-                            <constraint firstAttribute="centerX" secondItem="j90-Wc-C6O" secondAttribute="centerX" id="NPc-T4-K1r"/>
-                            <constraint firstAttribute="trailing" secondItem="ptE-ac-pPU" secondAttribute="trailing" constant="20" id="hxW-u8-Y94"/>
-                            <constraint firstItem="4RH-Sx-7FB" firstAttribute="leading" secondItem="Fyc-ZO-edu" secondAttribute="leading" constant="20" id="iUo-MV-1lr"/>
-                            <constraint firstItem="pRI-xS-bXf" firstAttribute="leading" secondItem="Fyc-ZO-edu" secondAttribute="leading" id="jdA-gr-tsV"/>
-                            <constraint firstItem="ptE-ac-pPU" firstAttribute="top" secondItem="4RH-Sx-7FB" secondAttribute="bottom" constant="20" id="kUY-2s-XhM"/>
-                            <constraint firstItem="pRI-xS-bXf" firstAttribute="top" secondItem="6p6-1E-RLL" secondAttribute="bottom" id="ocw-Lq-gOC"/>
-                            <constraint firstItem="j90-Wc-C6O" firstAttribute="top" secondItem="ptE-ac-pPU" secondAttribute="bottom" constant="8" id="sw3-9q-I76"/>
-                            <constraint firstItem="4RH-Sx-7FB" firstAttribute="top" secondItem="oh9-ML-zn7" secondAttribute="bottom" constant="20" id="tHy-Wm-o5c"/>
-                            <constraint firstItem="ZZ5-4q-6Ty" firstAttribute="leading" secondItem="Fyc-ZO-edu" secondAttribute="leading" constant="20" id="uaK-4r-Tlr"/>
-                            <constraint firstItem="ZZ5-4q-6Ty" firstAttribute="top" secondItem="4RH-Sx-7FB" secondAttribute="bottom" constant="20" id="zuO-28-snX"/>
+                            <constraint firstAttribute="centerX" secondItem="j90-Wc-C6O" secondAttribute="centerX" id="0i5-Dz-qkC"/>
+                            <constraint firstItem="ZZ5-4q-6Ty" firstAttribute="leading" secondItem="Fyc-ZO-edu" secondAttribute="leading" constant="20" id="2rz-qm-z1s"/>
+                            <constraint firstItem="4RH-Sx-7FB" firstAttribute="top" secondItem="oh9-ML-zn7" secondAttribute="bottom" constant="8" id="55X-zR-KgE"/>
+                            <constraint firstItem="ptE-ac-pPU" firstAttribute="top" secondItem="4RH-Sx-7FB" secondAttribute="bottom" constant="8" id="6G2-ol-U1t"/>
+                            <constraint firstAttribute="centerX" secondItem="4RH-Sx-7FB" secondAttribute="centerX" id="6UJ-RD-MsG"/>
+                            <constraint firstAttribute="centerY" secondItem="4RH-Sx-7FB" secondAttribute="centerY" id="Ktd-zR-3IN"/>
+                            <constraint firstAttribute="trailing" secondItem="ptE-ac-pPU" secondAttribute="trailing" constant="20" id="QHU-2r-QC4"/>
+                            <constraint firstItem="j90-Wc-C6O" firstAttribute="top" secondItem="ptE-ac-pPU" secondAttribute="bottom" constant="8" id="WEn-dS-nyS"/>
+                            <constraint firstItem="pRI-xS-bXf" firstAttribute="top" secondItem="6p6-1E-RLL" secondAttribute="bottom" constant="59" id="bSX-nk-qDc"/>
+                            <constraint firstAttribute="trailing" secondItem="oh9-ML-zn7" secondAttribute="trailing" constant="20" id="blJ-Tb-8TZ"/>
+                            <constraint firstItem="ZZ5-4q-6Ty" firstAttribute="top" secondItem="4RH-Sx-7FB" secondAttribute="bottom" constant="8" id="e8z-OS-knT"/>
+                            <constraint firstItem="pRI-xS-bXf" firstAttribute="leading" secondItem="Fyc-ZO-edu" secondAttribute="leading" id="n1g-WL-e3J"/>
+                            <constraint firstItem="oh9-ML-zn7" firstAttribute="leading" secondItem="Fyc-ZO-edu" secondAttribute="leading" constant="20" id="rHa-5M-5fE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9OR-Zz-V5H"/>

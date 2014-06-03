@@ -9,6 +9,9 @@
 #import "CEISignupViewController.h"
 
 #import "CEIProfilePreviewHeaderView.h"
+#import "CEICodeVerificationView.h"
+#import "ASDepthModalViewController.h"
+#import <Parse/Parse.h>
 
 @interface CEISignupViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -19,28 +22,56 @@
 @property (nonatomic, weak) IBOutlet UITextField *textFieldPasswordRetype;
 @property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
 
+@property (nonatomic, strong) CEICodeVerificationView *codeVerificationView;
+
 @end
 
 @implementation CEISignupViewController
+
+- (void)viewDidLoad{
+  [super viewDidLoad];
+  
+  self.slideToOriginAfterTap = YES;
+}
 
 #pragma mark - Action Handling
 
 - (IBAction)tapButtonContinue:(id)sender{
 	
 #warning TODO: implement fields verification
-	
-#warning TODO: implement Twilio phone number verification
-	
+
+  NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+
+#warning TODO: debug data
+  
+  [params setObject:@"8015439423" forKey:@"number"];
+  [params setObject:@"rPrpSXW6Fm8rtZyLP9EOROGxd" forKey:@"username"];
+//        [params setObject:[[PFUser currentUser] username] forKey:@"username"];
+//        [params setObject:self.textFieldMobileNumber.text forKey:@"number"];
+        [PFCloud callFunctionInBackground:@"phoneVerification" withParameters:params block:^(id object, NSError *error) {
+
+            if (!error) {
+                
+                NSLog(@"user: %@",[[PFUser currentUser] objectForKey:@"username" ]);
+
+                ASDepthModalOptions options = ASDepthModalOptionAnimationGrow | ASDepthModalOptionBlur | ASDepthModalOptionTapOutsideToClose;
+                
+                [ASDepthModalViewController presentView:self.codeVerificationView
+                                        backgroundColor:[UIColor whiteColor]
+                                                options:options
+                                      completionHandler:^{
+                                         
+                                          NSLog(@"complete");
+                                      }];
+            }
+            else {
+            
+#warning TODO: gracefully handle error
+                NSLog(@"error: %@",error);
+            }
+        }];
+
 #warning TODO: implement functionality to count phone verifications
-	
-#warning TODO: implement localized strings
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Mobile number verification"
-																											 message:@"Please insert code that you received via text message"
-																											delegate:self
-																						cancelButtonTitle:@"Cancel"
-																						otherButtonTitles:@"OK", nil];
-	alertView.delegate = self;
-	[alertView show];
 }
 
 #pragma mark - UIAlertView delegate
@@ -50,8 +81,7 @@
 	if (buttonIndex != alertView.cancelButtonIndex) {
     
 #warning TODO: implement
-		[self.navigationController dismissViewControllerAnimated:YES
-																									completion:NULL];
+		[self.navigationController dismissViewControllerAnimated:YES completion:NULL];
 	}
 }
 
@@ -83,6 +113,21 @@
 		}
 	
 	return YES;
+}
+
+#pragma mark - Lazy Getters
+
+- (CEICodeVerificationView *)codeVerificationView{
+    
+  if (_codeVerificationView == nil) {
+        
+      _codeVerificationView = [[[NSBundle mainBundle] loadNibNamed:@"CEICodeVerificationView"
+                                                             owner:self
+                                                           options:nil]
+                                 objectAtIndex:1];
+  }
+    
+  return _codeVerificationView;
 }
 
 @end

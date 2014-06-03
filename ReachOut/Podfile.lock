@@ -18,6 +18,7 @@ PODS:
   - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - ASDepthModal (1.0.0)
   - MBProgressHUD (0.8)
   - SDWebImage (3.6):
     - SDWebImage/Core
@@ -25,11 +26,13 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - ASDepthModal
   - MBProgressHUD (~> 0.8)
   - SDWebImage (~> 3.6.0)
 
 SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
+  ASDepthModal: 643841a570c2e04bb195581dbee0a65ee40c98f3
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
 
