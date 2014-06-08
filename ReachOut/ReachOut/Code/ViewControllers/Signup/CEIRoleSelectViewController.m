@@ -7,6 +7,7 @@
 //
 
 #import "CEIRoleSelectViewController.h"
+#import "CEIMentorSignupViewController.h"
 
 @interface CEIRoleSelectViewController ()
 

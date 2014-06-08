@@ -17,7 +17,7 @@
   [Parse setApplicationId:@"uL2Rc2e46NOSjs0zhrDHbijQZnkFxEuurjloyLlA"
                 clientKey:@"wwP3mr4m3p5NhU8pNZsSrxNTVCkeiE9yov7jVx8d"];
     
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+  [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
 	return YES;
 }

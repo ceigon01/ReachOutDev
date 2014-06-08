@@ -8,19 +8,23 @@
 
 #import "CEISignupViewController.h"
 
-#import "CEIProfilePreviewHeaderView.h"
 #import "CEICodeVerificationView.h"
 #import "ASDepthModalViewController.h"
 #import <Parse/Parse.h>
 
 @interface CEISignupViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
-@property (nonatomic, weak) IBOutlet CEIProfilePreviewHeaderView *profilePreviewHeaderView;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldFullName;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldMobileNumber;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldPassword;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldPasswordRetype;
+@property (nonatomic, weak) IBOutlet UIButton *buttonFacebook;
 @property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
+
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UILabel *labelRelation;
+@property (nonatomic, weak) IBOutlet UILabel *labelTitle;
+@property (nonatomic, weak) IBOutlet UILabel *labelFullName;
 
 @property (nonatomic, strong) CEICodeVerificationView *codeVerificationView;
 
@@ -30,11 +34,15 @@
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-  
+
   self.slideToOriginAfterTap = YES;
 }
 
 #pragma mark - Action Handling
+
+- (IBAction)tapButtonFacebook:(id)sender{
+  
+}
 
 - (IBAction)tapButtonContinue:(id)sender{
 	
@@ -86,11 +94,6 @@
 }
 
 #pragma mark - UITextField delegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-	
-	[self slideViewToInputTextField:textField];
-}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	

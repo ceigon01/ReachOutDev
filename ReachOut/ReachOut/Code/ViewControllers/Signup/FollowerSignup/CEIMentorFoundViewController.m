@@ -8,6 +8,8 @@
 
 #import "CEIMentorFoundViewController.h"
 
+#import <Parse/Parse.h>
+
 @interface CEIMentorFoundViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *labelTitle;
@@ -20,5 +22,25 @@
 @end
 
 @implementation CEIMentorFoundViewController
+
+- (void)viewDidLoad{
+  [super viewDidLoad];
+  
+  PFQuery *query = [PFUser query];
+  
+  [query whereKey:@"mobilePhone" equalTo:self.mentorMobileNumber];
+    
+  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+  
+    NSLog(@"%@",objects);
+  }];
+  
+  
+  
+//  PFUser *user = [PFQuery getUserObjectWithId:@"xtTTysdUoM"];
+//  
+//  NSLog(@"%@",user);
+  
+}
 
 @end

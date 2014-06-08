@@ -10,4 +10,6 @@
 
 @interface CEIMentorFoundViewController : CEIBaseViewController
 
+@property (nonatomic, strong) NSString *mentorMobileNumber;
+
 @end

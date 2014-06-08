@@ -58,6 +58,13 @@ static const CGFloat kHeightKeyboardHeight = 216.0f;
 									 completion:NULL];
 }
 
+#pragma mark - UITextField delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+  
+  [self slideViewToInputTextField:textField];
+}
+
 #pragma mark - Custom Setters
 
 - (void)setSlideToOriginAfterTap:(BOOL)slideToOriginAfterTap{

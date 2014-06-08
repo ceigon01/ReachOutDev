@@ -28,9 +28,7 @@
 		A440A1B01937F33900D7CC0D /* ReachOutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A440A1AF1937F33900D7CC0D /* ReachOutTests.m */; };
 		A45E4B88193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A45E4B87193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard */; };
 		A45E4B8C193800CC008D7EA6 /* CEIHandies.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4B8B193800CC008D7EA6 /* CEIHandies.m */; };
-		A4CAB086193A29F000CC7B12 /* CEIProfilePreviewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CAB085193A29F000CC7B12 /* CEIProfilePreviewHeaderView.m */; };
 		A4CAB08A193A2BAD00CC7B12 /* UIView+NibLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CAB089193A2BAD00CC7B12 /* UIView+NibLoading.m */; };
-		A4CAB08C193A318900CC7B12 /* CEIProfilePreviewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4CAB08B193A318900CC7B12 /* CEIProfilePreviewHeaderView.xib */; };
 		A4CAB08F193B4C3D00CC7B12 /* UIView+FirstResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CAB08E193B4C3D00CC7B12 /* UIView+FirstResponder.m */; };
 		E66A90BE8A0D47ACB6621D37 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 224F1343C32B4C2496EC140A /* libPods.a */; };
 		FD0C850C193E46CB004C006B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0C850B193E46CB004C006B /* AudioToolbox.framework */; };
@@ -50,6 +48,9 @@
 		FD0C852B193E5C6E004C006B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0C852A193E5C6E004C006B /* Twitter.framework */; };
 		FD0C852D193E5C7B004C006B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0C852C193E5C7B004C006B /* Social.framework */; };
 		FD0C852F193E5C84004C006B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0C852E193E5C84004C006B /* Accounts.framework */; };
+		FD0C8534193F5A7B004C006B /* CEIMentorSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0C8533193F5A7B004C006B /* CEIMentorSignupViewController.m */; };
+		FD119063194202F1005A1AE1 /* CEISession.m in Sources */ = {isa = PBXBuildFile; fileRef = FD119062194202F1005A1AE1 /* CEISession.m */; };
+		FD11906819420D80005A1AE1 /* CEIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11906719420D80005A1AE1 /* CEIAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +76,8 @@
 		A403F3B919393EAB0039750B /* CEIFindMentorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIFindMentorViewController.m; sourceTree = "<group>"; };
 		A403F3BB19393EC70039750B /* CEIMentorFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIMentorFoundViewController.h; sourceTree = "<group>"; };
 		A403F3BC19393EC70039750B /* CEIMentorFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIMentorFoundViewController.m; sourceTree = "<group>"; };
-		A403F3C2193947E00039750B /* CEISignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEISignupViewController.h; sourceTree = "<group>"; };
-		A403F3C3193947E00039750B /* CEISignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEISignupViewController.m; sourceTree = "<group>"; };
+		A403F3C2193947E00039750B /* CEISignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEISignupViewController.h; path = ../CEISignupViewController.h; sourceTree = "<group>"; };
+		A403F3C3193947E00039750B /* CEISignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CEISignupViewController.m; path = ../CEISignupViewController.m; sourceTree = "<group>"; };
 		A403F3CA193948F90039750B /* CEIRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIRootViewController.h; sourceTree = "<group>"; };
 		A403F3CB193948F90039750B /* CEIRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIRootViewController.m; sourceTree = "<group>"; };
 		A440A1871937F33900D7CC0D /* ReachOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReachOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,11 +99,8 @@
 		A45E4B87193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		A45E4B8A193800CC008D7EA6 /* CEIHandies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIHandies.h; sourceTree = "<group>"; };
 		A45E4B8B193800CC008D7EA6 /* CEIHandies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIHandies.m; sourceTree = "<group>"; };
-		A4CAB084193A29F000CC7B12 /* CEIProfilePreviewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIProfilePreviewHeaderView.h; sourceTree = "<group>"; };
-		A4CAB085193A29F000CC7B12 /* CEIProfilePreviewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIProfilePreviewHeaderView.m; sourceTree = "<group>"; };
 		A4CAB088193A2BAD00CC7B12 /* UIView+NibLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NibLoading.h"; sourceTree = "<group>"; };
 		A4CAB089193A2BAD00CC7B12 /* UIView+NibLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NibLoading.m"; sourceTree = "<group>"; };
-		A4CAB08B193A318900CC7B12 /* CEIProfilePreviewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEIProfilePreviewHeaderView.xib; sourceTree = "<group>"; };
 		A4CAB08D193B4C3D00CC7B12 /* UIView+FirstResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FirstResponder.h"; sourceTree = "<group>"; };
 		A4CAB08E193B4C3D00CC7B12 /* UIView+FirstResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FirstResponder.m"; sourceTree = "<group>"; };
 		FD0C850B193E46CB004C006B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -123,6 +121,12 @@
 		FD0C852A193E5C6E004C006B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		FD0C852C193E5C7B004C006B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		FD0C852E193E5C84004C006B /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		FD0C8532193F5A7B004C006B /* CEIMentorSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIMentorSignupViewController.h; sourceTree = "<group>"; };
+		FD0C8533193F5A7B004C006B /* CEIMentorSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIMentorSignupViewController.m; sourceTree = "<group>"; };
+		FD119061194202F1005A1AE1 /* CEISession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEISession.h; sourceTree = "<group>"; };
+		FD119062194202F1005A1AE1 /* CEISession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEISession.m; sourceTree = "<group>"; };
+		FD11906619420D80005A1AE1 /* CEIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAlertView.h; sourceTree = "<group>"; };
+		FD11906719420D80005A1AE1 /* CEIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,9 +183,7 @@
 			children = (
 				A403F3B119393E3A0039750B /* CEIRoleSelectViewController.h */,
 				A403F3B219393E3A0039750B /* CEIRoleSelectViewController.m */,
-				A403F3C2193947E00039750B /* CEISignupViewController.h */,
-				A403F3C3193947E00039750B /* CEISignupViewController.m */,
-				A403F3C1193943D30039750B /* MentorSignup */,
+				FD0C8531193F5A6E004C006B /* MentorSignup */,
 				A403F3B719393E980039750B /* FollowerSignup */,
 			);
 			path = Signup;
@@ -203,19 +205,14 @@
 		A403F3B719393E980039750B /* FollowerSignup */ = {
 			isa = PBXGroup;
 			children = (
+				A403F3C2193947E00039750B /* CEISignupViewController.h */,
+				A403F3C3193947E00039750B /* CEISignupViewController.m */,
 				A403F3B819393EAB0039750B /* CEIFindMentorViewController.h */,
 				A403F3B919393EAB0039750B /* CEIFindMentorViewController.m */,
 				A403F3BB19393EC70039750B /* CEIMentorFoundViewController.h */,
 				A403F3BC19393EC70039750B /* CEIMentorFoundViewController.m */,
 			);
 			path = FollowerSignup;
-			sourceTree = "<group>";
-		};
-		A403F3C1193943D30039750B /* MentorSignup */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MentorSignup;
 			sourceTree = "<group>";
 		};
 		A440A17E1937F33900D7CC0D = {
@@ -309,6 +306,7 @@
 		A45E4B8519380069008D7EA6 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				FD0C8535193F651C004C006B /* Model */,
 				A4CAB087193A2B2A00CC7B12 /* Categories */,
 				A4CAB083193A29CC00CC7B12 /* Views */,
 				A403F3A819393D670039750B /* ViewControllers */,
@@ -337,12 +335,11 @@
 		A4CAB083193A29CC00CC7B12 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A4CAB084193A29F000CC7B12 /* CEIProfilePreviewHeaderView.h */,
-				A4CAB085193A29F000CC7B12 /* CEIProfilePreviewHeaderView.m */,
-				A4CAB08B193A318900CC7B12 /* CEIProfilePreviewHeaderView.xib */,
 				FD0C8521193E4F66004C006B /* CEICodeVerificationView.h */,
 				FD0C8522193E4F66004C006B /* CEICodeVerificationView.m */,
 				FD0C8524193E5207004C006B /* CEICodeVerificationView.xib */,
+				FD11906619420D80005A1AE1 /* CEIAlertView.h */,
+				FD11906719420D80005A1AE1 /* CEIAlertView.m */,
 			);
 			name = Views;
 			path = View;
@@ -366,6 +363,24 @@
 				FD0C851D193E4787004C006B /* Parse.framework */,
 			);
 			path = External;
+			sourceTree = "<group>";
+		};
+		FD0C8531193F5A6E004C006B /* MentorSignup */ = {
+			isa = PBXGroup;
+			children = (
+				FD0C8532193F5A7B004C006B /* CEIMentorSignupViewController.h */,
+				FD0C8533193F5A7B004C006B /* CEIMentorSignupViewController.m */,
+			);
+			path = MentorSignup;
+			sourceTree = "<group>";
+		};
+		FD0C8535193F651C004C006B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FD119061194202F1005A1AE1 /* CEISession.h */,
+				FD119062194202F1005A1AE1 /* CEISession.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,7 +461,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4CAB08C193A318900CC7B12 /* CEIProfilePreviewHeaderView.xib in Resources */,
 				FD0C8525193E5207004C006B /* CEICodeVerificationView.xib in Resources */,
 				A45E4B88193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard in Resources */,
 				A440A1951937F33900D7CC0D /* InfoPlist.strings in Resources */,
@@ -503,17 +517,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4CAB08A193A2BAD00CC7B12 /* UIView+NibLoading.m in Sources */,
+				FD0C8534193F5A7B004C006B /* CEIMentorSignupViewController.m in Sources */,
 				A45E4B8C193800CC008D7EA6 /* CEIHandies.m in Sources */,
 				A440A1971937F33900D7CC0D /* main.m in Sources */,
 				A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */,
 				A440A19B1937F33900D7CC0D /* CEIAppDelegate.m in Sources */,
-				A4CAB086193A29F000CC7B12 /* CEIProfilePreviewHeaderView.m in Sources */,
 				A4CAB08F193B4C3D00CC7B12 /* UIView+FirstResponder.m in Sources */,
 				A403F3B019393DFA0039750B /* CEINavigationController.m in Sources */,
 				A403F3C4193947E00039750B /* CEISignupViewController.m in Sources */,
 				A403F3CC193948F90039750B /* CEIRootViewController.m in Sources */,
 				FD0C8523193E4F66004C006B /* CEICodeVerificationView.m in Sources */,
+				FD119063194202F1005A1AE1 /* CEISession.m in Sources */,
 				A403F3B319393E3A0039750B /* CEIRoleSelectViewController.m in Sources */,
+				FD11906819420D80005A1AE1 /* CEIAlertView.m in Sources */,
 				A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */,
 				A403F3BD19393EC70039750B /* CEIMentorFoundViewController.m in Sources */,
 			);
@@ -633,6 +649,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Pawel Majchrzak (397UFFU928)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pawel Majchrzak (397UFFU928)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ReachOut/External",
@@ -641,12 +659,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ReachOut/ReachOut-Prefix.pch";
 				INFOPLIST_FILE = "ReachOut/ReachOut-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/piotr.nietrzebka/Desktop/TwilioClient-1.1.4-e51f041/Libraries",
 					"$(PROJECT_DIR)/ReachOut/External",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ABC7EA78-0BF8-45FB-A1FC-380483624939";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -657,6 +677,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Pawel Majchrzak (UYP9NK522L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pawel Majchrzak (UYP9NK522L)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ReachOut/External",
@@ -665,12 +687,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ReachOut/ReachOut-Prefix.pch";
 				INFOPLIST_FILE = "ReachOut/ReachOut-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/piotr.nietrzebka/Desktop/TwilioClient-1.1.4-e51f041/Libraries",
 					"$(PROJECT_DIR)/ReachOut/External",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E152F955-BD58-419E-863D-9970B7062EC4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

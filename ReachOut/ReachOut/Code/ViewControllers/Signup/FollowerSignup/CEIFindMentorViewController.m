@@ -8,6 +8,8 @@
 
 #import "CEIFindMentorViewController.h"
 
+#import "CEIMentorFoundViewController.h"
+
 static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentifier_FindMentor_MentorFuond";
 
 @interface CEIFindMentorViewController () <UITextFieldDelegate>
@@ -26,14 +28,25 @@ static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentif
 - (void)viewDidLoad{
 	[super viewDidLoad];
 	
+#warning TODO: debug
+  self.textField.text = @"8015439423";
+  
 	self.slideToOriginAfterTap = YES;
 }
 
 #pragma mark - Navigation
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+  
+	if ([segue.identifier isEqualToString:kSegueIdentifierFindMentorToMentorFound]) {
+    
+    ((CEIMentorFoundViewController *)segue.destinationViewController).mentorMobileNumber = self.textField.text;
+  }
+}
+
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
 	
-	if (identifier == kSegueIdentifierFindMentorToMentorFound) {
+	if ([identifier isEqualToString:kSegueIdentifierFindMentorToMentorFound]) {
     
 #warning TODO: implement phone text field verification
 	}
@@ -41,16 +54,11 @@ static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentif
 	return YES;
 }
 
-- (IBAction)unwindMentorFound:(id)sender{
+- (IBAction)unwindRegistration:(UIStoryboardSegue *)unwindSegue{
 	
 }
 
 #pragma mark - UITextField delegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-	
-	[self slideViewToInputTextField:textField];
-}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
 	

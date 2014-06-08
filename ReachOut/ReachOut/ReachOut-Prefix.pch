@@ -13,4 +13,8 @@
 #ifdef __OBJC__
 	#import <UIKit/UIKit.h>
 	#import <Foundation/Foundation.h>
+  #import "CEIAppDelegate.h"
+
+  #define APP_DELEGATE ((CEIAppDelegate *)[[UIApplication sharedApplication] delegate])
+
 #endif

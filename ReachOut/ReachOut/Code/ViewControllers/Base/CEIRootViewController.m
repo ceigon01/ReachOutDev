@@ -7,6 +7,7 @@
 //
 
 #import "CEIRootViewController.h"
+#import <Parse/Parse.h>
 
 static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifier_Root_Signup";
 
@@ -18,14 +19,17 @@ static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifier_Root_Sign
 
 - (void)viewDidLoad{
 	[super viewDidLoad];
-	
+  
+  APP_DELEGATE.window.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:animated];
 	
-#warning TODO: check if we are registered
-	[self performSegueWithIdentifier:kSegueIdentifierRootSignup sender:self];
+  if (![[PFUser currentUser] isAuthenticated]) {
+    
+  	[self performSegueWithIdentifier:kSegueIdentifierRootSignup sender:self];
+  }
 }
 
 #pragma mark - Navigation
