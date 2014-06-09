@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rs8-Cj-SsA">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
@@ -327,7 +328,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="vDB-Wp-Q3y" kind="push" identifier="kSegueIdentifier_FindMentor_MentorFuond" id="WvR-kh-tAH"/>
+                                    <segue destination="vDB-Wp-Q3y" kind="push" identifier="" id="WvR-kh-tAH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rw6-Fe-Eb8">
@@ -385,6 +386,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJ6-mn-yrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7My-64-ndA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1290" y="-1756"/>
         </scene>
@@ -443,6 +445,9 @@
                                 <state key="normal" title="TRY AGAIN">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="7My-64-ndA" kind="unwind" unwindAction="unwindFindMentor:" id="TwW-HB-DE5"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kb-1b-W0m">
                                 <rect key="frame" x="200" y="322" width="100" height="40"/>
@@ -454,7 +459,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="vDB-Wp-Q3y" kind="push" id="Gty-YO-6eE"/>
+                                    <segue destination="vDB-Wp-Q3y" kind="push" identifier="kSegueIdentifier_MentorFuond_FollowerSignup" id="Gty-YO-6eE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -512,7 +517,7 @@
                                     <constraint firstAttribute="height" constant="30" id="HHJ-RU-0kf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                 <connections>
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="tEY-ZS-Omd"/>
                                 </connections>
@@ -536,7 +541,7 @@
                                     <constraint firstAttribute="width" constant="135" id="rK8-dW-E2N"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="4Ix-3J-0xM"/>
                                 </connections>
@@ -548,7 +553,7 @@
                                     <constraint firstAttribute="width" constant="130" id="Na7-y2-oKS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="YDt-Y3-iBz"/>
                                 </connections>
@@ -579,8 +584,9 @@
                                     <action selector="tapButtonFacebook:" destination="vDB-Wp-Q3y" eventType="touchUpInside" id="6sY-A1-0Er"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U70-JC-Rof">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgUserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="U70-JC-Rof">
                                 <rect key="frame" x="55" y="123" width="100" height="100"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="71H-WN-6eH"/>
                                     <constraint firstAttribute="height" constant="100" id="eeV-xN-XXD"/>
@@ -613,6 +619,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgUserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="9g0-F3-Lin">
+                                <rect key="frame" x="0.0" y="20" width="320" height="80"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -622,11 +632,14 @@
                             <constraint firstItem="4RH-Sx-7FB" firstAttribute="top" secondItem="oh9-ML-zn7" secondAttribute="bottom" constant="8" id="55X-zR-KgE"/>
                             <constraint firstItem="ptE-ac-pPU" firstAttribute="top" secondItem="4RH-Sx-7FB" secondAttribute="bottom" constant="8" id="6G2-ol-U1t"/>
                             <constraint firstAttribute="centerX" secondItem="4RH-Sx-7FB" secondAttribute="centerX" id="6UJ-RD-MsG"/>
+                            <constraint firstAttribute="trailing" secondItem="9g0-F3-Lin" secondAttribute="trailing" id="CIi-GJ-xbB"/>
+                            <constraint firstItem="9g0-F3-Lin" firstAttribute="leading" secondItem="Fyc-ZO-edu" secondAttribute="leading" id="Gzw-r7-Xe0"/>
                             <constraint firstAttribute="trailing" secondItem="M8T-Gl-rZg" secondAttribute="trailing" id="Kqt-WI-HfD"/>
                             <constraint firstAttribute="centerY" secondItem="4RH-Sx-7FB" secondAttribute="centerY" id="Ktd-zR-3IN"/>
                             <constraint firstItem="1me-R4-1Y2" firstAttribute="leading" secondItem="U70-JC-Rof" secondAttribute="trailing" constant="8" id="NJ3-aE-NTx"/>
                             <constraint firstAttribute="trailing" secondItem="ptE-ac-pPU" secondAttribute="trailing" constant="20" id="QHU-2r-QC4"/>
                             <constraint firstItem="yur-bW-d9r" firstAttribute="top" secondItem="ptE-ac-pPU" secondAttribute="bottom" constant="20" id="T65-RX-aPu"/>
+                            <constraint firstItem="U70-JC-Rof" firstAttribute="top" secondItem="9g0-F3-Lin" secondAttribute="bottom" constant="23" id="W28-fA-UJG"/>
                             <constraint firstItem="M8T-Gl-rZg" firstAttribute="leading" secondItem="U70-JC-Rof" secondAttribute="trailing" constant="8" id="WuY-43-pZc"/>
                             <constraint firstAttribute="centerX" secondItem="U70-JC-Rof" secondAttribute="centerX" constant="55" id="X3f-Dz-1Qs"/>
                             <constraint firstItem="M8T-Gl-rZg" firstAttribute="top" secondItem="1me-R4-1Y2" secondAttribute="bottom" constant="8" id="YYX-Ts-vQt"/>
@@ -634,6 +647,7 @@
                             <constraint firstItem="czo-4B-lzu" firstAttribute="top" secondItem="M8T-Gl-rZg" secondAttribute="bottom" constant="5" id="dSf-j4-yIH"/>
                             <constraint firstAttribute="trailing" secondItem="1me-R4-1Y2" secondAttribute="trailing" id="dz3-PH-H9t"/>
                             <constraint firstItem="ZZ5-4q-6Ty" firstAttribute="top" secondItem="4RH-Sx-7FB" secondAttribute="bottom" constant="8" id="e8z-OS-knT"/>
+                            <constraint firstItem="9g0-F3-Lin" firstAttribute="top" secondItem="6p6-1E-RLL" secondAttribute="bottom" id="eoe-54-kea"/>
                             <constraint firstItem="oh9-ML-zn7" firstAttribute="top" secondItem="czo-4B-lzu" secondAttribute="bottom" constant="22" id="fYK-dL-Ckn"/>
                             <constraint firstItem="j90-Wc-C6O" firstAttribute="top" secondItem="yur-bW-d9r" secondAttribute="bottom" constant="25" id="ghe-UN-gbq"/>
                             <constraint firstAttribute="trailing" secondItem="czo-4B-lzu" secondAttribute="trailing" id="mCu-CF-VRM"/>
@@ -646,7 +660,8 @@
                     <connections>
                         <outlet property="buttonContinue" destination="j90-Wc-C6O" id="Tpx-yx-efA"/>
                         <outlet property="buttonFacebook" destination="yur-bW-d9r" id="DBM-sB-wkQ"/>
-                        <outlet property="imageView" destination="U70-JC-Rof" id="qxh-lu-g27"/>
+                        <outlet property="imageViewMe" destination="9g0-F3-Lin" id="HEm-pI-Fj7"/>
+                        <outlet property="imageViewMentor" destination="U70-JC-Rof" id="Q9f-77-dQX"/>
                         <outlet property="labelFullName" destination="czo-4B-lzu" id="gzJ-fs-WGU"/>
                         <outlet property="labelRelation" destination="1me-R4-1Y2" id="2zl-sT-jtu"/>
                         <outlet property="labelTitle" destination="M8T-Gl-rZg" id="p0J-UX-eSr"/>

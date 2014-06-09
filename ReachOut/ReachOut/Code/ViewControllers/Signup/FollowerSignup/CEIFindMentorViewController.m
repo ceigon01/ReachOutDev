@@ -7,8 +7,8 @@
 //
 
 #import "CEIFindMentorViewController.h"
-
 #import "CEIMentorFoundViewController.h"
+#import "CEIAlertView.h"
 
 static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentifier_FindMentor_MentorFuond";
 
@@ -48,13 +48,18 @@ static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentif
 	
 	if ([identifier isEqualToString:kSegueIdentifierFindMentorToMentorFound]) {
     
-#warning TODO: implement phone text field verification
+#warning TODO: implement more complex phone text field verification
+    if (self.textField.text.length == 0) {
+
+      [CEIAlertView showAlertViewWithValidationMessage:@"Please insert your mentors the phone number"];
+      return NO;
+    }
 	}
 	
 	return YES;
 }
 
-- (IBAction)unwindRegistration:(UIStoryboardSegue *)unwindSegue{
+- (IBAction)unwindFindMentor:(UIStoryboardSegue *)unwindSegue{
 	
 }
 

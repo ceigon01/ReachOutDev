@@ -56,7 +56,8 @@
                                   PFUser *user = [PFUser user];
                                   user[@"fullName"] = [NSString stringWithFormat:@"%@ %@",[userData objectForKey:@"first_name"],[userData objectForKey:@"last_name"]];
                                   user[@"imageURL"] = [[[userData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
-            
+                                  
+                                  [progressHud hide:YES];
                                   paramCompletionHandler(user);
                                 }
                               }];
@@ -71,6 +72,9 @@ withCompletionHandler:(void (^)(void))paramCompletionHandler
 
   __block MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:paramView animated:YES];
   progressHud.labelText = @"Signing up...";
+  
+#warning TODO: should these be the same?
+  paramUser[@"fullName"] = paramUser[@"username"];
   
   [paramUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     

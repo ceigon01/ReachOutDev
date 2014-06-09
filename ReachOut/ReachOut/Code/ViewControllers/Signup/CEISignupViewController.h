@@ -7,7 +7,10 @@
 //
 
 #import "CEIBaseViewController.h"
+@class PFUser;
 
 @interface CEISignupViewController : CEIBaseViewController
+
+@property (nonatomic, strong) PFUser *mentor;
 
 @end
