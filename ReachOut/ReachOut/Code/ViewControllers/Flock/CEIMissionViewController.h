@@ -8,6 +8,10 @@
 
 #import "CEIBaseViewController.h"
 
+@class PFObject;
+
 @interface CEIMissionViewController : CEIBaseViewController
+
+@property (nonatomic, strong) PFObject *mission;
 
 @end

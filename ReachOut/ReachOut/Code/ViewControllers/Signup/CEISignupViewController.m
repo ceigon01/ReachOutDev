@@ -110,7 +110,10 @@
             self.user.username = self.textFieldFullName.text;
             self.user.password = self.textFieldPassword.text;
             self.user[@"mobilePhone"] = self.textFieldMobileNumber.text;
-            self.user[@"mentorID"] = self.mentor.objectId;
+            if (self.mentor.objectId) {
+
+              self.user[@"mentorID"] = self.mentor.objectId;
+            }
             self.user[@"isMentor"] = @NO;
             
             __weak CEISignupViewController *weakSelf = self;

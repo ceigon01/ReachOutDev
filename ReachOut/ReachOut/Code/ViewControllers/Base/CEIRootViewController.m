@@ -8,6 +8,7 @@
 
 #import "CEIRootViewController.h"
 #import <Parse/Parse.h>
+#import "CEINotificationNames.h"
 
 static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifier_Root_Signup";
 
@@ -17,8 +18,18 @@ static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifier_Root_Sign
 
 @implementation CEIRootViewController
 
+- (void)dealloc{
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad{
 	[super viewDidLoad];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleNotificationLogout:)
+                                               name:kNotificationNameLogout
+                                             object:nil];
   
   APP_DELEGATE.window.backgroundColor = [UIColor whiteColor];
 }
@@ -36,6 +47,13 @@ static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifier_Root_Sign
 
 - (IBAction)unwindRegistration:(UIStoryboardSegue *)unwindSegue{
 	
+}
+
+#pragma mark - Notification Handling
+
+- (void)handleNotificationLogout:(NSNotification *)paramNotification{
+  
+  [self performSegueWithIdentifier:kSegueIdentifierRootSignup sender:self];
 }
 
 @end

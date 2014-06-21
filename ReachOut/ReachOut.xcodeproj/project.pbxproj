@@ -57,10 +57,13 @@
 		FD1190A819487C03005A1AE1 /* CEIEncouragementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190A719487C03005A1AE1 /* CEIEncouragementViewController.m */; };
 		FD1190AB19488FBE005A1AE1 /* podfile in Resources */ = {isa = PBXBuildFile; fileRef = FD1190AA19488FBD005A1AE1 /* podfile */; };
 		FD1190AE194896C5005A1AE1 /* CEIMentorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190AD194896C5005A1AE1 /* CEIMentorCell.m */; };
-		FD1190B11948984C005A1AE1 /* CEIFollowerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190B01948984C005A1AE1 /* CEIFollowerCell.m */; };
 		FD1190B4194899C2005A1AE1 /* CEIMissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190B3194899C2005A1AE1 /* CEIMissionsViewController.m */; };
 		FD1190B7194899D8005A1AE1 /* CEIMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190B6194899D8005A1AE1 /* CEIMissionViewController.m */; };
 		FD1190BD19489A99005A1AE1 /* CEIUserPortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190BC19489A99005A1AE1 /* CEIUserPortraitView.m */; };
+		FD1190C01948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190BF1948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m */; };
+		FD1190C31949EDEF005A1AE1 /* NSDate+Difference.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190C21949EDEF005A1AE1 /* NSDate+Difference.m */; };
+		FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2461955D54300B60BEF /* CEILoginViewController.m */; };
+		FDC8D24A1955F79800B60BEF /* CEINotificationNames.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2491955F79800B60BEF /* CEINotificationNames.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,14 +151,20 @@
 		FD1190AA19488FBD005A1AE1 /* podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FD1190AC194896C5005A1AE1 /* CEIMentorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIMentorCell.h; sourceTree = "<group>"; };
 		FD1190AD194896C5005A1AE1 /* CEIMentorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIMentorCell.m; sourceTree = "<group>"; };
-		FD1190AF1948984C005A1AE1 /* CEIFollowerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIFollowerCell.h; sourceTree = "<group>"; };
-		FD1190B01948984C005A1AE1 /* CEIFollowerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIFollowerCell.m; sourceTree = "<group>"; };
 		FD1190B2194899C2005A1AE1 /* CEIMissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIMissionsViewController.h; sourceTree = "<group>"; };
 		FD1190B3194899C2005A1AE1 /* CEIMissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIMissionsViewController.m; sourceTree = "<group>"; };
 		FD1190B5194899D8005A1AE1 /* CEIMissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIMissionViewController.h; sourceTree = "<group>"; };
 		FD1190B6194899D8005A1AE1 /* CEIMissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIMissionViewController.m; sourceTree = "<group>"; };
 		FD1190BB19489A99005A1AE1 /* CEIUserPortraitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIUserPortraitView.h; sourceTree = "<group>"; };
 		FD1190BC19489A99005A1AE1 /* CEIUserPortraitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIUserPortraitView.m; sourceTree = "<group>"; };
+		FD1190BE1948F4E8005A1AE1 /* CEIDoubleDisclosureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIDoubleDisclosureCell.h; sourceTree = "<group>"; };
+		FD1190BF1948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIDoubleDisclosureCell.m; sourceTree = "<group>"; };
+		FD1190C11949EDEF005A1AE1 /* NSDate+Difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Difference.h"; sourceTree = "<group>"; };
+		FD1190C21949EDEF005A1AE1 /* NSDate+Difference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Difference.m"; sourceTree = "<group>"; };
+		FDC8D2451955D54300B60BEF /* CEILoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEILoginViewController.h; sourceTree = "<group>"; };
+		FDC8D2461955D54300B60BEF /* CEILoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEILoginViewController.m; sourceTree = "<group>"; };
+		FDC8D2481955F79800B60BEF /* CEINotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEINotificationNames.h; sourceTree = "<group>"; };
+		FDC8D2491955F79800B60BEF /* CEINotificationNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEINotificationNames.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +227,8 @@
 				A403F3B219393E3A0039750B /* CEIRoleSelectViewController.m */,
 				FD0C8531193F5A6E004C006B /* MentorSignup */,
 				A403F3B719393E980039750B /* FollowerSignup */,
+				FDC8D2451955D54300B60BEF /* CEILoginViewController.h */,
+				FDC8D2461955D54300B60BEF /* CEILoginViewController.m */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -376,8 +387,8 @@
 				FD11906719420D80005A1AE1 /* CEIAlertView.m */,
 				FD1190AC194896C5005A1AE1 /* CEIMentorCell.h */,
 				FD1190AD194896C5005A1AE1 /* CEIMentorCell.m */,
-				FD1190AF1948984C005A1AE1 /* CEIFollowerCell.h */,
-				FD1190B01948984C005A1AE1 /* CEIFollowerCell.m */,
+				FD1190BE1948F4E8005A1AE1 /* CEIDoubleDisclosureCell.h */,
+				FD1190BF1948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m */,
 				FD1190BB19489A99005A1AE1 /* CEIUserPortraitView.h */,
 				FD1190BC19489A99005A1AE1 /* CEIUserPortraitView.m */,
 			);
@@ -392,6 +403,8 @@
 				A4CAB089193A2BAD00CC7B12 /* UIView+NibLoading.m */,
 				A4CAB08D193B4C3D00CC7B12 /* UIView+FirstResponder.h */,
 				A4CAB08E193B4C3D00CC7B12 /* UIView+FirstResponder.m */,
+				FD1190C11949EDEF005A1AE1 /* NSDate+Difference.h */,
+				FD1190C21949EDEF005A1AE1 /* NSDate+Difference.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -419,6 +432,8 @@
 			children = (
 				FD119061194202F1005A1AE1 /* CEISession.h */,
 				FD119062194202F1005A1AE1 /* CEISession.m */,
+				FDC8D2481955F79800B60BEF /* CEINotificationNames.h */,
+				FDC8D2491955F79800B60BEF /* CEINotificationNames.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -610,19 +625,21 @@
 				FD1190BD19489A99005A1AE1 /* CEIUserPortraitView.m in Sources */,
 				FD1190A519487BD4005A1AE1 /* CEIMoreViewController.m in Sources */,
 				A4CAB08A193A2BAD00CC7B12 /* UIView+NibLoading.m in Sources */,
+				FDC8D24A1955F79800B60BEF /* CEINotificationNames.m in Sources */,
 				FD1190AE194896C5005A1AE1 /* CEIMentorCell.m in Sources */,
 				FD0C8534193F5A7B004C006B /* CEIMentorSignupViewController.m in Sources */,
 				A45E4B8C193800CC008D7EA6 /* CEIHandies.m in Sources */,
+				FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */,
 				A440A1971937F33900D7CC0D /* main.m in Sources */,
 				A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */,
 				A440A19B1937F33900D7CC0D /* CEIAppDelegate.m in Sources */,
 				A4CAB08F193B4C3D00CC7B12 /* UIView+FirstResponder.m in Sources */,
 				A403F3B019393DFA0039750B /* CEINavigationController.m in Sources */,
-				FD1190B11948984C005A1AE1 /* CEIFollowerCell.m in Sources */,
 				A403F3C4193947E00039750B /* CEISignupViewController.m in Sources */,
 				A403F3CC193948F90039750B /* CEIRootViewController.m in Sources */,
 				FD1190B7194899D8005A1AE1 /* CEIMissionViewController.m in Sources */,
 				FD0C8523193E4F66004C006B /* CEICodeVerificationView.m in Sources */,
+				FD1190C31949EDEF005A1AE1 /* NSDate+Difference.m in Sources */,
 				FD119063194202F1005A1AE1 /* CEISession.m in Sources */,
 				A403F3B319393E3A0039750B /* CEIRoleSelectViewController.m in Sources */,
 				FD1190721946559F005A1AE1 /* CEIMentorsViewController.m in Sources */,
@@ -630,6 +647,7 @@
 				FD11906E19465578005A1AE1 /* CEIFlockViewController.m in Sources */,
 				A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */,
 				A403F3BD19393EC70039750B /* CEIMentorFoundViewController.m in Sources */,
+				FD1190C01948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

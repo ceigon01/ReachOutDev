@@ -9,10 +9,9 @@
 #import "CEIFlockViewController.h"
 #import <Parse/Parse.h>
 #import "CEIAlertView.h"
-#import "MBProgressHUD.h"
 #import "SVPullToRefresh.h"
 #import "UIImageView+WebCache.h"
-#import "CEIFollowerCell.h"
+#import "CEIDoubleDisclosureCell.h"
 #import "CEIMissionsViewController.h"
 
 static NSString *const kCellIdentifierFollower = @"kCellIdentifierFollower";
@@ -35,9 +34,6 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
   
 #warning TODO: localization
   self.title = @"Flock";
-  
-  [self.tableView registerClass:[CEIFollowerCell class]
-         forCellReuseIdentifier:kCellIdentifierFollower];
   
   self.tableView.pullToRefreshView.titleLabel.text = @"Gathering your flock...";
   
@@ -98,8 +94,8 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-  CEIFollowerCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierFollower
-                                                            forIndexPath:indexPath];
+  CEIDoubleDisclosureCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierFollower
+                                                                  forIndexPath:indexPath];
   
   PFUser *user = [self.arrayFlock objectAtIndex:indexPath.row];
   
