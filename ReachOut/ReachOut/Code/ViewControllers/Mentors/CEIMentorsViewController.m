@@ -10,8 +10,9 @@
 #import "UIImageView+WebCache.h"
 #import <Parse/Parse.h>
 #import "CEIMissionsViewController.h"
-#import "SVPullToRefresh.h"
+#import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CEIAlertView.h"
 
 static NSString *const kCellIdentifierMentor = @"kCellIdentifierMentor";
 static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Mentors_Missions";
@@ -34,15 +35,22 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
 #warning TODO: localization
   self.title = @"Mentors";
   
-  self.tableView.pullToRefreshView.titleLabel.text = @"Gathering your flock...";
+  [self.tableView triggerPullToRefresh];
+  self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+  [super viewWillAppear:animated];
   
-  __weak CEIMentorsViewController *weakSelf = self;
-  [self.tableView addPullToRefreshWithActionHandler:^{
+  __weak typeof(self) weakSelf = self;
+  [self.tableView addPullToRefreshActionHandler:^{
     
     [weakSelf fetchMentors];
-  }];
-  
-  [weakSelf fetchMentors];
+  }
+                          ProgressImagesGifName:@"run@2x.gif"
+                           LoadingImagesGifName:@"run@2x.gif"
+                        ProgressScrollThreshold:60
+                          LoadingImageFrameRate:30];
 }
 
 - (void)fetchMentors{
@@ -55,12 +63,11 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
     [query whereKey:@"objectId" equalTo:[PFUser currentUser][@"mentorID"]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
-      NSLog(@"%@",objects);
+      [weakSelf.tableView stopRefreshAnimation];
       
       if (error) {
         
-#warning TODO: handle error
-        NSLog(@"%@",error);
+        [CEIAlertView showAlertViewWithError:error];
       }
       else{
         
@@ -83,12 +90,12 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
 
 #pragma mark - UITableView Delegate & Datasource
 
-- (int)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
   
   return 1;
 }
 
-- (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
   
   return self.arrayMentors.count;
 }

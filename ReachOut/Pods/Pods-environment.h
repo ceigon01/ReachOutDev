@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_ASDepthModal 0
 #define COCOAPODS_VERSION_PATCH_ASDepthModal 0
 
+// AnimatedGIFImageSerialization
+#define COCOAPODS_POD_AVAILABLE_AnimatedGIFImageSerialization
+#define COCOAPODS_VERSION_MAJOR_AnimatedGIFImageSerialization 0
+#define COCOAPODS_VERSION_MINOR_AnimatedGIFImageSerialization 0
+#define COCOAPODS_VERSION_PATCH_AnimatedGIFImageSerialization 1
+
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0
@@ -72,9 +78,9 @@
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 6
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 0
 
-// SVPullToRefresh
-#define COCOAPODS_POD_AVAILABLE_SVPullToRefresh
-#define COCOAPODS_VERSION_MAJOR_SVPullToRefresh 0
-#define COCOAPODS_VERSION_MINOR_SVPullToRefresh 4
-#define COCOAPODS_VERSION_PATCH_SVPullToRefresh 1
+// UzysAnimatedGifPullToRefresh
+#define COCOAPODS_POD_AVAILABLE_UzysAnimatedGifPullToRefresh
+#define COCOAPODS_VERSION_MAJOR_UzysAnimatedGifPullToRefresh 0
+#define COCOAPODS_VERSION_MINOR_UzysAnimatedGifPullToRefresh 9
+#define COCOAPODS_VERSION_PATCH_UzysAnimatedGifPullToRefresh 1
 

@@ -9,10 +9,10 @@
 #import "CEIFlockViewController.h"
 #import <Parse/Parse.h>
 #import "CEIAlertView.h"
-#import "SVPullToRefresh.h"
 #import "UIImageView+WebCache.h"
 #import "CEIDoubleDisclosureCell.h"
 #import "CEIMissionsViewController.h"
+#import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
 
 static NSString *const kCellIdentifierFollower = @"kCellIdentifierFollower";
 static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Flock_Missions";
@@ -22,6 +22,7 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSIndexPath *indexPathSelected;
 @property (nonatomic, strong) NSArray *arrayFlock;
+//@property (nonatomic, strong) UIRefreshControl *refreshControll;
 
 - (void)fetchFlock;
 
@@ -35,15 +36,21 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
 #warning TODO: localization
   self.title = @"Flock";
   
-  self.tableView.pullToRefreshView.titleLabel.text = @"Gathering your flock...";
+  [self fetchFlock];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+  [super viewWillAppear:animated];
   
-  __weak CEIFlockViewController *weakSelf = self;
-  [self.tableView addPullToRefreshWithActionHandler:^{
-    
-    [weakSelf fetchFlock];
-  }];
-  
-  [weakSelf fetchFlock];
+    __weak typeof(self) weakSelf =self;
+    [self.tableView addPullToRefreshActionHandler:^{
+      
+      [weakSelf fetchFlock];
+    }
+                            ProgressImagesGifName:@"run@2x.gif"
+                             LoadingImagesGifName:@"run@2x.gif"
+                          ProgressScrollThreshold:60
+                            LoadingImageFrameRate:30];
 }
 
 - (void)fetchFlock{
@@ -56,10 +63,11 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
     [query whereKey:@"mentorID" equalTo:[PFUser currentUser].objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
+      [weakSelf.tableView stopRefreshAnimation];
+      
       if (error) {
         
-#warning TODO: handle error
-        NSLog(@"%@",error);
+        [CEIAlertView showAlertViewWithError:error];
       }
       else{
         
@@ -82,12 +90,12 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
 
 #pragma mark - UITableView Datasource & Delegate
 
-- (int)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
   
   return 1;
 }
 
-- (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
   
   return self.arrayFlock.count;
 }

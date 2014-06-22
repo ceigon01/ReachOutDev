@@ -10,7 +10,7 @@
 #import "CEIUserPortraitView.h"
 #import "CEIDoubleDisclosureCell.h"
 #import <Parse/Parse.h>
-#import "SVPullToRefresh.h"
+#import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
 #import "UIImageView+WebCache.h"
 #import "NSDate+Difference.h"
 #import "CEIMissionViewController.h"
@@ -38,20 +38,26 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
 #warning TODO: localization
   self.title = @"Missions";
   
-  self.tableView.pullToRefreshView.titleLabel.text = @"Gathering missions...";
-  
   if ([[PFUser currentUser][@"isMentor"] isEqual:@0]) {
     
     self.navigationItem.rightBarButtonItem = nil;
   }
 
-  __weak CEIMissionsViewController *weakSelf = self;
-  [self.tableView addPullToRefreshWithActionHandler:^{
+  [self.tableView triggerPullToRefresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+  [super viewWillAppear:animated];
+  
+  __weak typeof(self) weakSelf =self;
+  [self.tableView addPullToRefreshActionHandler:^{
     
     [weakSelf fetchMissions];
-  }];
-  
-  [weakSelf fetchMissions];
+  }
+                          ProgressImagesGifName:@"run@2x.gif"
+                           LoadingImagesGifName:@"run@2x.gif"
+                        ProgressScrollThreshold:60
+                          LoadingImageFrameRate:30];
 }
 
 - (void)fetchMissions{
@@ -72,14 +78,13 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   
   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     
+    [weakSelf.tableView stopRefreshAnimation];
+    
     if (error) {
       
-#warning TODO: handle error
-      NSLog(@"%@",error);
+      [CEIAlertView showAlertViewWithError:error];
     }
     else {
-      
-      NSLog(@"%@",objects);
       
       weakSelf.arrayMissions = [NSMutableArray arrayWithArray:objects];
       [weakSelf.tableView reloadData];
@@ -101,12 +106,9 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   
   if ([unwindSegue.sourceViewController isKindOfClass:[CEIAddMissionViewController class]]) {
     
-    NSLog(@"unwind missions");
-    
     [self.tableView reloadData];
   }
 }
-
 
 - (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
   

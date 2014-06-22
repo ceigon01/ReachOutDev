@@ -62,11 +62,15 @@
 		FD1190BD19489A99005A1AE1 /* CEIUserPortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190BC19489A99005A1AE1 /* CEIUserPortraitView.m */; };
 		FD1190C01948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190BF1948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m */; };
 		FD1190C31949EDEF005A1AE1 /* NSDate+Difference.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190C21949EDEF005A1AE1 /* NSDate+Difference.m */; };
+		FD2E9AD9195731F7005B074A /* run@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD2E9AD7195731F7005B074A /* run@2x.gif */; };
+		FD2E9ADD1957371C005B074A /* sheepPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = FD2E9ADC1957371C005B074A /* sheepPhoto.png */; };
 		FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2461955D54300B60BEF /* CEILoginViewController.m */; };
 		FDC8D24A1955F79800B60BEF /* CEINotificationNames.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2491955F79800B60BEF /* CEINotificationNames.m */; };
 		FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */; };
 		FDC8D25019560CDF00B60BEF /* CEIAddMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D24F19560CDF00B60BEF /* CEIAddMissionViewController.m */; };
 		FDC8D25319560CF400B60BEF /* CEIAddGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D25219560CF400B60BEF /* CEIAddGoalViewController.m */; };
+		FDC8D2571956E67D00B60BEF /* CEIAddEncouragementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2561956E67D00B60BEF /* CEIAddEncouragementViewController.m */; };
+		FDC8D25A1956EF9F00B60BEF /* CEIEncouragementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +168,8 @@
 		FD1190BF1948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIDoubleDisclosureCell.m; sourceTree = "<group>"; };
 		FD1190C11949EDEF005A1AE1 /* NSDate+Difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Difference.h"; sourceTree = "<group>"; };
 		FD1190C21949EDEF005A1AE1 /* NSDate+Difference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Difference.m"; sourceTree = "<group>"; };
+		FD2E9AD7195731F7005B074A /* run@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "run@2x.gif"; sourceTree = "<group>"; };
+		FD2E9ADC1957371C005B074A /* sheepPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sheepPhoto.png; sourceTree = "<group>"; };
 		FDC8D2451955D54300B60BEF /* CEILoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEILoginViewController.h; sourceTree = "<group>"; };
 		FDC8D2461955D54300B60BEF /* CEILoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEILoginViewController.m; sourceTree = "<group>"; };
 		FDC8D2481955F79800B60BEF /* CEINotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEINotificationNames.h; sourceTree = "<group>"; };
@@ -174,6 +180,10 @@
 		FDC8D24F19560CDF00B60BEF /* CEIAddMissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddMissionViewController.m; sourceTree = "<group>"; };
 		FDC8D25119560CF400B60BEF /* CEIAddGoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddGoalViewController.h; sourceTree = "<group>"; };
 		FDC8D25219560CF400B60BEF /* CEIAddGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddGoalViewController.m; sourceTree = "<group>"; };
+		FDC8D2551956E67D00B60BEF /* CEIAddEncouragementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddEncouragementViewController.h; sourceTree = "<group>"; };
+		FDC8D2561956E67D00B60BEF /* CEIAddEncouragementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddEncouragementViewController.m; sourceTree = "<group>"; };
+		FDC8D2581956EF9F00B60BEF /* CEIEncouragementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIEncouragementTableViewCell.h; sourceTree = "<group>"; };
+		FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIEncouragementTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +327,7 @@
 		A440A1901937F33900D7CC0D /* ReachOut */ = {
 			isa = PBXGroup;
 			children = (
+				FD2E9AD5195731EF005B074A /* Assets */,
 				FD0C850A193E0A49004C006B /* External */,
 				A45E4B861938008E008D7EA6 /* Storyboards */,
 				A45E4B8519380069008D7EA6 /* Code */,
@@ -402,6 +413,8 @@
 				FD1190BC19489A99005A1AE1 /* CEIUserPortraitView.m */,
 				FDC8D24B1956007000B60BEF /* CEIProfileBarButtonItem.h */,
 				FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */,
+				FDC8D2581956EF9F00B60BEF /* CEIEncouragementTableViewCell.h */,
+				FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */,
 			);
 			name = Views;
 			path = View;
@@ -480,6 +493,8 @@
 			children = (
 				FD1190A619487C03005A1AE1 /* CEIEncouragementViewController.h */,
 				FD1190A719487C03005A1AE1 /* CEIEncouragementViewController.m */,
+				FDC8D2551956E67D00B60BEF /* CEIAddEncouragementViewController.h */,
+				FDC8D2561956E67D00B60BEF /* CEIAddEncouragementViewController.m */,
 			);
 			path = Encouragement;
 			sourceTree = "<group>";
@@ -499,6 +514,15 @@
 				FD1190AA19488FBD005A1AE1 /* podfile */,
 			);
 			path = Build;
+			sourceTree = "<group>";
+		};
+		FD2E9AD5195731EF005B074A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FD2E9ADC1957371C005B074A /* sheepPhoto.png */,
+				FD2E9AD7195731F7005B074A /* run@2x.gif */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -582,6 +606,8 @@
 				FD0C8525193E5207004C006B /* CEICodeVerificationView.xib in Resources */,
 				A45E4B88193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard in Resources */,
 				FD1190AB19488FBE005A1AE1 /* podfile in Resources */,
+				FD2E9ADD1957371C005B074A /* sheepPhoto.png in Resources */,
+				FD2E9AD9195731F7005B074A /* run@2x.gif in Resources */,
 				A440A1951937F33900D7CC0D /* InfoPlist.strings in Resources */,
 				A440A19D1937F33900D7CC0D /* Images.xcassets in Resources */,
 			);
@@ -639,6 +665,7 @@
 				FD1190B4194899C2005A1AE1 /* CEIMissionsViewController.m in Sources */,
 				FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */,
 				FD1190BD19489A99005A1AE1 /* CEIUserPortraitView.m in Sources */,
+				FDC8D2571956E67D00B60BEF /* CEIAddEncouragementViewController.m in Sources */,
 				FD1190A519487BD4005A1AE1 /* CEIMoreViewController.m in Sources */,
 				A4CAB08A193A2BAD00CC7B12 /* UIView+NibLoading.m in Sources */,
 				FDC8D24A1955F79800B60BEF /* CEINotificationNames.m in Sources */,
@@ -664,6 +691,7 @@
 				FD11906E19465578005A1AE1 /* CEIFlockViewController.m in Sources */,
 				A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */,
 				FDC8D25019560CDF00B60BEF /* CEIAddMissionViewController.m in Sources */,
+				FDC8D25A1956EF9F00B60BEF /* CEIEncouragementTableViewCell.m in Sources */,
 				A403F3BD19393EC70039750B /* CEIMentorFoundViewController.m in Sources */,
 				FD1190C01948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m in Sources */,
 			);
