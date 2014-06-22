@@ -64,6 +64,7 @@
 		FD1190C31949EDEF005A1AE1 /* NSDate+Difference.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190C21949EDEF005A1AE1 /* NSDate+Difference.m */; };
 		FD2E9AD9195731F7005B074A /* run@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD2E9AD7195731F7005B074A /* run@2x.gif */; };
 		FD2E9ADD1957371C005B074A /* sheepPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = FD2E9ADC1957371C005B074A /* sheepPhoto.png */; };
+		FD2E9AE019573BCC005B074A /* CEIWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E9ADF19573BCC005B074A /* CEIWebViewViewController.m */; };
 		FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2461955D54300B60BEF /* CEILoginViewController.m */; };
 		FDC8D24A1955F79800B60BEF /* CEINotificationNames.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2491955F79800B60BEF /* CEINotificationNames.m */; };
 		FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */; };
@@ -170,6 +171,8 @@
 		FD1190C21949EDEF005A1AE1 /* NSDate+Difference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Difference.m"; sourceTree = "<group>"; };
 		FD2E9AD7195731F7005B074A /* run@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "run@2x.gif"; sourceTree = "<group>"; };
 		FD2E9ADC1957371C005B074A /* sheepPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sheepPhoto.png; sourceTree = "<group>"; };
+		FD2E9ADE19573BCC005B074A /* CEIWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIWebViewViewController.h; sourceTree = "<group>"; };
+		FD2E9ADF19573BCC005B074A /* CEIWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIWebViewViewController.m; sourceTree = "<group>"; };
 		FDC8D2451955D54300B60BEF /* CEILoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEILoginViewController.h; sourceTree = "<group>"; };
 		FDC8D2461955D54300B60BEF /* CEILoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEILoginViewController.m; sourceTree = "<group>"; };
 		FDC8D2481955F79800B60BEF /* CEINotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEINotificationNames.h; sourceTree = "<group>"; };
@@ -504,6 +507,8 @@
 			children = (
 				FD1190A319487BD4005A1AE1 /* CEIMoreViewController.h */,
 				FD1190A419487BD4005A1AE1 /* CEIMoreViewController.m */,
+				FD2E9ADE19573BCC005B074A /* CEIWebViewViewController.h */,
+				FD2E9ADF19573BCC005B074A /* CEIWebViewViewController.m */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -693,6 +698,7 @@
 				FDC8D25019560CDF00B60BEF /* CEIAddMissionViewController.m in Sources */,
 				FDC8D25A1956EF9F00B60BEF /* CEIEncouragementTableViewCell.m in Sources */,
 				A403F3BD19393EC70039750B /* CEIMentorFoundViewController.m in Sources */,
+				FD2E9AE019573BCC005B074A /* CEIWebViewViewController.m in Sources */,
 				FD1190C01948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rs8-Cj-SsA">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
@@ -1579,11 +1580,76 @@
                     <navigationItem key="navigationItem" id="Aa8-P7-DIN"/>
                     <connections>
                         <outlet property="tableView" destination="Cfn-O0-3Mx" id="JIp-N2-80y"/>
+                        <segue destination="AI5-Tx-Ezt" kind="push" identifier="kIdentifierSegueMoreToWebViewCeigon" id="kWy-gH-JBn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLd-Kb-GVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1367" y="1298"/>
+        </scene>
+        <!--Web View View Controller-->
+        <scene sceneID="Sjn-6Y-mOB">
+            <objects>
+                <viewController id="AI5-Tx-Ezt" customClass="CEIWebViewViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vEa-uh-hVJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="4I0-gL-m6e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rf1-BZ-Y1y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcr-5n-Qmw">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="fIF-Iq-S9F"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="refresh" id="dr3-WY-owJ">
+                                        <connections>
+                                            <action selector="tapButtonRefresh:" destination="AI5-Tx-Ezt" id="jPQ-nE-OgL"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="iFc-W6-Erc"/>
+                                    <barButtonItem systemItem="undo" id="km7-PR-c8U">
+                                        <connections>
+                                            <action selector="tapButtonBack:" destination="AI5-Tx-Ezt" id="SXh-Vp-K7l"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="redo" id="Mnm-Nb-nHT">
+                                        <connections>
+                                            <action selector="tapButtnNext:" destination="AI5-Tx-Ezt" id="Bjz-tB-6zC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0oC-fu-b6C">
+                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="AI5-Tx-Ezt" id="8UN-3D-XaO"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hcr-5n-Qmw" firstAttribute="top" secondItem="vEa-uh-hVJ" secondAttribute="bottom" id="81p-Cc-Rkc"/>
+                            <constraint firstItem="0oC-fu-b6C" firstAttribute="leading" secondItem="Rf1-BZ-Y1y" secondAttribute="leading" id="B3p-e2-jyv"/>
+                            <constraint firstItem="0oC-fu-b6C" firstAttribute="top" secondItem="hcr-5n-Qmw" secondAttribute="bottom" id="BWd-mN-FKZ"/>
+                            <constraint firstAttribute="bottom" secondItem="0oC-fu-b6C" secondAttribute="bottom" id="Nhr-mT-m5p"/>
+                            <constraint firstAttribute="trailing" secondItem="hcr-5n-Qmw" secondAttribute="trailing" id="ZOJ-So-A0e"/>
+                            <constraint firstItem="hcr-5n-Qmw" firstAttribute="leading" secondItem="Rf1-BZ-Y1y" secondAttribute="leading" id="jf5-8u-kef"/>
+                            <constraint firstAttribute="trailing" secondItem="0oC-fu-b6C" secondAttribute="trailing" id="pIK-Vg-nRL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="fbB-FT-Qzd"/>
+                    <connections>
+                        <outlet property="webView" destination="0oC-fu-b6C" id="2Gi-Vd-7hp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HsL-lf-Zte" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1792" y="1298"/>
         </scene>
     </scenes>
     <resources>

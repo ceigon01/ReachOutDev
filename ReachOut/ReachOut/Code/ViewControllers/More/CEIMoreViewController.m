@@ -9,6 +9,7 @@
 #import "CEIMoreViewController.h"
 #import <Parse/Parse.h>
 #import "CEINotificationNames.h"
+#import "CEIWebViewViewController.h"
 
 typedef NS_ENUM(NSInteger, CEIMoreRow){
 
@@ -18,6 +19,9 @@ typedef NS_ENUM(NSInteger, CEIMoreRow){
 static const NSInteger kNumberOfMoreRows = 2;
 
 static NSString *const kIdentifierCellMore = @"kIdentifierCellMore";
+static NSString *const kIdentifierSegueMoreToWebViewCeigon = @"kIdentifierSegueMoreToWebViewCeigon";
+static NSString *const kURLWebsiteCEIGON = @"http://www.ceigon.com/";
+static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
 
 @interface CEIMoreViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
@@ -32,6 +36,17 @@ static NSString *const kIdentifierCellMore = @"kIdentifierCellMore";
   
 #warning TODO: localization
   self.title = @"More";
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+  
+  if ([segue.identifier isEqualToString:kIdentifierSegueMoreToWebViewCeigon]) {
+    
+    [(CEIWebViewViewController *)segue.destinationViewController loadURL:[NSURL URLWithString:kURLWebsiteCEIGON]
+                                                               withTitle:kTitleWebsiteCEIGON];
+  }
 }
 
 #pragma mark - UITableView Datasource & Delegate
@@ -64,6 +79,7 @@ static NSString *const kIdentifierCellMore = @"kIdentifierCellMore";
   switch (indexPath.row) {
     case CEIMoreRowAbout:{
       
+      [self performSegueWithIdentifier:kIdentifierSegueMoreToWebViewCeigon sender:self];
       break;
     }
       
