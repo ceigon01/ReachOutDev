@@ -14,6 +14,8 @@
 #import "UIImageView+WebCache.h"
 #import "NSDate+Difference.h"
 #import "CEIMissionViewController.h"
+#import "CEIAddMissionViewController.h"
+#import "CEIAlertView.h"
 
 static NSString *const kSegueIdentifierMissionsToMission = @"kSegueIdentifier_Missions_Mission";
 static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
@@ -21,7 +23,7 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
 @interface CEIMissionsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *arrayMissions;
+@property (nonatomic, strong) NSMutableArray *arrayMissions;
 @property (nonatomic, strong) NSIndexPath *indexPathSelected;
 
 - (void)fetchMissions;
@@ -38,6 +40,11 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   
   self.tableView.pullToRefreshView.titleLabel.text = @"Gathering missions...";
   
+  if ([[PFUser currentUser][@"isMentor"] isEqual:@0]) {
+    
+    self.navigationItem.rightBarButtonItem = nil;
+  }
+
   __weak CEIMissionsViewController *weakSelf = self;
   [self.tableView addPullToRefreshWithActionHandler:^{
     
@@ -50,15 +57,15 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
 - (void)fetchMissions{
   
   PFQuery *query = [PFQuery queryWithClassName:@"Mission"];
-  if ([PFUser currentUser][@"isMentor"]) {
-    
-    [query whereKey:@"userIDAsignee" equalTo:self.user.objectId];
-    [query whereKey:@"userIDReporter" equalTo:[PFUser currentUser].objectId];
-  }
-  else{
+  if ([[PFUser currentUser][@"isMentor"] isEqual:@1]) {
     
     [query whereKey:@"userIDReporter" equalTo:self.user.objectId];
     [query whereKey:@"userIDAsignee" equalTo:[PFUser currentUser].objectId];
+  }
+  else{
+    
+    [query whereKey:@"userIDAsignee" equalTo:self.user.objectId];
+    [query whereKey:@"userIDReporter" equalTo:[PFUser currentUser].objectId];
   }
   
   __weak CEIMissionsViewController *weakSelf = self;
@@ -72,7 +79,9 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
     }
     else {
       
-      weakSelf.arrayMissions = [NSArray arrayWithArray:objects];
+      NSLog(@"%@",objects);
+      
+      weakSelf.arrayMissions = [NSMutableArray arrayWithArray:objects];
       [weakSelf.tableView reloadData];
     }
   }];
@@ -86,6 +95,80 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
     
     ((CEIMissionViewController *)segue.destinationViewController).mission = [self.arrayMissions objectAtIndex:self.indexPathSelected.row];
   }
+}
+
+- (IBAction)unwindAddMission:(UIStoryboardSegue *)unwindSegue{
+  
+  if ([unwindSegue.sourceViewController isKindOfClass:[CEIAddMissionViewController class]]) {
+    
+    NSLog(@"unwind missions");
+    
+    [self.tableView reloadData];
+  }
+}
+
+
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
+  
+#warning TODO: localizations
+  CEIAddMissionViewController *vc = nil;
+  
+  if ([fromViewController isKindOfClass:[CEIAddMissionViewController class]]) {
+    
+    vc = (CEIAddMissionViewController *)fromViewController;
+  }
+  else {
+    
+    [CEIAlertView showAlertViewWithValidationMessage:@"Shouldn't get here!"];
+    return NO;
+  }
+  
+  if (vc.mission){
+  
+    if (vc.mission[@"caption"] == nil) {
+      
+      [CEIAlertView showAlertViewWithValidationMessage:@"Please put a Caption"];
+      return NO;
+    }
+    
+    if (vc.arrayGoals.count == 0) {
+      
+      [CEIAlertView showAlertViewWithValidationMessage:@"You should add some goals to this mission!"];
+      return NO;
+    }
+    
+    __weak CEIMissionsViewController *weakSelf = self;
+    
+    PFObject *mission = vc.mission;
+    mission[@"userIDAsignee"] = self.user.objectId;
+    mission[@"userIDReporter"] = [PFUser currentUser].objectId;
+    
+    PFRelation *relation = [mission relationForKey:@"goals"];
+    [vc.arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
+  
+      [relation addObject:goal];
+    }];
+    
+    [mission saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+      
+      if (error) {
+        
+        [CEIAlertView showAlertViewWithError:error];
+      }
+      else {
+        
+        [weakSelf.arrayMissions addObject:mission];
+        [weakSelf.tableView reloadData];
+      }
+    }];
+    
+  }
+  else {
+    
+    return NO;
+  }
+  
+  return YES;
 }
 
 #pragma mark - UITableVIew Datasource & Delegate

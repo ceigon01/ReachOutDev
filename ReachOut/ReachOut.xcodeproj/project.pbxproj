@@ -64,6 +64,9 @@
 		FD1190C31949EDEF005A1AE1 /* NSDate+Difference.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1190C21949EDEF005A1AE1 /* NSDate+Difference.m */; };
 		FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2461955D54300B60BEF /* CEILoginViewController.m */; };
 		FDC8D24A1955F79800B60BEF /* CEINotificationNames.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2491955F79800B60BEF /* CEINotificationNames.m */; };
+		FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */; };
+		FDC8D25019560CDF00B60BEF /* CEIAddMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D24F19560CDF00B60BEF /* CEIAddMissionViewController.m */; };
+		FDC8D25319560CF400B60BEF /* CEIAddGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D25219560CF400B60BEF /* CEIAddGoalViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +168,12 @@
 		FDC8D2461955D54300B60BEF /* CEILoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEILoginViewController.m; sourceTree = "<group>"; };
 		FDC8D2481955F79800B60BEF /* CEINotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEINotificationNames.h; sourceTree = "<group>"; };
 		FDC8D2491955F79800B60BEF /* CEINotificationNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEINotificationNames.m; sourceTree = "<group>"; };
+		FDC8D24B1956007000B60BEF /* CEIProfileBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIProfileBarButtonItem.h; sourceTree = "<group>"; };
+		FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIProfileBarButtonItem.m; sourceTree = "<group>"; };
+		FDC8D24E19560CDF00B60BEF /* CEIAddMissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddMissionViewController.h; sourceTree = "<group>"; };
+		FDC8D24F19560CDF00B60BEF /* CEIAddMissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddMissionViewController.m; sourceTree = "<group>"; };
+		FDC8D25119560CF400B60BEF /* CEIAddGoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddGoalViewController.h; sourceTree = "<group>"; };
+		FDC8D25219560CF400B60BEF /* CEIAddGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddGoalViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -391,6 +400,8 @@
 				FD1190BF1948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m */,
 				FD1190BB19489A99005A1AE1 /* CEIUserPortraitView.h */,
 				FD1190BC19489A99005A1AE1 /* CEIUserPortraitView.m */,
+				FDC8D24B1956007000B60BEF /* CEIProfileBarButtonItem.h */,
+				FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */,
 			);
 			name = Views;
 			path = View;
@@ -447,6 +458,10 @@
 				FD1190B3194899C2005A1AE1 /* CEIMissionsViewController.m */,
 				FD1190B5194899D8005A1AE1 /* CEIMissionViewController.h */,
 				FD1190B6194899D8005A1AE1 /* CEIMissionViewController.m */,
+				FDC8D24E19560CDF00B60BEF /* CEIAddMissionViewController.h */,
+				FDC8D24F19560CDF00B60BEF /* CEIAddMissionViewController.m */,
+				FDC8D25119560CF400B60BEF /* CEIAddGoalViewController.h */,
+				FDC8D25219560CF400B60BEF /* CEIAddGoalViewController.m */,
 			);
 			path = Flock;
 			sourceTree = "<group>";
@@ -622,6 +637,7 @@
 			files = (
 				FD1190A819487C03005A1AE1 /* CEIEncouragementViewController.m in Sources */,
 				FD1190B4194899C2005A1AE1 /* CEIMissionsViewController.m in Sources */,
+				FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */,
 				FD1190BD19489A99005A1AE1 /* CEIUserPortraitView.m in Sources */,
 				FD1190A519487BD4005A1AE1 /* CEIMoreViewController.m in Sources */,
 				A4CAB08A193A2BAD00CC7B12 /* UIView+NibLoading.m in Sources */,
@@ -629,6 +645,7 @@
 				FD1190AE194896C5005A1AE1 /* CEIMentorCell.m in Sources */,
 				FD0C8534193F5A7B004C006B /* CEIMentorSignupViewController.m in Sources */,
 				A45E4B8C193800CC008D7EA6 /* CEIHandies.m in Sources */,
+				FDC8D25319560CF400B60BEF /* CEIAddGoalViewController.m in Sources */,
 				FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */,
 				A440A1971937F33900D7CC0D /* main.m in Sources */,
 				A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */,
@@ -646,6 +663,7 @@
 				FD11906819420D80005A1AE1 /* CEIAlertView.m in Sources */,
 				FD11906E19465578005A1AE1 /* CEIFlockViewController.m in Sources */,
 				A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */,
+				FDC8D25019560CDF00B60BEF /* CEIAddMissionViewController.m in Sources */,
 				A403F3BD19393EC70039750B /* CEIMentorFoundViewController.m in Sources */,
 				FD1190C01948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m in Sources */,
 			);

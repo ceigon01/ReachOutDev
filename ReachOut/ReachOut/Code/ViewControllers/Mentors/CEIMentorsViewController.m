@@ -71,6 +71,16 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
   }
 }
 
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+  
+  if ([segue.identifier isEqualToString:kSegueIdentifierMentorsToMissions]) {
+    
+    ((CEIMissionsViewController *)segue.destinationViewController).user = [self.arrayMentors objectAtIndex:self.indexPathSelected.row];
+  }
+}
+
 #pragma mark - UITableView Delegate & Datasource
 
 - (int)numberOfSectionsInTableView:(UITableView *)tableView{

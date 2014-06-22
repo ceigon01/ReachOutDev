@@ -9,6 +9,7 @@
 #import "CEILoginViewController.h"
 #import <Parse/Parse.h>
 #import "CEISession.h"
+#import "CEIAlertView.h"
 
 @interface CEILoginViewController () <UITextFieldDelegate>
 
@@ -58,13 +59,7 @@
   if (self.textFieldUsername.text.length == 0 ||
       self.textFieldPassword.text.length == 0) {
 
-#warning TODO: localizations
-    [[[UIAlertView alloc] initWithTitle:@"Please fill in both fields"
-                                message:nil
-                               delegate:nil
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil] show];
-
+    [CEIAlertView showAlertViewWithValidationMessage:@"Please fill in both fields"];
     return;
   }
   
@@ -77,14 +72,7 @@
         }
                  errorHandler:^(NSError *error) {
 
-                   NSString *errorMessage = [error.userInfo objectForKey:@"error"];
-                   
-#warning TODO: localizations
-                   [[[UIAlertView alloc] initWithTitle:@"Login failed"
-                                               message:errorMessage
-                                              delegate:nil
-                                     cancelButtonTitle:@"OK"
-                                     otherButtonTitles:nil] show];
+                   [CEIAlertView showAlertViewWithError:error];
                  }];
 }
 

@@ -11,5 +11,6 @@
 @interface CEIAlertView : UIAlertView
 
 + (void)showAlertViewWithValidationMessage:(NSString *)paramValidationMessage;
++ (void)showAlertViewWithError:(NSError *)paramError;
 
 @end

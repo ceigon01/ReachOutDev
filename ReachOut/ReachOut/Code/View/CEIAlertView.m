@@ -12,9 +12,22 @@
 
 + (void)showAlertViewWithValidationMessage:(NSString *)paramValidationMessage{
   
-#warning TODO: validate strings
+#warning TODO: validate strings & localizations
   [[[UIAlertView alloc] initWithTitle:@"Validation error"
                               message:paramValidationMessage
+                             delegate:nil
+                    cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil] show];
+}
+
++ (void)showAlertViewWithError:(NSError *)paramError{
+
+#warning TODO: validate strings & localizations
+  
+  NSString *errorMessage = [paramError.userInfo objectForKey:@"error"];
+  
+  [[[UIAlertView alloc] initWithTitle:@"Error"
+                              message:errorMessage
                              delegate:nil
                     cancelButtonTitle:@"OK"
                     otherButtonTitles:nil] show];
