@@ -15,6 +15,11 @@
 	#import <Foundation/Foundation.h>
   #import "CEIAppDelegate.h"
 
+  #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+  #define IS_IPHONE_5 ((IS_IPHONE) && ([UIScreen mainScreen].bounds.size.height > 500))
+  #define IS_IPAD !IS_IPHONE
+  #define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale == 2.0))
+
   #define APP_DELEGATE ((CEIAppDelegate *)[[UIApplication sharedApplication] delegate])
 
   #define IS_OS_6_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)

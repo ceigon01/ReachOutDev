@@ -35,8 +35,9 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
 #warning TODO: localization
   self.title = @"Mentors";
   
-  [self.tableView triggerPullToRefresh];
   self.automaticallyAdjustsScrollViewInsets = NO;
+  
+  [self fetchMentors];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -85,6 +86,7 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
   if ([segue.identifier isEqualToString:kSegueIdentifierMentorsToMissions]) {
     
     ((CEIMissionsViewController *)segue.destinationViewController).user = [self.arrayMentors objectAtIndex:self.indexPathSelected.row];
+    ((CEIMissionsViewController *)segue.destinationViewController).mentor = NO;
   }
 }
 
@@ -102,23 +104,49 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierMentor];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierMentor
+                                                          forIndexPath:indexPath];
+  
+  __weak UITableViewCell *weakCell = cell;
   
   PFUser *user = [self.arrayMentors objectAtIndex:indexPath.row];
   
-  [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]
-                 placeholderImage:[UIImage imageNamed:@"imgPlaceholder"]];
+  if (user[@"imageURL"]) {
+    
+    [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]
+                   placeholderImage:[UIImage imageNamed:@"sheepPhoto"]
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+
+                            weakCell.imageView.layer.cornerRadius = weakCell.imageView.frame.size.height * 0.5f;
+                            weakCell.imageView.layer.masksToBounds = YES;
+                          }];
+  }
+  else{
+    
+    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+  }
+  
   cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height * 0.5f;
   cell.imageView.layer.masksToBounds = YES;
-  cell.textLabel.text = user[@"title"];
-  cell.detailTextLabel.text = user[@"fullName"];
+  
+  cell.textLabel.text = user[@"fullName"];
+  cell.detailTextLabel.text = user[@"title"];
   
   return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+  
+  cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height * 0.5f;
+  cell.imageView.layer.masksToBounds = YES;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
   self.indexPathSelected = indexPath;
+  
+  [self performSegueWithIdentifier:kSegueIdentifierMentorsToMissions
+                            sender:self];
 }
 
 @end

@@ -43,13 +43,13 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
     self.navigationItem.rightBarButtonItem = nil;
   }
 
-  [self.tableView triggerPullToRefresh];
+  [self fetchMissions];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   
-  __weak typeof(self) weakSelf =self;
+  __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshActionHandler:^{
     
     [weakSelf fetchMissions];
@@ -99,6 +99,7 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   if ([segue.identifier isEqualToString:kSegueIdentifierMissionsToMission]) {
     
     ((CEIMissionViewController *)segue.destinationViewController).mission = [self.arrayMissions objectAtIndex:self.indexPathSelected.row];
+    ((CEIMissionViewController *)segue.destinationViewController).mentor = self.mentor;
   }
 }
 
@@ -111,64 +112,64 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
 }
 
 - (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
-  
-#warning TODO: localizations
-  CEIAddMissionViewController *vc = nil;
-  
-  if ([fromViewController isKindOfClass:[CEIAddMissionViewController class]]) {
-    
-    vc = (CEIAddMissionViewController *)fromViewController;
-  }
-  else {
-    
-    [CEIAlertView showAlertViewWithValidationMessage:@"Shouldn't get here!"];
-    return NO;
-  }
-  
-  if (vc.mission){
-  
-    if (vc.mission[@"caption"] == nil) {
-      
-      [CEIAlertView showAlertViewWithValidationMessage:@"Please put a Caption"];
-      return NO;
-    }
-    
-    if (vc.arrayGoals.count == 0) {
-      
-      [CEIAlertView showAlertViewWithValidationMessage:@"You should add some goals to this mission!"];
-      return NO;
-    }
-    
-    __weak CEIMissionsViewController *weakSelf = self;
-    
-    PFObject *mission = vc.mission;
-    mission[@"userIDAsignee"] = self.user.objectId;
-    mission[@"userIDReporter"] = [PFUser currentUser].objectId;
-    
-    PFRelation *relation = [mission relationForKey:@"goals"];
-    [vc.arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
-  
-      [relation addObject:goal];
-    }];
-    
-    [mission saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-      
-      if (error) {
-        
-        [CEIAlertView showAlertViewWithError:error];
-      }
-      else {
-        
-        [weakSelf.arrayMissions addObject:mission];
-        [weakSelf.tableView reloadData];
-      }
-    }];
-    
-  }
-  else {
-    
-    return NO;
-  }
+//  
+//#warning TODO: localizations
+//  CEIAddMissionViewController *vc = nil;
+//  
+//  if ([fromViewController isKindOfClass:[CEIAddMissionViewController class]]) {
+//    
+//    vc = (CEIAddMissionViewController *)fromViewController;
+//  }
+//  else {
+//    
+//    [CEIAlertView showAlertViewWithValidationMessage:@"Shouldn't get here!"];
+//    return NO;
+//  }
+//  
+//  if (vc.mission){
+//  
+//    if (vc.mission[@"caption"] == nil) {
+//      
+//      [CEIAlertView showAlertViewWithValidationMessage:@"Please put a Caption"];
+//      return NO;
+//    }
+//    
+//    if (vc.arrayGoals.count == 0) {
+//      
+//      [CEIAlertView showAlertViewWithValidationMessage:@"You should add some goals to this mission!"];
+//      return NO;
+//    }
+//    
+//    __weak CEIMissionsViewController *weakSelf = self;
+//    
+//    PFObject *mission = vc.mission;
+//    mission[@"userIDAsignee"] = self.user.objectId;
+//    mission[@"userIDReporter"] = [PFUser currentUser].objectId;
+//    
+//    PFRelation *relation = [mission relationForKey:@"goals"];
+//    [vc.arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
+//  
+//      [relation addObject:goal];
+//    }];
+//    
+//    [mission saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//      
+//      if (error) {
+//        
+//        [CEIAlertView showAlertViewWithError:error];
+//      }
+//      else {
+//        
+//        [weakSelf.arrayMissions addObject:mission];
+//        [weakSelf.tableView reloadData];
+//      }
+//    }];
+//    
+//  }
+//  else {
+//    
+//    return NO;
+//  }
   
   return YES;
 }
@@ -198,8 +199,9 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   NSDate *dateEnds = mission[@"dateEnds"];
   NSInteger daysDifference = [dateBegins daysBetweenDate:dateEnds];
   
-  cell.labelCounter.text = [NSString stringWithFormat:@"%ld",(long)daysDifference];
-  cell.labelDate.text = @"Days";
+#warning TODO: implement
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",(long)daysDifference];
+  cell.labelLowerDetail.text = @"Days";
   
   return cell;
 }

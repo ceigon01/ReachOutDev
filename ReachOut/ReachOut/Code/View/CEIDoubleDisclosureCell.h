@@ -10,7 +10,6 @@
 
 @interface CEIDoubleDisclosureCell : UITableViewCell
 
-@property (nonatomic, strong) IBOutlet UILabel *labelCounter;
-@property (nonatomic, strong) IBOutlet UILabel *labelDate;
+@property (nonatomic, strong) IBOutlet UILabel *labelLowerDetail;
 
 @end

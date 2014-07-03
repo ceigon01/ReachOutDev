@@ -12,14 +12,18 @@
 #import "CEIWebViewViewController.h"
 
 typedef NS_ENUM(NSInteger, CEIMoreRow){
-
-  CEIMoreRowAbout = 0,
-  CEIMoreRowLogout = 1,
+  
+  CEIMoreRowMissions = 0,
+  CEIMoreRowUpdateProfile = 1,
+  CEIMoreRowAbout = 2,
+  CEIMoreRowLogout = 3,
 };
-static const NSInteger kNumberOfMoreRows = 2;
+static const NSInteger kNumberOfMoreRows = 4;
 
 static NSString *const kIdentifierCellMore = @"kIdentifierCellMore";
 static NSString *const kIdentifierSegueMoreToWebViewCeigon = @"kIdentifierSegueMoreToWebViewCeigon";
+static NSString *const kIdentifierSegueMoreToAllMissions = @"kIdentifierSegueMoreToAllMissions";
+
 static NSString *const kURLWebsiteCEIGON = @"http://www.ceigon.com/";
 static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
 
@@ -77,6 +81,12 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
   switch (indexPath.row) {
+    case CEIMoreRowMissions:{
+      
+      [self performSegueWithIdentifier:kIdentifierSegueMoreToAllMissions sender:self];
+      break;
+    }
+    
     case CEIMoreRowAbout:{
       
       [self performSegueWithIdentifier:kIdentifierSegueMoreToWebViewCeigon sender:self];
@@ -117,6 +127,8 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
 
 #warning TODO: localization
   switch (paramIndexPath.row) {
+    case CEIMoreRowMissions: return @"Missions";
+    case CEIMoreRowUpdateProfile: return @"Update Profile";
     case CEIMoreRowAbout: return @"About";
     case CEIMoreRowLogout: return @"Logout";
       

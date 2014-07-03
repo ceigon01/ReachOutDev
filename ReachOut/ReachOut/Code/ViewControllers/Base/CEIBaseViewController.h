@@ -15,4 +15,8 @@
 - (void)slideViewToInputTextField:(UITextField *)textField;
 - (void)slideViewToOrigin;
 
+- (void)showToastWithTitle:(NSString *)paramTitle
+                  subtitle:(NSString *)paramSubtitle
+                   success:(BOOL)paramSuccess;
+
 @end

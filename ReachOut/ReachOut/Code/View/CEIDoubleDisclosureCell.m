@@ -8,8 +8,8 @@
 
 #import "CEIDoubleDisclosureCell.h"
 
-static CGFloat const kLabelsYOffset = 40.0f;
-static CGFloat const kLabelsWidth = 100.0f;
+static CGFloat const kLabelsYOffset = 0.0f;
+static CGFloat const kLabelsWidth = 40.0f;
 static CGFloat const kLabelsHeightRatio = 0.6f;
 
 @interface CEIDoubleDisclosureCell ()
@@ -31,6 +31,17 @@ static CGFloat const kLabelsHeightRatio = 0.6f;
   return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder{
+  
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    
+    [self setup];
+  }
+  
+  return self;
+}
+
 - (void)awakeFromNib{
   [super awakeFromNib];
   
@@ -39,23 +50,26 @@ static CGFloat const kLabelsHeightRatio = 0.6f;
 
 - (void)setup{
   
-  _labelCounter = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - kLabelsYOffset - kLabelsWidth,
-                                                            0.0f,
-                                                            kLabelsWidth,
-                                                            self.frame.size.height * kLabelsHeightRatio)];
-  _labelCounter.text = @"upper";
-  _labelCounter.backgroundColor = [UIColor clearColor];
-  _labelCounter.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight;
-  [self.contentView addSubview:_labelCounter];
+  _labelLowerDetail = [[UILabel alloc] initWithFrame:self.detailTextLabel.frame];
+  _labelLowerDetail.text = @"upper";
+  _labelLowerDetail.backgroundColor = [UIColor clearColor];
+  _labelLowerDetail.textAlignment = NSTextAlignmentRight;
+  _labelLowerDetail.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
+  [self.contentView addSubview:_labelLowerDetail];
+}
+
+- (void)layoutSubviews{
+  [super layoutSubviews];
   
-  _labelDate = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - kLabelsYOffset - kLabelsWidth,
-                                                         0.0f,
-                                                         kLabelsWidth,
-                                                         self.frame.size.height * (1.0f - kLabelsHeightRatio))];
-  _labelDate.text = @"lower";
-  _labelDate.backgroundColor = [UIColor clearColor];
-  _labelDate.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
-  [self.contentView addSubview:_labelDate];
+  self.detailTextLabel.frame = CGRectMake(self.detailTextLabel.frame.origin.x,
+                                          0.0f,
+                                          self.detailTextLabel.frame.size.width,
+                                          self.detailTextLabel.frame.size.height);
+  
+  self.labelLowerDetail.frame = CGRectMake(self.detailTextLabel.frame.origin.x,
+                                           self.detailTextLabel.frame.size.height,
+                                           self.detailTextLabel.frame.size.width,
+                                           self.contentView.frame.size.height - self.detailTextLabel.frame.size.height);
 }
 
 @end

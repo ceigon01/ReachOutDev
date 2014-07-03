@@ -22,7 +22,6 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSIndexPath *indexPathSelected;
 @property (nonatomic, strong) NSArray *arrayFlock;
-//@property (nonatomic, strong) UIRefreshControl *refreshControll;
 
 - (void)fetchFlock;
 
@@ -85,6 +84,7 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
   if ([segue.identifier isEqualToString:kSegueIdentifierFlockToMissions]) {
     
     ((CEIMissionsViewController *)segue.destinationViewController).user = [self.arrayFlock objectAtIndex:self.indexPathSelected.row];
+    ((CEIMissionsViewController *)segue.destinationViewController).mentor = YES;
   }
 }
 
@@ -107,14 +107,30 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
   
   PFUser *user = [self.arrayFlock objectAtIndex:indexPath.row];
   
-  [cell.imageView setImageWithURL:user[@"imageURL"]
-                 placeholderImage:[UIImage imageNamed:@"imgPlaceholder"]];
+  __weak UITableViewCell *weakCell = cell;
   
+  if (user[@"imageURL"]) {
+    
+    [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]
+                   placeholderImage:[UIImage imageNamed:@"sheepPhoto"]
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                            
+                            weakCell.imageView.layer.cornerRadius = weakCell.imageView.frame.size.height * 0.5f;
+                            weakCell.imageView.layer.masksToBounds = YES;
+                          }];
+  }
+  else{
+    
+    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+  }
+  
+  cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height * 0.5f;
+  cell.imageView.layer.masksToBounds = YES;
+  
+#warning TODO: implement
   cell.textLabel.text = user[@"fullName"];
-#warning TODO: find value to be placed here
-  cell.labelCounter.text = @"1/2";
-#warning TODO: ...and here
-  cell.labelDate.text = @"Yesterday";
+  cell.detailTextLabel.text = @"detail";
+  cell.labelLowerDetail.text = @"lower detail";
   
   return cell;
 }
@@ -122,6 +138,8 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
   self.indexPathSelected = indexPath;
+  [self performSegueWithIdentifier:kSegueIdentifierFlockToMissions
+                            sender:self];
 }
 
 @end

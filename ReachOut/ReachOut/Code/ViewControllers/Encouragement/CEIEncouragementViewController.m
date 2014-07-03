@@ -44,8 +44,9 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
 #warning TODO: localization
   self.title = @"Encouragement";
   
-  [self.tableView triggerPullToRefresh];
   self.automaticallyAdjustsScrollViewInsets = NO;
+  [self fetchEncouragementsReceived];
+  [self fetchEncouragementsSent];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -271,28 +272,14 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   }
   else {
     
+#warning TODO
     cell.labelDateRead.text = @"not read yet";
   }
   
   cell.constraintHeightLabelCaption.constant = cell.frame.size.height - kHeightCellOffset;
   
-//  cell.labelCaption.frame = CGRectMake(cell.labelCaption.frame.origin.x,
-//                                       cell.labelCaption.frame.origin.y,
-//                                       cell.labelCaption.frame.size.width,
-//                                       cell.frame.size.height - kHeightCellOffset);
-  
   return cell;
 }
-
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//  
-//  CEIEncouragementTableViewCell *cellEncourage = (CEIEncouragementTableViewCell *)cell;
-//  
-//  cellEncourage.labelCaption.frame = CGRectMake(cellEncourage.labelCaption.frame.origin.x,
-//                                                cellEncourage.labelCaption.frame.origin.y,
-//                                                cellEncourage.labelCaption.frame.size.width,
-//                                                cellEncourage.frame.size.height - kHeightCellOffset);
-//}
 
 #pragma mark - Action Handling
 

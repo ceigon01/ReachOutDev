@@ -8,6 +8,8 @@
 
 #import "CEIBaseViewController.h"
 #import "UIView+FirstResponder.h"
+#import "CRToast.h"
+#import "CEIColor.h"
 
 static const NSTimeInterval kTimeDurationViewSlides = 0.22f;
 #warning TODO: this suports only iPhone
@@ -66,6 +68,29 @@ static const CGFloat kHeightKeyboardHeight = 216.0f;
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
   
   [self slideViewToInputTextField:textField];
+}
+
+#pragma mark - Convinience Methods
+
+- (void)showToastWithTitle:(NSString *)paramTitle
+                  subtitle:(NSString *)paramSubtitle
+                   success:(BOOL)paramSuccess{
+  
+  NSDictionary *options = @{
+                            kCRToastTextKey : paramTitle,
+                            kCRToastTextAlignmentKey : @(NSTextAlignmentLeft),
+                            kCRToastBackgroundColorKey : paramSuccess ? [CEIColor colorGreen] : [CEIColor colorRed],
+                            kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
+                            kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
+                            kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
+                            kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
+                            kCRToastSubtitleTextKey : paramSubtitle,
+                            kCRToastSubtitleTextAlignmentKey : @(NSTextAlignmentLeft),
+                            };
+  [CRToastManager showNotificationWithOptions:options
+                              completionBlock:^{
+
+                              }];
 }
 
 #pragma mark - Custom Setters

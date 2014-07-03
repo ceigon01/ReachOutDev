@@ -12,7 +12,7 @@
 @interface CEIAddMissionViewController : CEIBaseViewController
 
 @property (nonatomic, strong) PFObject *mission;
-@property (nonatomic, assign) BOOL isEditing;
 @property (nonatomic, strong) NSMutableArray *arrayGoals;
+@property (nonatomic, strong) NSMutableArray *arrayFlock;
 
 @end

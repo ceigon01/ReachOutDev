@@ -9,6 +9,7 @@
 #import "CEINotificationNames.h"
 
 NSString *const kNotificationNameLogout = @"kNotificationNameLogout";
+NSString *const kNotificationNameMissionAdded = @"kNotificationNameMissionAdded";
 
 @implementation CEINotificationNames
 

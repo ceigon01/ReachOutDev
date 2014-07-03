@@ -46,6 +46,15 @@
   return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+  
+  //intentionaly left blank
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+
+  //intentionaly left blank
+}
 
 #pragma mark - Action handling
 

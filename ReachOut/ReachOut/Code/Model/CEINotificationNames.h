@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *const kNotificationNameLogout;
+extern NSString *const kNotificationNameMissionAdded;
 
 @interface CEINotificationNames : NSObject
 
