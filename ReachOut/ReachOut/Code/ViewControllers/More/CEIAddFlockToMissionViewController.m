@@ -40,8 +40,7 @@ static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFl
   PFQuery *query = [PFUser query];
   if (query && [PFUser currentUser]) {
     
-#warning: TODO: change to a relation
-    [query whereKey:@"mentorID" equalTo:[PFUser currentUser].objectId];
+    [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       if (error) {

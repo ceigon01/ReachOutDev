@@ -28,7 +28,7 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
   PFQuery *query = [PFUser query];
   if (query && [PFUser currentUser]) {
     
-    [query whereKey:@"mentorID" equalTo:[PFUser currentUser].objectId];
+    [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       if (error) {

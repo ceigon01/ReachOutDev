@@ -77,8 +77,7 @@
                 }
                          errorHandler:^(NSError *error) {
                            
-#warning TODO: handle error
-                           NSLog(@"%@",error);
+                           [CEIAlertView showAlertViewWithError:error];
                          }];
 
 }
@@ -110,11 +109,11 @@
             self.user.username = self.textFieldFullName.text;
             self.user.password = self.textFieldPassword.text;
             self.user[@"mobilePhone"] = self.textFieldMobileNumber.text;
-            if (self.mentor.objectId) {
+            if (self.mentor) {
 
-              self.user[@"mentorID"] = self.mentor.objectId;
+              PFRelation *relation = [self.user relationForKey:@"mentors"];
+              [relation addObject:self.mentor];
             }
-            self.user[@"isMentor"] = @NO;
             
             __weak CEISignupViewController *weakSelf = self;
             [CEISession signupUser:self.user
@@ -126,8 +125,7 @@
              }
                       errorHandler:^(NSError *error) {
                         
-#warning TODO: handle error
-                        NSLog(@"%@",error);
+                        [CEIAlertView showAlertViewWithError:error];
                       }];
           }
 }

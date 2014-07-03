@@ -121,8 +121,8 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
   
   PFQuery *query = [PFQuery queryWithClassName:@"User"];
   if (self.mission.objectId){
-  #warning TODO: change from string to pointer
-    [query whereKey:@"mentorID" equalTo:[PFUser currentUser].objectId];
+
+    [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
     [query whereKey:@"missions" equalTo:self.mission];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       

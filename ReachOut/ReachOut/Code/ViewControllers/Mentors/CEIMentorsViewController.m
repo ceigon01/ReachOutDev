@@ -13,6 +13,8 @@
 #import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CEIAlertView.h"
+#import "CEIAddMentorViewController.h"
+#import "CEIAddMentorFoundViewController.h"
 
 static NSString *const kCellIdentifierMentor = @"kCellIdentifierMentor";
 static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Mentors_Missions";
@@ -20,7 +22,7 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
 @interface CEIMentorsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *arrayMentors;
+@property (nonatomic, strong) NSMutableArray *arrayMentors;
 @property (nonatomic, strong) NSIndexPath *indexPathSelected;
 
 - (void)fetchMentors;
@@ -58,10 +60,10 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
   
   __weak CEIMentorsViewController *weakSelf = self;
   
-  PFQuery *query = [PFUser query];
-  if (query && [PFUser currentUser] && [PFUser currentUser][@"mentorID"]) {
+  PFQuery *query = [[[PFUser currentUser] relationForKey:@"mentors"] query];
+  
+  if (query && [PFUser currentUser]) {
     
-    [query whereKey:@"objectId" equalTo:[PFUser currentUser][@"mentorID"]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       [weakSelf.tableView stopRefreshAnimation];
@@ -72,7 +74,7 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
       }
       else{
         
-        weakSelf.arrayMentors = [NSArray arrayWithArray:objects];
+        weakSelf.arrayMentors = [NSMutableArray arrayWithArray:objects];
         [weakSelf.tableView reloadData];
       }
     }];
@@ -87,6 +89,39 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
     
     ((CEIMissionsViewController *)segue.destinationViewController).user = [self.arrayMentors objectAtIndex:self.indexPathSelected.row];
     ((CEIMissionsViewController *)segue.destinationViewController).mentor = NO;
+  }
+}
+
+- (IBAction)unwindAddMission:(UIStoryboardSegue *)unwindSegue{
+  
+  if ([unwindSegue.sourceViewController isKindOfClass:[CEIAddMentorViewController class]]) {
+    
+    [self.tableView reloadData];
+  }
+}
+
+- (IBAction)unwindAddMentorFound:(UIStoryboardSegue *)unwindSegue{
+  
+  if ([unwindSegue.sourceViewController isKindOfClass:[CEIAddMentorFoundViewController class]]) {
+    
+    PFUser *user = ((CEIAddMentorFoundViewController *)unwindSegue.sourceViewController).userMentor;
+    
+    [self.arrayMentors addObject:user];
+    [self.tableView reloadData];
+
+    __weak typeof (self) weakSelf = self;
+    
+    PFRelation *relation = [[PFUser currentUser] relationForKey:@"mentors"];
+    [relation addObject:user];
+    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+  
+      if (error) {
+        
+        [CEIAlertView showAlertViewWithError:error];
+        [weakSelf.arrayMentors removeObject:user];
+        [weakSelf.tableView reloadData];
+      }
+    }];
   }
 }
 

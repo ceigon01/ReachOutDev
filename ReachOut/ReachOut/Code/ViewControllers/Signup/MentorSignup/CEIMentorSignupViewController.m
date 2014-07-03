@@ -104,8 +104,7 @@
              }
                       errorHandler:^(NSError *error) {
                       
-#warning TODO: handle error
-                        NSLog(@"%@",error);
+                        [CEIAlertView showAlertViewWithError:error];
                       }];
   }
 }

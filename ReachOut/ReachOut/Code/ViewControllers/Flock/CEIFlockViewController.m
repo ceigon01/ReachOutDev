@@ -59,7 +59,7 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
   PFQuery *query = [PFUser query];
   if (query && [PFUser currentUser]) {
    
-    [query whereKey:@"mentorID" equalTo:[PFUser currentUser].objectId];
+    [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       [weakSelf.tableView stopRefreshAnimation];

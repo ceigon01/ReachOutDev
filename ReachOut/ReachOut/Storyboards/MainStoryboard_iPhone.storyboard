@@ -1374,15 +1374,183 @@
                             <constraint firstItem="4qz-mc-IDq" firstAttribute="top" secondItem="j5W-vy-Bj6" secondAttribute="top" id="yBF-AY-2kq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Gs4-bh-D6T"/>
+                    <navigationItem key="navigationItem" id="Gs4-bh-D6T">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="lbD-MW-d4Y">
+                            <connections>
+                                <segue destination="IJy-ew-Aia" kind="push" id="pTJ-aG-uz3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="4qz-mc-IDq" id="iol-oU-Tw2"/>
                         <segue destination="2QK-Yh-C7c" kind="push" identifier="kSegueIdentifier_Mentors_Missions" id="FbI-Om-JAD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLw-3q-cwb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aQC-sz-eN1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1367" y="-20"/>
+        </scene>
+        <!--Add Mentor View Controller - Add a Mentor-->
+        <scene sceneID="CgM-dw-pvy">
+            <objects>
+                <viewController id="IJy-ew-Aia" customClass="CEIAddMentorViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gmQ-6F-f65"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y31-4E-sRA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TwV-6c-tCZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="4Z9-3O-AO5">
+                                <rect key="frame" x="5" y="61" width="300" height="200"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I36-MC-ijG">
+                                <rect key="frame" x="10" y="269" width="300" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="sGB-Wy-X5d"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="IJy-ew-Aia" id="MEH-Q2-jWw"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-LE-sff">
+                                <rect key="frame" x="110" y="309" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="7oA-27-OVZ"/>
+                                    <constraint firstAttribute="width" constant="100" id="rgb-Iy-r4k"/>
+                                </constraints>
+                                <state key="normal" title="FIND">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="1fY-H1-qZc" kind="push" identifier="kIdentifierSegueAddMentorToAddMentorFound" id="k2b-CQ-Ht3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I36-MC-ijG" firstAttribute="top" secondItem="4Z9-3O-AO5" secondAttribute="bottom" constant="8" id="Mwn-xc-A4z"/>
+                            <constraint firstAttribute="centerX" secondItem="Rza-LE-sff" secondAttribute="centerX" id="Sdd-Bm-Rlk"/>
+                            <constraint firstAttribute="trailing" secondItem="I36-MC-ijG" secondAttribute="trailing" constant="10" id="Yfv-oD-bxY"/>
+                            <constraint firstAttribute="trailing" secondItem="4Z9-3O-AO5" secondAttribute="trailing" constant="15" id="g7R-ou-gRU"/>
+                            <constraint firstItem="Rza-LE-sff" firstAttribute="top" secondItem="I36-MC-ijG" secondAttribute="bottom" constant="10" id="gii-cK-Sch"/>
+                            <constraint firstItem="4Z9-3O-AO5" firstAttribute="leading" secondItem="TwV-6c-tCZ" secondAttribute="leading" constant="5" id="hbA-VI-xV0"/>
+                            <constraint firstItem="4Z9-3O-AO5" firstAttribute="top" secondItem="TwV-6c-tCZ" secondAttribute="top" constant="61" id="iin-nG-LjX"/>
+                            <constraint firstItem="I36-MC-ijG" firstAttribute="leading" secondItem="TwV-6c-tCZ" secondAttribute="leading" constant="10" id="ioa-Qs-xi5"/>
+                            <constraint firstAttribute="centerX" secondItem="I36-MC-ijG" secondAttribute="centerX" id="jXd-2j-ZHT"/>
+                            <constraint firstAttribute="centerY" secondItem="I36-MC-ijG" secondAttribute="centerY" id="zzV-cU-Mio"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add a Mentor" id="8gy-BI-cPy"/>
+                    <connections>
+                        <outlet property="buttonFind" destination="Rza-LE-sff" id="LNP-lY-kdX"/>
+                        <outlet property="imageView" destination="4Z9-3O-AO5" id="Vbv-qz-Dny"/>
+                        <outlet property="textField" destination="I36-MC-ijG" id="Zid-KG-ztD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TII-eh-Vsh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="1St-98-DOt" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1774" y="-20"/>
+        </scene>
+        <!--Add Mentor Found View Controller - Mentor found!-->
+        <scene sceneID="M2B-fP-0Gv">
+            <objects>
+                <viewController id="1fY-H1-qZc" customClass="CEIAddMentorFoundViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CIU-XW-zk1"/>
+                        <viewControllerLayoutGuide type="bottom" id="58C-1i-9hJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yD8-n2-bsF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIe-Nj-x95">
+                                <rect key="frame" x="0.0" y="274" width="320" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="lf8-bY-YUI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAx-RB-hRj">
+                                <rect key="frame" x="0.0" y="302" width="320" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="ReY-qM-CZc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQi-BW-umR">
+                                <rect key="frame" x="20" y="333" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="YQe-Lk-7C0"/>
+                                    <constraint firstAttribute="height" constant="40" id="ppg-5y-a1m"/>
+                                </constraints>
+                                <state key="normal" title="TRY AGAIN">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="1St-98-DOt" kind="unwind" unwindAction="unwindAddMentorFound:" id="ui0-eD-k7t"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTT-g0-ozD">
+                                <rect key="frame" x="200" y="333" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="EzI-bi-IaD"/>
+                                    <constraint firstAttribute="width" constant="100" id="mK8-wW-cdI"/>
+                                </constraints>
+                                <state key="normal" title="ADD!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aQC-sz-eN1" kind="unwind" unwindAction="unwindAddMentorFound:" id="U5q-be-qAX"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgUserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="hmb-tZ-MW8">
+                                <rect key="frame" x="0.0" y="146" width="320" height="120"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="HvT-fv-fPu"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UTT-g0-ozD" firstAttribute="top" secondItem="aAx-RB-hRj" secondAttribute="bottom" constant="11" id="2bh-su-VJD"/>
+                            <constraint firstItem="aAx-RB-hRj" firstAttribute="top" secondItem="DIe-Nj-x95" secondAttribute="bottom" constant="8" id="3uj-Ax-juq"/>
+                            <constraint firstAttribute="trailing" secondItem="DIe-Nj-x95" secondAttribute="trailing" id="7qr-gF-23I"/>
+                            <constraint firstAttribute="centerX" secondItem="DIe-Nj-x95" secondAttribute="centerX" id="Fd8-Ea-xaw"/>
+                            <constraint firstAttribute="centerY" secondItem="DIe-Nj-x95" secondAttribute="centerY" id="IUv-Ve-OOs"/>
+                            <constraint firstItem="TQi-BW-umR" firstAttribute="top" secondItem="aAx-RB-hRj" secondAttribute="bottom" constant="11" id="MEh-V5-SXo"/>
+                            <constraint firstItem="hmb-tZ-MW8" firstAttribute="leading" secondItem="yD8-n2-bsF" secondAttribute="leading" id="RYn-S7-FCc"/>
+                            <constraint firstItem="aAx-RB-hRj" firstAttribute="leading" secondItem="yD8-n2-bsF" secondAttribute="leading" id="SHn-9C-nCh"/>
+                            <constraint firstAttribute="trailing" secondItem="UTT-g0-ozD" secondAttribute="trailing" constant="20" id="e2J-w5-5N9"/>
+                            <constraint firstAttribute="trailing" secondItem="aAx-RB-hRj" secondAttribute="trailing" id="lfh-vi-EYT"/>
+                            <constraint firstItem="TQi-BW-umR" firstAttribute="leading" secondItem="yD8-n2-bsF" secondAttribute="leading" constant="20" id="o8d-OM-0eo"/>
+                            <constraint firstAttribute="trailing" secondItem="hmb-tZ-MW8" secondAttribute="trailing" id="pe5-oh-XNi"/>
+                            <constraint firstItem="DIe-Nj-x95" firstAttribute="leading" secondItem="yD8-n2-bsF" secondAttribute="leading" id="qqs-XQ-rci"/>
+                            <constraint firstItem="DIe-Nj-x95" firstAttribute="top" secondItem="hmb-tZ-MW8" secondAttribute="bottom" constant="8" id="u0s-Mz-5LU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Mentor found!" id="CRf-j7-5h2"/>
+                    <connections>
+                        <outlet property="buttonAdd" destination="UTT-g0-ozD" id="YOY-Mg-eE4"/>
+                        <outlet property="buttonTryAgain" destination="TQi-BW-umR" id="xTz-zN-n7i"/>
+                        <outlet property="imageView" destination="hmb-tZ-MW8" id="es0-re-bhk"/>
+                        <outlet property="labelFullName" destination="aAx-RB-hRj" id="Hg7-Ob-0VF"/>
+                        <outlet property="labelTitle" destination="DIe-Nj-x95" id="8Oc-Hv-TAy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Yg-oO-PAF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2190" y="-20"/>
         </scene>
         <!--Navigation Controller - Mentors-->
         <scene sceneID="sH1-DN-AYK">
@@ -1918,7 +2086,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jKs-Gj-82x"/>
+        <segue reference="FbI-Om-JAD"/>
         <segue reference="Gty-YO-6eE"/>
     </inferredMetricsTieBreakers>
 </document>
