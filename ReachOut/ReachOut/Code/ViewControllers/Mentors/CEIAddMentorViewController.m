@@ -48,10 +48,6 @@ static NSString *const kIdentifierSegueAddMentorToAddMentorFound = @"kIdentifier
     
     return NO;
   }
-  else
-//    if ([fromViewController isKindOfClass:[CEI]]){
-//    
-//    }
   
   return YES;
 }
