@@ -1238,7 +1238,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KRG-VR-QRc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KRG-VR-QRc">
                                 <rect key="frame" x="0.0" y="64" width="320" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="fw1-ei-j8b"/>
@@ -1311,7 +1311,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Mission" id="BO2-dU-W2m"/>
                     <connections>
+                        <outlet property="imageViewBackgroud" destination="KRG-VR-QRc" id="vSS-mo-Ikt"/>
+                        <outlet property="imageViewProfile" destination="VT9-cQ-oPx" id="FLe-iy-0aN"/>
+                        <outlet property="labelMissionDuration" destination="eFI-Bs-4a8" id="pgg-hA-bRp"/>
                         <outlet property="labelMissionName" destination="EVi-L9-de1" id="JeT-ew-VuK"/>
+                        <outlet property="labelUserName" destination="2BT-gM-EAk" id="35m-zS-eD9"/>
                         <outlet property="tableView" destination="KG9-7F-Rz9" id="RB9-up-Qdt"/>
                     </connections>
                 </viewController>

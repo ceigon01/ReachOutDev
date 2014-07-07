@@ -408,9 +408,17 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
     
     PFUser *user = [self.arrayFlock objectAtIndex:indexPath.row];
     
+    __weak UITableViewCell *weakCell = cell;
+    
     if (user[@"imageURL"]) {
       
-      [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]];
+      [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]
+                     placeholderImage:[UIImage imageNamed:@"sheepPhoto"]
+                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                              
+                              weakCell.imageView.layer.cornerRadius = weakCell.imageView.frame.size.height * 0.5f;
+                              weakCell.imageView.layer.masksToBounds = YES;
+                            }];
     }
     else{
       

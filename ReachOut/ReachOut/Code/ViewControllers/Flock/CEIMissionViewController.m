@@ -11,6 +11,9 @@
 #import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
 #import "CEIAlertView.h"
 #import "NSDate+Difference.h"
+#import <Parse/Parse.h>
+#import "NSDate+Difference.h"
+#import "UIImageView+WebCache.h"
 
 static NSString *const kIdentifierCellMission = @"kIdentifierCellMission";
 static const CGFloat kHeightFooter = 20.0f;
@@ -19,11 +22,13 @@ static const CGFloat kHeightFooter = 20.0f;
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageViewBackgroud;
 @property (nonatomic, weak) IBOutlet UIImageView *imageViewProfile;
+@property (nonatomic, weak) IBOutlet UILabel *labelUserName;
 @property (nonatomic, weak) IBOutlet UILabel *labelMissionName;
 @property (nonatomic, weak) IBOutlet UILabel *labelMissionDuration;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *arrayGoals;
+@property (nonatomic, strong) NSArray *arrayGoalSteps;
 
 @end
 
@@ -35,13 +40,55 @@ static const CGFloat kHeightFooter = 20.0f;
   [self.tableView registerClass:[CEIGoalTableViewCell class]
          forCellReuseIdentifier:kIdentifierCellMission];
   
+  __weak typeof (self) weakSelf = self;
+  
+  PFFile *file = self.mission[@"image"];
+  [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+    
+    if (error){
+    
+    }
+    else{
+      
+      weakSelf.imageViewBackgroud.image = [UIImage imageWithData:data];
+    }
+  }];
+
+  self.imageViewProfile.layer.cornerRadius = self.imageViewProfile.frame.size.height * 0.5f;
+  self.imageViewProfile.layer.masksToBounds = YES;
+  
+#warning TODO: url -> file
+  if (self.user[@"imageURL"]){
+  
+    [self.imageViewProfile setImageWithURL:[NSURL URLWithString:self.user[@"imageURL"]]
+                   placeholderImage:[UIImage imageNamed:@"sheepPhoto"]
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                            
+                            weakSelf.imageViewProfile.layer.cornerRadius = weakSelf.imageViewProfile.frame.size.height * 0.5f;
+                            weakSelf.imageViewProfile.layer.masksToBounds = YES;
+                          }];
+  }
+  else{
+    
+    self.imageViewProfile.image = [UIImage imageNamed:@"sheepPhoto"];
+  }
+  
+  self.labelMissionDuration.text = self.mission[@"timeCount"];
+  self.labelMissionName.text = self.mission[@"caption"];
+  self.labelUserName.text = self.user[@"fullName"];
+  self.labelMissionDuration.textColor = [UIColor whiteColor];
+  self.labelMissionName.textColor = [UIColor whiteColor];
+  self.labelUserName.textColor = [UIColor whiteColor];
+  
+  self.tableView.backgroundColor = [UIColor whiteColor];
+  
   [self fetchGoals];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   
-  __weak typeof(self) weakSelf =self;
+  __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshActionHandler:^{
     
     [weakSelf fetchGoals];
@@ -56,13 +103,11 @@ static const CGFloat kHeightFooter = 20.0f;
   
   __weak CEIMissionViewController *weakSelf = self;
   
-  PFQuery *query = [PFQuery queryWithClassName:@"Goal"];
-  if (query && [PFUser currentUser]) {
+  PFQuery *queryGoals = [PFQuery queryWithClassName:@"Goal"];
+  if (queryGoals && [PFUser currentUser]) {
     
-    [query whereKey:@"mission" equalTo:self.mission];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-      
-      [weakSelf.tableView stopRefreshAnimation];
+    [queryGoals whereKey:@"mission" equalTo:self.mission];
+    [queryGoals findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       if (error) {
         
@@ -71,7 +116,27 @@ static const CGFloat kHeightFooter = 20.0f;
       else{
         
         weakSelf.arrayGoals = [NSArray arrayWithArray:objects];
-        [weakSelf.tableView reloadData];
+        
+#warning TODO: double fetch, not so cool :(
+        
+        PFQuery *queryGoalSteps = [PFQuery queryWithClassName:@"GoalStep"];
+        [queryGoalSteps whereKey:@"mission" equalTo:self.mission];
+        [queryGoalSteps includeKey:@"goal"];
+        [queryGoalSteps findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+          
+          [weakSelf.tableView stopRefreshAnimation];
+      
+          if (error){
+            
+            [CEIAlertView showAlertViewWithError:error];
+          }
+          else{
+            
+            weakSelf.arrayGoalSteps = [NSArray arrayWithArray:objects];
+            
+            [weakSelf.tableView reloadData];
+          }
+        }];
       }
     }];
   }
@@ -116,20 +181,117 @@ static const CGFloat kHeightFooter = 20.0f;
   
   PFObject *goal = [self.arrayGoals objectAtIndex:section];
   
-  NSDate *dateFrom = goal[@"dateFrom"];
-  NSDate *dateTo = goal[@"dateTo"];
-  
-  NSInteger numberOfDaysTotal = [dateFrom daysBetweenDate:dateTo];
-  NSInteger numberOfDaysSoFar = [[NSDate date] daysBetweenDate:dateTo];
+  NSArray *arrayGoalSteps = [self arrayGoalStepsForGoal:goal withDone:YES];
   
   UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
                                                              0.0f,
                                                              tableView.frame.size.width,
                                                              kHeightFooter)];
-  label.text = [NSString stringWithFormat:@"%d %% of goal",(numberOfDaysSoFar * 100 / numberOfDaysTotal)];
   label.textAlignment = NSTextAlignmentRight;
   
+#warning TODO: which to use?
+//  label.text = [NSString stringWithFormat:@"%.0f %% of goal",([self totalDaysCountForTodayForMission:self.mission] * 100.0f / [self totalDaysCountForMission:self.mission])];
+  
+  label.text = [NSString stringWithFormat:@"%.0f %% of goal  ",fabs((arrayGoalSteps.count * 100.0f / [self totalDaysCountForMission:self.mission]))];
+  
   return label;
+}
+
+#pragma mark - Convinience Methods
+
+- (NSArray *)arrayGoalStepsForGoal:(PFObject *)paramGoal{
+  
+  NSMutableArray *arrayGoalsFiltered = [[NSMutableArray alloc] init];
+  
+  NSString *goalID = paramGoal.objectId;
+  
+  [self.arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
+    
+    NSString *goalIDTest = [goalStep[@"goal"] objectId];
+    
+    if ([goalID isEqualToString:goalIDTest]){
+    
+      [arrayGoalsFiltered addObject:goalStep];
+    }
+  }];
+  
+  return [NSArray arrayWithArray:arrayGoalsFiltered];
+}
+
+- (NSArray *)arrayGoalStepsForGoal:(PFObject *)paramGoal withDone:(BOOL)paramDone{
+  
+  NSMutableArray *arrayGoalsFiltered = [[NSMutableArray alloc] init];
+  
+  NSString *goalID = paramGoal.objectId;
+  
+  [self.arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
+    
+    NSString *goalIDTest = [goalStep[@"goal"] objectId];
+    
+    BOOL done = [goalStep[@"done"] boolValue];
+    
+    if ([goalID isEqualToString:goalIDTest] && done){
+      
+      [arrayGoalsFiltered addObject:goalStep];
+    }
+  }];
+  
+  return [NSArray arrayWithArray:arrayGoalsFiltered];
+}
+
+- (NSInteger)totalDaysCountForTodayForMission:(PFObject *)paramMission{
+  
+  NSDate *dateBegins = paramMission[@"dateBegins"];
+  
+  NSDate *dateEnds = [NSDate date];
+  
+  return [dateBegins daysBetweenDate:dateEnds];
+}
+
+- (NSInteger)totalDaysCountForMission:(PFObject *)paramMission{
+  
+  NSDate *dateBegins = paramMission[@"dateBegins"];
+  
+  NSArray *arrayCountAndSeason = [paramMission[@"timeCount"] componentsSeparatedByString:@" "];
+  
+  if (arrayCountAndSeason.count == 2){
+  
+    NSInteger counter = [[arrayCountAndSeason objectAtIndex:0] integerValue];
+    NSString *season = [arrayCountAndSeason objectAtIndex:1];
+    
+    NSInteger days = 0;
+    NSInteger months = 0;
+    
+#warning TODO: hardcoded
+    if ([season isEqualToString:@"days"]){
+      
+      days = counter;
+    }
+    else
+      if ([season isEqualToString:@"months"]){
+      
+        months = counter;
+      }
+      else {
+        
+        return 1;
+      }
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents *dateComponentsBegins = [calendar components:NSCalendarUnitCalendar fromDate:dateBegins];
+    
+    dateComponentsBegins.day += days;
+    dateComponentsBegins.month += months;
+    
+    NSDate *dateEnds = [[NSCalendar currentCalendar] dateFromComponents:dateComponentsBegins];
+    
+    return [dateBegins daysBetweenDate:dateEnds];
+  }
+  else{
+    
+    return 1;
+  }
 }
 
 @end
