@@ -8,9 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class PFObject;
+
 @interface NSDate (Difference)
 
 - (NSDate *)differerenceBetweenDate:(NSDate *)paramDate;
 - (NSInteger)daysBetweenDate:(NSDate *)paramDate;
+
++ (NSInteger)totalDaysCountForTodayForMission:(PFObject *)paramMission;
++ (NSInteger)totalDaysCountForMission:(PFObject *)paramMission;
 
 @end

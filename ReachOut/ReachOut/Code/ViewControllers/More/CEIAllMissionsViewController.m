@@ -29,9 +29,6 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
 - (void)viewDidLoad{
   [super viewDidLoad];
 
-  [self.tableView registerClass:[CEIDoubleDisclosureCell class]
-         forCellReuseIdentifier:kIdentifierCellAllMissionsToAddMission];
-  
   self.indexPathSelected = nil;
   
   [self fetchMissions];
@@ -181,8 +178,7 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   PFObject *mission = [self.arrayMissions objectAtIndex:indexPath.row];
   
   cell.textLabel.text = mission[@"caption"];
-
-  cell.detailTextLabel.text = mission[@"asigneeCount"];
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",mission[@"asigneesCount"]];
   cell.labelLowerDetail.text = @"Followers";
   
   return cell;

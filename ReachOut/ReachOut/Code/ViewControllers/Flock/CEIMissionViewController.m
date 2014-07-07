@@ -192,7 +192,7 @@ static const CGFloat kHeightFooter = 20.0f;
 #warning TODO: which to use?
 //  label.text = [NSString stringWithFormat:@"%.0f %% of goal",([self totalDaysCountForTodayForMission:self.mission] * 100.0f / [self totalDaysCountForMission:self.mission])];
   
-  label.text = [NSString stringWithFormat:@"%.0f %% of goal  ",fabs((arrayGoalSteps.count * 100.0f / [self totalDaysCountForMission:self.mission]))];
+  label.text = [NSString stringWithFormat:@"%.0f %% of goal  ",fabs((arrayGoalSteps.count * 100.0f / [NSDate totalDaysCountForMission:self.mission]))];
   
   return label;
 }
@@ -237,61 +237,6 @@ static const CGFloat kHeightFooter = 20.0f;
   }];
   
   return [NSArray arrayWithArray:arrayGoalsFiltered];
-}
-
-- (NSInteger)totalDaysCountForTodayForMission:(PFObject *)paramMission{
-  
-  NSDate *dateBegins = paramMission[@"dateBegins"];
-  
-  NSDate *dateEnds = [NSDate date];
-  
-  return [dateBegins daysBetweenDate:dateEnds];
-}
-
-- (NSInteger)totalDaysCountForMission:(PFObject *)paramMission{
-  
-  NSDate *dateBegins = paramMission[@"dateBegins"];
-  
-  NSArray *arrayCountAndSeason = [paramMission[@"timeCount"] componentsSeparatedByString:@" "];
-  
-  if (arrayCountAndSeason.count == 2){
-  
-    NSInteger counter = [[arrayCountAndSeason objectAtIndex:0] integerValue];
-    NSString *season = [arrayCountAndSeason objectAtIndex:1];
-    
-    NSInteger days = 0;
-    NSInteger months = 0;
-    
-#warning TODO: hardcoded
-    if ([season isEqualToString:@"days"]){
-      
-      days = counter;
-    }
-    else
-      if ([season isEqualToString:@"months"]){
-      
-        months = counter;
-      }
-      else {
-        
-        return 1;
-      }
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents *dateComponentsBegins = [calendar components:NSCalendarUnitCalendar fromDate:dateBegins];
-    
-    dateComponentsBegins.day += days;
-    dateComponentsBegins.month += months;
-    
-    NSDate *dateEnds = [[NSCalendar currentCalendar] dateFromComponents:dateComponentsBegins];
-    
-    return [dateBegins daysBetweenDate:dateEnds];
-  }
-  else{
-    
-    return 1;
-  }
 }
 
 @end

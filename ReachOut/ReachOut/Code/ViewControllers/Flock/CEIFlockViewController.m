@@ -127,10 +127,10 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
   cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height * 0.5f;
   cell.imageView.layer.masksToBounds = YES;
   
-#warning TODO: implement
+#warning TODO: implement?
   cell.textLabel.text = user[@"fullName"];
-  cell.detailTextLabel.text = @"detail";
-  cell.labelLowerDetail.text = @"lower detail";
+  cell.detailTextLabel.text = @"";//@"detail";
+  cell.labelLowerDetail.text = @"";//@"lower detail";
   
   return cell;
 }

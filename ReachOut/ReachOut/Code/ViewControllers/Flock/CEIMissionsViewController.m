@@ -37,11 +37,6 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   
 #warning TODO: localization
   self.title = @"Missions";
-  
-  if ([[PFUser currentUser][@"isMentor"] isEqual:@0]) {
-    
-    self.navigationItem.rightBarButtonItem = nil;
-  }
 
   [self fetchMissions];
 }
@@ -138,13 +133,13 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   
   cell.textLabel.text = mission[@"caption"];
   
-  NSDate *dateBegins = mission[@"dateBegins"];
-  NSDate *dateEnds = mission[@"dateEnds"];
-  NSInteger daysDifference = [dateBegins daysBetweenDate:dateEnds];
+  NSArray *arrayCountAndSeason = [mission[@"timeCount"] componentsSeparatedByString:@" "];
   
-#warning TODO: implement
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",(long)daysDifference];
-  cell.labelLowerDetail.text = @"Days";
+  if (arrayCountAndSeason.count == 2){
+
+    cell.detailTextLabel.text = [arrayCountAndSeason objectAtIndex:0];
+    cell.labelLowerDetail.text = [arrayCountAndSeason objectAtIndex:1];
+  }
   
   return cell;
 }

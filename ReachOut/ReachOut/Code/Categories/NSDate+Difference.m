@@ -7,6 +7,7 @@
 //
 
 #import "NSDate+Difference.h"
+#import <Parse/Parse.h>
 
 @implementation NSDate (Difference)
 
@@ -56,6 +57,61 @@
                                               options:0];
   
   return difference.day;
+}
+
++ (NSInteger)totalDaysCountForTodayForMission:(PFObject *)paramMission{
+  
+  NSDate *dateBegins = paramMission[@"dateBegins"];
+  
+  NSDate *dateEnds = [NSDate date];
+  
+  return [dateBegins daysBetweenDate:dateEnds];
+}
+
++ (NSInteger)totalDaysCountForMission:(PFObject *)paramMission{
+  
+  NSDate *dateBegins = paramMission[@"dateBegins"];
+  
+  NSArray *arrayCountAndSeason = [paramMission[@"timeCount"] componentsSeparatedByString:@" "];
+  
+  if (arrayCountAndSeason.count == 2){
+    
+    NSInteger counter = [[arrayCountAndSeason objectAtIndex:0] integerValue];
+    NSString *season = [arrayCountAndSeason objectAtIndex:1];
+    
+    NSInteger days = 0;
+    NSInteger months = 0;
+    
+#warning TODO: hardcoded
+    if ([season isEqualToString:@"days"]){
+      
+      days = counter;
+    }
+    else
+      if ([season isEqualToString:@"months"]){
+        
+        months = counter;
+      }
+      else {
+        
+        return 1;
+      }
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents *dateComponentsBegins = [calendar components:NSCalendarUnitCalendar fromDate:dateBegins];
+    
+    dateComponentsBegins.day += days;
+    dateComponentsBegins.month += months;
+    
+    NSDate *dateEnds = [[NSCalendar currentCalendar] dateFromComponents:dateComponentsBegins];
+    
+    return [dateBegins daysBetweenDate:dateEnds];
+  }
+  else{
+    
+    return 1;
+  }
 }
 
 @end

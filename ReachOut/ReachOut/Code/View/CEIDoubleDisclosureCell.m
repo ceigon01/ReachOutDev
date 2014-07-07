@@ -42,28 +42,26 @@ static CGFloat const kLabelsHeightRatio = 0.6f;
   return self;
 }
 
-- (void)awakeFromNib{
-  [super awakeFromNib];
-  
-  [self setup];
-}
-
 - (void)setup{
   
   _labelLowerDetail = [[UILabel alloc] initWithFrame:self.detailTextLabel.frame];
   _labelLowerDetail.text = @"upper";
   _labelLowerDetail.backgroundColor = [UIColor clearColor];
   _labelLowerDetail.textAlignment = NSTextAlignmentRight;
+  _labelLowerDetail.font = [UIFont fontWithName:@"Helvetica" size:12];
   _labelLowerDetail.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
   [self.contentView addSubview:_labelLowerDetail];
+  
+  self.detailTextLabel.backgroundColor = [UIColor clearColor];
+  self.labelLowerDetail.backgroundColor = [UIColor clearColor];
 }
 
 - (void)layoutSubviews{
   [super layoutSubviews];
   
-  self.detailTextLabel.frame = CGRectMake(self.detailTextLabel.frame.origin.x,
+  self.detailTextLabel.frame = CGRectMake(self.contentView.frame.size.width * 0.7f,
                                           0.0f,
-                                          self.detailTextLabel.frame.size.width,
+                                          self.contentView.frame.size.width * 0.3f,
                                           self.detailTextLabel.frame.size.height);
   
   self.labelLowerDetail.frame = CGRectMake(self.detailTextLabel.frame.origin.x,
