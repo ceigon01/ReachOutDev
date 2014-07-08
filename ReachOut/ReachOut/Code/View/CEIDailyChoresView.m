@@ -68,15 +68,25 @@
   self.labelY.textColor = [UIColor darkGrayColor];
   [self addSubview:self.labelY];
   
-  self.labelY = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
+  self.labelN = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width * 0.5f,
                                                           self.frame.size.height * 0.5f,
                                                           self.frame.size.width * 0.5f,
                                                           self.frame.size.height * 0.5f)];
-  self.labelY.text = @"Y";
-  self.labelY.textAlignment = NSTextAlignmentCenter;
-  self.labelY.backgroundColor = [UIColor lightGrayColor];
-  self.labelY.textColor = [UIColor darkGrayColor];
-  [self addSubview:self.labelY];
+  self.labelN.text = @"N";
+  self.labelN.textAlignment = NSTextAlignmentCenter;
+  self.labelN.backgroundColor = [UIColor lightGrayColor];
+  self.labelN.textColor = [UIColor darkGrayColor];
+  [self addSubview:self.labelN];
+}
+
+- (void)prepareForReuse{
+  
+  NSLog(@"prepare for reuse");
+}
+
+- (void)configureWithGoalStep:(PFObject *)paramGoalStep{
+  
+  NSLog(@"configure with goalStep %@",paramGoalStep);
 }
 
 #pragma mark - Action Handling
@@ -90,6 +100,18 @@
 }
 
 #pragma mark - Custom Getters
+
+- (void)setDayName:(NSString *)dayName{
+  
+  if ([dayName isEqualToString:_dayName]) {
+    
+    return;
+  }
+  
+  _dayName = dayName;
+  
+  self.labelDay.text = dayName;
+}
 
 - (void)setDone:(BOOL)done{
 

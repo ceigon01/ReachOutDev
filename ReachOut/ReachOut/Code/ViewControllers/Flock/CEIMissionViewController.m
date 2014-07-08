@@ -17,6 +17,7 @@
 
 static NSString *const kIdentifierCellMission = @"kIdentifierCellMission";
 static const CGFloat kHeightFooter = 20.0f;
+static const CGFloat kHeightCell = 72.0f;
 
 @interface CEIMissionViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -144,6 +145,11 @@ static const CGFloat kHeightFooter = 20.0f;
 
 #pragma mark - UITableView Datasource & Delegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+  
+  return kHeightCell;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
   
   return self.arrayGoals.count;
@@ -160,7 +166,7 @@ static const CGFloat kHeightFooter = 20.0f;
   
   PFObject *goal = [self.arrayGoals objectAtIndex:indexPath.section];
   
-  cell.textLabel.text = goal[@"caption"];
+  [cell configureWithGoal:goal mission:self.mission goalSteps:[self arrayGoalStepsForGoal:goal]];
   
   return cell;
 }

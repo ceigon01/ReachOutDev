@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
+
+@class PFObject;
 
 @interface CEIGoalTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UIScrollView *scrollView;
-
-- (void)configureWithGoal:(PFObject *)paramGoal;
+- (void)configureWithGoal:(PFObject *)paramGoal mission:(PFObject *)paramMission goalSteps:(NSArray *)paramArrayGoalSteps;
 
 @end

@@ -99,7 +99,7 @@
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
-    NSDateComponents *dateComponentsBegins = [calendar components:NSCalendarUnitCalendar fromDate:dateBegins];
+    NSDateComponents *dateComponentsBegins = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:dateBegins];
     
     dateComponentsBegins.day += days;
     dateComponentsBegins.month += months;

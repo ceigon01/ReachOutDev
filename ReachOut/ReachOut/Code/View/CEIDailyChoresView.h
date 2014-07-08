@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class CEIDailyChoresView;
+@class PFObject;
 
 @protocol CEIDailyChoresViewDelegate <NSObject>
 
@@ -20,8 +21,13 @@
 @interface CEIDailyChoresView : UIView
 
 @property (nonatomic, weak) id<CEIDailyChoresViewDelegate> delegate;
+@property (nonatomic, copy) NSString *dayName;
 @property (nonatomic, assign, getter=isDone) BOOL done;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *comment;
+@property (nonatomic, strong) PFObject *goalStep;
+
+- (void)configureWithGoalStep:(PFObject *)paramGoalStep;
+- (void)prepareForReuse;
 
 @end

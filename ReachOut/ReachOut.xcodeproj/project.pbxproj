@@ -80,6 +80,7 @@
 		FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */; };
 		FDC8D2571956E67D00B60BEF /* CEIAddEncouragementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2561956E67D00B60BEF /* CEIAddEncouragementViewController.m */; };
 		FDC8D25A1956EF9F00B60BEF /* CEIEncouragementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */; };
+		FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE1626C196BFDD500E9FD8F /* CEIDailyChoresWeekView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +212,8 @@
 		FDC8D2561956E67D00B60BEF /* CEIAddEncouragementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddEncouragementViewController.m; sourceTree = "<group>"; };
 		FDC8D2581956EF9F00B60BEF /* CEIEncouragementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIEncouragementTableViewCell.h; sourceTree = "<group>"; };
 		FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIEncouragementTableViewCell.m; sourceTree = "<group>"; };
+		FDE1626B196BFDD500E9FD8F /* CEIDailyChoresWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIDailyChoresWeekView.h; sourceTree = "<group>"; };
+		FDE1626C196BFDD500E9FD8F /* CEIDailyChoresWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIDailyChoresWeekView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -444,6 +447,8 @@
 				FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */,
 				FD2E9AE119575E49005B074A /* CEIDailyChoresView.h */,
 				FD2E9AE219575E49005B074A /* CEIDailyChoresView.m */,
+				FDE1626B196BFDD500E9FD8F /* CEIDailyChoresWeekView.h */,
+				FDE1626C196BFDD500E9FD8F /* CEIDailyChoresWeekView.m */,
 				FD2E9AE719577E76005B074A /* CEIGoalTableViewCell.h */,
 				FD2E9AE819577E76005B074A /* CEIGoalTableViewCell.m */,
 			);
@@ -741,6 +746,7 @@
 				FD1190721946559F005A1AE1 /* CEIMentorsViewController.m in Sources */,
 				FD11906819420D80005A1AE1 /* CEIAlertView.m in Sources */,
 				FD2E9AFB1959B7FD005B074A /* CEIAddMissionViewController.m in Sources */,
+				FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */,
 				FD11906E19465578005A1AE1 /* CEIFlockViewController.m in Sources */,
 				FDA5DA9D1965A10B005394BC /* CEIAddMentorViewController.m in Sources */,
 				A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */,
