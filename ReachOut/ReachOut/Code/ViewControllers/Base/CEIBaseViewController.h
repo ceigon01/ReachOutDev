@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CEIColor.h"
 
 @interface CEIBaseViewController : UIViewController
 

@@ -47,11 +47,29 @@
                 withCompletionHandler:^(PFUser *user) {
                   
                   weakSelf.user[@"fullName"] = user[@"fullName"];
-                  weakSelf.user[@"imageURL"] = user[@"imageURL"];
+                  weakSelf.user[@"image"] = user[@"image"];
                   
                   weakSelf.textFieldFullName.text = user[@"fullName"];
-                  [weakSelf.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]
-                                     placeholderImage:[UIImage imageNamed:@"imgUserPhoto"]];
+                  if (weakSelf.user[@"image"]) {
+                    
+                    PFFile *file = self.user[@"image"];
+                    
+                    __weak typeof (self) weakSelf = self;
+                    
+                    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                      
+                      weakSelf.imageView.image = [UIImage imageWithData:data];
+                      weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
+                      weakSelf.imageView.layer.masksToBounds = YES;
+                    }];
+                    
+                  }
+                  else{
+                    
+                    self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+                    self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
+                    self.imageView.layer.masksToBounds = YES;
+                  }
                 }
                          errorHandler:^(NSError *error) {
 

@@ -9,6 +9,7 @@
 #import "CEISession.h"
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
+#import "UIImageView+WebCache.h"
 
 @implementation CEISession
 
@@ -55,10 +56,18 @@
 
                                   PFUser *user = [PFUser user];
                                   user[@"fullName"] = [NSString stringWithFormat:@"%@ %@",[userData objectForKey:@"first_name"],[userData objectForKey:@"last_name"]];
-                                  user[@"imageURL"] = [[[userData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+                                  NSString *imageURLString = [[[userData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
                                   
-                                  [progressHud hide:YES];
-                                  paramCompletionHandler(user);
+                                  UIImageView *imageView = [[UIImageView alloc] init];
+                                  [imageView setImageWithURL:[NSURL URLWithString:imageURLString]
+                                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+#warning TODO: nested and clunky; leavs a lot of space for improvements
+                                                     
+                                                     user[@"image"] = [PFFile fileWithData:UIImagePNGRepresentation(image)];
+                                                     
+                                                     [progressHud hide:YES];
+                                                     paramCompletionHandler(user);
+                                                   }];
                                 }
                               }];
         }

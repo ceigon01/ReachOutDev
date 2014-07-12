@@ -71,23 +71,25 @@ static const CGFloat kHeightCell = 100.0f;
     }
   }];
 
-  self.imageViewProfile.layer.cornerRadius = self.imageViewProfile.frame.size.height * 0.5f;
-  self.imageViewProfile.layer.masksToBounds = YES;
-  
-#warning TODO: url -> file
-  if (self.user[@"imageURL"]){
-  
-    [self.imageViewProfile setImageWithURL:[NSURL URLWithString:self.user[@"imageURL"]]
-                   placeholderImage:[UIImage imageNamed:@"sheepPhoto"]
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                            
-                            weakSelf.imageViewProfile.layer.cornerRadius = weakSelf.imageViewProfile.frame.size.height * 0.5f;
-                            weakSelf.imageViewProfile.layer.masksToBounds = YES;
-                          }];
+  if (weakSelf.user[@"image"]) {
+    
+    PFFile *file = weakSelf.user[@"image"];
+    
+    __weak typeof (self) weakSelf = self;
+    
+    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+      
+      weakSelf.imageViewProfile.image = [UIImage imageWithData:data];
+      weakSelf.imageViewProfile.layer.cornerRadius = weakSelf.imageViewProfile.frame.size.height * 0.5f;
+      weakSelf.imageViewProfile.layer.masksToBounds = YES;
+    }];
+    
   }
   else{
     
     self.imageViewProfile.image = [UIImage imageNamed:@"sheepPhoto"];
+    self.imageViewProfile.layer.cornerRadius = self.imageViewProfile.frame.size.height * 0.5f;
+    self.imageViewProfile.layer.masksToBounds = YES;
   }
   
   self.labelMissionDuration.text = self.mission[@"timeCount"];

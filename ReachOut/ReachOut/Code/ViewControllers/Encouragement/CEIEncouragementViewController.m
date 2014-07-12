@@ -256,25 +256,26 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
     cell.labelTitle.text = @"";
   }
   
-  __weak CEIEncouragementTableViewCell *weakCell = cell;
-  
-  if (user[@"imageURL"]) {
+  if (user[@"image"]) {
     
-    [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]
-                   placeholderImage:[UIImage imageNamed:@"sheepPhoto"]
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                            
-                            weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
-                            weakCell.imageView.layer.masksToBounds = YES;
-                          }];
+    PFFile *file = user[@"image"];
+    
+    __weak UITableViewCell *weakCell = cell;
+    
+    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+      
+      weakCell.imageView.image = [UIImage imageWithData:data];
+      weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
+      weakCell.imageView.layer.masksToBounds = YES;
+    }];
+    
   }
   else{
     
     cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+    cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
+    cell.imageView.layer.masksToBounds = YES;
   }
-  
-  cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
-  cell.imageView.layer.masksToBounds = YES;
   
   cell.labelCaption.text = encouragement[@"caption"];
   cell.labelFullName.text = user[@"username"];

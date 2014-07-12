@@ -1,0 +1,46 @@
+{
+  "images" : [
+    {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1,
+          "height" : 1
+        },
+        "capInsets" : {
+          "bottom" : 9,
+          "top" : 8,
+          "right" : 10,
+          "left" : 8
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "shortbtn-blue.png",
+      "scale" : "1x"
+    },
+    {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1,
+          "height" : 1
+        },
+        "capInsets" : {
+          "bottom" : 17,
+          "top" : 15,
+          "right" : 19,
+          "left" : 15
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "shortbtn-blue@2x.png",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

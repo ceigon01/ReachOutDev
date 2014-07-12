@@ -119,4 +119,11 @@ static const CGFloat kHeightKeyboardHeight = 216.0f;
 	_slideToOriginAfterTap = slideToOriginAfterTap;
 }
 
+#pragma mark - Apperance
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+  
+  return UIStatusBarStyleLightContent;
+}
+
 @end

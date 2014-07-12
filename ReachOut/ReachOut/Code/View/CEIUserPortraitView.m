@@ -48,7 +48,27 @@ static CGFloat kTextToImageRatio = 0.25f;
 
 - (void)setUser:(PFUser *)paramUser{
   
-  [self.imageView setImageWithURL:[NSURL URLWithString:paramUser[@"imageURL"]]];
+  if (paramUser[@"image"]) {
+    
+    PFFile *file = paramUser[@"image"];
+    
+    __weak typeof (self) weakSelf = self;
+    
+    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+      
+      weakSelf.imageView.image = [UIImage imageWithData:data];
+      weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
+      weakSelf.imageView.layer.masksToBounds = YES;
+    }];
+    
+  }
+  else{
+    
+    self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+    self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
+    self.imageView.layer.masksToBounds = YES;
+  }
+
   self.labelFullName = paramUser[@"fullName"];
 }
 

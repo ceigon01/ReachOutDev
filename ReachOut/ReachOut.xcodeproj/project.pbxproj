@@ -85,6 +85,7 @@
 		FDE16273196C35D300E9FD8F /* CEIGoalStepViewCheckup.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE16272196C35D300E9FD8F /* CEIGoalStepViewCheckup.m */; };
 		FDE16275196C35EF00E9FD8F /* CEIGoalStepViewCheckin.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDE16274196C35EF00E9FD8F /* CEIGoalStepViewCheckin.xib */; };
 		FDE16277196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDE16276196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib */; };
+		FDE162AD19715EB600E9FD8F /* CEIMottoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE162AC19715EB600E9FD8F /* CEIMottoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,7 +131,7 @@
 		A440A1AB1937F33900D7CC0D /* ReachOutTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ReachOutTests-Info.plist"; sourceTree = "<group>"; };
 		A440A1AD1937F33900D7CC0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A440A1AF1937F33900D7CC0D /* ReachOutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReachOutTests.m; sourceTree = "<group>"; };
-		A45E4B87193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		A45E4B87193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone.storyboard; path = ../Storyboards/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		A45E4B8A193800CC008D7EA6 /* CEIHandies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIHandies.h; sourceTree = "<group>"; };
 		A45E4B8B193800CC008D7EA6 /* CEIHandies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIHandies.m; sourceTree = "<group>"; };
 		A4CAB088193A2BAD00CC7B12 /* UIView+NibLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NibLoading.h"; sourceTree = "<group>"; };
@@ -224,6 +225,8 @@
 		FDE16272196C35D300E9FD8F /* CEIGoalStepViewCheckup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIGoalStepViewCheckup.m; sourceTree = "<group>"; };
 		FDE16274196C35EF00E9FD8F /* CEIGoalStepViewCheckin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEIGoalStepViewCheckin.xib; sourceTree = "<group>"; };
 		FDE16276196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEIGoalStepViewCheckup.xib; sourceTree = "<group>"; };
+		FDE162AB19715EB600E9FD8F /* CEIMottoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIMottoViewController.h; sourceTree = "<group>"; };
+		FDE162AC19715EB600E9FD8F /* CEIMottoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIMottoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +272,7 @@
 		A403F3A819393D670039750B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FDE162AA19715E8B00E9FD8F /* Welcome */,
 				A403F3AA19393DD50039750B /* Base */,
 				A403F3A919393D750039750B /* Signup */,
 				FD11906B1946549E005A1AE1 /* Flock */,
@@ -411,6 +415,7 @@
 		A45E4B8519380069008D7EA6 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				A45E4B87193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard */,
 				FD0C8535193F651C004C006B /* Model */,
 				A4CAB087193A2B2A00CC7B12 /* Categories */,
 				A4CAB083193A29CC00CC7B12 /* Views */,
@@ -423,7 +428,6 @@
 		A45E4B861938008E008D7EA6 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				A45E4B87193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -589,6 +593,15 @@
 				FD2E9AD7195731F7005B074A /* run@2x.gif */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		FDE162AA19715E8B00E9FD8F /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				FDE162AB19715EB600E9FD8F /* CEIMottoViewController.h */,
+				FDE162AC19715EB600E9FD8F /* CEIMottoViewController.m */,
+			);
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -767,6 +780,7 @@
 				FD11906819420D80005A1AE1 /* CEIAlertView.m in Sources */,
 				FD2E9AFB1959B7FD005B074A /* CEIAddMissionViewController.m in Sources */,
 				FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */,
+				FDE162AD19715EB600E9FD8F /* CEIMottoViewController.m in Sources */,
 				FD11906E19465578005A1AE1 /* CEIFlockViewController.m in Sources */,
 				FDA5DA9D1965A10B005394BC /* CEIAddMentorViewController.m in Sources */,
 				A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */,

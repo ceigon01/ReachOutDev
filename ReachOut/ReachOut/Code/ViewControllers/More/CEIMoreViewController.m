@@ -23,6 +23,7 @@ static const NSInteger kNumberOfMoreRows = 4;
 static NSString *const kIdentifierCellMore = @"kIdentifierCellMore";
 static NSString *const kIdentifierSegueMoreToWebViewCeigon = @"kIdentifierSegueMoreToWebViewCeigon";
 static NSString *const kIdentifierSegueMoreToAllMissions = @"kIdentifierSegueMoreToAllMissions";
+static NSString *const kIdentifierSegueMoreToMotto = @"kIdentifierSegueMoreToMotto";
 
 static NSString *const kURLWebsiteCEIGON = @"http://www.ceigon.com/";
 static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
@@ -51,6 +52,12 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
     [(CEIWebViewViewController *)segue.destinationViewController loadURL:[NSURL URLWithString:kURLWebsiteCEIGON]
                                                                withTitle:kTitleWebsiteCEIGON];
   }
+}
+
+- (IBAction)unwindMotto:(UIStoryboardSegue *)unwindSegue{
+  
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  [userDefaults setBool:YES forKey:kUserDefaultsKeyDidShowMottoViewController];
 }
 
 #pragma mark - UITableView Datasource & Delegate

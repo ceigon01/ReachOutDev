@@ -56,8 +56,27 @@
         self.userMentor = [objects lastObject];
         self.labelTitle.text = self.userMentor[@"title"];
         self.labelFullName.text = self.userMentor[@"fullName"];
-        [self.imageView setImageWithURL:[NSURL URLWithString:self.userMentor[@"imageURL"]]
-                       placeholderImage:[UIImage imageNamed:@"imgUserPhoto"]];
+        
+        if (self.userMentor[@"image"]) {
+          
+          PFFile *file = self.userMentor[@"image"];
+          
+          __weak typeof (self) weakSelf = self;
+          
+          [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            
+            weakSelf.imageView.image = [UIImage imageWithData:data];
+            weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
+            weakSelf.imageView.layer.masksToBounds = YES;
+          }];
+          
+        }
+        else{
+          
+          self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+          self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
+          self.imageView.layer.masksToBounds = YES;
+        }
       }
   }];
 }

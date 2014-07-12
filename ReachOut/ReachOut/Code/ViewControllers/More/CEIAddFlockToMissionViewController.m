@@ -75,17 +75,28 @@ static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFl
   
   PFUser *user = [self.arrayAllFollowers objectAtIndex:indexPath.row];
   
-  if (user[@"imageURL"]) {
+  
+  if (user[@"image"]) {
     
-    [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]];
+    PFFile *file = user[@"image"];
+    
+    __weak UITableViewCell *weakCell = cell;
+    
+    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+      
+      weakCell.imageView.image = [UIImage imageWithData:data];
+      weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
+      weakCell.imageView.layer.masksToBounds = YES;
+    }];
+    
   }
   else{
     
     cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+    cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
+    cell.imageView.layer.masksToBounds = YES;
   }
 
-  cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
-  cell.imageView.layer.masksToBounds = YES;
   cell.textLabel.text = user[@"fullName"];
   
   if ([self.arrayFollowersSelected containsObject:user]) {

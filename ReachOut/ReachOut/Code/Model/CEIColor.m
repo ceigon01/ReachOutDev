@@ -26,9 +26,35 @@
                          alpha:1.0f];
 }
 
++ (UIColor *)colorGray{
+  
+  return [UIColor colorWithRed:101.0f / 255.0f
+                         green:101.0f / 255.0f
+                          blue:101.0f / 255.0f
+                         alpha:1.0f];
+}
+
 + (UIColor *)colorIdle{
   
   return [UIColor lightGrayColor];
+}
+
++ (UIColor *)colorDarkBlue{
+
+  return [UIColor colorWithRed:72.0f / 255.0f
+                         green:77.0f / 255.0f
+                          blue:98.0f / 255.0f
+                         alpha:1.0f];
+}
+
++ (UIColor *)colorLightText{
+  
+  return [CEIColor colorGray];
+}
+
++ (UIColor *)colorDarkText{
+
+  return [CEIColor colorDarkBlue];
 }
 
 @end

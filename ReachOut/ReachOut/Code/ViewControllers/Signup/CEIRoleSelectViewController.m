@@ -9,6 +9,9 @@
 #import "CEIRoleSelectViewController.h"
 #import "CEIMentorSignupViewController.h"
 
+static NSString *const kIdentifierSegueRoleSelectToMotto = @"kIdentifierSegueRoleSelectToMotto";
+static NSString *const kUserDefaultsKeyDidShowMottoViewController = @"kUserDefaultsKeyDidShowMottoViewController";
+
 @interface CEIRoleSelectViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *labelTitle;
@@ -20,5 +23,23 @@
 @end
 
 @implementation CEIRoleSelectViewController
+
+- (void)viewDidAppear:(BOOL)animated{
+  [super viewDidAppear:animated];
+  
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  if (![userDefaults boolForKey:kUserDefaultsKeyDidShowMottoViewController]) {
+    
+    [self performSegueWithIdentifier:kIdentifierSegueRoleSelectToMotto sender:self];
+  }
+}
+
+#pragma mark - Navigation
+
+- (IBAction)unwindMotto:(UIStoryboardSegue *)unwindSegue{
+  
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  [userDefaults setBool:YES forKey:kUserDefaultsKeyDidShowMottoViewController];
+}
 
 @end
