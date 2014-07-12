@@ -9,8 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class PFObject;
+@class CEIGoalTableViewCell;
+@class CEIDailyChoresView;
+
+@protocol CEIGoalTableViewCellDelegate <NSObject>
+
+- (void)goalTableViewCell:(CEIGoalTableViewCell *)paramGoalTableViewCell didTapDailyChoresView:(CEIDailyChoresView *)paramDailyChoresView;
+
+@end
 
 @interface CEIGoalTableViewCell : UITableViewCell
+
+@property (nonatomic, weak) id<CEIGoalTableViewCellDelegate> delegateGoalStep;
+@property (nonatomic, strong) PFObject *goal;
 
 - (void)configureWithGoal:(PFObject *)paramGoal mission:(PFObject *)paramMission goalSteps:(NSArray *)paramArrayGoalSteps;
 

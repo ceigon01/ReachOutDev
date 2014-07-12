@@ -8,6 +8,7 @@
 
 #import "CEIDailyChoresView.h"
 #import "CEIColor.h"
+#import <Parse/Parse.h>
 
 @interface CEIDailyChoresView ()
 
@@ -54,7 +55,7 @@
                                                             self.frame.size.height * 0.5f)];
   self.labelDay.text = @"day";
   self.labelDay.textAlignment = NSTextAlignmentCenter;
-  self.labelDay.backgroundColor = [UIColor lightGrayColor];
+  self.labelDay.backgroundColor = [CEIColor colorIdle];
   self.labelDay.textColor = [UIColor darkGrayColor];
   [self addSubview:self.labelDay];
   
@@ -64,7 +65,7 @@
                                                           self.frame.size.height * 0.5f)];
   self.labelY.text = @"Y";
   self.labelY.textAlignment = NSTextAlignmentCenter;
-  self.labelY.backgroundColor = [UIColor lightGrayColor];
+  self.labelY.backgroundColor = [CEIColor colorIdle];
   self.labelY.textColor = [UIColor darkGrayColor];
   [self addSubview:self.labelY];
   
@@ -74,19 +75,25 @@
                                                           self.frame.size.height * 0.5f)];
   self.labelN.text = @"N";
   self.labelN.textAlignment = NSTextAlignmentCenter;
-  self.labelN.backgroundColor = [UIColor lightGrayColor];
+  self.labelN.backgroundColor = [CEIColor colorIdle];
   self.labelN.textColor = [UIColor darkGrayColor];
   [self addSubview:self.labelN];
 }
 
 - (void)prepareForReuse{
   
-  NSLog(@"prepare for reuse");
+  self.labelDay.backgroundColor = [CEIColor colorIdle];
+  self.labelY.backgroundColor = [CEIColor colorIdle];
+  self.labelN.backgroundColor = [CEIColor colorIdle];
+  self.labelDay.textColor = [UIColor darkGrayColor];
+  self.labelY.textColor = [UIColor darkGrayColor];
+  self.labelN.textColor = [UIColor darkGrayColor];
 }
 
 - (void)configureWithGoalStep:(PFObject *)paramGoalStep{
   
-  NSLog(@"configure with goalStep %@",paramGoalStep);
+  self.goalStep = paramGoalStep;
+  self.dayName = paramGoalStep[@"day"];
 }
 
 #pragma mark - Action Handling
@@ -99,7 +106,7 @@
   }
 }
 
-#pragma mark - Custom Getters
+#pragma mark - Custom Getters & Setters
 
 - (void)setDayName:(NSString *)dayName{
   

@@ -16,4 +16,6 @@
 @property (nonatomic, strong) NSArray *arrayFollowers;
 @property (nonatomic, strong) NSIndexPath *indexPathSelectedFollower;
 
+@property (nonatomic, strong) PFObject *folowerSelected;
+
 @end

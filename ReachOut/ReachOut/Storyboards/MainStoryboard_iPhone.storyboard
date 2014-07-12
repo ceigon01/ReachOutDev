@@ -1331,9 +1331,11 @@
                         <outlet property="labelMissionName" destination="EVi-L9-de1" id="JeT-ew-VuK"/>
                         <outlet property="labelUserName" destination="2BT-gM-EAk" id="35m-zS-eD9"/>
                         <outlet property="tableView" destination="KG9-7F-Rz9" id="RB9-up-Qdt"/>
+                        <segue destination="IIq-RI-CQM" kind="push" identifier="kIdentifierSegueMissionAddEncouragement" id="kq1-ES-DfJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Yh-vQ-f45" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="KEQ-uo-fE9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2190" y="-673"/>
         </scene>
@@ -1741,7 +1743,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YEF-PW-qJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="uZO-Za-NEG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1367" y="640"/>
         </scene>
@@ -1809,7 +1810,7 @@
                     <navigationItem key="navigationItem" title="Encourage!" id="0eB-ZT-7aU">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="3FK-tF-dgo">
                             <connections>
-                                <segue destination="uZO-Za-NEG" kind="unwind" unwindAction="unwindAddEncouragement:" id="OIl-3g-NCq"/>
+                                <segue destination="KEQ-uo-fE9" kind="unwind" unwindAction="unwindAddEncouragement:" id="0pk-7Y-db1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2104,7 +2105,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="FbI-Om-JAD"/>
         <segue reference="Gty-YO-6eE"/>
+        <segue reference="FbI-Om-JAD"/>
+        <segue reference="kq1-ES-DfJ"/>
     </inferredMetricsTieBreakers>
 </document>

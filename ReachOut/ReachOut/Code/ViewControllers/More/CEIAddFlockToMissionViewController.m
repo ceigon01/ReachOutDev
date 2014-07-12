@@ -84,7 +84,7 @@ static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFl
     cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
   }
 
-  cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height * 0.5f;
+  cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
   cell.imageView.layer.masksToBounds = YES;
   cell.textLabel.text = user[@"fullName"];
   

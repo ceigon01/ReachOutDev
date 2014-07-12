@@ -23,6 +23,7 @@ extern const NSInteger kNumberOfDaysInWeek;
 @interface CEIDailyChoresWeekView : UIView
 
 @property (nonatomic, weak) id<CEIDailyChoresWeekViewDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *arrayGoalSteps;
 
 - (void)configureWithArrayGoalSteps:(NSArray *)arrayGoalSteps;
 

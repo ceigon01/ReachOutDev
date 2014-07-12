@@ -59,6 +59,8 @@ static const CGFloat kItemsSpacing = 1.0f;
 
 - (void)configureWithArrayGoalSteps:(NSArray *)arrayGoalSteps{
   
+  self.arrayGoalSteps = [NSMutableArray arrayWithArray:arrayGoalSteps];
+  
   [self.dictionaryDailyChoresView enumerateKeysAndObjectsUsingBlock:^(NSString *key, CEIDailyChoresView *dailyChoresView, BOOL *stop) {
     
     [dailyChoresView prepareForReuse];
@@ -68,7 +70,10 @@ static const CGFloat kItemsSpacing = 1.0f;
   
   [arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
 
-    NSInteger dayNumber = [[NSCalendar currentCalendar] component:NSWeekdayCalendarUnit fromDate:goalStep[@"date"]];
+    CFAbsoluteTime absoluteTime = CFAbsoluteTimeGetCurrent();
+    CFTimeZoneRef timeZone = CFTimeZoneCopySystem();
+    SInt32 dayNumber = CFAbsoluteTimeGetDayOfWeek(absoluteTime, timeZone);
+    
     CEIDailyChoresView *dailyChoresView = [weakSelf.dictionaryDailyChoresView objectForKey:[CEIDay dayNameWithDayNumber:dayNumber]];
     [dailyChoresView configureWithGoalStep:goalStep];
   }];

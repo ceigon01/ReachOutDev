@@ -81,6 +81,10 @@
 		FDC8D2571956E67D00B60BEF /* CEIAddEncouragementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2561956E67D00B60BEF /* CEIAddEncouragementViewController.m */; };
 		FDC8D25A1956EF9F00B60BEF /* CEIEncouragementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */; };
 		FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE1626C196BFDD500E9FD8F /* CEIDailyChoresWeekView.m */; };
+		FDE16270196C35B700E9FD8F /* CEIGoalStepViewCheckin.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE1626F196C35B700E9FD8F /* CEIGoalStepViewCheckin.m */; };
+		FDE16273196C35D300E9FD8F /* CEIGoalStepViewCheckup.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE16272196C35D300E9FD8F /* CEIGoalStepViewCheckup.m */; };
+		FDE16275196C35EF00E9FD8F /* CEIGoalStepViewCheckin.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDE16274196C35EF00E9FD8F /* CEIGoalStepViewCheckin.xib */; };
+		FDE16277196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDE16276196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +218,12 @@
 		FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIEncouragementTableViewCell.m; sourceTree = "<group>"; };
 		FDE1626B196BFDD500E9FD8F /* CEIDailyChoresWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIDailyChoresWeekView.h; sourceTree = "<group>"; };
 		FDE1626C196BFDD500E9FD8F /* CEIDailyChoresWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIDailyChoresWeekView.m; sourceTree = "<group>"; };
+		FDE1626E196C35B700E9FD8F /* CEIGoalStepViewCheckin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIGoalStepViewCheckin.h; sourceTree = "<group>"; };
+		FDE1626F196C35B700E9FD8F /* CEIGoalStepViewCheckin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIGoalStepViewCheckin.m; sourceTree = "<group>"; };
+		FDE16271196C35D300E9FD8F /* CEIGoalStepViewCheckup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIGoalStepViewCheckup.h; sourceTree = "<group>"; };
+		FDE16272196C35D300E9FD8F /* CEIGoalStepViewCheckup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIGoalStepViewCheckup.m; sourceTree = "<group>"; };
+		FDE16274196C35EF00E9FD8F /* CEIGoalStepViewCheckin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEIGoalStepViewCheckin.xib; sourceTree = "<group>"; };
+		FDE16276196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEIGoalStepViewCheckup.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -451,6 +461,12 @@
 				FDE1626C196BFDD500E9FD8F /* CEIDailyChoresWeekView.m */,
 				FD2E9AE719577E76005B074A /* CEIGoalTableViewCell.h */,
 				FD2E9AE819577E76005B074A /* CEIGoalTableViewCell.m */,
+				FDE1626E196C35B700E9FD8F /* CEIGoalStepViewCheckin.h */,
+				FDE1626F196C35B700E9FD8F /* CEIGoalStepViewCheckin.m */,
+				FDE16274196C35EF00E9FD8F /* CEIGoalStepViewCheckin.xib */,
+				FDE16271196C35D300E9FD8F /* CEIGoalStepViewCheckup.h */,
+				FDE16272196C35D300E9FD8F /* CEIGoalStepViewCheckup.m */,
+				FDE16276196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib */,
 			);
 			name = Views;
 			path = View;
@@ -656,8 +672,10 @@
 				FD0C8525193E5207004C006B /* CEICodeVerificationView.xib in Resources */,
 				A45E4B88193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard in Resources */,
 				FD1190AB19488FBE005A1AE1 /* podfile in Resources */,
+				FDE16275196C35EF00E9FD8F /* CEIGoalStepViewCheckin.xib in Resources */,
 				FD2E9ADD1957371C005B074A /* sheepPhoto.png in Resources */,
 				FD2E9AD9195731F7005B074A /* run@2x.gif in Resources */,
+				FDE16277196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib in Resources */,
 				A440A1951937F33900D7CC0D /* InfoPlist.strings in Resources */,
 				A440A19D1937F33900D7CC0D /* Images.xcassets in Resources */,
 			);
@@ -722,6 +740,7 @@
 				FDC8D24A1955F79800B60BEF /* CEINotificationNames.m in Sources */,
 				FD1190AE194896C5005A1AE1 /* CEIMentorCell.m in Sources */,
 				FD0C8534193F5A7B004C006B /* CEIMentorSignupViewController.m in Sources */,
+				FDE16270196C35B700E9FD8F /* CEIGoalStepViewCheckin.m in Sources */,
 				A45E4B8C193800CC008D7EA6 /* CEIHandies.m in Sources */,
 				FDA5DAA01965A3F5005394BC /* CEIAddMentorFoundViewController.m in Sources */,
 				FD2E9AF51958C4C4005B074A /* CEIAllMissionsViewController.m in Sources */,
@@ -744,6 +763,7 @@
 				FD119063194202F1005A1AE1 /* CEISession.m in Sources */,
 				A403F3B319393E3A0039750B /* CEIRoleSelectViewController.m in Sources */,
 				FD1190721946559F005A1AE1 /* CEIMentorsViewController.m in Sources */,
+				FDE16273196C35D300E9FD8F /* CEIGoalStepViewCheckup.m in Sources */,
 				FD11906819420D80005A1AE1 /* CEIAlertView.m in Sources */,
 				FD2E9AFB1959B7FD005B074A /* CEIAddMissionViewController.m in Sources */,
 				FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */,

@@ -23,25 +23,33 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
 - (void)viewDidLoad{
   [super viewDidLoad];
  
-  __weak CEIAddEncouragementViewController *weakSelf = self;
-  
-  PFQuery *query = [PFUser query];
-  if (query && [PFUser currentUser]) {
+  if (self.folowerSelected != nil) {
     
-    [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    self.arrayFollowers = [NSArray arrayWithObjects:self.folowerSelected, nil];
+    [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+  }
+  else{
+  
+    __weak CEIAddEncouragementViewController *weakSelf = self;
+    
+    PFQuery *query = [PFUser query];
+    if (query && [PFUser currentUser]) {
       
-      if (error) {
-
-        [CEIAlertView showAlertViewWithError:error];
-      }
-      else{
+      [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
+      [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
-        weakSelf.arrayFollowers = [NSArray arrayWithArray:objects];
-        weakSelf.indexPathSelectedFollower = nil;
-        [weakSelf.tableView reloadData];
-      }
-    }];
+        if (error) {
+
+          [CEIAlertView showAlertViewWithError:error];
+        }
+        else{
+          
+          weakSelf.arrayFollowers = [NSArray arrayWithArray:objects];
+          weakSelf.indexPathSelectedFollower = nil;
+          [weakSelf.tableView reloadData];
+        }
+      }];
+    }
   }
   
 #warning TODO: localization
@@ -96,20 +104,36 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
   
   PFUser *user = [self.arrayFollowers objectAtIndex:indexPath.row];
   
+  __weak UITableViewCell *weakCell = cell;
+  
   if (user[@"imageURL"]) {
     
-    [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]
+                   placeholderImage:[UIImage imageNamed:@"sheepPhoto"]
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                            
+                            weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
+                            weakCell.imageView.layer.masksToBounds = YES;
+                          }];
   }
-  else {
-
-    cell.imageView.image = [UIImage imageNamed:@"imgUserPlaceholder"];
+  else{
+    
+    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
   }
   
-  cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height * 0.5f;
+  cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
   cell.imageView.layer.masksToBounds = YES;
+  
   cell.textLabel.text = user[@"fullName"];
   
-  cell.accessoryType = ([self.indexPathSelectedFollower compare:indexPath] == NSOrderedSame) ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
+  if (self.folowerSelected) {
+    
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+  }
+  else{
+    
+    cell.accessoryType = ([self.indexPathSelectedFollower compare:indexPath] == NSOrderedSame) ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
+  }
   
   return cell;
 }
@@ -129,7 +153,6 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
   
   self.indexPathSelectedFollower = indexPath;
   
-
   [tableView reloadRowsAtIndexPaths:@[self.indexPathSelectedFollower]
                    withRowAnimation:UITableViewRowAnimationFade];
   [self.tableView cellForRowAtIndexPath:self.indexPathSelectedFollower].accessoryType = UITableViewCellAccessoryCheckmark;

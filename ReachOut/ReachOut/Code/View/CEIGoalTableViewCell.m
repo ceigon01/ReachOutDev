@@ -11,12 +11,17 @@
 #import "iCarousel.h"
 #import "NSDate+Difference.h"
 #import "CEIDailyChoresWeekView.h"
+#import <Parse/Parse.h>
+
+static const CGFloat kHeightRatioLabelToSelf = 0.3f;
 
 @interface CEIGoalTableViewCell () <iCarouselDataSource, iCarouselDelegate, CEIDailyChoresWeekViewDelegate>
 
 @property (nonatomic, strong) iCarousel *carousel;
+@property (nonatomic, strong) UILabel *labelDatesPeriod;
 @property (nonatomic, assign) NSUInteger numberOfDays;
 @property (nonatomic, strong) NSArray *arrayGoalSteps;
+@property (nonatomic, strong) NSDate *dateStart;
 
 @end
 
@@ -48,13 +53,25 @@
   self.carousel.delegate = self;
   self.carousel.decelerationRate = 0.0f;
   [self.contentView addSubview:self.carousel];
+  
+  self.labelDatesPeriod = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
+                                                                    0.0f,
+                                                                    self.contentView.frame.size.width,
+                                                                    self.contentView.frame.size.height * kHeightRatioLabelToSelf)];
+  self.labelDatesPeriod.text = @"dates period";
+  self.labelDatesPeriod.textAlignment = NSTextAlignmentRight;
+  [self.contentView addSubview:self.labelDatesPeriod];
 }
 
 - (void)configureWithGoal:(PFObject *)paramGoal mission:(PFObject *)paramMission goalSteps:(NSArray *)paramArrayGoalSteps{
   
+  self.goal = paramGoal;
   self.numberOfDays = [NSDate totalDaysCountForMission:paramMission];
   self.arrayGoalSteps = paramArrayGoalSteps;
+  self.dateStart = paramMission[@"dateBegins"];
 
+  [self carouselDidEndDecelerating:self.carousel];
+  
   [self.carousel reloadData];
 }
 
@@ -77,12 +94,11 @@
   
   if (dailyChoresWeekView == nil){
     
-    dailyChoresWeekView = [[CEIDailyChoresWeekView alloc] initWithFrame:CGRectMake(0.0f,
+    dailyChoresWeekView = [[CEIDailyChoresWeekView alloc] initWithFrame:CGRectMake(self.contentView.frame.size.height * kHeightRatioLabelToSelf,
                                                                                    0.0f,
                                                                                    self.contentView.frame.size.width,
-                                                                                   self.contentView.frame.size.height)];
+                                                                                   self.contentView.frame.size.height * (1.0f - kHeightRatioLabelToSelf))];
     dailyChoresWeekView.delegate = self;
-
   }
   
   NSMutableArray *arrayGoalSteps = [[NSMutableArray alloc] init];
@@ -129,11 +145,38 @@
   }
 }
 
+- (void)carouselDidEndDecelerating:(iCarousel *)carousel{
+  
+#warning TODO: there be some mess here, has to be debuged
+  
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  
+  dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+  dateFormatter.timeStyle = NSDateFormatterNoStyle;
+  
+  NSInteger weeksOffset = carousel.currentItemIndex;
+  
+  NSCalendar *calendar = [NSCalendar currentCalendar];
+  
+  NSDateComponents *dateComponentsStart = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit
+                                                      fromDate:self.dateStart];
+  
+  dateComponentsStart.day += 7 * weeksOffset;
+  
+  NSDate *dateStart = [calendar dateFromComponents:dateComponentsStart];
+
+  dateComponentsStart.day += 7;
+
+  NSDate *dateFinish = [calendar dateFromComponents:dateComponentsStart];
+  
+  self.labelDatesPeriod.text = [NSString stringWithFormat:@"%@ - %@",[dateFormatter stringFromDate:dateStart],[dateFormatter stringFromDate:dateFinish]];
+}
+
 #pragma mark - CEIDailyChoresView Delegate
 
 - (void)dailyChoresWeekView:(CEIDailyChoresWeekView *)paramDailyChoresWeekView didTapDailyChoresView:(CEIDailyChoresView *)paramDailyChoresView{
   
-
+  [self.delegateGoalStep goalTableViewCell:self didTapDailyChoresView:paramDailyChoresView];
 }
 
 @end

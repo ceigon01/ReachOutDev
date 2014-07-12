@@ -18,8 +18,25 @@
                 clientKey:@"wwP3mr4m3p5NhU8pNZsSrxNTVCkeiE9yov7jVx8d"];
     
   [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    
+  
+  [application registerForRemoteNotificationTypes:
+   UIRemoteNotificationTypeBadge |
+   UIRemoteNotificationTypeAlert |
+   UIRemoteNotificationTypeSound];
+  
 	return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+
+  PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+  [currentInstallation setDeviceTokenFromData:newDeviceToken];
+  [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+
+  [PFPush handlePush:userInfo];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application{}

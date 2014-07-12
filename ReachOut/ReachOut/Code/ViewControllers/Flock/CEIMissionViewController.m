@@ -14,12 +14,23 @@
 #import <Parse/Parse.h>
 #import "NSDate+Difference.h"
 #import "UIImageView+WebCache.h"
+#import "CEIGoalStepViewCheckin.h"
+#import "CEIGoalStepViewCheckup.h"
+#import "ASDepthModalViewController.h"
+#import "CEIDailyChoresView.h"
+#import "CEIColor.h"
+#import "CEIAddEncouragementViewController.h"
+
+static NSString *const kNibNameCEIGoalStepViewCheckin = @"CEIGoalStepViewCheckin";
+static NSString *const kNibNameCEIGoalStepViewCheckup = @"CEIGoalStepViewCheckup";
+
+static NSString *const kIdentifierSegueMissionAddEncouragement = @"kIdentifierSegueMissionAddEncouragement";
 
 static NSString *const kIdentifierCellMission = @"kIdentifierCellMission";
 static const CGFloat kHeightFooter = 20.0f;
-static const CGFloat kHeightCell = 72.0f;
+static const CGFloat kHeightCell = 100.0f;
 
-@interface CEIMissionViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CEIMissionViewController () <UITableViewDataSource, UITableViewDelegate, CEIGoalStepViewCheckinDelegate, CEIGoalTableViewCellDelegate, CEIGoalStepViewCheckupDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageViewBackgroud;
 @property (nonatomic, weak) IBOutlet UIImageView *imageViewProfile;
@@ -30,6 +41,11 @@ static const CGFloat kHeightCell = 72.0f;
 
 @property (nonatomic, strong) NSArray *arrayGoals;
 @property (nonatomic, strong) NSArray *arrayGoalSteps;
+
+@property (nonatomic, strong) PFObject *encouragementNew;
+
+@property (nonatomic, strong) CEIGoalTableViewCell *selectedCell;
+@property (nonatomic, strong) CEIDailyChoresView *selectedDailyChoresView;
 
 @end
 
@@ -143,6 +159,77 @@ static const CGFloat kHeightCell = 72.0f;
   }
 }
 
+#pragma mark - Navigation
+
+- (IBAction)unwindAddEncouragement:(UIStoryboardSegue *)unwindSegue{
+  
+  if ([unwindSegue.sourceViewController isKindOfClass:[CEIAddEncouragementViewController class]]) {
+    
+    [self.tableView reloadData];
+  }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+  
+  if ([segue.identifier isEqualToString:kIdentifierSegueMissionAddEncouragement]) {
+    
+    CEIAddEncouragementViewController *addEncouragementViewController = (CEIAddEncouragementViewController *)segue.destinationViewController;
+    
+    addEncouragementViewController.folowerSelected = self.user;
+  }
+}
+
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
+  
+#warning TODO: localizations
+  CEIAddEncouragementViewController *vc = nil;
+  
+  if ([fromViewController isKindOfClass:[CEIAddEncouragementViewController class]]) {
+    
+    vc = (CEIAddEncouragementViewController *)fromViewController;
+  }
+  else {
+    
+    [CEIAlertView showAlertViewWithValidationMessage:@"Shouldn't get here!"];
+    return NO;
+  }
+  
+  self.encouragementNew = [PFObject objectWithClassName:@"Encouragement"];
+  
+  if (vc.textView.text.length == 0) {
+    
+    [CEIAlertView showAlertViewWithValidationMessage:@"Please put an Encouragement"];
+    return NO;
+  }
+  else {
+    
+    self.encouragementNew[@"caption"] = vc.textView.text;
+  }
+  
+  if (vc.indexPathSelectedFollower == nil) {
+    
+    [CEIAlertView showAlertViewWithValidationMessage:@"Select a Follower to Encourage"];
+    return NO;
+  }
+  
+  __block PFUser *userFollowerSelected = [vc.arrayFollowers objectAtIndex:vc.indexPathSelectedFollower.row];
+  
+  self.encouragementNew[@"mentorID"] = [PFUser currentUser];
+  self.encouragementNew[@"followerID"] = userFollowerSelected;
+  
+  [self.encouragementNew saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    
+    if (error) {
+      
+      [CEIAlertView showAlertViewWithError:error];
+    }
+    else {
+    }
+  }];
+  
+  return YES;
+}
+
 #pragma mark - UITableView Datasource & Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -163,6 +250,8 @@ static const CGFloat kHeightCell = 72.0f;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
   CEIGoalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifierCellMission];
+  
+  cell.delegateGoalStep = self;
   
   PFObject *goal = [self.arrayGoals objectAtIndex:indexPath.section];
   
@@ -243,6 +332,133 @@ static const CGFloat kHeightCell = 72.0f;
   }];
   
   return [NSArray arrayWithArray:arrayGoalsFiltered];
+}
+
+#pragma mark - CEIGoalTableViewCell Delegate
+
+- (void)goalTableViewCell:(CEIGoalTableViewCell *)paramGoalTableViewCell didTapDailyChoresView:(CEIDailyChoresView *)paramDailyChoresView{
+  
+  self.selectedCell = paramGoalTableViewCell;
+  self.selectedDailyChoresView = paramDailyChoresView;
+  
+  if (self.isMentor) {
+    
+    CEIGoalStepViewCheckup *goalStepViewCheckup = [[[NSBundle mainBundle] loadNibNamed:kNibNameCEIGoalStepViewCheckup
+                                                                                 owner:self
+                                                                               options:nil]
+                                                   lastObject];
+    goalStepViewCheckup.delegate = self;
+    
+    PFObject *goal = paramGoalTableViewCell.goal;
+    PFObject *goalStep = paramDailyChoresView.goalStep;
+    
+    goalStepViewCheckup.labelGoalTitle.text = goal[@"caption"];
+    
+    if (goalStep == nil) {
+      
+      goalStepViewCheckup.textView.text = @"This day for goal is empty, and this view is displayed only due to demo purposes. It won't be active afterwards.";
+      
+      goalStepViewCheckup.labelDay.text = @"-";
+      goalStepViewCheckup.labelDone.text = @"-";
+      
+    }
+    else{
+      
+      goalStepViewCheckup.textView.text = goalStep[@"caption"];
+      
+      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+      dateFormatter.dateStyle = NSDateFormatterShortStyle;
+      dateFormatter.timeStyle = NSDateFormatterShortStyle;
+      
+#warning TODO: improove handling
+      goalStepViewCheckup.labelResponseTime.text = [dateFormatter stringFromDate:goalStep.createdAt];
+      goalStepViewCheckup.labelDay.text = goalStep[@"day"];
+      goalStepViewCheckup.labelDone.text = [goalStep[@"done"] boolValue] ? @"Yes" : @"No";
+      
+      if ([goalStep[@"done"] boolValue]) {
+        
+        goalStepViewCheckup.labelDone.backgroundColor = [CEIColor colorGreen];
+        goalStepViewCheckup.labelDay.backgroundColor = [CEIColor colorGreen];
+      }
+      else{
+        
+        goalStepViewCheckup.labelDone.backgroundColor = [CEIColor colorRed];
+        goalStepViewCheckup.labelDay.backgroundColor = [CEIColor colorRed];
+      }
+      
+    }
+    
+    [ASDepthModalViewController presentView:goalStepViewCheckup
+                            backgroundColor:[UIColor whiteColor]
+                                    options:ASDepthModalOptionAnimationGrow | ASDepthModalOptionBlur | ASDepthModalOptionTapOutsideToClose
+                          completionHandler:NULL];
+  }
+  else{
+   
+    CEIGoalStepViewCheckin *goalStepViewCheckin = [[[NSBundle mainBundle] loadNibNamed:kNibNameCEIGoalStepViewCheckin
+                                                                                owner:self
+                                                                              options:nil]
+                                                   lastObject];
+    goalStepViewCheckin.delegate = self;
+    
+    PFObject *goal = paramGoalTableViewCell.goal;
+    
+    goalStepViewCheckin.labelGoalTitle.text = goal[@"caption"];
+    
+    [ASDepthModalViewController presentView:goalStepViewCheckin
+                            backgroundColor:[UIColor whiteColor]
+                                    options:ASDepthModalOptionAnimationGrow | ASDepthModalOptionBlur | ASDepthModalOptionTapOutsideToClose
+                          completionHandler:NULL];
+  }
+}
+
+#pragma mark - CEIGoalStepViewCheckup Delegate
+
+- (void)goalStepViewCheckupDidTapDone:(CEIGoalStepViewCheckup *)paramGoalStepViewCheckup{
+  
+  [ASDepthModalViewController dismiss];
+}
+
+- (void)goalStepViewCheckupDidTapEncourage:(CEIGoalStepViewCheckup *)paramGoalStepViewCheckup{
+  
+  [ASDepthModalViewController dismiss];
+  [self performSegueWithIdentifier:kIdentifierSegueMissionAddEncouragement sender:self];
+}
+
+#pragma mark - CEIGoalStepViewCheckin Delegate
+
+- (void)goalStepViewCheckinDidTapDone:(CEIGoalStepViewCheckin *)paramGoalStepViewCheckin{
+  
+  if (!paramGoalStepViewCheckin.isDoneSelected){
+  
+    [CEIAlertView showAlertViewWithValidationMessage:@"Please confirim wether you have fulfilled the goal or not."];
+    return;
+  }
+  
+  PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
+  
+  goalStep[@"goal"] = self.selectedCell.goal;
+  goalStep[@"caption"] = paramGoalStepViewCheckin.textView.text;
+  goalStep[@"done"] = [NSNumber numberWithBool:paramGoalStepViewCheckin.done];
+  goalStep[@"mission"] = self.mission;
+  goalStep[@"day"] = self.selectedDailyChoresView.dayName;
+  
+  [self.selectedDailyChoresView configureWithGoalStep:goalStep];
+  
+  [goalStep saveInBackground];
+  
+  
+  PFQuery *query = [PFInstallation query];
+  [query whereKey:@"user" equalTo:self.user];
+  
+  [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@: %@ %@",[PFUser currentUser][@"fullName"],paramGoalStepViewCheckin.done ? @"Done:" : @"Didn't do it:",self.selectedCell.goal[@"caption"]]];
+  
+  [ASDepthModalViewController dismiss];
+}
+
+- (void)goalStepViewCheckinDidTapCancel:(CEIGoalStepViewCheckin *)paramGoalStepViewCheckin{
+
+  [ASDepthModalViewController dismiss];
 }
 
 @end

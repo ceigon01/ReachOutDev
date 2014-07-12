@@ -188,6 +188,11 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
       [CEIAlertView showAlertViewWithError:error];
     }
     else {
+    
+      PFQuery *query = [PFInstallation query];
+      [query whereKey:@"user" equalTo:userFollowerSelected];
+      
+      [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@: %@",[PFUser currentUser][@"fullName"],vc.textView.text]];
       
       [weakSelf.arraySent addObject:weakSelf.encouragementNew];
       weakSelf.encouragementNew = nil;
@@ -251,14 +256,26 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
     cell.labelTitle.text = @"";
   }
   
+  __weak CEIEncouragementTableViewCell *weakCell = cell;
+  
   if (user[@"imageURL"]) {
     
-    [cell.imageViewProfile setImageWithURL:user[@"imageURL"]];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]
+                   placeholderImage:[UIImage imageNamed:@"sheepPhoto"]
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                            
+                            weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
+                            weakCell.imageView.layer.masksToBounds = YES;
+                          }];
   }
-  else {
+  else{
     
-    cell.imageViewProfile.image = [UIImage imageNamed:@"sheepPhoto"];
+    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
   }
+  
+  cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
+  cell.imageView.layer.masksToBounds = YES;
+  
   cell.labelCaption.text = encouragement[@"caption"];
   cell.labelFullName.text = user[@"username"];
 

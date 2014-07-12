@@ -416,7 +416,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
                      placeholderImage:[UIImage imageNamed:@"sheepPhoto"]
                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                               
-                              weakCell.imageView.layer.cornerRadius = weakCell.imageView.frame.size.height * 0.5f;
+                              weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
                               weakCell.imageView.layer.masksToBounds = YES;
                             }];
     }
@@ -425,7 +425,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
       cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
     }
     
-    cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height * 0.5f;
+    cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
     cell.imageView.layer.masksToBounds = YES;
     cell.textLabel.text = user[@"fullName"];
   }
