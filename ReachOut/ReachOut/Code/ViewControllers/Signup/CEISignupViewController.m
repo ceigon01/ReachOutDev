@@ -15,7 +15,11 @@
 #import "UIImageView+WebCache.h"
 #import "CEIAlertView.h"
 
-@interface CEISignupViewController () <UITextFieldDelegate, UIAlertViewDelegate>
+#warning TODO: redundant
+NSString *const kTitleButtonImageSourceCameraRollCameraRoll3 = @"Camera roll";
+NSString *const kTitleButtonImageSourceCameraRollTakeAPicture3 = @"Take a picture";
+
+@interface CEISignupViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextField *textFieldFullName;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldMobileNumber;
@@ -23,7 +27,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *textFieldPasswordRetype;
 @property (nonatomic, weak) IBOutlet UIButton *buttonFacebook;
 @property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
-@property (nonatomic, weak) IBOutlet UIImageView *imageViewMe;
+@property (nonatomic, weak) IBOutlet UIButton *buttonUserImage;
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageViewMentor;
 @property (nonatomic, weak) IBOutlet UILabel *labelRelation;
@@ -40,7 +44,14 @@
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-
+  
+#warning TODO: add prefix field
+  
+  self.buttonUserImage.layer.cornerRadius = self.buttonUserImage.frame.size.width * 0.5f;
+  self.buttonUserImage.layer.borderColor = [UIColor grayColor].CGColor;
+  self.buttonUserImage.layer.borderWidth = 1.0f;
+  self.buttonUserImage.layer.masksToBounds = YES;
+  
 #warning TODO: localizations
   self.labelRelation.text = @"Mentor";
   if (self.mentor) {
@@ -91,8 +102,15 @@
                   weakSelf.user[@"imageURL"] = user[@"imageURL"];
 
                   weakSelf.textFieldFullName.text = user[@"fullName"];
-                  [weakSelf.imageViewMe setImageWithURL:[NSURL URLWithString:user[@"imageURL"]]
-                                       placeholderImage:[UIImage imageNamed:@"imgUserPhoto"]];
+                  
+                  PFFile *file = user[@"image"];
+                  
+                  [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    
+                    [weakSelf.buttonUserImage setImage:[UIImage imageWithData:data]
+                                              forState:UIControlStateNormal];
+                  }];
+                  
                 }
                          errorHandler:^(NSError *error) {
                            
@@ -128,6 +146,11 @@
             self.user.username = self.textFieldFullName.text;
             self.user.password = self.textFieldPassword.text;
             self.user[@"mobilePhone"] = self.textFieldMobileNumber.text;
+            
+//            NSString *prefix = [[[self.butt titleForState:self.buttonMoblieNumberPrefix.state] componentsSeparatedByCharactersInSet:
+//                                 [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+//                                componentsJoinedByString:@""];
+//            self.user[@"phonePrefix"] = prefix;
             if (self.mentor) {
 
               PFRelation *relation = [self.user relationForKey:@"mentors"];
@@ -198,6 +221,62 @@
   }
     
   return _codeVerificationView;
+}
+
+#pragma mark - Action Handling
+
+
+- (IBAction)tapButtonUserImage:(id)sender{
+  
+#warning TODO: localizations
+  UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Set Photo"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                             destructiveButtonTitle:nil
+                                                  otherButtonTitles:kTitleButtonImageSourceCameraRollCameraRoll3, kTitleButtonImageSourceCameraRollTakeAPicture3, nil];
+  
+  [actionSheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+  
+  if (buttonIndex == actionSheet.cancelButtonIndex) {
+    
+  }
+  else {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:kTitleButtonImageSourceCameraRollTakeAPicture3]) {
+      
+      picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else if ([buttonTitle isEqualToString:kTitleButtonImageSourceCameraRollCameraRoll3]){
+      
+      picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    [self.navigationController presentViewController:picker animated:YES completion:NULL];
+  }
+}
+
+#pragma mark - UIImagePickerController Delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+  
+  UIImage *image = info[UIImagePickerControllerOriginalImage];
+  
+  [self.buttonUserImage setBackgroundImage:image forState:UIControlStateNormal];
+  
+  PFFile *imageFile = [PFFile fileWithName:@"image.png" data:UIImagePNGRepresentation(image)];
+  
+  self.user[@"image"] = imageFile;
+  
+  [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark - Lazy Getters

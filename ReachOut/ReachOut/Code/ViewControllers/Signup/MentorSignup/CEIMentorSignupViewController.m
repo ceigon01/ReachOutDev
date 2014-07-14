@@ -11,10 +11,15 @@
 #import <Parse/Parse.h>
 #import "UIImageView+WebCache.h"
 #import "CEIAlertView.h"
+#import "CEIPhonePrefixPickerViewController.h"
 
-@interface CEIMentorSignupViewController ()
+#warning TODO: redundant
+NSString *const kTitleButtonImageSourceCameraRollCameraRoll2 = @"Camera roll";
+NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a picture";
 
-@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@interface CEIMentorSignupViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, weak) IBOutlet UIButton *buttonUserImage;
 @property (nonatomic, weak) IBOutlet UILabel *labelTitle;
 @property (nonatomic, weak) IBOutlet UILabel *labelSubtitle;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldTitle;
@@ -24,6 +29,8 @@
 @property (nonatomic, weak) IBOutlet UITextField *textFieldPasswordRetype;
 @property (nonatomic, weak) IBOutlet UIButton *buttonFacebook;
 @property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
+@property (nonatomic, weak) IBOutlet UIButton *buttonMoblieNumberPrefix;
+@property (nonatomic, copy) NSString *phonePrefix;
 
 @property (nonatomic, strong) PFUser *user;
 
@@ -34,7 +41,13 @@
 - (void)viewDidLoad{
   [super viewDidLoad];
 
+  self.buttonUserImage.layer.cornerRadius = self.buttonUserImage.frame.size.width * 0.5f;
+  self.buttonUserImage.layer.borderColor = [UIColor grayColor].CGColor;
+  self.buttonUserImage.layer.borderWidth = 1.0f;
+  self.buttonUserImage.layer.masksToBounds = YES;
+  
   self.slideToOriginAfterTap = YES;
+  self.phonePrefix = @"1";  //US
 }
 
 #pragma mark - Action handling
@@ -58,17 +71,15 @@
                     
                     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                       
-                      weakSelf.imageView.image = [UIImage imageWithData:data];
-                      weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
-                      weakSelf.imageView.layer.masksToBounds = YES;
+                      [weakSelf.buttonUserImage setBackgroundImage:[UIImage imageWithData:data]
+                                                          forState:UIControlStateNormal];
                     }];
                     
                   }
                   else{
                     
-                    self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-                    self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
-                    self.imageView.layer.masksToBounds = YES;
+                    [weakSelf.buttonUserImage setBackgroundImage:[UIImage imageNamed:@"thumbMentor"]
+                                                        forState:UIControlStateNormal];
                   }
                 }
                          errorHandler:^(NSError *error) {
@@ -76,6 +87,25 @@
 #warning TODO: handle error
                            NSLog(@"%@",error);
                          }];
+}
+
+#pragma mark - Navigation
+
+
+- (IBAction)unwindFindPrefix:(UIStoryboardSegue *)unwindSegue{
+	
+#warning TODO: there is a bug, when going back :/
+  
+  CEIPhonePrefixPickerViewController *pppvc = (CEIPhonePrefixPickerViewController *)unwindSegue.sourceViewController;
+  
+  if (pppvc.dictionarySelected) {
+    
+    NSString *countryCode = [pppvc.dictionarySelected objectForKey:@"countryShort"];
+    self.phonePrefix = [pppvc.dictionarySelected objectForKey:@"code"];
+    
+    [self.buttonMoblieNumberPrefix setTitle:[NSString stringWithFormat:@"%@: (+%@)",countryCode,self.phonePrefix]
+                                   forState:UIControlStateNormal];
+  }
 }
 
 - (IBAction)tapButtonContinue:(id)sender{
@@ -109,8 +139,13 @@
             
             self.user.username = self.textFieldFullName.text;
             self.user.password = self.textFieldPassword.text;
+            self.user[@"title"] = self.textFieldTitle.text;
             self.user[@"mobilePhone"] = self.textFieldMobileNumber.text;
-            self.user[@"isMentor"] = @YES;
+            
+            NSString *prefix = [[[self.buttonMoblieNumberPrefix titleForState:self.buttonMoblieNumberPrefix.state] componentsSeparatedByCharactersInSet:
+                                    [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                                   componentsJoinedByString:@""];
+            self.user[@"phonePrefix"] = prefix;
             
             __weak CEIMentorSignupViewController *weakSelf = self;
             [CEISession signupUser:self.user
@@ -155,6 +190,61 @@
     }
   
   return YES;
+}
+
+#pragma mark - Action Handling
+
+- (IBAction)tapButtonUserImage:(id)sender{
+  
+#warning TODO: localizations
+  UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Set Photo"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                             destructiveButtonTitle:nil
+                                                  otherButtonTitles:kTitleButtonImageSourceCameraRollCameraRoll2, kTitleButtonImageSourceCameraRollTakeAPicture2, nil];
+
+  [actionSheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+  
+  if (buttonIndex == actionSheet.cancelButtonIndex) {
+    
+  }
+  else {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:kTitleButtonImageSourceCameraRollTakeAPicture2]) {
+      
+      picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else if ([buttonTitle isEqualToString:kTitleButtonImageSourceCameraRollCameraRoll2]){
+      
+      picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    [self.navigationController presentViewController:picker animated:YES completion:NULL];
+  }
+}
+
+#pragma mark - UIImagePickerController Delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+  
+  UIImage *image = info[UIImagePickerControllerOriginalImage];
+  
+  [self.buttonUserImage setBackgroundImage:image forState:UIControlStateNormal];
+  
+  PFFile *imageFile = [PFFile fileWithName:@"image.png" data:UIImagePNGRepresentation(image)];
+  
+  self.user[@"image"] = imageFile;
+  
+  [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark - Lazy Getters

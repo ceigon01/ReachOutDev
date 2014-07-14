@@ -53,8 +53,8 @@ static NSString *const kNibNameCEIAddGoalView = @"CEIAddGoalView";
 static NSString *const kIdentifierSegueAddMissionToAddGoal = @"kIdentifierSegueAddMissionToAddGoal";
 static NSString *const kIdentifierSegueAddMissionToAddFlock = @"kIdentifierSegueAddMissionToAddFlock";
 
-static NSString *const kTitleButtonImageSourceCameraRollCameraRoll = @"Camera roll";
-static NSString *const kTitleButtonImageSourceCameraRollTakeAPicture = @"Take a picture";
+NSString *const kTitleButtonImageSourceCameraRollCameraRoll1 = @"Camera roll";
+NSString *const kTitleButtonImageSourceCameraRollTakeAPicture1 = @"Take a picture";
 static const CGFloat kNumberOfRowsInPickerView = 100.0f;
 
 @interface CEIAddMissionViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
@@ -657,7 +657,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
                                                 destructiveButtonTitle:nil
-                                                  otherButtonTitles:kTitleButtonImageSourceCameraRollCameraRoll, kTitleButtonImageSourceCameraRollTakeAPicture, nil];
+                                                  otherButtonTitles:kTitleButtonImageSourceCameraRollCameraRoll1, kTitleButtonImageSourceCameraRollTakeAPicture1, nil];
   if (IS_IPAD) {
     
     [actionSheet showInView:self.view];
@@ -700,11 +700,11 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
     picker.delegate = self;
     
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if ([buttonTitle isEqualToString:kTitleButtonImageSourceCameraRollTakeAPicture]) {
+    if ([buttonTitle isEqualToString:kTitleButtonImageSourceCameraRollTakeAPicture1]) {
       
       picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
-    else if ([buttonTitle isEqualToString:kTitleButtonImageSourceCameraRollCameraRoll]){
+    else if ([buttonTitle isEqualToString:kTitleButtonImageSourceCameraRollCameraRoll1]){
 
       picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }

@@ -24,6 +24,13 @@ static NSString *const kUserDefaultsKeyDidShowMottoViewController = @"kUserDefau
 
 @implementation CEIRoleSelectViewController
 
+- (void)viewDidLoad{
+  [super viewDidLoad];
+  
+  self.labelTitle.textColor = [CEIColor colorDarkText];
+  self.labelSubTitle.textColor = [CEIColor colorLightText];
+}
+
 - (void)viewDidAppear:(BOOL)animated{
   [super viewDidAppear:animated];
   
@@ -40,6 +47,10 @@ static NSString *const kUserDefaultsKeyDidShowMottoViewController = @"kUserDefau
   
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
   [userDefaults setBool:YES forKey:kUserDefaultsKeyDidShowMottoViewController];
+}
+
+- (IBAction)unwindLogin:(UIStoryboardSegue *)unwindSegue{
+  
 }
 
 @end

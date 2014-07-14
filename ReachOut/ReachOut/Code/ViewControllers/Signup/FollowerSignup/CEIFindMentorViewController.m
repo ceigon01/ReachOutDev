@@ -9,6 +9,7 @@
 #import "CEIFindMentorViewController.h"
 #import "CEIMentorFoundViewController.h"
 #import "CEIAlertView.h"
+#import "CEIPhonePrefixPickerViewController.h"
 
 static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentifier_FindMentor_MentorFuond";
 
@@ -18,8 +19,10 @@ static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentif
 @property (nonatomic, weak) IBOutlet UILabel *labelSubTitle;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic, weak) IBOutlet UIButton *buttonPhonePrefix;
 @property (nonatomic, weak) IBOutlet UIButton *buttonSkip;
 @property (nonatomic, weak) IBOutlet UIButton *buttonFind;
+@property (nonatomic, copy) NSString *phonePrefix;
 
 @end
 
@@ -28,10 +31,8 @@ static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentif
 - (void)viewDidLoad{
 	[super viewDidLoad];
 	
-#warning TODO: debug
-  self.textField.text = @"8015439423";
-  
 	self.slideToOriginAfterTap = YES;
+  self.phonePrefix = @"1";    //US
 }
 
 #pragma mark - Navigation
@@ -39,8 +40,13 @@ static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentif
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
   
 	if ([segue.identifier isEqualToString:kSegueIdentifierFindMentorToMentorFound]) {
+//    
+//    NSString *prefixString = [[[self.buttonPhonePrefix titleForState:self.buttonPhonePrefix.state] componentsSeparatedByCharactersInSet:
+//                            [NSCharacterSet decimalDigitCharacterSet]]
+//                           componentsJoinedByString:@""];
     
     ((CEIMentorFoundViewController *)segue.destinationViewController).mentorMobileNumber = self.textField.text;
+    ((CEIMentorFoundViewController *)segue.destinationViewController).mentorMobileNumberPrefix = self.phonePrefix;
   }
 }
 
@@ -59,15 +65,26 @@ static NSString *const kSegueIdentifierFindMentorToMentorFound = @"kSegueIdentif
 	return YES;
 }
 
-- (IBAction)unwindFindMentor:(UIStoryboardSegue *)unwindSegue{
+- (IBAction)unwindFindPrefix:(UIStoryboardSegue *)unwindSegue{
 	
+#warning TODO: there is a bug, when going back :/
+  
+  CEIPhonePrefixPickerViewController *pppvc = (CEIPhonePrefixPickerViewController *)unwindSegue.sourceViewController;
+
+  if (pppvc.dictionarySelected) {
+    
+    NSString *countryCode = [pppvc.dictionarySelected objectForKey:@"countryShort"];
+    self.phonePrefix = [pppvc.dictionarySelected objectForKey:@"code"];
+    
+    [self.buttonPhonePrefix setTitle:[NSString stringWithFormat:@"%@: (+%@)",countryCode,self.phonePrefix]
+                            forState:UIControlStateNormal];
+  }
 }
 
-#pragma mark - UITextField delegate
+#pragma mark - Action Handling
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-	
-	[self slideViewToOrigin];
+- (IBAction)tapButtonPhonePrefix:(id)paramSender{
+  
 }
 
 @end

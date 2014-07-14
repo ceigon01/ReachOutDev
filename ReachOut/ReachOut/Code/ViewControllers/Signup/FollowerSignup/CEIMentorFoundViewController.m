@@ -39,6 +39,7 @@ static NSString* const kSegueIdentifierMentorFuondFollowerSignup = @"kSegueIdent
   
   PFQuery *query = [PFUser query];
   [query whereKey:@"mobilePhone" equalTo:self.mentorMobileNumber];
+  [query whereKey:@"phonePrefix" equalTo:self.mentorMobileNumberPrefix];
   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
   
     [progressView hide:YES];

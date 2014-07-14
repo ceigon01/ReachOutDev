@@ -80,6 +80,8 @@
 		FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */; };
 		FDC8D2571956E67D00B60BEF /* CEIAddEncouragementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2561956E67D00B60BEF /* CEIAddEncouragementViewController.m */; };
 		FDC8D25A1956EF9F00B60BEF /* CEIEncouragementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */; };
+		FDD65EAA19719A9500DAC841 /* CEIPhonePrefixPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD65EA919719A9500DAC841 /* CEIPhonePrefixPickerViewController.m */; };
+		FDD65EAD1972AA4200DAC841 /* CEITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD65EAC1972AA4200DAC841 /* CEITextField.m */; };
 		FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE1626C196BFDD500E9FD8F /* CEIDailyChoresWeekView.m */; };
 		FDE16270196C35B700E9FD8F /* CEIGoalStepViewCheckin.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE1626F196C35B700E9FD8F /* CEIGoalStepViewCheckin.m */; };
 		FDE16273196C35D300E9FD8F /* CEIGoalStepViewCheckup.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE16272196C35D300E9FD8F /* CEIGoalStepViewCheckup.m */; };
@@ -217,6 +219,10 @@
 		FDC8D2561956E67D00B60BEF /* CEIAddEncouragementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddEncouragementViewController.m; sourceTree = "<group>"; };
 		FDC8D2581956EF9F00B60BEF /* CEIEncouragementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIEncouragementTableViewCell.h; sourceTree = "<group>"; };
 		FDC8D2591956EF9F00B60BEF /* CEIEncouragementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIEncouragementTableViewCell.m; sourceTree = "<group>"; };
+		FDD65EA819719A9500DAC841 /* CEIPhonePrefixPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIPhonePrefixPickerViewController.h; sourceTree = "<group>"; };
+		FDD65EA919719A9500DAC841 /* CEIPhonePrefixPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIPhonePrefixPickerViewController.m; sourceTree = "<group>"; };
+		FDD65EAB1972AA4200DAC841 /* CEITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEITextField.h; sourceTree = "<group>"; };
+		FDD65EAC1972AA4200DAC841 /* CEITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEITextField.m; sourceTree = "<group>"; };
 		FDE1626B196BFDD500E9FD8F /* CEIDailyChoresWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIDailyChoresWeekView.h; sourceTree = "<group>"; };
 		FDE1626C196BFDD500E9FD8F /* CEIDailyChoresWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIDailyChoresWeekView.m; sourceTree = "<group>"; };
 		FDE1626E196C35B700E9FD8F /* CEIGoalStepViewCheckin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIGoalStepViewCheckin.h; sourceTree = "<group>"; };
@@ -292,6 +298,8 @@
 				A403F3B719393E980039750B /* FollowerSignup */,
 				FDC8D2451955D54300B60BEF /* CEILoginViewController.h */,
 				FDC8D2461955D54300B60BEF /* CEILoginViewController.m */,
+				FDD65EA819719A9500DAC841 /* CEIPhonePrefixPickerViewController.h */,
+				FDD65EA919719A9500DAC841 /* CEIPhonePrefixPickerViewController.m */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -471,6 +479,8 @@
 				FDE16271196C35D300E9FD8F /* CEIGoalStepViewCheckup.h */,
 				FDE16272196C35D300E9FD8F /* CEIGoalStepViewCheckup.m */,
 				FDE16276196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib */,
+				FDD65EAB1972AA4200DAC841 /* CEITextField.h */,
+				FDD65EAC1972AA4200DAC841 /* CEITextField.m */,
 			);
 			name = Views;
 			path = View;
@@ -761,6 +771,7 @@
 				FD5833D21960BAC6008782D8 /* CEIAddGoalViewController.m in Sources */,
 				A440A1971937F33900D7CC0D /* main.m in Sources */,
 				A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */,
+				FDD65EAD1972AA4200DAC841 /* CEITextField.m in Sources */,
 				A440A19B1937F33900D7CC0D /* CEIAppDelegate.m in Sources */,
 				A4CAB08F193B4C3D00CC7B12 /* UIView+FirstResponder.m in Sources */,
 				A403F3B019393DFA0039750B /* CEINavigationController.m in Sources */,
@@ -780,6 +791,7 @@
 				FD11906819420D80005A1AE1 /* CEIAlertView.m in Sources */,
 				FD2E9AFB1959B7FD005B074A /* CEIAddMissionViewController.m in Sources */,
 				FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */,
+				FDD65EAA19719A9500DAC841 /* CEIPhonePrefixPickerViewController.m in Sources */,
 				FDE162AD19715EB600E9FD8F /* CEIMottoViewController.m in Sources */,
 				FD11906E19465578005A1AE1 /* CEIFlockViewController.m in Sources */,
 				FDA5DA9D1965A10B005394BC /* CEIAddMentorViewController.m in Sources */,

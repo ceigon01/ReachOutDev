@@ -40,6 +40,7 @@
   }
   else {
     
+    [textField resignFirstResponder];
     [self tapButtonLogin:self.buttonLogin];
   }
   

@@ -18,9 +18,12 @@
 - (void)viewDidLoad{
   [super viewDidLoad];
   
-#warning TODO: check this tint
-  [[UINavigationBar appearance] setTintColor:[CEIColor colorDarkBlue]];
+  [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
   [[UINavigationBar appearance] setBarTintColor:[CEIColor colorDarkBlue]];
+#warning TODO: check the font
+  [[UINavigationBar appearance] setTitleTextAttributes: @{
+                                                          NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f],
+                                                          }];
   
   [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
   self.navigationBar.translucent = NO;

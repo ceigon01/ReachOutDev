@@ -56,8 +56,6 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
 
 - (IBAction)unwindMotto:(UIStoryboardSegue *)unwindSegue{
   
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  [userDefaults setBool:YES forKey:kUserDefaultsKeyDidShowMottoViewController];
 }
 
 #pragma mark - UITableView Datasource & Delegate

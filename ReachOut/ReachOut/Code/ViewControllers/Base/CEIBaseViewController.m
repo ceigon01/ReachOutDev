@@ -32,10 +32,18 @@ static const CGFloat kHeightKeyboardHeight = 216.0f;
 	self.slideToOriginAfterTap = NO;
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+  [super viewDidDisappear:animated];
+  
+//  [self slideViewToOrigin];
+  
+//  [self.view endEditing:YES];
+}
+
 - (void)slideViewToInputTextField:(UITextField *)textField{
 	
-	CGFloat offsetY = CGRectGetMinY(textField.frame) - kHeightKeyboardHeight;
-	
+	CGFloat offsetY = CGRectGetMinY(textField.frame) - kHeightKeyboardHeight;// + (self.navigationController.navigationBar.frame.size.height);
+  
 	if (offsetY > 0.0f) {
     
 		[UIView animateWithDuration:kTimeDurationViewSlides
@@ -43,7 +51,10 @@ static const CGFloat kHeightKeyboardHeight = 216.0f;
 												options:UIViewAnimationOptionCurveEaseInOut
 										 animations:^{
 											 
-											 self.view.transform = CGAffineTransformTranslate(self.view.transform, 0.0f, -offsetY);
+											 self.view.frame = CGRectMake(0.0f,
+                                                    -offsetY,
+                                                    self.view.frame.size.width,
+                                                    self.view.frame.size.height);
 										 }
 										 completion:NULL];
 	}
@@ -52,13 +63,16 @@ static const CGFloat kHeightKeyboardHeight = 216.0f;
 - (void)slideViewToOrigin{
 	
 	[self.view findAndResignFirstResponder];
-	
+  
 	[UIView animateWithDuration:kTimeDurationViewSlides
 												delay:0.0f
 											options:UIViewAnimationOptionCurveEaseInOut
 									 animations:^{
 										 
-										 self.view.transform = CGAffineTransformIdentity;
+                     self.view.frame = CGRectMake(0.0f,
+                                                  self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height,
+                                                  self.view.frame.size.width,
+                                                  self.view.frame.size.height);
 									 }
 									 completion:NULL];
 }
