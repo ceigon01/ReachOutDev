@@ -82,9 +82,6 @@ withCompletionHandler:(void (^)(void))paramCompletionHandler
   __block MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:paramView animated:YES];
   progressHud.labelText = @"Signing up...";
   
-#warning TODO: should these be the same?
-  paramUser[@"fullName"] = paramUser[@"username"];
-  
   [paramUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     
       if (error) {

@@ -57,6 +57,10 @@ static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifier_Root_Sign
 	
 }
 
+- (IBAction)unwindAddUser:(UIStoryboardSegue *)unwindSegue{
+
+}
+
 #pragma mark - Notification Handling
 
 - (void)handleNotificationLogout:(NSNotification *)paramNotification{

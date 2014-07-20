@@ -233,6 +233,11 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
   
+  if (indexPath.section == CEIAddMissionSectionFlock) {
+    
+    return kHeightUserCell;
+  }
+  
   return kHeightDefaultCell;
 }
 

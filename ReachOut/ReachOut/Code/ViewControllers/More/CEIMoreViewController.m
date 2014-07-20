@@ -10,20 +10,24 @@
 #import <Parse/Parse.h>
 #import "CEINotificationNames.h"
 #import "CEIWebViewViewController.h"
+#import "CEIMyProfileViewController.h"
+#import "CEIAlertView.h"
 
 typedef NS_ENUM(NSInteger, CEIMoreRow){
   
   CEIMoreRowMissions = 0,
   CEIMoreRowUpdateProfile = 1,
   CEIMoreRowAbout = 2,
-  CEIMoreRowLogout = 3,
+  CEIMoreRowMotto = 3,
+  CEIMoreRowLogout = 4,
 };
-static const NSInteger kNumberOfMoreRows = 4;
+static const NSInteger kNumberOfMoreRows = 5;
 
 static NSString *const kIdentifierCellMore = @"kIdentifierCellMore";
 static NSString *const kIdentifierSegueMoreToWebViewCeigon = @"kIdentifierSegueMoreToWebViewCeigon";
 static NSString *const kIdentifierSegueMoreToAllMissions = @"kIdentifierSegueMoreToAllMissions";
 static NSString *const kIdentifierSegueMoreToMotto = @"kIdentifierSegueMoreToMotto";
+static NSString *const kIdentifierSegueMoreToMyProfile = @"kIdentifierSegueMoreToMyProfile";
 
 static NSString *const kURLWebsiteCEIGON = @"http://www.ceigon.com/";
 static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
@@ -54,7 +58,60 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
   }
 }
 
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
+  
+  if ([fromViewController isKindOfClass:[CEIMyProfileViewController class]]) {
+    
+    CEIMyProfileViewController *vc = (CEIMyProfileViewController *)fromViewController;
+    
+#warning TODO: localizations
+    if (vc.textFieldFullName.text.length == 0){
+      
+      [CEIAlertView showAlertViewWithValidationMessage:@"Please tell us your name"];
+      return NO;
+    }
+    else
+      if (![vc.textFieldPassword.text isEqualToString:vc.textFieldPasswordRetype.text]){
+        
+        [CEIAlertView showAlertViewWithValidationMessage:@"Passwords do not match"];
+        return NO;
+      }
+      else{
+          
+          PFUser *user = [PFUser currentUser];
+          
+          user.password = vc.textFieldPassword.text;
+          user[@"fullName"] = vc.textFieldFullName.text;
+          user[@"title"] = vc.textFieldTitle.text;
+
+        if (vc.imageChanged) {
+          
+          UIImage *image = [vc.buttonUserImage backgroundImageForState:vc.buttonUserImage.state];
+          PFFile *file = [PFFile fileWithData:UIImagePNGRepresentation(image)];
+          user[@"image"] = file;
+        }
+        
+        [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    
+          if (error) {
+      
+            [CEIAlertView showAlertViewWithError:error];
+          }
+          else{
+      
+          }
+        }];
+      }
+  }
+  
+  return YES;
+}
+
 - (IBAction)unwindMotto:(UIStoryboardSegue *)unwindSegue{
+  
+}
+
+- (IBAction)unwindMyProfile:(UIStoryboardSegue *)unwindSegue{
   
 }
 
@@ -98,6 +155,18 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
       break;
     }
       
+    case CEIMoreRowMotto:{
+      
+      [self performSegueWithIdentifier:kIdentifierSegueMoreToMotto sender:self];
+      break;
+    }
+      
+    case CEIMoreRowUpdateProfile:{
+      
+      [self performSegueWithIdentifier:kIdentifierSegueMoreToMyProfile sender:self];
+      break;
+    }
+      
     case CEIMoreRowLogout:{
       
       [[[UIAlertView alloc] initWithTitle:@"Logout"
@@ -135,6 +204,7 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
     case CEIMoreRowMissions: return @"Missions";
     case CEIMoreRowUpdateProfile: return @"Update Profile";
     case CEIMoreRowAbout: return @"About";
+    case CEIMoreRowMotto: return @"Motto";
     case CEIMoreRowLogout: return @"Logout";
       
     default:  return @"Name missing";

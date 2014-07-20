@@ -137,15 +137,18 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
           }
           else{
             
-            self.user.username = self.textFieldFullName.text;
+            self.user.username = self.user[@"mobilePhone"];
             self.user.password = self.textFieldPassword.text;
+            self.user[@"fullName"] = self.textFieldFullName.text;
             self.user[@"title"] = self.textFieldTitle.text;
             self.user[@"mobilePhone"] = self.textFieldMobileNumber.text;
-            
+
             NSString *prefix = [[[self.buttonMoblieNumberPrefix titleForState:self.buttonMoblieNumberPrefix.state] componentsSeparatedByCharactersInSet:
                                     [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
                                    componentsJoinedByString:@""];
             self.user[@"phonePrefix"] = prefix;
+            
+            self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",self.user[@"mobilePhone"],self.user[@"mobilePhone"]];
             
             __weak CEIMentorSignupViewController *weakSelf = self;
             [CEISession signupUser:self.user
@@ -253,7 +256,14 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
   
   if (_user == nil) {
     
-    _user = [PFUser user];
+    if ([PFUser currentUser] == nil) {
+      
+      _user = [PFUser user];
+    }
+    else{
+
+      _user = [PFUser currentUser];
+    }
   }
   
   return _user;

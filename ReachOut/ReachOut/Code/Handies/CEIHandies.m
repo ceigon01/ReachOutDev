@@ -8,6 +8,10 @@
 
 #import "CEIHandies.h"
 
+CGFloat kHeightUserCell = 58.0f;
+CGFloat kHeightUserCellPhoto = 50.0f;
+CGFloat kRadiusUserCellPhoto = 50.0f; //should be => kHeightUserCellPhoto * 0.5f;
+
 @implementation CEIHandies
 
 @end

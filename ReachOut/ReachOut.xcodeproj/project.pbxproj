@@ -71,10 +71,14 @@
 		FD2E9AF51958C4C4005B074A /* CEIAllMissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E9AF41958C4C4005B074A /* CEIAllMissionsViewController.m */; };
 		FD2E9AF81958C5BA005B074A /* CEIAddFlockToMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E9AF71958C5BA005B074A /* CEIAddFlockToMissionViewController.m */; };
 		FD2E9AFB1959B7FD005B074A /* CEIAddMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E9AFA1959B7FD005B074A /* CEIAddMissionViewController.m */; };
+		FD53C7841978084D00107F09 /* CEIAddCustomUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD53C7831978084D00107F09 /* CEIAddCustomUserViewController.m */; };
+		FD53C787197809A000107F09 /* CEICustomUserFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD53C786197809A000107F09 /* CEICustomUserFoundViewController.m */; };
 		FD5833CF1960A9FD008782D8 /* CEIDay.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5833CE1960A9FD008782D8 /* CEIDay.m */; };
 		FD5833D21960BAC6008782D8 /* CEIAddGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5833D11960BAC6008782D8 /* CEIAddGoalViewController.m */; };
-		FDA5DA9D1965A10B005394BC /* CEIAddMentorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA5DA9C1965A10B005394BC /* CEIAddMentorViewController.m */; };
-		FDA5DAA01965A3F5005394BC /* CEIAddMentorFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA5DA9F1965A3F5005394BC /* CEIAddMentorFoundViewController.m */; };
+		FDA20041197575A900DC8BDA /* CEIAddUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA20040197575A900DC8BDA /* CEIAddUserViewController.m */; };
+		FDA2004419757F2D00DC8BDA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA2004219757F2D00DC8BDA /* AddressBook.framework */; };
+		FDA2004519757F2D00DC8BDA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA2004319757F2D00DC8BDA /* AddressBookUI.framework */; };
+		FDA200B01977213600DC8BDA /* CEIMyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA200AF1977213600DC8BDA /* CEIMyProfileViewController.m */; };
 		FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2461955D54300B60BEF /* CEILoginViewController.m */; };
 		FDC8D24A1955F79800B60BEF /* CEINotificationNames.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2491955F79800B60BEF /* CEINotificationNames.m */; };
 		FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */; };
@@ -201,14 +205,20 @@
 		FD2E9AF71958C5BA005B074A /* CEIAddFlockToMissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddFlockToMissionViewController.m; sourceTree = "<group>"; };
 		FD2E9AF91959B7FD005B074A /* CEIAddMissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddMissionViewController.h; sourceTree = "<group>"; };
 		FD2E9AFA1959B7FD005B074A /* CEIAddMissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddMissionViewController.m; sourceTree = "<group>"; };
+		FD53C7821978084D00107F09 /* CEIAddCustomUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddCustomUserViewController.h; sourceTree = "<group>"; };
+		FD53C7831978084D00107F09 /* CEIAddCustomUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddCustomUserViewController.m; sourceTree = "<group>"; };
+		FD53C785197809A000107F09 /* CEICustomUserFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEICustomUserFoundViewController.h; sourceTree = "<group>"; };
+		FD53C786197809A000107F09 /* CEICustomUserFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEICustomUserFoundViewController.m; sourceTree = "<group>"; };
 		FD5833CD1960A9FD008782D8 /* CEIDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIDay.h; sourceTree = "<group>"; };
 		FD5833CE1960A9FD008782D8 /* CEIDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIDay.m; sourceTree = "<group>"; };
 		FD5833D01960BAC6008782D8 /* CEIAddGoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddGoalViewController.h; sourceTree = "<group>"; };
 		FD5833D11960BAC6008782D8 /* CEIAddGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddGoalViewController.m; sourceTree = "<group>"; };
-		FDA5DA9B1965A10B005394BC /* CEIAddMentorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddMentorViewController.h; sourceTree = "<group>"; };
-		FDA5DA9C1965A10B005394BC /* CEIAddMentorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddMentorViewController.m; sourceTree = "<group>"; };
-		FDA5DA9E1965A3F5005394BC /* CEIAddMentorFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddMentorFoundViewController.h; sourceTree = "<group>"; };
-		FDA5DA9F1965A3F5005394BC /* CEIAddMentorFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddMentorFoundViewController.m; sourceTree = "<group>"; };
+		FDA2003F197575A900DC8BDA /* CEIAddUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddUserViewController.h; sourceTree = "<group>"; };
+		FDA20040197575A900DC8BDA /* CEIAddUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddUserViewController.m; sourceTree = "<group>"; };
+		FDA2004219757F2D00DC8BDA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		FDA2004319757F2D00DC8BDA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		FDA200AE1977213600DC8BDA /* CEIMyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIMyProfileViewController.h; sourceTree = "<group>"; };
+		FDA200AF1977213600DC8BDA /* CEIMyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIMyProfileViewController.m; sourceTree = "<group>"; };
 		FDC8D2451955D54300B60BEF /* CEILoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEILoginViewController.h; sourceTree = "<group>"; };
 		FDC8D2461955D54300B60BEF /* CEILoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEILoginViewController.m; sourceTree = "<group>"; };
 		FDC8D2481955F79800B60BEF /* CEINotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEINotificationNames.h; sourceTree = "<group>"; };
@@ -240,6 +250,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA2004419757F2D00DC8BDA /* AddressBook.framework in Frameworks */,
+				FDA2004519757F2D00DC8BDA /* AddressBookUI.framework in Frameworks */,
 				FD0C852F193E5C84004C006B /* Accounts.framework in Frameworks */,
 				FD0C852D193E5C7B004C006B /* Social.framework in Frameworks */,
 				FD0C852B193E5C6E004C006B /* Twitter.framework in Frameworks */,
@@ -354,6 +366,8 @@
 		A440A1891937F33900D7CC0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FDA2004219757F2D00DC8BDA /* AddressBook.framework */,
+				FDA2004319757F2D00DC8BDA /* AddressBookUI.framework */,
 				FD0C852E193E5C84004C006B /* Accounts.framework */,
 				FD0C852C193E5C7B004C006B /* Social.framework */,
 				FD0C852A193E5C6E004C006B /* Twitter.framework */,
@@ -550,10 +564,12 @@
 			children = (
 				FD1190701946559F005A1AE1 /* CEIMentorsViewController.h */,
 				FD1190711946559F005A1AE1 /* CEIMentorsViewController.m */,
-				FDA5DA9B1965A10B005394BC /* CEIAddMentorViewController.h */,
-				FDA5DA9C1965A10B005394BC /* CEIAddMentorViewController.m */,
-				FDA5DA9E1965A3F5005394BC /* CEIAddMentorFoundViewController.h */,
-				FDA5DA9F1965A3F5005394BC /* CEIAddMentorFoundViewController.m */,
+				FDA2003F197575A900DC8BDA /* CEIAddUserViewController.h */,
+				FDA20040197575A900DC8BDA /* CEIAddUserViewController.m */,
+				FD53C7821978084D00107F09 /* CEIAddCustomUserViewController.h */,
+				FD53C7831978084D00107F09 /* CEIAddCustomUserViewController.m */,
+				FD53C785197809A000107F09 /* CEICustomUserFoundViewController.h */,
+				FD53C786197809A000107F09 /* CEICustomUserFoundViewController.m */,
 			);
 			path = Mentors;
 			sourceTree = "<group>";
@@ -584,6 +600,8 @@
 				FD5833D11960BAC6008782D8 /* CEIAddGoalViewController.m */,
 				FD2E9AF61958C5BA005B074A /* CEIAddFlockToMissionViewController.h */,
 				FD2E9AF71958C5BA005B074A /* CEIAddFlockToMissionViewController.m */,
+				FDA200AE1977213600DC8BDA /* CEIMyProfileViewController.h */,
+				FDA200AF1977213600DC8BDA /* CEIMyProfileViewController.m */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -765,8 +783,8 @@
 				FD0C8534193F5A7B004C006B /* CEIMentorSignupViewController.m in Sources */,
 				FDE16270196C35B700E9FD8F /* CEIGoalStepViewCheckin.m in Sources */,
 				A45E4B8C193800CC008D7EA6 /* CEIHandies.m in Sources */,
-				FDA5DAA01965A3F5005394BC /* CEIAddMentorFoundViewController.m in Sources */,
 				FD2E9AF51958C4C4005B074A /* CEIAllMissionsViewController.m in Sources */,
+				FDA200B01977213600DC8BDA /* CEIMyProfileViewController.m in Sources */,
 				FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */,
 				FD5833D21960BAC6008782D8 /* CEIAddGoalViewController.m in Sources */,
 				A440A1971937F33900D7CC0D /* main.m in Sources */,
@@ -785,6 +803,7 @@
 				FD2E9AE319575E49005B074A /* CEIDailyChoresView.m in Sources */,
 				FD1190C31949EDEF005A1AE1 /* NSDate+Difference.m in Sources */,
 				FD119063194202F1005A1AE1 /* CEISession.m in Sources */,
+				FDA20041197575A900DC8BDA /* CEIAddUserViewController.m in Sources */,
 				A403F3B319393E3A0039750B /* CEIRoleSelectViewController.m in Sources */,
 				FD1190721946559F005A1AE1 /* CEIMentorsViewController.m in Sources */,
 				FDE16273196C35D300E9FD8F /* CEIGoalStepViewCheckup.m in Sources */,
@@ -792,11 +811,12 @@
 				FD2E9AFB1959B7FD005B074A /* CEIAddMissionViewController.m in Sources */,
 				FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */,
 				FDD65EAA19719A9500DAC841 /* CEIPhonePrefixPickerViewController.m in Sources */,
+				FD53C787197809A000107F09 /* CEICustomUserFoundViewController.m in Sources */,
 				FDE162AD19715EB600E9FD8F /* CEIMottoViewController.m in Sources */,
 				FD11906E19465578005A1AE1 /* CEIFlockViewController.m in Sources */,
-				FDA5DA9D1965A10B005394BC /* CEIAddMentorViewController.m in Sources */,
 				A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */,
 				FDC8D25A1956EF9F00B60BEF /* CEIEncouragementTableViewCell.m in Sources */,
+				FD53C7841978084D00107F09 /* CEIAddCustomUserViewController.m in Sources */,
 				A403F3BD19393EC70039750B /* CEIMentorFoundViewController.m in Sources */,
 				FD2E9AE019573BCC005B074A /* CEIWebViewViewController.m in Sources */,
 				FD1190C01948F4E8005A1AE1 /* CEIDoubleDisclosureCell.m in Sources */,
@@ -917,8 +937,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Pawel Majchrzak (397UFFU928)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pawel Majchrzak (397UFFU928)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Piotr Nietrzebka (8FY4S498TZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Piotr Nietrzebka (8FY4S498TZ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ReachOut/External",
@@ -934,7 +954,7 @@
 					"$(PROJECT_DIR)/ReachOut/External",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ABC7EA78-0BF8-45FB-A1FC-380483624939";
+				PROVISIONING_PROFILE = "71db7de0-7ece-4feb-941e-aac7d7b4e4e3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -945,8 +965,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Pawel Majchrzak (UYP9NK522L)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pawel Majchrzak (UYP9NK522L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Piotr Nietrzebka (8FY4S498TZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Piotr Nietrzebka (8FY4S498TZ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ReachOut/External",
@@ -962,7 +982,7 @@
 					"$(PROJECT_DIR)/ReachOut/External",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E152F955-BD58-419E-863D-9970B7062EC4";
+				PROVISIONING_PROFILE = "71db7de0-7ece-4feb-941e-aac7d7b4e4e3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

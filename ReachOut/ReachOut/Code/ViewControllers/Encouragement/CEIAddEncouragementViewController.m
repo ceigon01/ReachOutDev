@@ -87,6 +87,11 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
 
 #pragma mark - UITableView Datasource & Delegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+  
+  return kHeightUserCell;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
   
   return 1;

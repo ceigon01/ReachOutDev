@@ -151,6 +151,9 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture3 = @"Take a pictur
 //                                 [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
 //                                componentsJoinedByString:@""];
 //            self.user[@"phonePrefix"] = prefix;
+            
+            self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",self.user[@"mobilePhone"],self.user[@"mobilePhone"]];
+            
             if (self.mentor) {
 
               PFRelation *relation = [self.user relationForKey:@"mentors"];
@@ -225,7 +228,6 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture3 = @"Take a pictur
 
 #pragma mark - Action Handling
 
-
 - (IBAction)tapButtonUserImage:(id)sender{
   
 #warning TODO: localizations
@@ -285,7 +287,14 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture3 = @"Take a pictur
   
   if (_user == nil) {
     
-    _user = [PFUser user];
+    if ([PFUser currentUser] == nil) {
+      
+      _user = [PFUser user];
+    }
+    else{
+      
+      _user = [PFUser currentUser];
+    }
   }
   
   return _user;

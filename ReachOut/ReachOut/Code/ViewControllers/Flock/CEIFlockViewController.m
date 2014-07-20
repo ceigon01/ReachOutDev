@@ -13,15 +13,18 @@
 #import "CEIDoubleDisclosureCell.h"
 #import "CEIMissionsViewController.h"
 #import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
+#import "CEIAddUserViewController.h"
+#import "CEINotificationNames.h"
 
 static NSString *const kCellIdentifierFollower = @"kCellIdentifierFollower";
 static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Flock_Missions";
+static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFlockToAddUser";
 
 @interface CEIFlockViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSIndexPath *indexPathSelected;
-@property (nonatomic, strong) NSArray *arrayFlock;
+@property (nonatomic, strong) NSMutableArray *arrayFlock;
 
 - (void)fetchFlock;
 
@@ -29,8 +32,18 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
 
 @implementation CEIFlockViewController
 
+- (void)dealloc{
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad{
   [super viewDidLoad];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleNotificationFollowerAdded:)
+                                               name:kNotificationNameUserFollowerAdded
+                                             object:nil];
   
 #warning TODO: localization
   self.title = @"Flock";
@@ -70,7 +83,7 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
       }
       else{
         
-        weakSelf.arrayFlock = [NSArray arrayWithArray:objects];
+        weakSelf.arrayFlock = [NSMutableArray arrayWithArray:objects];
         [weakSelf.tableView reloadData];
       }
     }];
@@ -84,11 +97,21 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
   if ([segue.identifier isEqualToString:kSegueIdentifierFlockToMissions]) {
     
     ((CEIMissionsViewController *)segue.destinationViewController).user = [self.arrayFlock objectAtIndex:self.indexPathSelected.row];
-    ((CEIMissionsViewController *)segue.destinationViewController).mentor = YES;
+    ((CEIMissionsViewController *)segue.destinationViewController).isMentor = YES;
   }
+  else
+    if ([segue.identifier isEqualToString:kIdentifierSegueMentorsToAddUser]) {
+      
+      ((CEIAddUserViewController *)segue.destinationViewController).isMentor = NO;
+    }
 }
 
 #pragma mark - UITableView Datasource & Delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+  
+  return kHeightUserCell;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
   
@@ -138,9 +161,18 @@ static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Floc
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   self.indexPathSelected = indexPath;
   [self performSegueWithIdentifier:kSegueIdentifierFlockToMissions
                             sender:self];
+}
+
+#pragma mark - Notification Handling
+
+- (void)handleNotificationFollowerAdded:(NSNotification *)paramNotification{
+  
+  [self.arrayFlock addObject:paramNotification.object];
+  [self.tableView reloadData];
 }
 
 @end

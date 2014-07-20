@@ -13,11 +13,12 @@
 #import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CEIAlertView.h"
-#import "CEIAddMentorViewController.h"
-#import "CEIAddMentorFoundViewController.h"
+#import "CEIAddUserViewController.h"
+#import "CEINotificationNames.h"
 
 static NSString *const kCellIdentifierMentor = @"kCellIdentifierMentor";
 static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Mentors_Missions";
+static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMentorsToAddUser";
 
 @interface CEIMentorsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -31,8 +32,18 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
 
 @implementation CEIMentorsViewController
 
+- (void)dealloc{
+
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad{
   [super viewDidLoad];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleNotificationMentorAdded:)
+                                               name:kNotificationNameUserMentorAdded
+                                             object:nil];
   
 #warning TODO: localization
   self.title = @"Mentors";
@@ -88,44 +99,21 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
   if ([segue.identifier isEqualToString:kSegueIdentifierMentorsToMissions]) {
     
     ((CEIMissionsViewController *)segue.destinationViewController).user = [self.arrayMentors objectAtIndex:self.indexPathSelected.row];
-    ((CEIMissionsViewController *)segue.destinationViewController).mentor = NO;
+    ((CEIMissionsViewController *)segue.destinationViewController).isMentor = NO;
   }
-}
-
-- (IBAction)unwindAddMission:(UIStoryboardSegue *)unwindSegue{
-  
-  if ([unwindSegue.sourceViewController isKindOfClass:[CEIAddMentorViewController class]]) {
-    
-    [self.tableView reloadData];
-  }
-}
-
-- (IBAction)unwindAddMentorFound:(UIStoryboardSegue *)unwindSegue{
-  
-  if ([unwindSegue.sourceViewController isKindOfClass:[CEIAddMentorFoundViewController class]]) {
-    
-    PFUser *user = ((CEIAddMentorFoundViewController *)unwindSegue.sourceViewController).userMentor;
-    
-    [self.arrayMentors addObject:user];
-    [self.tableView reloadData];
-
-    __weak typeof (self) weakSelf = self;
-    
-    PFRelation *relation = [[PFUser currentUser] relationForKey:@"mentors"];
-    [relation addObject:user];
-    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-  
-      if (error) {
-        
-        [CEIAlertView showAlertViewWithError:error];
-        [weakSelf.arrayMentors removeObject:user];
-        [weakSelf.tableView reloadData];
-      }
-    }];
-  }
+  else
+    if ([segue.identifier isEqualToString:kIdentifierSegueMentorsToAddUser]) {
+      
+      ((CEIAddUserViewController *)segue.destinationViewController).isMentor = YES;
+    }
 }
 
 #pragma mark - UITableView Delegate & Datasource
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+  
+  return kHeightUserCell;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
   
@@ -173,10 +161,18 @@ static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Me
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   self.indexPathSelected = indexPath;
-  
   [self performSegueWithIdentifier:kSegueIdentifierMentorsToMissions
                             sender:self];
+}
+
+#pragma mark - Notification Handling
+
+- (void)handleNotificationMentorAdded:(NSNotification *)paramNotification{
+  
+  [self.arrayMentors addObject:paramNotification.object];
+  [self.tableView reloadData];
 }
 
 @end

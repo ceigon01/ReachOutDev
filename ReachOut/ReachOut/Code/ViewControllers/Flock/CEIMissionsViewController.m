@@ -94,7 +94,7 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   if ([segue.identifier isEqualToString:kSegueIdentifierMissionsToMission]) {
     
     ((CEIMissionViewController *)segue.destinationViewController).mission = [self.arrayMissions objectAtIndex:self.indexPathSelected.row];
-    ((CEIMissionViewController *)segue.destinationViewController).mentor = self.mentor;
+    ((CEIMissionViewController *)segue.destinationViewController).mentor = self.isMentor;
     ((CEIMissionViewController *)segue.destinationViewController).user = self.user;
   }
 }

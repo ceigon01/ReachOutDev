@@ -10,6 +10,8 @@
 
 extern NSString *const kNotificationNameLogout;
 extern NSString *const kNotificationNameMissionAdded;
+extern NSString *const kNotificationNameUserFollowerAdded;
+extern NSString *const kNotificationNameUserMentorAdded;
 
 @interface CEINotificationNames : NSObject
 

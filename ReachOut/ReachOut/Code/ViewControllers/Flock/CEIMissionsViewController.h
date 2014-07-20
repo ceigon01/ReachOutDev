@@ -13,6 +13,6 @@
 @interface CEIMissionsViewController : CEIBaseViewController
 
 @property (nonatomic, strong) PFUser *user;
-@property (nonatomic, assign, getter=isMentor) BOOL mentor;
+@property (nonatomic, assign) BOOL isMentor;
 
 @end

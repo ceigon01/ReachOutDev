@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+extern CGFloat kHeightUserCell;
+extern CGFloat kHeightUserCellPhoto;
+extern CGFloat kRadiusUserCellPhoto;
+
 @interface CEIHandies : NSObject
 
 @end
