@@ -42,7 +42,7 @@ static const CGFloat kHeightKeyboardHeight = 216.0f;
 
 - (void)slideViewToInputTextField:(UITextField *)textField{
 	
-	CGFloat offsetY = CGRectGetMinY(textField.frame) - kHeightKeyboardHeight;// + (self.navigationController.navigationBar.frame.size.height);
+	CGFloat offsetY = CGRectGetMinY(textField.frame) - kHeightKeyboardHeight + (self.navigationController.navigationBar.frame.size.height);
   
 	if (offsetY > 0.0f) {
     

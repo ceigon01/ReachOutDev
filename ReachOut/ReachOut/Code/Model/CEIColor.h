@@ -19,4 +19,6 @@
 + (UIColor *)colorLightText;
 + (UIColor *)colorDarkText;
 
++ (UIColor *)colorBlue;
+
 @end

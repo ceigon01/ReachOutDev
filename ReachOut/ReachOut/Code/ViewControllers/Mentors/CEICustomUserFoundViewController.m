@@ -110,8 +110,10 @@
   }];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-  [super viewWillDisappear:animated];
+#pragma mark - Action Handling
+
+- (IBAction)tapButtonContinue:(id)paramSender{
+//  4043954202
   
   NSString *notificationName = nil;
   PFRelation *relationTo = nil;
@@ -119,16 +121,23 @@
   
   if (self.isMentor) {
     
-    relationTo = [PFUser currentUser][@"followers"];
     relationFrom = [PFUser currentUser][@"mentors"];
-    notificationName = kNotificationNameUserFollowerAdded;
+    [relationFrom addObject:self.user];
     
+    relationTo = self.user[@"followers"];
+    [relationTo addObject:[PFUser currentUser]];
+    
+    notificationName = kNotificationNameUserMentorAdded;
   }
   else{
-   
-    relationTo = [PFUser currentUser][@"mentors"];
-    relationFrom = [PFUser currentUser][@"followers"];
-    notificationName = kNotificationNameUserMentorAdded;
+    
+    relationTo = [PFUser currentUser][@"followers"];
+    [relationTo addObject:self.user];
+    
+    relationFrom = [PFUser currentUser][@"mentors"];
+    [relationFrom addObject:[PFUser currentUser]];
+    
+    notificationName = kNotificationNameUserFollowerAdded;
   }
   
   [self.user saveInBackground];
@@ -136,6 +145,8 @@
   
   [[NSNotificationCenter defaultCenter] postNotificationName:notificationName
                                                       object:self.user];
+  
+  [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

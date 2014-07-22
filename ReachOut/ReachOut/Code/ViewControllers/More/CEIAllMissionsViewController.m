@@ -187,6 +187,8 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
   self.indexPathSelected = indexPath;
+  [self performSegueWithIdentifier:kIdentifierCellAllMissionsToAddMission
+                            sender:self];
 }
 
 @end

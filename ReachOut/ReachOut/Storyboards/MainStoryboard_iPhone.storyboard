@@ -1125,7 +1125,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                 <connections>
-                                    <outlet property="delegate" destination="vDB-Wp-Q3y" id="tEY-ZS-Omd"/>
+                                    <outlet property="delegate" destination="vDB-Wp-Q3y" id="P1a-uZ-USj"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="4RH-Sx-7FB" customClass="CEITextField">
@@ -1309,7 +1309,6 @@
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZu-8T-ZKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Sat-sp-Bdz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="425" y="-673"/>
         </scene>
@@ -1735,14 +1734,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerMentors" translatesAutoresizingMaskIntoConstraints="NO" id="j0a-CB-pvb">
-                                <rect key="frame" x="60" y="44" width="200" height="200"/>
+                                <rect key="frame" x="60" y="64" width="200" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="XCi-zJ-sS3"/>
-                                    <constraint firstAttribute="height" constant="200" id="wvV-DE-fSj"/>
+                                    <constraint firstAttribute="height" constant="140" id="wvV-DE-fSj"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tz-48-2gT">
-                                <rect key="frame" x="110" y="287" width="100" height="30"/>
+                                <rect key="frame" x="110" y="227" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Ioj-hl-CTX"/>
                                     <constraint firstAttribute="height" constant="30" id="MOz-G2-DNj"/>
@@ -1756,7 +1755,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="555-555-555" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="xJi-S3-Djn" customClass="CEITextField">
-                                <rect key="frame" x="20" y="249" width="280" height="30"/>
+                                <rect key="frame" x="20" y="189" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2bD-jt-jeo"/>
                                 </constraints>
@@ -1769,18 +1768,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="j0a-CB-pvb" firstAttribute="top" secondItem="rhe-De-G4o" secondAttribute="top" constant="44" id="3j5-3b-DTg"/>
                             <constraint firstItem="2tz-48-2gT" firstAttribute="top" secondItem="xJi-S3-Djn" secondAttribute="bottom" constant="8" id="DdV-ox-fPv"/>
+                            <constraint firstItem="xJi-S3-Djn" firstAttribute="top" secondItem="Knx-wU-WSH" secondAttribute="bottom" constant="125" id="DlY-3X-bKP"/>
                             <constraint firstAttribute="centerX" secondItem="j0a-CB-pvb" secondAttribute="centerX" id="JoF-wd-cQZ"/>
+                            <constraint firstItem="j0a-CB-pvb" firstAttribute="top" secondItem="Knx-wU-WSH" secondAttribute="bottom" id="M5f-y4-xCx"/>
                             <constraint firstItem="xJi-S3-Djn" firstAttribute="leading" secondItem="rhe-De-G4o" secondAttribute="leading" constant="20" id="Tbw-sr-cB9"/>
                             <constraint firstAttribute="trailing" secondItem="xJi-S3-Djn" secondAttribute="trailing" constant="20" id="UFJ-71-bV1"/>
-                            <constraint firstItem="xJi-S3-Djn" firstAttribute="top" secondItem="j0a-CB-pvb" secondAttribute="bottom" constant="5" id="cWo-cW-sON"/>
                             <constraint firstAttribute="centerX" secondItem="2tz-48-2gT" secondAttribute="centerX" id="mjB-XW-BjA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UXY-mV-WOu"/>
+                    <connections>
+                        <outlet property="textField" destination="xJi-S3-Djn" id="NYh-nu-4jA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuz-ze-FnR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FYM-7R-YKV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2190" y="-20"/>
         </scene>
@@ -1831,6 +1834,9 @@
                                 <state key="normal" title="TRY AGAIN" backgroundImage="btnBckgndSide">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="FYM-7R-YKV" kind="unwind" unwindAction="unwindCustomUserFound:" id="gDN-il-Vf8"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxY-I4-aZM">
                                 <rect key="frame" x="200" y="327" width="100" height="30"/>
@@ -1843,7 +1849,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Sat-sp-Bdz" kind="unwind" unwindAction="unwindAddUser:" id="EzA-mg-rD1"/>
+                                    <action selector="tapButtonContinue:" destination="9EQ-gs-ZGW" eventType="touchUpInside" id="Z8U-aY-E1Q"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1865,6 +1871,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="GEF-Ie-0np"/>
                     <connections>
+                        <outlet property="buttonContinue" destination="kxY-I4-aZM" id="JPw-7r-hQ1"/>
+                        <outlet property="buttonTryAgain" destination="QJV-XT-Tl0" id="OgQ-zI-UNf"/>
                         <outlet property="imageView" destination="62o-p4-fV4" id="yu9-rZ-iqV"/>
                         <outlet property="labelFullName" destination="eKS-eV-wqE" id="1az-yA-pve"/>
                         <outlet property="labelTitle" destination="Myh-0O-2H6" id="PFm-Qj-WAI"/>

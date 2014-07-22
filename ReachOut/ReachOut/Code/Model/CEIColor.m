@@ -57,4 +57,12 @@
   return [CEIColor colorDarkBlue];
 }
 
++ (UIColor *)colorBlue{
+  
+  return [UIColor colorWithRed:81.0f / 255.0f
+                         green:149.0f / 255.0f
+                          blue:255.0f / 255.0f
+                         alpha:1.0f];
+}
+
 @end

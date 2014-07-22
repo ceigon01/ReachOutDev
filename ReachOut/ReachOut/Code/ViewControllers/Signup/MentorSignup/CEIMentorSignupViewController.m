@@ -12,12 +12,15 @@
 #import "UIImageView+WebCache.h"
 #import "CEIAlertView.h"
 #import "CEIPhonePrefixPickerViewController.h"
+#import "MBProgressHUD.h"
+
+static const NSInteger kTagAlertViewVerificationCode1 = 12345;
 
 #warning TODO: redundant
 NSString *const kTitleButtonImageSourceCameraRollCameraRoll2 = @"Camera roll";
 NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a picture";
 
-@interface CEIMentorSignupViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface CEIMentorSignupViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIButton *buttonUserImage;
 @property (nonatomic, weak) IBOutlet UILabel *labelTitle;
@@ -33,6 +36,8 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
 @property (nonatomic, copy) NSString *phonePrefix;
 
 @property (nonatomic, strong) PFUser *user;
+
+@property (nonatomic, strong) NSString *verifyCode;
 
 @end
 
@@ -89,8 +94,60 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
                          }];
 }
 
-#pragma mark - Navigation
 
+- (void)sendSMS{
+  
+  MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  progressHud.labelText = @"Sending an SMS...";
+  
+  __weak typeof (self) weakSelf = self;
+  
+  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:self.textFieldMobileNumber.text
+                                                                   forKey:@"number"];
+  [PFCloud callFunctionInBackground:@"phoneVerification1" withParameters:params
+                              block:^(NSDictionary *results, NSError *error) {
+                                
+                                if (error) {
+                                  
+                                  [CEIAlertView showAlertViewWithError:error];
+                                }
+                                else{
+                                  
+                                  [progressHud hide:YES];
+                                  
+                                  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SMS sent!"
+                                                                                      message:@"We sent you an access code to your mobile phone. Enter it below:"
+                                                                                     delegate:self
+                                                                            cancelButtonTitle:@"Cancel"
+                                                                            otherButtonTitles:@"OK", nil];
+                                  alertView.tag = kTagAlertViewVerificationCode1;
+                                  alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                                  [alertView show];
+                                  
+                                  weakSelf.verifyCode = [results objectForKey:@"validationCode"];
+                                  NSLog(@"results: %@ %@",[results class], results);
+                                }
+                              }];
+}
+
+#pragma mark - UIAlertView delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+	
+  if (buttonIndex != alertView.cancelButtonIndex) {
+    if (alertView.tag == kTagAlertViewVerificationCode1) {
+      
+      NSString *codeEntered = [[alertView textFieldAtIndex:0] text];
+      
+      if ([codeEntered isEqualToString:self.verifyCode] && self.verifyCode) {
+        
+        [self validateAndSave];
+      }
+    }
+  }
+}
+
+#pragma mark - Navigation
 
 - (IBAction)unwindFindPrefix:(UIStoryboardSegue *)unwindSegue{
 	
@@ -110,6 +167,10 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
 
 - (IBAction)tapButtonContinue:(id)sender{
   
+  [self sendSMS];
+}
+
+- (void)validateAndSave{
 #warning TODO: localizations
   if (self.textFieldTitle.text.length == 0) {
     
@@ -132,20 +193,20 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
         }
         else
           if (![self.textFieldPassword.text isEqualToString:self.textFieldPasswordRetype.text]){
-    
+            
             [CEIAlertView showAlertViewWithValidationMessage:@"Passwords do not match"];
           }
           else{
             
-            self.user.username = self.user[@"mobilePhone"];
+            self.user.username = self.textFieldMobileNumber.text;
             self.user.password = self.textFieldPassword.text;
             self.user[@"fullName"] = self.textFieldFullName.text;
             self.user[@"title"] = self.textFieldTitle.text;
             self.user[@"mobilePhone"] = self.textFieldMobileNumber.text;
-
+            
             NSString *prefix = [[[self.buttonMoblieNumberPrefix titleForState:self.buttonMoblieNumberPrefix.state] componentsSeparatedByCharactersInSet:
-                                    [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
-                                   componentsJoinedByString:@""];
+                                 [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                                componentsJoinedByString:@""];
             self.user[@"phonePrefix"] = prefix;
             
             self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",self.user[@"mobilePhone"],self.user[@"mobilePhone"]];
@@ -154,15 +215,15 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
             [CEISession signupUser:self.user
                             inView:self.view
              withCompletionHandler:^{
-             
+               
 #warning TODO: implement phone verification
                [weakSelf dismissViewControllerAnimated:YES completion:NULL];
              }
                       errorHandler:^(NSError *error) {
-                      
+                        
                         [CEIAlertView showAlertViewWithError:error];
                       }];
-  }
+          }
 }
 
 #pragma mark - UITextField delegate

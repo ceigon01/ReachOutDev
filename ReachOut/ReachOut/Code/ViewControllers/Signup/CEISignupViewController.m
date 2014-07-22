@@ -14,10 +14,13 @@
 #import "CEISession.h"
 #import "UIImageView+WebCache.h"
 #import "CEIAlertView.h"
+#import "MBProgressHUD.h"
 
 #warning TODO: redundant
 NSString *const kTitleButtonImageSourceCameraRollCameraRoll3 = @"Camera roll";
 NSString *const kTitleButtonImageSourceCameraRollTakeAPicture3 = @"Take a picture";
+
+static const NSInteger kTagAlertViewVerificationCode = 1234;
 
 @interface CEISignupViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -37,6 +40,8 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture3 = @"Take a pictur
 @property (nonatomic, strong) CEICodeVerificationView *codeVerificationView;
 
 @property (nonatomic, strong) PFUser *user;
+
+@property (nonatomic, copy) NSString *verifyCode;
 
 @end
 
@@ -89,6 +94,98 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture3 = @"Take a pictur
   self.slideToOriginAfterTap = YES;
 }
 
+- (void)sendSMS{
+  
+  MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  progressHud.labelText = @"Sending an SMS...";
+  
+  __weak typeof (self) weakSelf = self;
+  
+  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:self.textFieldMobileNumber.text
+                                                                   forKey:@"number"];
+  [PFCloud callFunctionInBackground:@"phoneVerification1" withParameters:params
+                              block:^(NSDictionary *results, NSError *error) {
+                                
+                                if (error) {
+                                  
+                                  [CEIAlertView showAlertViewWithError:error];
+                                }
+                                else{
+                                  
+                                  [progressHud hide:YES];
+                                  
+                                  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SMS sent!"
+                                                                                      message:@"We sent you an access code to your mobile phone. Enter it below:"
+                                                                                     delegate:self
+                                                                            cancelButtonTitle:@"Cancel"
+                                                                            otherButtonTitles:@"OK", nil];
+                                  alertView.tag = kTagAlertViewVerificationCode;
+                                  alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                                  [alertView show];
+
+                                  weakSelf.verifyCode = [results objectForKey:@"validationCode"];
+                                  NSLog(@"results: %@ %@",[results class], results);
+                                }
+                              }];
+}
+
+- (void)validateAndSave{
+  
+#warning TODO: localizations
+  if (self.textFieldFullName.text.length == 0){
+    
+    [CEIAlertView showAlertViewWithValidationMessage:@"Please tell us your name"];
+  }
+  else
+    if (self.textFieldMobileNumber.text.length == 0){
+      
+      [CEIAlertView showAlertViewWithValidationMessage:@"We need to verify your phone number"];
+    }
+    else
+      if (self.textFieldPassword.text.length == 0){
+        
+        [CEIAlertView showAlertViewWithValidationMessage:@"You need to setup a password"];
+      }
+      else
+        if (![self.textFieldPassword.text isEqualToString:self.textFieldPasswordRetype.text]){
+          
+          [CEIAlertView showAlertViewWithValidationMessage:@"Passwords do not match"];
+        }
+        else{
+          
+          self.user.username = self.textFieldMobileNumber.text;
+          self.user.password = self.textFieldPassword.text;
+          self.user[@"mobilePhone"] = self.textFieldMobileNumber.text;
+          self.user[@"fullName"] = self.textFieldFullName.text;
+          
+          //            NSString *prefix = [[[self.butt titleForState:self.buttonMoblieNumberPrefix.state] componentsSeparatedByCharactersInSet:
+          //                                 [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+          //                                componentsJoinedByString:@""];
+          //            self.user[@"phonePrefix"] = prefix;
+          
+          self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",self.user[@"mobilePhone"],self.user[@"mobilePhone"]];
+          
+          if (self.mentor) {
+            
+            PFRelation *relation = [self.user relationForKey:@"mentors"];
+            [relation addObject:self.mentor];
+          }
+          
+          __weak CEISignupViewController *weakSelf = self;
+          [CEISession signupUser:self.user
+                          inView:self.view
+           withCompletionHandler:^{
+             
+#warning TODO: implement phone verification
+             [weakSelf dismissViewControllerAnimated:YES completion:NULL];
+           }
+                    errorHandler:^(NSError *error) {
+                      
+                      [CEIAlertView showAlertViewWithError:error];
+                    }];
+        }
+}
+
 #pragma mark - Action Handling
 
 - (IBAction)tapButtonFacebook:(id)sender{
@@ -120,70 +217,30 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture3 = @"Take a pictur
 }
 
 - (IBAction)tapButtonContinue:(id)sender{
-	
-#warning TODO: localizations
-    if (self.textFieldFullName.text.length == 0){
-      
-      [CEIAlertView showAlertViewWithValidationMessage:@"Please tell us your name"];
-    }
-    else
-      if (self.textFieldMobileNumber.text.length == 0){
-        
-        [CEIAlertView showAlertViewWithValidationMessage:@"We need to verify your phone number"];
-      }
-      else
-        if (self.textFieldPassword.text.length == 0){
-          
-          [CEIAlertView showAlertViewWithValidationMessage:@"You need to setup a password"];
-        }
-        else
-          if (![self.textFieldPassword.text isEqualToString:self.textFieldPasswordRetype.text]){
-            
-            [CEIAlertView showAlertViewWithValidationMessage:@"Passwords do not match"];
-          }
-          else{
-            
-            self.user.username = self.textFieldFullName.text;
-            self.user.password = self.textFieldPassword.text;
-            self.user[@"mobilePhone"] = self.textFieldMobileNumber.text;
-            
-//            NSString *prefix = [[[self.butt titleForState:self.buttonMoblieNumberPrefix.state] componentsSeparatedByCharactersInSet:
-//                                 [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
-//                                componentsJoinedByString:@""];
-//            self.user[@"phonePrefix"] = prefix;
-            
-            self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",self.user[@"mobilePhone"],self.user[@"mobilePhone"]];
-            
-            if (self.mentor) {
-
-              PFRelation *relation = [self.user relationForKey:@"mentors"];
-              [relation addObject:self.mentor];
-            }
-            
-            __weak CEISignupViewController *weakSelf = self;
-            [CEISession signupUser:self.user
-                            inView:self.view
-             withCompletionHandler:^{
-               
-#warning TODO: implement phone verification
-               [weakSelf dismissViewControllerAnimated:YES completion:NULL];
-             }
-                      errorHandler:^(NSError *error) {
-                        
-                        [CEIAlertView showAlertViewWithError:error];
-                      }];
-          }
+  
+  [self sendSMS];
 }
 
 #pragma mark - UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 	
-	if (buttonIndex != alertView.cancelButtonIndex) {
-    
-#warning TODO: implement
-		[self.navigationController dismissViewControllerAnimated:YES completion:NULL];
-	}
+    if (buttonIndex != alertView.cancelButtonIndex) {
+      if (alertView.tag == kTagAlertViewVerificationCode) {
+        
+        NSString *codeEntered = [[alertView textFieldAtIndex:0] text];
+        
+        if ([codeEntered isEqualToString:self.verifyCode] && self.verifyCode) {
+          
+          [self validateAndSave];
+        }
+      }
+      else{
+        
+
+        [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
+      }
+  }
 }
 
 #pragma mark - UITextField delegate

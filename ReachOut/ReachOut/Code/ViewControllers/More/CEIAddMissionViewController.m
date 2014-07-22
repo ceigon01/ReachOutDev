@@ -13,6 +13,7 @@
 #import "CEIAddFlockToMissionViewController.h"
 #import "CEIAddGoalViewController.h"
 #import "UIImageView+WebCache.h"
+#import "CEITextField.h"
 
 typedef NS_ENUM(NSInteger, CEIAddMissionPickerViewComponent){
   
@@ -63,7 +64,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
 
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 
-@property (nonatomic, strong) UITextField *textFieldCaption;
+@property (nonatomic, strong) CEITextField *textFieldCaption;
 @property (nonatomic, assign) NSInteger duration;
 @property (nonatomic, strong) UISwitch *switchNeverEnding;
 @property (nonatomic, strong) NSString *period;
@@ -82,6 +83,30 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
   [super viewDidLoad];
   
   self.tableView.editing = YES;
+  
+  if (self.mission) {
+   
+    __weak typeof (self) weakSelf = self;
+    
+    PFFile *file = self.mission[@"image"];
+    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+
+      weakSelf.imageViewHeader.image = [UIImage imageWithData:data];
+    }];
+
+    self.textFieldCaption.text = self.mission[@"caption"];
+    
+    self.switchNeverEnding.on = [self.mission[@"isNeverending"] boolValue];
+    
+    NSString *timeCount = self.mission[@"timeCount"];
+
+    
+  
+    
+    
+    
+    
+  }
   
   [self fetchGoals];
   [self fetchFlock];
@@ -221,12 +246,10 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
 
 - (IBAction)unwindAddGoal:(UIStoryboardSegue *)unwindSegue{
   
-  NSLog(@"unwind add goal");
 }
 
 - (IBAction)unwindAddFlock:(UIStoryboardSegue *)unwindSegue{
 
-  NSLog(@"unwind add flock");
 }
 
 #pragma mark - UITableView Datasource & Delegate
@@ -291,7 +314,8 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
         self.imageViewHeader.image = [UIImage imageWithData:[file getData]];
       }
       
-      self.buttonImageHeader = [UIButton buttonWithType:UIButtonTypeInfoLight];
+      self.buttonImageHeader = [UIButton buttonWithType:UIButtonTypeCustom];
+      [self.buttonImageHeader setImage:[UIImage imageNamed:@"btnAddPhoto"] forState:UIControlStateNormal];
       self.buttonImageHeader.frame = self.imageViewHeader.bounds;
       [self.buttonImageHeader addTarget:self
                                  action:@selector(tapButtonSetImage:)
@@ -312,6 +336,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
                                                                  tableView.frame.size.width,
                                                                  kHeightHeaderView * 0.5f)];
       label.text = @"  Mission Details";
+      label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
       [view addSubview:label];
       
       break;
@@ -326,6 +351,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
                                                                  tableView.frame.size.width,
                                                                  kHeightHeaderView * 0.5f)];
       label.text = @"  Followers";
+      label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
       [view addSubview:label];
       
       UIButton *buttonAdd = [UIButton buttonWithType:UIButtonTypeContactAdd];
@@ -348,6 +374,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
                                                                  tableView.frame.size.width,
                                                                  kHeightHeaderView * 0.5f)];
       label.text = @"  Goals";
+      label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
       [view addSubview:label];
       
       UIButton *buttonAdd = [UIButton buttonWithType:UIButtonTypeContactAdd];
@@ -474,11 +501,12 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
       switch (paramIndexPath.row) {
         case CEIAddMissionRowCaption:{
           
-          self.textFieldCaption = [[UITextField alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width * 0.05f,
-                                                                                0.0f,
-                                                                                self.tableView.frame.size.width * 0.9f,
-                                                                                [self tableView:self.tableView heightForRowAtIndexPath:paramIndexPath])];
+          self.textFieldCaption = [[CEITextField alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width * 0.04f,
+                                                                                 [self tableView:self.tableView heightForRowAtIndexPath:paramIndexPath] * 0.1f,
+                                                                                 self.tableView.frame.size.width * 0.92f,
+                                                                                 [self tableView:self.tableView heightForRowAtIndexPath:paramIndexPath] * 0.8f)];
           self.textFieldCaption.placeholder = @"Mission Title";
+          [self.textFieldCaption setBackground:[UIImage imageNamed:@"btnBckgndSide"]];
           [self.textFieldCaption addTarget:self action:@selector(didChangeText:) forControlEvents:UIControlEventEditingChanged];
           [cell.contentView addSubview:self.textFieldCaption];
           
@@ -488,9 +516,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
         case CEIAddMissionRowIsNeverending:{
           
           cell.textLabel.text = @"Neverending mission";
-          
-          self.switchNeverEnding = [[UISwitch alloc] init];
-          [self.switchNeverEnding addTarget:self action:@selector(tapSwitchNeverending:) forControlEvents:UIControlEventValueChanged];
+          cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
           cell.accessoryView = self.switchNeverEnding;
           
           break;
@@ -499,13 +525,18 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
         case CEIAddMissionRowEndsIn:{
           
           cell.textLabel.text = @"Ends in:";
+          cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
           
           self.buttonEndsIn = [[UIButton alloc] initWithFrame:CGRectMake(0.0f,
-                                                                         0.0f,
+                                                                         [self tableView:self.tableView heightForRowAtIndexPath:paramIndexPath] * 0.1f,
                                                                          kWidthButtonEndsIs,
-                                                                         kHeightDefaultCell)];
-          self.buttonEndsIn.backgroundColor = [UIColor lightGrayColor];
-          self.mission[@"timeCount"] = @"30 days";
+                                                                         [self tableView:self.tableView heightForRowAtIndexPath:paramIndexPath] * 0.8f)];
+          [self.buttonEndsIn setBackgroundImage:[UIImage imageNamed:@"btnBckgndSide"] forState:UIControlStateNormal];
+          [self.buttonEndsIn setTitleColor:[CEIColor colorBlue] forState:UIControlStateNormal];
+          if (!self.mission[@"timeCount"]) {
+            
+            self.mission[@"timeCount"] = @"30 days";
+          }
           [self.buttonEndsIn setTitle:self.mission[@"timeCount"] forState:UIControlStateNormal];
           [self.buttonEndsIn addTarget:self action:@selector(showPicker) forControlEvents:UIControlEventTouchUpInside];
           cell.accessoryView = self.buttonEndsIn;
@@ -811,6 +842,19 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
 
 #pragma mark - Lazy Getters
 
+- (UISwitch *)switchNeverEnding{
+  
+  if (_switchNeverEnding == nil) {
+    
+    _switchNeverEnding = [[UISwitch alloc] init];
+    [_switchNeverEnding addTarget:self
+                           action:@selector(tapSwitchNeverending:)
+                 forControlEvents:UIControlEventValueChanged];
+  }
+  
+  return _switchNeverEnding;
+}
+
 - (NSMutableArray *)arrayGoals{
   
   if (_arrayGoals == nil) {
@@ -849,9 +893,11 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
                                                                  self.view.frame.size.height,
                                                                  self.view.frame.size.width,
                                                                  kHeightPickerView)];
-    _pickerView.backgroundColor = [UIColor lightGrayColor];
+    _pickerView.backgroundColor = [UIColor whiteColor];
     _pickerView.delegate = self;
     _pickerView.dataSource = self;
+    _pickerView.layer.borderColor = [CEIColor colorBlue].CGColor;
+    _pickerView.layer.borderWidth = 0.5f;
     [self.view addSubview:_pickerView];
   }
   
