@@ -98,12 +98,8 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
     
     self.switchNeverEnding.on = [self.mission[@"isNeverending"] boolValue];
     
-    NSString *timeCount = self.mission[@"timeCount"];
-
-    
+    [self.buttonEndsIn setTitle:self.mission[@"timeCount"] forState:UIControlStateNormal];
   
-    
-    
     
     
   }
@@ -134,8 +130,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
       }
       
       [weakSelf.arrayGoals setArray:objects];
-      [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
-                        withRowAnimation:UITableViewRowAnimationMiddle];
+      [weakSelf.tableView reloadData];
     }];
   }
 }
@@ -144,11 +139,11 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
 
   __weak typeof (self) weakSelf = self;
   
-  PFQuery *query = [PFQuery queryWithClassName:@"User"];
   if (self.mission.objectId){
 
-    [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
-    [query whereKey:@"missions" equalTo:self.mission];
+    PFRelation *relation = self.mission[@"usersAsignees"];
+    PFQuery *query = [relation query];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       if (error) {
@@ -156,9 +151,8 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
         [CEIAlertView showAlertViewWithError:error];
       }
       
-      [weakSelf.arrayGoals setArray:objects];
-      [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionFlock]
-                        withRowAnimation:UITableViewRowAnimationMiddle];
+      [weakSelf.arrayFlock setArray:objects];
+      [weakSelf.tableView reloadData];
     }];
   }
 }
@@ -501,15 +495,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
       switch (paramIndexPath.row) {
         case CEIAddMissionRowCaption:{
           
-          self.textFieldCaption = [[CEITextField alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width * 0.04f,
-                                                                                 [self tableView:self.tableView heightForRowAtIndexPath:paramIndexPath] * 0.1f,
-                                                                                 self.tableView.frame.size.width * 0.92f,
-                                                                                 [self tableView:self.tableView heightForRowAtIndexPath:paramIndexPath] * 0.8f)];
-          self.textFieldCaption.placeholder = @"Mission Title";
-          [self.textFieldCaption setBackground:[UIImage imageNamed:@"btnBckgndSide"]];
-          [self.textFieldCaption addTarget:self action:@selector(didChangeText:) forControlEvents:UIControlEventEditingChanged];
           [cell.contentView addSubview:self.textFieldCaption];
-          
           break;
         }
           
@@ -527,18 +513,6 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
           cell.textLabel.text = @"Ends in:";
           cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
           
-          self.buttonEndsIn = [[UIButton alloc] initWithFrame:CGRectMake(0.0f,
-                                                                         [self tableView:self.tableView heightForRowAtIndexPath:paramIndexPath] * 0.1f,
-                                                                         kWidthButtonEndsIs,
-                                                                         [self tableView:self.tableView heightForRowAtIndexPath:paramIndexPath] * 0.8f)];
-          [self.buttonEndsIn setBackgroundImage:[UIImage imageNamed:@"btnBckgndSide"] forState:UIControlStateNormal];
-          [self.buttonEndsIn setTitleColor:[CEIColor colorBlue] forState:UIControlStateNormal];
-          if (!self.mission[@"timeCount"]) {
-            
-            self.mission[@"timeCount"] = @"30 days";
-          }
-          [self.buttonEndsIn setTitle:self.mission[@"timeCount"] forState:UIControlStateNormal];
-          [self.buttonEndsIn addTarget:self action:@selector(showPicker) forControlEvents:UIControlEventTouchUpInside];
           cell.accessoryView = self.buttonEndsIn;
           
           break;
@@ -897,11 +871,49 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
     _pickerView.delegate = self;
     _pickerView.dataSource = self;
     _pickerView.layer.borderColor = [CEIColor colorBlue].CGColor;
-    _pickerView.layer.borderWidth = 0.5f;
+    _pickerView.layer.borderWidth = 2.0f;
     [self.view addSubview:_pickerView];
   }
   
   return _pickerView;
+}
+
+- (CEITextField *)textFieldCaption{
+  
+  if (_textFieldCaption == nil) {
+    
+    _textFieldCaption = [[CEITextField alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width * 0.04f,
+                                                                       kHeightDefaultCell * 0.1f,
+                                                                       self.tableView.frame.size.width * 0.92f,
+                                                                       kHeightDefaultCell * 0.8f)];
+    _textFieldCaption.placeholder = @"Mission Title";
+    _textFieldCaption.delegate = self;
+    [_textFieldCaption setBackground:[UIImage imageNamed:@"btnBckgndSide"]];
+    [_textFieldCaption addTarget:self action:@selector(didChangeText:) forControlEvents:UIControlEventEditingChanged];
+  }
+ 
+  return _textFieldCaption;
+}
+
+- (UIButton *)buttonEndsIn{
+  
+  if (_buttonEndsIn == nil) {
+
+    _buttonEndsIn = [[UIButton alloc] initWithFrame:CGRectMake(0.0f,
+                                                               kHeightDefaultCell * 0.1f,
+                                                               kWidthButtonEndsIs,
+                                                               kHeightDefaultCell * 0.8f)];
+    [_buttonEndsIn setBackgroundImage:[UIImage imageNamed:@"btnBckgndSide"] forState:UIControlStateNormal];
+    [_buttonEndsIn setTitleColor:[CEIColor colorBlue] forState:UIControlStateNormal];
+    if (!self.mission[@"timeCount"]) {
+      
+      self.mission[@"timeCount"] = @"30 days";
+    }
+    [_buttonEndsIn setTitle:self.mission[@"timeCount"] forState:UIControlStateNormal];
+    [_buttonEndsIn addTarget:self action:@selector(showPicker) forControlEvents:UIControlEventTouchUpInside];
+  }
+  
+  return _buttonEndsIn;
 }
 
 @end

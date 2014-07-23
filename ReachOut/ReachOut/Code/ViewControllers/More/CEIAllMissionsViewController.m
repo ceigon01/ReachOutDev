@@ -72,17 +72,6 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   }];
 }
 
-- (void)notificationMissionAdded:(id)paramNotification{
-  
-  if ([paramNotification isKindOfClass:[NSNotification class]]) {
-    
-    NSNotification *notification = (NSNotification *)paramNotification;
-   
-    [self.arrayMissions addObject:notification.object];
-    [self.tableView reloadData];
-  }
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -143,8 +132,31 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
     mission[@"asigneesCount"] = [NSNumber numberWithInt:addMissionViewController.arrayFlock.count];
     [mission saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
       
-      [weakSelf.arrayMissions addObject:mission];
-      [weakSelf.tableView reloadData];
+      BOOL isEditing = [weakSelf.arrayMissions indexOfObject:mission] != NSNotFound;
+      
+      if (!isEditing) {
+        
+        [weakSelf.arrayMissions addObject:mission];
+        [weakSelf.tableView reloadData];
+      }
+      
+      if (error) {
+        
+        [CEIAlertView showAlertViewWithError:error];
+      }
+      else{
+
+        [addMissionViewController.arrayFlock enumerateObjectsUsingBlock:^(PFUser *user, NSUInteger idx, BOOL *stop) {
+  
+          PFQuery *query = [PFInstallation query];
+          [query whereKey:@"user" equalTo:user];
+          
+          NSString *pushText = [NSString stringWithFormat:@"%@ has %@ mission: %@",[PFUser currentUser][@"fullName"],(isEditing ? @"edited a" : @"assigned you a new"), mission[@"caption"]];
+          
+          [PFPush sendPushMessageToQueryInBackground:query
+                                         withMessage:pushText];
+        }];
+      }
     }];
   }
   
@@ -185,6 +197,8 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
   self.indexPathSelected = indexPath;
   [self performSegueWithIdentifier:kIdentifierCellAllMissionsToAddMission
