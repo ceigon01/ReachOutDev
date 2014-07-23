@@ -1956,15 +1956,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="imgUserPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="ppx-ge-h6h">
-                                                    <rect key="frame" x="10" y="0.0" width="40" height="40.5"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgUserPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="ppx-ge-h6h">
+                                                    <rect key="frame" x="10" y="10" width="40" height="40.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40.5" id="2pY-j9-opx"/>
                                                         <constraint firstAttribute="width" constant="40" id="KHE-pM-aUN"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfn-B8-slS">
-                                                    <rect key="frame" x="60" y="0.0" width="240" height="25"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfn-B8-slS">
+                                                    <rect key="frame" x="60" y="25" width="240" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="B9k-wW-EZp"/>
                                                     </constraints>
@@ -1972,8 +1972,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZm-sn-eE1">
-                                                    <rect key="frame" x="60" y="0.0" width="100" height="14.5"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZm-sn-eE1">
+                                                    <rect key="frame" x="60" y="10" width="100" height="14.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="04q-Of-LWY"/>
                                                         <constraint firstAttribute="height" constant="14.5" id="Xvq-ZT-kmX"/>
@@ -1982,8 +1982,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Lorem Ipsum" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3av-IB-XsB">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="22"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3av-IB-XsB">
+                                                    <rect key="frame" x="10" y="61" width="300" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="RzC-qZ-ctQ"/>
                                                     </constraints>
@@ -1991,8 +1991,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="not read yet" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdC-TQ-yyr">
-                                                    <rect key="frame" x="168" y="0.0" width="132" height="14.5"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not read yet" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdC-TQ-yyr">
+                                                    <rect key="frame" x="168" y="10" width="132" height="14.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14.5" id="zOc-IW-Vf4"/>
                                                     </constraints>
@@ -2668,8 +2668,8 @@
         <segue reference="7aa-Rm-Hm2"/>
         <segue reference="lbr-ma-Rjx"/>
         <segue reference="Gty-YO-6eE"/>
+        <segue reference="1Bj-0O-Kc0"/>
         <segue reference="FbI-Om-JAD"/>
-        <segue reference="kq1-ES-DfJ"/>
         <segue reference="4q1-Vo-cTc"/>
         <segue reference="biv-Bn-3hS"/>
     </inferredMetricsTieBreakers>

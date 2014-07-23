@@ -99,6 +99,13 @@ withCompletionHandler:(void (^)(void))paramCompletionHandler
         [role.users addObject:[PFUser currentUser]];
         [role saveInBackground];
         
+        PFInstallation *instalation = [PFInstallation currentInstallation];
+        instalation[@"user"] = paramUser;
+        [instalation save];
+        PFRelation *relation = paramUser[@"installations"];
+        [relation addObject:instalation];
+        [paramUser save];
+        
         [progressHud hide:YES];
         paramCompletionHandler();
       }
@@ -124,6 +131,13 @@ withCompletionHandler:(void (^)(void))paramCompletionHandler
       paramErrorHandler(error);
     }
     else{
+      
+      PFInstallation *instalation = [PFInstallation currentInstallation];
+      instalation[@"user"] = user;
+      [instalation save];
+      PFRelation *relation = user[@"installations"];
+      [relation addObject:instalation];
+      [user save];
       
       [progressHud hide:YES];
       paramCompletionHandler();

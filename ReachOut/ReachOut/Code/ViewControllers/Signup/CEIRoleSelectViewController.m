@@ -24,8 +24,15 @@ static NSString *const kUserDefaultsKeyDidShowMottoViewController = @"kUserDefau
 
 @implementation CEIRoleSelectViewController
 
+- (void)dealloc{
+  
+  APP_DELEGATE.signupIsUp = NO;
+}
+
 - (void)viewDidLoad{
   [super viewDidLoad];
+  
+  APP_DELEGATE.signupIsUp = YES;
   
   self.labelTitle.textColor = [CEIColor colorDarkText];
   self.labelSubTitle.textColor = [CEIColor colorLightText];

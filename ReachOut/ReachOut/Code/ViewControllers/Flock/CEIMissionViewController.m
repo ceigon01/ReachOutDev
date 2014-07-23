@@ -42,8 +42,6 @@ static const CGFloat kHeightCell = 100.0f;
 @property (nonatomic, strong) NSArray *arrayGoals;
 @property (nonatomic, strong) NSArray *arrayGoalSteps;
 
-@property (nonatomic, strong) PFObject *encouragementNew;
-
 @property (nonatomic, strong) CEIGoalTableViewCell *selectedCell;
 @property (nonatomic, strong) CEIDailyChoresView *selectedDailyChoresView;
 
@@ -177,7 +175,7 @@ static const CGFloat kHeightCell = 100.0f;
     
     CEIAddEncouragementViewController *addEncouragementViewController = (CEIAddEncouragementViewController *)segue.destinationViewController;
     
-    addEncouragementViewController.folowerSelected = self.user;
+    addEncouragementViewController.arrayFollowersAvailable = [NSMutableArray arrayWithObjects:self.user, nil];
   }
 }
 
@@ -196,37 +194,41 @@ static const CGFloat kHeightCell = 100.0f;
     return NO;
   }
   
-  self.encouragementNew = [PFObject objectWithClassName:@"Encouragement"];
-  
-  if (vc.textView.text.length == 0) {
+  if (vc.encouragementInPlace == NO){
     
     [CEIAlertView showAlertViewWithValidationMessage:@"Please put an Encouragement"];
     return NO;
   }
-  else {
-    
-    self.encouragementNew[@"caption"] = vc.textView.text;
-  }
   
-  if (vc.indexPathSelectedFollower == nil) {
+  if (vc.arrayFollowersSelected.count == 0){
     
-    [CEIAlertView showAlertViewWithValidationMessage:@"Select a Follower to Encourage"];
+    [CEIAlertView showAlertViewWithValidationMessage:@"Select at least one Follower to Encourage"];
     return NO;
   }
   
-  __block PFUser *userFollowerSelected = [vc.arrayFollowers objectAtIndex:vc.indexPathSelectedFollower.row];
-  
-  self.encouragementNew[@"mentorID"] = [PFUser currentUser];
-  self.encouragementNew[@"followerID"] = userFollowerSelected;
-  
-  [self.encouragementNew saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+  [vc.arrayFollowersSelected enumerateObjectsUsingBlock:^(PFUser *user, NSUInteger idx, BOOL *stop){
+
+    PFObject *encouragement = [PFObject objectWithClassName:@"Encouragement"];
     
-    if (error) {
+    encouragement[@"caption"] = vc.textView.text;
+    encouragement[@"mentorID"] = [PFUser currentUser];
+    encouragement[@"followerID"] = user;
+    
+    [encouragement saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
       
-      [CEIAlertView showAlertViewWithError:error];
-    }
-    else {
-    }
+      if (error) {
+        
+        [CEIAlertView showAlertViewWithError:error];
+      }
+      else {
+        
+        PFQuery *query = [PFInstallation query];
+        [query whereKey:@"user" equalTo:user];
+        
+        [PFPush sendPushMessageToQueryInBackground:query
+                                       withMessage:[NSString stringWithFormat:@"%@: %@",[PFUser currentUser][@"fullName"],vc.textView.text]];
+      }
+    }];
   }];
   
   return YES;

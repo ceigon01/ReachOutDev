@@ -22,13 +22,10 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
 
 - (void)viewDidLoad{
   [super viewDidLoad];
- 
-  if (self.folowerSelected != nil) {
-    
-    self.arrayFollowers = [NSArray arrayWithObjects:self.folowerSelected, nil];
-    [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-  }
-  else{
+  
+  self.encouragementInPlace = NO;
+  
+  if (self.arrayFollowersAvailable.count == 0) {
   
     __weak CEIAddEncouragementViewController *weakSelf = self;
     
@@ -39,13 +36,12 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
       [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if (error) {
-
+          
           [CEIAlertView showAlertViewWithError:error];
         }
         else{
           
-          weakSelf.arrayFollowers = [NSArray arrayWithArray:objects];
-          weakSelf.indexPathSelectedFollower = nil;
+          weakSelf.arrayFollowersAvailable = [NSMutableArray arrayWithArray:objects];
           [weakSelf.tableView reloadData];
         }
       }];
@@ -65,12 +61,21 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
 - (void)textViewDidEndEditing:(UITextView *)textView{
   
   [textView resignFirstResponder];
+  if (textView.text.length == 0){
+    
+#warning TODO: localization
+    textView.textColor = [UIColor lightGrayColor];
+    textView.text = @"Put your Encouragement here.";
+    self.encouragementInPlace = NO;
+    [textView resignFirstResponder];
+  }
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
   
   textView.text = @"";
   textView.textColor = [UIColor blackColor];
+  self.encouragementInPlace = YES;
   return YES;
 }
 
@@ -81,6 +86,7 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
 #warning TODO: localization
     textView.textColor = [UIColor lightGrayColor];
     textView.text = @"Put your Encouragement here.";
+    self.encouragementInPlace = NO;
     [textView resignFirstResponder];
   }
 }
@@ -99,7 +105,7 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
   
-  return self.arrayFollowers.count;
+  return self.arrayFollowersAvailable.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -107,7 +113,7 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifierCellAddEncouragement
                                                           forIndexPath:indexPath];
   
-  PFUser *user = [self.arrayFollowers objectAtIndex:indexPath.row];
+  PFUser *user = [self.arrayFollowersAvailable objectAtIndex:indexPath.row];
   
   if (user[@"image"]) {
     
@@ -131,15 +137,10 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
   }
   
   cell.textLabel.text = user[@"fullName"];
+
+  NSInteger selected = [self.arrayFollowersSelected indexOfObject:user];
   
-  if (self.folowerSelected) {
-    
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-  }
-  else{
-    
-    cell.accessoryType = ([self.indexPathSelectedFollower compare:indexPath] == NSOrderedSame) ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
-  }
+  cell.accessoryType = (selected == NSNotFound) ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
   
   return cell;
 }
@@ -149,31 +150,44 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
   [self.textView resignFirstResponder];
   
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+  PFUser *user = [self.arrayFollowersAvailable objectAtIndex:indexPath.row];
   
-  if (self.indexPathSelectedFollower) {
+  if ([self.arrayFollowersSelected indexOfObject:user] == NSNotFound) {
     
-    [tableView reloadRowsAtIndexPaths:@[self.indexPathSelectedFollower]
-                     withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView cellForRowAtIndexPath:self.indexPathSelectedFollower].accessoryType = UITableViewCellAccessoryNone;
+    [self.arrayFollowersSelected addObject:user];
+  }
+  else{
+    
+    [self.arrayFollowersSelected removeObject:user];
   }
   
-  self.indexPathSelectedFollower = indexPath;
-  
-  [tableView reloadRowsAtIndexPaths:@[self.indexPathSelectedFollower]
+  [tableView reloadRowsAtIndexPaths:@[indexPath]
                    withRowAnimation:UITableViewRowAnimationFade];
-  [self.tableView cellForRowAtIndexPath:self.indexPathSelectedFollower].accessoryType = UITableViewCellAccessoryCheckmark;
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Lazy Getters
 
-- (NSArray *)arrayFollowers{
+- (NSMutableArray *)arrayFollowersSelected{
   
-  if (_arrayFollowers == nil){
+  if (_arrayFollowersSelected == nil){
     
-    _arrayFollowers = [[NSArray alloc] init];
+    _arrayFollowersSelected = [[NSMutableArray alloc] init];
   }
   
-  return _arrayFollowers;
+  return _arrayFollowersSelected;
 }
-   
+
+
+- (NSMutableArray *)arrayFollowersAvailable{
+  
+  if (_arrayFollowersAvailable == nil){
+    
+    _arrayFollowersAvailable = [[NSMutableArray alloc] init];
+  }
+  
+  return _arrayFollowersAvailable;
+}
+
 @end

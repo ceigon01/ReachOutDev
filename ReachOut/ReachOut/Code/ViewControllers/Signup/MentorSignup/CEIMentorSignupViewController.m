@@ -107,13 +107,13 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
   [PFCloud callFunctionInBackground:@"phoneVerification1" withParameters:params
                               block:^(NSDictionary *results, NSError *error) {
                                 
+                                [progressHud hide:YES];
+                                
                                 if (error) {
                                   
                                   [CEIAlertView showAlertViewWithError:error];
                                 }
                                 else{
-                                  
-                                  [progressHud hide:YES];
                                   
                                   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SMS sent!"
                                                                                       message:@"We sent you an access code to your mobile phone. Enter it below:"
@@ -209,7 +209,7 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
                                 componentsJoinedByString:@""];
             self.user[@"phonePrefix"] = prefix;
             
-            self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",self.user[@"mobilePhone"],self.user[@"mobilePhone"]];
+            self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",prefix,self.user[@"mobilePhone"]];
             
             __weak CEIMentorSignupViewController *weakSelf = self;
             [CEISession signupUser:self.user

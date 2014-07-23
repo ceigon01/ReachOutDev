@@ -14,7 +14,7 @@
 #import "CEIAlertView.h"
 #import "CEIAddEncouragementViewController.h"
 
-static const CGFloat kHeightCellOffset = 70.0f;
+static const CGFloat kHeightCellOffset = 80.0f;
 
 typedef NS_ENUM(NSInteger, CEIEncouragementType){
   
@@ -83,6 +83,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
     
   [query whereKey:@"mentorID" equalTo:[PFUser currentUser]];
   [query includeKey:@"followerID"];
+  [query orderByAscending:@"dateRead"];
   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     
     [weakSelf.tableView stopRefreshAnimation];
@@ -107,6 +108,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   
   [query whereKey:@"followerID" equalTo:[PFUser currentUser]];
   [query includeKey:@"mentorID"];
+  [query orderByAscending:@"dateRead"];
   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     
     [weakSelf.tableView stopRefreshAnimation];
@@ -156,48 +158,45 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
     return NO;
   }
   
-  self.encouragementNew = [PFObject objectWithClassName:@"Encouragement"];
-  
-  if (vc.textView.text.length == 0) {
+  if (vc.encouragementInPlace == NO) {
     
     [CEIAlertView showAlertViewWithValidationMessage:@"Please put an Encouragement"];
     return NO;
   }
-  else {
-    
-    self.encouragementNew[@"caption"] = vc.textView.text;
-  }
   
-  if (vc.indexPathSelectedFollower == nil) {
+  if (vc.arrayFollowersSelected.count == 0) {
     
-    [CEIAlertView showAlertViewWithValidationMessage:@"Select a Follower to Encourage"];
+    [CEIAlertView showAlertViewWithValidationMessage:@"Select at least one Follower to Encourage"];
     return NO;
   }
   
-  __block PFUser *userFollowerSelected = [vc.arrayFollowers objectAtIndex:vc.indexPathSelectedFollower.row];
+  __weak typeof (self) weakSelf = self;
   
-  self.encouragementNew[@"mentorID"] = [PFUser currentUser];
-  self.encouragementNew[@"followerID"] = userFollowerSelected;
-  
-  __weak CEIEncouragementViewController *weakSelf = self;
-  
-  [self.encouragementNew saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+  [vc.arrayFollowersSelected enumerateObjectsUsingBlock:^(PFUser *user, NSUInteger idx, BOOL *stop) {
     
-    if (error) {
-      
-      [CEIAlertView showAlertViewWithError:error];
-    }
-    else {
+    PFObject *encouragement = [PFObject objectWithClassName:@"Encouragement"];
     
-      PFQuery *query = [PFInstallation query];
-      [query whereKey:@"user" equalTo:userFollowerSelected];
+    encouragement[@"caption"] = vc.textView.text;
+    encouragement[@"mentorID"] = [PFUser currentUser];
+    encouragement[@"followerID"] = user;
+    
+    [encouragement saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
       
-      [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@: %@",[PFUser currentUser][@"fullName"],vc.textView.text]];
-      
-      [weakSelf.arraySent addObject:weakSelf.encouragementNew];
-      weakSelf.encouragementNew = nil;
-      [weakSelf.tableView reloadData];
-    }
+      if (error) {
+        
+        [CEIAlertView showAlertViewWithError:error];
+      }
+      else {
+        
+        PFQuery *query = [PFInstallation query];
+        [query whereKey:@"user" equalTo:user];
+        
+        [PFPush sendPushMessageToQueryInBackground:query
+                                       withMessage:[NSString stringWithFormat:@"%@: %@",[PFUser currentUser][@"fullName"],vc.textView.text]];
+        [weakSelf.arraySent insertObject:encouragement atIndex:0];
+        [weakSelf.tableView reloadData];
+      }
+    }];
   }];
   
   return YES;
@@ -227,7 +226,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   NSString *caption = encouragement[@"caption"];
   
 #warning TODO: hardcoded & deprecated :/
-  CGSize expectedLabelSize = [caption sizeWithFont:[UIFont systemFontOfSize:17]
+  CGSize expectedLabelSize = [caption sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:14]
                                  constrainedToSize:maximumLabelSize
                                      lineBreakMode:NSLineBreakByTruncatingTail];
   
@@ -260,25 +259,16 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
     
     PFFile *file = user[@"image"];
     
-    __weak UITableViewCell *weakCell = cell;
+    __weak CEIEncouragementTableViewCell *weakCell = cell;
     
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
       
-      weakCell.imageView.image = [UIImage imageWithData:data];
-      weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
-      weakCell.imageView.layer.masksToBounds = YES;
+      weakCell.imageViewProfile.image = [UIImage imageWithData:data];
     }];
-    
-  }
-  else{
-    
-    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-    cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
-    cell.imageView.layer.masksToBounds = YES;
   }
   
   cell.labelCaption.text = encouragement[@"caption"];
-  cell.labelFullName.text = user[@"username"];
+  cell.labelFullName.text = user[@"fullName"];
 
   if (encouragement[@"dateRead"]) {
 
@@ -289,8 +279,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
     cell.labelDateRead.text = [NSString stringWithFormat:@"read: %@",[dateFormatter stringFromDate: encouragement[@"dateRead"]]];
   }
   else {
-    
-#warning TODO
+
     cell.labelDateRead.text = @"not read yet";
   }
   

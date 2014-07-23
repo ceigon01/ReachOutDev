@@ -13,9 +13,9 @@
 
 @property (nonatomic, weak) IBOutlet UITextView *textView;
 
-@property (nonatomic, strong) NSArray *arrayFollowers;
-@property (nonatomic, strong) NSIndexPath *indexPathSelectedFollower;
+@property (nonatomic, strong) NSMutableArray *arrayFollowersSelected;
+@property (nonatomic, strong) NSMutableArray *arrayFollowersAvailable;
 
-@property (nonatomic, strong) PFObject *folowerSelected;
+@property (nonatomic, assign) BOOL encouragementInPlace;
 
 @end

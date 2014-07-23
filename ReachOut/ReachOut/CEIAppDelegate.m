@@ -24,12 +24,13 @@
    UIRemoteNotificationTypeAlert |
    UIRemoteNotificationTypeSound];
   
+  self.signupIsUp = NO;
+  
 	return YES;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
 
-#warning TODO: append instalation to registered user
   PFInstallation *currentInstallation = [PFInstallation currentInstallation];
   [currentInstallation setDeviceTokenFromData:newDeviceToken];
   [currentInstallation saveInBackground];

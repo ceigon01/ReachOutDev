@@ -106,13 +106,13 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
   [PFCloud callFunctionInBackground:@"phoneVerification1" withParameters:params
                               block:^(NSDictionary *results, NSError *error) {
                                 
+                                [progressHud hide:YES];
+                                
                                 if (error) {
                                   
                                   [CEIAlertView showAlertViewWithError:error];
                                 }
                                 else{
-                                  
-                                  [progressHud hide:YES];
                                   
                                   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SMS sent!"
                                                                                       message:@"We sent you an access code to your mobile phone. Enter it below:"
@@ -163,7 +163,8 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
           //                                componentsJoinedByString:@""];
           //            self.user[@"phonePrefix"] = prefix;
           
-          self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",self.user[@"mobilePhone"],self.user[@"mobilePhone"]];
+#warning TODO: mobile number prefix
+          self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",@"1",self.user[@"mobilePhone"]];
           
           if (self.mentor) {
             
