@@ -129,7 +129,7 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
     
     mission[@"dateBegins"] = [NSDate date];
     mission[@"userReporter"] = [PFUser currentUser];
-    mission[@"asigneesCount"] = [NSNumber numberWithInt:addMissionViewController.arrayFlock.count];
+    mission[@"asigneesCount"] = [NSNumber numberWithInteger:addMissionViewController.arrayFlock.count];
     [mission saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
       
       BOOL isEditing = [weakSelf.arrayMissions indexOfObject:mission] != NSNotFound;

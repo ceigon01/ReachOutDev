@@ -195,7 +195,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
     __weak typeof(self) weakSelf = self;
     
     goal[@"mission"] = self.mission;
-    goal[@"orderIndex"] = [NSNumber numberWithInt:self.arrayGoals.count];
+    goal[@"orderIndex"] = [NSNumber numberWithInteger:self.arrayGoals.count];
     [self.arrayGoals addObject:goal];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
                         withRowAnimation:UITableViewRowAnimationMiddle];
@@ -577,7 +577,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
   for (NSInteger goalCounter = sourceIndexPath.row; goalCounter<destinationIndexPath.row; goalCounter++) {
     
     PFObject *goal = [self.arrayGoals objectAtIndex:goalCounter];
-    goal[@"orderIndex"] = [NSNumber numberWithInt:goalCounter];
+    goal[@"orderIndex"] = [NSNumber numberWithInteger:goalCounter];
   }
 }
 
@@ -595,7 +595,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
     for (NSInteger goalCounter = indexPath.row; goalCounter<self.arrayGoals.count; goalCounter++) {
       
       PFObject *goal = [self.arrayGoals objectAtIndex:goalCounter];
-      goal[@"orderIndex"] = [NSNumber numberWithInt:goalCounter];
+      goal[@"orderIndex"] = [NSNumber numberWithInteger:goalCounter];
     }
   }
 }
@@ -780,7 +780,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
   
   if (component == CEIAddMissionPickerViewComponentCounter) {
     
-    return [NSString stringWithFormat:@"%d",row+1];
+    return [NSString stringWithFormat:@"%ld",row+1];
   }
   else{
     
