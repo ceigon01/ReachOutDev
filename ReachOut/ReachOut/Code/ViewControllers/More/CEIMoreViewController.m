@@ -13,6 +13,7 @@
 #import "CEIMyProfileViewController.h"
 #import "CEIAlertView.h"
 #import "CEIAddMissionViewController.h"
+#import "CEIAddGoalViewController.h"
 
 typedef NS_ENUM(NSInteger, CEIMoreRow){
   
@@ -61,10 +62,9 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
 
 - (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
   
-  if ([fromViewController isKindOfClass:[CEIAddMissionViewController class]]) {
+  if ([fromViewController isKindOfClass:[CEIAddMissionViewController class]] ||
+      [fromViewController isKindOfClass:[CEIAddGoalViewController class]]) {
     
-#warning TODO: shouldn't get here
-    NSLog(@"shouldn't get here :/");
     return NO;
   }
   
@@ -115,6 +115,10 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
   return YES;
 }
 
+- (IBAction)unwindAddGoal:(UIStoryboardSegue *)unwindSegue{
+  
+}
+
 - (IBAction)unwindMotto:(UIStoryboardSegue *)unwindSegue{
   
 }
@@ -125,7 +129,6 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
 
 - (IBAction)unwindAddMission:(UIStoryboardSegue *)unwindSegue{
 
-#warning TODO: dunno why this triggers from time to time :/
 }
 
 #pragma mark - UITableView Datasource & Delegate

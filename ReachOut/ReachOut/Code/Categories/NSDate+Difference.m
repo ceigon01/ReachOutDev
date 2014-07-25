@@ -72,6 +72,12 @@
   
   NSDate *dateBegins = paramMission[@"dateBegins"];
   
+  if (dateBegins == nil){
+    
+    NSLog(@"warning! calculationg from nil date for mission: %@",paramMission);
+    dateBegins = [NSDate date];
+  }
+  
   NSArray *arrayCountAndSeason = [paramMission[@"timeCount"] componentsSeparatedByString:@" "];
   
   if (arrayCountAndSeason.count == 2){

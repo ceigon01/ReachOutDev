@@ -56,7 +56,8 @@ static NSString *const kIdentifierSegueAddMissionToAddFlock = @"kIdentifierSegue
 
 NSString *const kTitleButtonImageSourceCameraRollCameraRoll1 = @"Camera roll";
 NSString *const kTitleButtonImageSourceCameraRollTakeAPicture1 = @"Take a picture";
-static const CGFloat kNumberOfRowsInPickerView = 100.0f;
+static const NSUInteger kNumberOfRowsInPickerViewForComponent0 = 30;
+static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
 @interface CEIAddMissionViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -184,13 +185,18 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
       return NO;
     }
     
-    NSArray *arrayDays = goal[@"days"];
+    NSArray *arrayDays = addGoalViewController.arrayButtonNamesSelected;
     BOOL isRecurring = [goal[@"isRecurring"] boolValue];
     if (!isRecurring && arrayDays.count == 0) {
       
       [CEIAlertView showAlertViewWithValidationMessage:@"Select days you want the goal to take place, or press 'repeat everyday'."];
       return NO;
     }
+    
+    [arrayDays enumerateObjectsUsingBlock:^(NSString *dayName, NSUInteger idx, BOOL *stop) {
+      
+      [goal addUniqueObject:dayName forKey:@"days"];
+    }];
     
     __weak typeof(self) weakSelf = self;
     
@@ -199,7 +205,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
     [self.arrayGoals addObject:goal];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
                         withRowAnimation:UITableViewRowAnimationMiddle];
-
+    
     [goal saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
       
       if (error) {
@@ -768,7 +774,14 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
   
   if (component == CEIAddMissionPickerViewComponentCounter) {
     
-    return kNumberOfRowsInPickerView;
+    if ([pickerView selectedRowInComponent:CEIAddMissionPickerViewComponentTime] == 0) {
+      
+      return kNumberOfRowsInPickerViewForComponent0;
+    }
+    else{
+     
+      return kNumberOfRowsInPickerViewForComponent1;
+    }
   }
   else{
     
@@ -780,7 +793,7 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
   
   if (component == CEIAddMissionPickerViewComponentCounter) {
     
-    return [NSString stringWithFormat:@"%ld",row+1];
+    return [NSString stringWithFormat:@"%d",row+1];
   }
   else{
     
@@ -801,6 +814,11 @@ static const CGFloat kNumberOfRowsInPickerView = 100.0f;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+  
+  if (component == CEIAddMissionPickerViewComponentTime) {
+    
+    [pickerView reloadComponent:CEIAddMissionPickerViewComponentCounter];
+  }
   
   NSString *counter = [self pickerView:self.pickerView
                         titleForRow:[self.pickerView selectedRowInComponent:CEIAddMissionPickerViewComponentCounter]

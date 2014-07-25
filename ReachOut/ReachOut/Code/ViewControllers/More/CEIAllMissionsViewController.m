@@ -12,6 +12,10 @@
 #import "CEIDoubleDisclosureCell.h"
 #import <Parse/Parse.h>
 #import "CEIAddMissionViewController.h"
+#import "NSDate+Difference.h"
+#import "CEIDay.h"
+#import "MBProgressHUD.h"
+#import "CEIAddGoalViewController.h"
 
 static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCellAllMissionsToAddMission";
 
@@ -85,6 +89,11 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
 
 - (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
   
+  if ([fromViewController isKindOfClass:[CEIAddGoalViewController class]]) {
+    
+    return NO;
+  }
+  
   if ([fromViewController isKindOfClass:[CEIAddMissionViewController class]]) {
     
     CEIAddMissionViewController *addMissionViewController = (CEIAddMissionViewController *)fromViewController;
@@ -119,10 +128,86 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
       return NO;
     }
     
+    MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:addMissionViewController.view animated:YES];
+    progressHUD.labelText = @"Updating mission...";
+    
     if (addMissionViewController.arrayGoals.count == 0) {
       
       [CEIAlertView showAlertViewWithValidationMessage:@"Please set some goals."];
       return NO;
+    }
+    else{
+      
+      [addMissionViewController.arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
+        if (![goal[@"stepsGenerated"] boolValue]) {
+          
+          NSMutableArray *arrayGoalSteps = [[NSMutableArray alloc] init];
+          
+#warning TODO: neverending set to 3 years...
+          NSUInteger totalDays = 0;
+          
+          if (isNeverending) {
+            
+            totalDays = 1000;  //around three years, also it's the Parse fetch cap
+          }
+          else{
+            
+            totalDays = [NSDate totalDaysCountForMission:mission];
+            
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            
+#warning TODO: dunno why +1...
+            PFRelation *relation = [goal relationForKey:@"goalSteps"];
+            for (NSUInteger daysCount = 1; daysCount < totalDays + 1; daysCount++) {
+              
+              PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
+              goalStep[@"goal"] = goal;
+              goalStep[@"mission"] = mission;
+              
+              NSDateComponents *dateComponents = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
+                                                             fromDate:[NSDate date]];
+              
+              dateComponents.day += daysCount;
+#warning TODO: dunno why -2...
+              dateComponents.weekday = (dateComponents.weekday + daysCount - 2)%7;
+              
+              goalStep[@"date"] = [calendar dateFromComponents:dateComponents];
+              
+              goalStep[@"day"] = [CEIDay dayNameWithDayNumber:(dateComponents.weekday)];
+              
+              if ([goal[@"isRecurring"] boolValue]) {
+                
+                goalStep[@"available"] = @YES;
+              }
+              else{
+                
+                NSArray *arrayDays = goal[@"days"];
+                
+                if ([arrayDays indexOfObject:goalStep[@"day"]] == NSNotFound) {
+                  
+                  goalStep[@"available"] = @NO;
+                }
+                else{
+                  
+                  goalStep[@"available"] = @YES;
+                }
+              }
+
+              [arrayGoalSteps addObject:goalStep];
+            }
+            
+            [PFObject saveAll:arrayGoalSteps];
+            [arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
+              
+              [relation addObject:goalStep];
+            }];
+            [arrayGoalSteps removeAllObjects];
+          }
+          
+          goal[@"stepsGenerated"] = @YES;
+          [goal save];
+        }
+      }];
     }
     
     __weak typeof (self) weakSelf = self;
@@ -131,6 +216,8 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
     mission[@"userReporter"] = [PFUser currentUser];
     mission[@"asigneesCount"] = [NSNumber numberWithInteger:addMissionViewController.arrayFlock.count];
     [mission saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+      
+      [progressHUD hide:YES];
       
       BOOL isEditing = [weakSelf.arrayMissions indexOfObject:mission] != NSNotFound;
       
@@ -166,7 +253,10 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
 
 - (IBAction)unwindAddMission:(UIStoryboardSegue *)unwindSegue{
   
-  NSLog(@"did unwind add mission");
+}
+
+- (IBAction)unwindAddGoal:(UIStoryboardSegue *)unwindSegue{
+  
 }
 
 #pragma mark - UITableView Datasource & Delegate

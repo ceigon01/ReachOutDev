@@ -10,6 +10,7 @@
 #import "CEIDay.h"
 #import "CEIColor.h"
 #import <Parse/Parse.h>
+#import <QuartzCore/QuartzCore.h>
 
 static const NSUInteger kTagOffsetButtonDay = 1000;
 static const NSUInteger kNumerbOfDayButtons = 7;
@@ -47,10 +48,10 @@ static const NSUInteger kNumerbOfDayButtons = 7;
   for (NSInteger dayNumber = 0; dayNumber < kNumerbOfDayButtons; dayNumber++) {
     
     UIButton *button = (UIButton *)[self.view viewWithTag:(dayNumber + kTagOffsetButtonDay)];
-    
+    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    button.layer.borderWidth = 1.0f;
     [button setTitle:[CEIDay dayNameWithDayNumber:dayNumber] forState:UIControlStateNormal];
     [button setTitle:[CEIDay dayNameWithDayNumber:dayNumber] forState:UIControlStateSelected];
-    button.backgroundColor = [CEIColor colorIdle];
     [button addTarget:self action:@selector(tapButtonDay:) forControlEvents:UIControlEventTouchUpInside];
     [self.arrayButtonsDays addObject:button];
   }
@@ -117,18 +118,18 @@ static const NSUInteger kNumerbOfDayButtons = 7;
   if ([paramSender isKindOfClass:[UIButton class]]) {
     
     UIButton *button = (UIButton *)paramSender;
-    
-    button.selected = !button.selected;
-    
-    if (button.selected) {
+
+    if ([self.arrayButtonNamesSelected indexOfObject:[button titleForState:button.state]] == NSNotFound) {
       
-      [self.goalAdded addUniqueObject:[button titleForState:button.state] forKey:@"days"];
-      button.backgroundColor = [CEIColor greenColor];
+      [self.arrayButtonNamesSelected addObject:[button titleForState:button.state]];
+      button.backgroundColor = [UIColor lightGrayColor];
+      [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else{
 
-      [self.goalAdded removeObject:[button titleForState:button.state] forKey:@"days"];
-      button.backgroundColor = [CEIColor colorIdle];
+      [self.arrayButtonNamesSelected removeObject:[button titleForState:button.state]];
+      button.backgroundColor = [UIColor whiteColor];
+      [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     }
   }
 }
@@ -216,6 +217,16 @@ static const NSUInteger kNumerbOfDayButtons = 7;
   }
   
   return _goalAdded;
+}
+
+- (NSMutableArray *)arrayButtonNamesSelected{
+  
+  if (_arrayButtonNamesSelected == nil) {
+    
+    _arrayButtonNamesSelected = [[NSMutableArray alloc] init];
+  }
+  
+  return _arrayButtonNamesSelected;
 }
 
 @end

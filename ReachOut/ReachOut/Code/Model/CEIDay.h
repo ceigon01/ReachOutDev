@@ -12,18 +12,18 @@
 typedef NS_ENUM(NSInteger, CEIDayName){
   
   CEIDayUnknown       = -1,
-  CEIDayNameMonday    = 0,
-  CEIDayNameTuesday   = 1,
-  CEIDayNameWednesday = 2,
-  CEIDayNameThursday  = 3,
-  CEIDayNameFriday    = 4,
-  CEIDayNameSaturday  = 5,
-  CEIDayNameSunday    = 6
+  CEIDayNameSunday    = 0,
+  CEIDayNameMonday    = 1,
+  CEIDayNameTuesday   = 2,
+  CEIDayNameWednesday = 3,
+  CEIDayNameThursday  = 4,
+  CEIDayNameFriday    = 5,
+  CEIDayNameSaturday  = 6,
 };
 
 @interface CEIDay : NSObject
 
 + (NSString *)dayNameWithDayNumber:(NSInteger)paramDayNumber;
-+ (NSInteger *)dayNumberWithDayName:(NSString *)paramDayName;
++ (NSInteger)dayNumberWithDayName:(NSString *)paramDayName;
 
 @end
