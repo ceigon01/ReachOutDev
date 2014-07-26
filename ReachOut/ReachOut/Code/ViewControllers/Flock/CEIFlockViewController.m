@@ -15,6 +15,7 @@
 #import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
 #import "CEIAddUserViewController.h"
 #import "CEINotificationNames.h"
+#import "CEIUserTableViewCell.h"
 
 static NSString *const kCellIdentifierFollower = @"kCellIdentifierFollower";
 static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Flock_Missions";
@@ -47,6 +48,10 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
   
 #warning TODO: localization
   self.title = @"Flock";
+  
+  [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
+                                            bundle:[NSBundle mainBundle]]
+       forCellReuseIdentifier:kCellIdentifierFollower];
   
   [self fetchFlock];
 }
@@ -125,36 +130,12 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-  CEIDoubleDisclosureCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierFollower
-                                                                  forIndexPath:indexPath];
+  CEIUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierFollower
+                                                               forIndexPath:indexPath];
   
   PFUser *user = [self.arrayFlock objectAtIndex:indexPath.row];
   
-  if (user[@"image"]) {
-    
-    PFFile *file = user[@"image"];
-    
-    __weak UITableViewCell *weakCell = cell;
-    
-    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-      
-      weakCell.imageView.image = [UIImage imageWithData:data];
-      weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
-      weakCell.imageView.layer.masksToBounds = YES;
-    }];
-    
-  }
-  else{
-    
-    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-    cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
-    cell.imageView.layer.masksToBounds = YES;
-  }
-  
-#warning TODO: implement?
-  cell.textLabel.text = user[@"fullName"];
-  cell.detailTextLabel.text = @"";//@"detail";
-  cell.labelLowerDetail.text = @"";//@"lower detail";
+  [cell configureWithUser:user];
   
   return cell;
 }

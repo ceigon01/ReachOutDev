@@ -15,6 +15,7 @@
 #import "CEIAlertView.h"
 #import "CEIAddUserViewController.h"
 #import "CEINotificationNames.h"
+#import "CEIUserTableViewCell.h"
 
 static NSString *const kCellIdentifierMentor = @"kCellIdentifierMentor";
 static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Mentors_Missions";
@@ -47,6 +48,10 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
   
 #warning TODO: localization
   self.title = @"Mentors";
+  
+  [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
+                                             bundle:[NSBundle mainBundle]]
+       forCellReuseIdentifier:kCellIdentifierMentor];
   
   self.automaticallyAdjustsScrollViewInsets = NO;
   
@@ -127,34 +132,12 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierMentor
-                                                          forIndexPath:indexPath];
+  CEIUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierMentor
+                                                               forIndexPath:indexPath];
   
   PFUser *user = [self.arrayMentors objectAtIndex:indexPath.row];
   
-  if (user[@"image"]) {
-    
-    PFFile *file = user[@"image"];
-    
-    __weak UITableViewCell *weakCell = cell;
-    
-    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-      
-      weakCell.imageView.image = [UIImage imageWithData:data];
-      weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
-      weakCell.imageView.layer.masksToBounds = YES;
-    }];
-    
-  }
-  else{
-    
-    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-    cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
-    cell.imageView.layer.masksToBounds = YES;
-  }
-  
-  cell.textLabel.text = user[@"fullName"];
-  cell.detailTextLabel.text = user[@"title"];
+  [cell configureWithUser:user];
   
   return cell;
 }

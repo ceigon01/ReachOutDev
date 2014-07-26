@@ -63,9 +63,9 @@ static CGFloat const kLabelsHeightRatio = 0.6f;
   [super layoutSubviews];
   
   self.detailTextLabel.frame = CGRectMake(self.contentView.frame.size.width * 0.8f,
-                                          0.0f,
+                                          self.contentView.frame.size.height * 0.1f,
                                           self.contentView.frame.size.width * 0.2f,
-                                          self.detailTextLabel.frame.size.height);
+                                          self.contentView.frame.size.height * 0.4f);
   
   self.labelLowerDetail.frame = CGRectMake(self.detailTextLabel.frame.origin.x,
                                            self.detailTextLabel.frame.size.height,

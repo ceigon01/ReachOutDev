@@ -9,6 +9,7 @@
 #import "CEIAddEncouragementViewController.h"
 #import "UIImageView+WebCache.h"
 #import "CEIAlertView.h"
+#import "CEIUserTableViewCell.h"
 
 static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEncouragement";
 
@@ -22,6 +23,10 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
 
 - (void)viewDidLoad{
   [super viewDidLoad];
+  
+  [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
+                                             bundle:[NSBundle mainBundle]]
+       forCellReuseIdentifier:kIdentifierCellAddEncouragement];
   
   self.encouragementInPlace = NO;
   
@@ -110,34 +115,13 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifierCellAddEncouragement
-                                                          forIndexPath:indexPath];
+  CEIUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifierCellAddEncouragement
+                                                               forIndexPath:indexPath];
   
   PFUser *user = [self.arrayFollowersAvailable objectAtIndex:indexPath.row];
   
-  if (user[@"image"]) {
-    
-    PFFile *file = user[@"image"];
-    
-    __weak UITableViewCell *weakCell = cell;
-    
-    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-      
-      weakCell.imageView.image = [UIImage imageWithData:data];
-      weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
-      weakCell.imageView.layer.masksToBounds = YES;
-    }];
-    
-  }
-  else{
-    
-    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-    cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
-    cell.imageView.layer.masksToBounds = YES;
-  }
+  [cell configureWithUser:user];
   
-  cell.textLabel.text = user[@"fullName"];
-
   NSInteger selected = [self.arrayFollowersSelected indexOfObject:user];
   
   cell.accessoryType = (selected == NSNotFound) ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;

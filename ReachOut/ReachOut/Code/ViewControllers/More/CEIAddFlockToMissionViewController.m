@@ -11,6 +11,7 @@
 #import "CEIAlertView.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CEIUserTableViewCell.h"
 
 static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFlockToMission";
 
@@ -27,8 +28,9 @@ static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFl
 - (void)viewDidLoad{
   [super viewDidLoad];
 
-  [self.tableView registerClass:[UITableViewCell class]
-         forCellReuseIdentifier:kCellIdentifierAddFlockToMission];
+  [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
+                                             bundle:[NSBundle mainBundle]]
+       forCellReuseIdentifier:kCellIdentifierAddFlockToMission];
   
   [self fetchFlock];
 }
@@ -75,35 +77,13 @@ static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFl
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierAddFlockToMission
-                                                          forIndexPath:indexPath];
+  CEIUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifierAddFlockToMission
+                                                               forIndexPath:indexPath];
   
   PFUser *user = [self.arrayAllFollowers objectAtIndex:indexPath.row];
   
-  
-  if (user[@"image"]) {
-    
-    PFFile *file = user[@"image"];
-    
-    __weak UITableViewCell *weakCell = cell;
-    
-    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-      
-      weakCell.imageView.image = [UIImage imageWithData:data];
-      weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
-      weakCell.imageView.layer.masksToBounds = YES;
-    }];
-    
-  }
-  else{
-    
-    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-    cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
-    cell.imageView.layer.masksToBounds = YES;
-  }
+  [cell configureWithUser:user];
 
-  cell.textLabel.text = user[@"fullName"];
-  
   if ([self.arrayFollowersSelected containsObject:user]) {
     
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
