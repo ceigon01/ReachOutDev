@@ -10,6 +10,8 @@
 #import "CEIColor.h"
 #import <QuartzCore/QuartzCore.h>
 
+#warning TODO: localization
+static NSString *const kTextViewTextPlaceholder = @"Do you have anything in mind?";
 static const NSInteger kMaxTextLength = 140;
 
 @interface CEIGoalStepViewCheckin () <UITextViewDelegate>
@@ -38,21 +40,27 @@ static const NSInteger kMaxTextLength = 140;
   
   self.layer.cornerRadius = 4.0f;
   self.layer.masksToBounds = YES;
-  self.layer.borderWidth = 1.0f;
+  self.layer.borderWidth = 2.0f;
   self.layer.borderColor = [CEIColor colorBlue].CGColor;
   
-#warning TODO: localization
-  self.textView.text = @"Do you have anything in mind?";
+  self.textView.text = kTextViewTextPlaceholder;
   self.textView.textColor = [UIColor lightGrayColor];
   self.textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-  self.textView.layer.borderWidth = 0.5f;
-  self.textView.layer.cornerRadius = 4.0f;
+  self.textView.layer.borderWidth = 1.0f;
+  
+  UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                         action:@selector(tapGesture:)];
+  tapGestureRecognizer.numberOfTapsRequired = 1;
+  [self addGestureRecognizer:tapGestureRecognizer];
+  
+  self.labelGoalCharactersRemaining.text = [NSString stringWithFormat:@"%d characters remaining",kMaxTextLength];
 }
 
 #pragma mark - UITextView Delegate
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
   
+  self.labelGoalCharactersRemaining.text = [NSString stringWithFormat:@"%d characters remaining",kMaxTextLength];
   textView.text = @"";
   textView.textColor = [UIColor blackColor];
   return YES;
@@ -60,6 +68,7 @@ static const NSInteger kMaxTextLength = 140;
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
   
+  [self textViewDidChange:textView];
   [textView resignFirstResponder];
 }
 
@@ -86,10 +95,16 @@ static const NSInteger kMaxTextLength = 140;
     textView.textColor = [UIColor lightGrayColor];
     textView.text = @"Do you have anything in mind?";
     [textView resignFirstResponder];
+    self.labelGoalCharactersRemaining.text = [NSString stringWithFormat:@"%d characters remaining",kMaxTextLength];
   }
 }
 
 #pragma mark - Action Handling
+
+- (void)tapGesture:(id)sender{
+  
+  [self.textView resignFirstResponder];
+}
 
 - (IBAction)tapButtonYes:(id)sender{
   
@@ -98,6 +113,7 @@ static const NSInteger kMaxTextLength = 140;
 
   self.buttonNo.backgroundColor = [UIColor clearColor];
   self.buttonYes.backgroundColor = [CEIColor colorGreen];
+  [self.textView resignFirstResponder];
 }
 
 - (IBAction)tapButtonNo:(id)sender{
@@ -107,6 +123,7 @@ static const NSInteger kMaxTextLength = 140;
   
   self.buttonYes.backgroundColor = [UIColor clearColor];
   self.buttonNo.backgroundColor = [CEIColor colorRed];
+  [self.textView resignFirstResponder];
 }
 
 - (IBAction)tapButtonCancel:(id)sender{

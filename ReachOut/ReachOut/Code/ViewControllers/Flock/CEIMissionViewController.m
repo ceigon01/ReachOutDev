@@ -433,7 +433,7 @@ static const CGFloat kHeightCell = 100.0f;
                           completionHandler:NULL];
   }
   else{
-   
+    
     CEIGoalStepViewCheckin *goalStepViewCheckin = [[[NSBundle mainBundle] loadNibNamed:kNibNameCEIGoalStepViewCheckin
                                                                                 owner:self
                                                                               options:nil]
@@ -443,6 +443,25 @@ static const CGFloat kHeightCell = 100.0f;
     PFObject *goal = paramGoalTableViewCell.goal;
     
     goalStepViewCheckin.labelGoalTitle.text = goal[@"caption"];
+    
+    if (self.selectedDailyChoresView.goalStep[@"done"] != nil) {
+  
+      goalStepViewCheckin.textView.text = self.selectedDailyChoresView.goalStep[@"caption"];
+      goalStepViewCheckin.labelGoalCharactersRemaining.text = @"Already checked in!";
+      
+      goalStepViewCheckin.textView.editable = NO;
+      goalStepViewCheckin.buttonNo.enabled = NO;
+      goalStepViewCheckin.buttonYes.enabled = NO;
+      
+      if ([self.selectedDailyChoresView.goalStep[@"done"] boolValue]) {
+
+        [goalStepViewCheckin tapButtonYes:nil];
+      }
+      else{
+        
+        [goalStepViewCheckin tapButtonNo:nil];
+      }
+    }
     
     [ASDepthModalViewController presentView:goalStepViewCheckin
                             backgroundColor:[UIColor whiteColor]
@@ -468,31 +487,39 @@ static const CGFloat kHeightCell = 100.0f;
 
 - (void)goalStepViewCheckinDidTapDone:(CEIGoalStepViewCheckin *)paramGoalStepViewCheckin{
   
-  if (!paramGoalStepViewCheckin.isDoneSelected){
-  
-    [CEIAlertView showAlertViewWithValidationMessage:@"Please confirim wether you have fulfilled the goal or not."];
-    return;
+  if (paramGoalStepViewCheckin.textView.editable) {
+    
+    if (!paramGoalStepViewCheckin.isDoneSelected){
+    
+      [CEIAlertView showAlertViewWithValidationMessage:@"Please confirim wether you have fulfilled the goal or not."];
+      return;
+    }
+    
+    PFObject *goalStep = self.selectedDailyChoresView.goalStep;
+    
+    goalStep[@"caption"] = paramGoalStepViewCheckin.textView.text;
+    goalStep[@"done"] = [NSNumber numberWithBool:paramGoalStepViewCheckin.done];
+    
+    [self.selectedDailyChoresView configureWithGoalStep:goalStep];
+    
+    [goalStep saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+
+      if (error) {
+        
+        [CEIAlertView showAlertViewWithError:error];
+      }
+      else{
+
+        [self.selectedDailyChoresView updateWithDone:paramGoalStepViewCheckin.done
+                                             comment:paramGoalStepViewCheckin.textView.text];
+        
+        PFQuery *query = [PFInstallation query];
+        [query whereKey:@"user" equalTo:self.user];
+        
+        [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@: %@ %@",[PFUser currentUser][@"fullName"],paramGoalStepViewCheckin.done ? @"Done:" : @"Didn't do it:",self.selectedCell.goal[@"caption"]]];
+      }
+    }];
   }
-  
-  paramGoalStepViewCheckin.
-  
-  PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
-  
-  goalStep[@"goal"] = self.selectedCell.goal;
-  goalStep[@"caption"] = paramGoalStepViewCheckin.textView.text;
-  goalStep[@"done"] = [NSNumber numberWithBool:paramGoalStepViewCheckin.done];
-  goalStep[@"mission"] = self.mission;
-  goalStep[@"day"] = self.selectedDailyChoresView.dayName;
-  
-  [self.selectedDailyChoresView configureWithGoalStep:goalStep];
-  
-  [goalStep saveInBackground];
-  
-  
-  PFQuery *query = [PFInstallation query];
-  [query whereKey:@"user" equalTo:self.user];
-  
-  [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@: %@ %@",[PFUser currentUser][@"fullName"],paramGoalStepViewCheckin.done ? @"Done:" : @"Didn't do it:",self.selectedCell.goal[@"caption"]]];
   
   [ASDepthModalViewController dismiss];
 }

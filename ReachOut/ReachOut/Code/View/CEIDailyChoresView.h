@@ -22,12 +22,14 @@
 
 @property (nonatomic, weak) id<CEIDailyChoresViewDelegate> delegate;
 @property (nonatomic, copy) NSString *dayName;
-@property (nonatomic, assign, getter=isDone) BOOL done;
+@property (nonatomic, assign, getter=isDone, readonly) BOOL done;
 @property (nonatomic, strong) NSDate *date;
-@property (nonatomic, strong) NSString *comment;
+@property (nonatomic, copy, readonly) NSString *comment;
 @property (nonatomic, strong) PFObject *goalStep;
 
 - (void)configureWithGoalStep:(PFObject *)paramGoalStep;
 - (void)prepareForReuse;
+
+- (void)updateWithDone:(BOOL)paramDone comment:(NSString *)paramComment;
 
 @end

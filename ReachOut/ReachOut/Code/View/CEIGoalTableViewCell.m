@@ -89,7 +89,7 @@ static const CGFloat kHeightRatioLabelToSelf = 0.3f;
       return [date1 compare:date2];
     }];
     weakSelf.dateStart = paramMission[@"dateBegins"];
-    [weakSelf carouselDidEndDecelerating:weakSelf.carousel];
+    [weakSelf carouselDidScroll:weakSelf.carousel];
     [weakSelf.carousel reloadData];
   }];
 }
@@ -164,9 +164,7 @@ static const CGFloat kHeightRatioLabelToSelf = 0.3f;
   }
 }
 
-- (void)carouselDidEndDecelerating:(iCarousel *)carousel{
-  
-#warning TODO: there be some mess here, has to be debuged
+- (void)carouselDidScroll:(iCarousel *)carousel{
   
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   

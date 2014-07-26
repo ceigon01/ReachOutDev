@@ -34,4 +34,7 @@
 
 @property (nonatomic, weak) IBOutlet UITextView *textView;
 
+- (IBAction)tapButtonNo:(id)sender;
+- (IBAction)tapButtonYes:(id)sender;
+
 @end

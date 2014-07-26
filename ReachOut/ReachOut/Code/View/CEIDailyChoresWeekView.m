@@ -11,7 +11,7 @@
 #import <Parse/Parse.h>
 
 const NSInteger kNumberOfDaysInWeek = 7;
-static const CGFloat kItemsSpacing = 1.0f;
+static const CGFloat kItemsSpacing = 0.0f;
 
 @interface CEIDailyChoresWeekView () <CEIDailyChoresViewDelegate>
 
@@ -39,13 +39,13 @@ static const CGFloat kItemsSpacing = 1.0f;
 
 - (void)setup{
   
-  CGFloat segmentWidth = (self.frame.size.width - kItemsSpacing*(kNumberOfDaysInWeek+1)) / (CGFloat)kNumberOfDaysInWeek;
+  CGFloat segmentWidth = (self.frame.size.width - kItemsSpacing*(kNumberOfDaysInWeek+1) + 6.0f) / (CGFloat)kNumberOfDaysInWeek;
   CGFloat segmentOffset = kItemsSpacing;
   
   self.dictionaryDailyChoresView = [[NSMutableDictionary alloc] init];
   for (NSInteger dayCounter = 0; dayCounter < kNumberOfDaysInWeek; dayCounter++) {
     
-    CEIDailyChoresView *dailyChoresView = [[CEIDailyChoresView alloc] initWithFrame:CGRectMake(segmentOffset,
+    CEIDailyChoresView *dailyChoresView = [[CEIDailyChoresView alloc] initWithFrame:CGRectMake(segmentOffset - dayCounter,
                                                                                                0.0f,
                                                                                                segmentWidth,
                                                                                                self.frame.size.height)];

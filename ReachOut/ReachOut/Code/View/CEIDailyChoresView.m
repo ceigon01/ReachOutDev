@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UILabel *labelN;
 @property (nonatomic, strong) UIImageView *viewCorner;
 @property (nonatomic, assign) BOOL available;
+@property (nonatomic, assign) BOOL today;
 
 @end
 
@@ -80,7 +81,10 @@
   self.labelN.textColor = [UIColor darkGrayColor];
   [self addSubview:self.labelN];
   
-  self.layer.borderColor = [CEIColor colorBlue].CGColor;
+  self.layer.borderColor = [UIColor grayColor].CGColor;
+  self.layer.borderWidth = 2.0f;
+  
+  self.today = NO;
 }
 
 - (void)prepareForReuse{
@@ -92,7 +96,10 @@
   self.labelY.textColor = [UIColor darkGrayColor];
   self.labelN.textColor = [UIColor darkGrayColor];
   
-  self.layer.borderWidth = 0.0f;
+  self.viewCorner.hidden = YES;
+  
+  _comment = nil;
+  _done = NO;
 }
 
 - (void)configureWithGoalStep:(PFObject *)paramGoalStep{
@@ -121,15 +128,52 @@
 
     NSLog(@"today:%@ date:%@",dateGoalStep,dateToday);
     
-    self.layer.borderWidth = 3.0f;
+    self.layer.borderColor = [CEIColor colorBlue].CGColor;
+    self.layer.borderWidth = 2.0f;
+    self.today = YES;
   }
   else{
     
-    self.layer.borderWidth = 0.0f;
+    self.layer.borderColor = [UIColor grayColor].CGColor;
+    self.layer.borderWidth = 1.0f;
+    self.today = NO;
   }
   
   self.goalStep = paramGoalStep;
   self.dayName = paramGoalStep[@"day"];
+
+  if (self.goalStep[@"done"]) {
+    
+    BOOL done = [self.goalStep[@"done"] boolValue];
+    [self updateWithDone:done comment:self.goalStep[@"caption"]];
+  }
+}
+
+- (void)updateWithDone:(BOOL)paramDone comment:(NSString *)paramComment{
+  
+  _comment = paramComment;
+  
+  self.viewCorner.hidden = (_comment.length == 0);
+  
+  self.labelDay.textColor = [UIColor whiteColor];
+  
+  _done = paramDone;
+  if (_done) {
+    
+    self.labelDay.backgroundColor = [CEIColor colorGreen];
+    self.labelY.backgroundColor = [CEIColor colorGreen];
+    self.labelY.textColor = [UIColor whiteColor];
+    self.labelN.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor whiteColor];
+  }
+  else {
+    
+    self.labelDay.backgroundColor = [CEIColor colorRed];
+    self.labelN.backgroundColor = [CEIColor colorRed];
+    self.labelN.textColor = [UIColor whiteColor];
+    self.labelY.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor whiteColor];
+  }
 }
 
 #pragma mark - Action Handling
@@ -156,30 +200,6 @@
   self.labelDay.text = dayName;
 }
 
-- (void)setDone:(BOOL)done{
-
-  if (done == _done) {
-    
-    return;
-  }
-  
-  self.labelDay.textColor = [UIColor whiteColor];
-  
-  _done = done;
-  if (_done) {
-    
-    self.labelDay.backgroundColor = [CEIColor colorGreen];
-    self.labelY.backgroundColor = [CEIColor colorGreen];
-    self.labelY.textColor = [UIColor whiteColor];
-  }
-  else {
-
-    self.labelDay.backgroundColor = [CEIColor colorRed];
-    self.labelN.backgroundColor = [CEIColor colorRed];
-    self.labelN.textColor = [UIColor whiteColor];
-  }
-}
-
 - (void)setDate:(NSDate *)date{
   
   _date = date;
@@ -189,26 +209,20 @@
   self.labelDay.text = [formatter stringFromDate:date];
 }
 
-- (void)setComment:(NSString *)comment{
+- (UIImageView *)viewCorner{
   
-  _comment = comment;
-  
-  if (comment.length == 0) {
+  if (_viewCorner == nil) {
     
-    [self.viewCorner removeFromSuperview];
-    self.viewCorner = nil;
+    _viewCorner = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"imgCorner"]];
+    _viewCorner.contentMode = UIViewContentModeScaleAspectFill;
+    _viewCorner.frame = CGRectMake(self.labelDay.frame.size.width * 0.75f - self.layer.borderWidth,
+                                   0.0f,
+                                   self.labelDay.frame.size.width * 0.25f,
+                                   self.labelDay.frame.size.height * 0.5f);
+    [self.labelDay addSubview:_viewCorner];
   }
-  else
-    if (self.viewCorner == nil) {
-      
-      self.viewCorner = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"imgCorner"]];
-      self.viewCorner.contentMode = UIViewContentModeScaleAspectFit;
-      self.viewCorner.frame = CGRectMake(0.0f,
-                                         0.0f,
-                                         self.labelDay.frame.size.width * 0.25f,
-                                         self.labelDay.frame.size.height * 0.5f);
-      [self.labelDay addSubview:self.viewCorner];
-    }
+  
+  return _viewCorner;
 }
 
 @end
