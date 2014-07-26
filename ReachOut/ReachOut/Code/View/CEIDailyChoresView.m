@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel *labelY;
 @property (nonatomic, strong) UILabel *labelN;
 @property (nonatomic, strong) UIImageView *viewCorner;
+@property (nonatomic, assign) BOOL available;
 
 @end
 
@@ -78,6 +79,8 @@
   self.labelN.backgroundColor = [CEIColor colorIdle];
   self.labelN.textColor = [UIColor darkGrayColor];
   [self addSubview:self.labelN];
+  
+  self.layer.borderColor = [CEIColor colorBlue].CGColor;
 }
 
 - (void)prepareForReuse{
@@ -88,9 +91,42 @@
   self.labelDay.textColor = [UIColor darkGrayColor];
   self.labelY.textColor = [UIColor darkGrayColor];
   self.labelN.textColor = [UIColor darkGrayColor];
+  
+  self.layer.borderWidth = 0.0f;
 }
 
 - (void)configureWithGoalStep:(PFObject *)paramGoalStep{
+  
+  self.available = [paramGoalStep[@"available"] boolValue];
+  if (self.available) {
+    
+    self.backgroundColor = [UIColor lightGrayColor];
+    self.labelDay.backgroundColor = [UIColor lightGrayColor];
+    self.labelN.backgroundColor = [UIColor lightGrayColor];
+    self.labelY.backgroundColor = [UIColor lightGrayColor];
+  }
+  else{
+    
+    self.backgroundColor = [UIColor whiteColor];
+    self.labelDay.backgroundColor = [UIColor whiteColor];
+    self.labelN.backgroundColor = [UIColor whiteColor];
+    self.labelY.backgroundColor = [UIColor whiteColor];
+  }
+
+  NSDateComponents *dateGoalStep = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:paramGoalStep[@"date"]];
+  NSDateComponents *dateToday = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
+  if (dateGoalStep.day == dateToday.day &&
+     dateGoalStep.month == dateToday.month &&
+     dateGoalStep.year == dateToday.year){
+
+    NSLog(@"today:%@ date:%@",dateGoalStep,dateToday);
+    
+    self.layer.borderWidth = 3.0f;
+  }
+  else{
+    
+    self.layer.borderWidth = 0.0f;
+  }
   
   self.goalStep = paramGoalStep;
   self.dayName = paramGoalStep[@"day"];
@@ -100,7 +136,7 @@
 
 - (void)tapGesture:(id)paramSender{
   
-  if ([self.delegate respondsToSelector:@selector(didTapDailyChoresView:)]) {
+  if ([self.delegate respondsToSelector:@selector(didTapDailyChoresView:)] && self.available) {
     
     [self.delegate didTapDailyChoresView:self];
   }

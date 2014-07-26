@@ -38,6 +38,8 @@ static const NSInteger kMaxTextLength = 140;
   
   self.layer.cornerRadius = 4.0f;
   self.layer.masksToBounds = YES;
+  self.layer.borderWidth = 1.0f;
+  self.layer.borderColor = [CEIColor colorBlue].CGColor;
   
 #warning TODO: localization
   self.textView.text = @"Do you have anything in mind?";

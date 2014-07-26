@@ -20,6 +20,7 @@
 #import "CEIDailyChoresView.h"
 #import "CEIColor.h"
 #import "CEIAddEncouragementViewController.h"
+#import <CoreGraphics/CoreGraphics.h>
 
 static NSString *const kNibNameCEIGoalStepViewCheckin = @"CEIGoalStepViewCheckin";
 static NSString *const kNibNameCEIGoalStepViewCheckup = @"CEIGoalStepViewCheckup";
@@ -27,6 +28,7 @@ static NSString *const kNibNameCEIGoalStepViewCheckup = @"CEIGoalStepViewCheckup
 static NSString *const kIdentifierSegueMissionAddEncouragement = @"kIdentifierSegueMissionAddEncouragement";
 
 static NSString *const kIdentifierCellMission = @"kIdentifierCellMission";
+static const CGFloat kHeightHeader = 20.0f;
 static const CGFloat kHeightFooter = 20.0f;
 static const CGFloat kHeightCell = 100.0f;
 
@@ -56,6 +58,23 @@ static const CGFloat kHeightCell = 100.0f;
          forCellReuseIdentifier:kIdentifierCellMission];
   
   __weak typeof (self) weakSelf = self;
+  
+  
+  UIColor *colorTop = [UIColor colorWithWhite:1.0 alpha:0.1];
+  UIColor *colorBottom = [UIColor colorWithWhite:0.0 alpha:0.8];
+  NSArray *colors =  [NSArray arrayWithObjects:(id)colorTop.CGColor, colorBottom.CGColor, nil];
+  
+  NSNumber *stopTop = [NSNumber numberWithFloat:0.4];
+  NSNumber *stopBottom = [NSNumber numberWithFloat:1.0];
+  NSArray *locations = [NSArray arrayWithObjects:stopTop, stopBottom, nil];
+  
+  CAGradientLayer *headerLayer = [CAGradientLayer layer];
+  headerLayer.colors = colors;
+  headerLayer.locations = locations;
+  
+  headerLayer.frame = self.imageViewBackgroud.bounds;
+
+  [self.imageViewBackgroud.layer insertSublayer:headerLayer atIndex:0];
   
   PFFile *file = self.mission[@"image"];
   [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -259,21 +278,35 @@ static const CGFloat kHeightCell = 100.0f;
   
   PFObject *goal = [self.arrayGoals objectAtIndex:indexPath.section];
   
-  [cell configureWithGoal:goal mission:self.mission goalSteps:[self arrayGoalStepsForGoal:goal]];
+  [cell configureWithGoal:goal mission:self.mission];
   
   return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
   
   PFObject *goal = [self.arrayGoals objectAtIndex:section];
   
-  return goal[@"caption"];
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
+                                                             0.0f,
+                                                             tableView.frame.size.width,
+                                                             kHeightHeader)];
+  label.textAlignment = NSTextAlignmentLeft;
+  label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
+  label.text = [NSString stringWithFormat:@"  %@",goal[@"caption"]];
+  label.textColor = [UIColor blackColor];
+  
+  return label;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
   
   return kHeightFooter;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+  
+  return kHeightHeader;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -287,11 +320,13 @@ static const CGFloat kHeightCell = 100.0f;
                                                              tableView.frame.size.width,
                                                              kHeightFooter)];
   label.textAlignment = NSTextAlignmentRight;
+  label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
   
 #warning TODO: which to use?
 //  label.text = [NSString stringWithFormat:@"%.0f %% of goal",([self totalDaysCountForTodayForMission:self.mission] * 100.0f / [self totalDaysCountForMission:self.mission])];
   
-  label.text = [NSString stringWithFormat:@"%.0f %% of goal  ",fabs((arrayGoalSteps.count * 100.0f / [NSDate totalDaysCountForMission:self.mission]))];
+  label.text = [NSString stringWithFormat:@"%.0f %% of goal\t",fabs((arrayGoalSteps.count * 100.0f / [NSDate totalDaysCountForMission:self.mission]))];
+  label.textColor = [UIColor blackColor];
   
   return label;
 }
@@ -438,6 +473,8 @@ static const CGFloat kHeightCell = 100.0f;
     [CEIAlertView showAlertViewWithValidationMessage:@"Please confirim wether you have fulfilled the goal or not."];
     return;
   }
+  
+  paramGoalStepViewCheckin.
   
   PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
   

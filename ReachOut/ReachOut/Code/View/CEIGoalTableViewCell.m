@@ -60,19 +60,38 @@ static const CGFloat kHeightRatioLabelToSelf = 0.3f;
                                                                     self.contentView.frame.size.height * kHeightRatioLabelToSelf)];
   self.labelDatesPeriod.text = @"dates period";
   self.labelDatesPeriod.textAlignment = NSTextAlignmentRight;
+  self.labelDatesPeriod.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12];
   [self.contentView addSubview:self.labelDatesPeriod];
 }
 
-- (void)configureWithGoal:(PFObject *)paramGoal mission:(PFObject *)paramMission goalSteps:(NSArray *)paramArrayGoalSteps{
+- (void)configureWithGoal:(PFObject *)paramGoal mission:(PFObject *)paramMission{
   
   self.goal = paramGoal;
   self.numberOfDays = [NSDate totalDaysCountForMission:paramMission];
-  self.arrayGoalSteps = paramArrayGoalSteps;
-  self.dateStart = paramMission[@"dateBegins"];
-
-  [self carouselDidEndDecelerating:self.carousel];
   
-  [self.carousel reloadData];
+  __weak typeof (self) weakSelf = self;
+  
+  PFRelation *relation = [self.goal relationForKey:@"goalSteps"];
+  PFQuery *query = [relation query];
+  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    
+    if (error) {
+      
+      NSLog(@"%@",error);
+    }
+    
+    weakSelf.arrayGoalSteps = [NSMutableArray arrayWithArray:objects];
+    weakSelf.arrayGoalSteps = [weakSelf.arrayGoalSteps sortedArrayUsingComparator:^NSComparisonResult(PFObject *goalStep1, PFObject *goalStep2) {
+      
+      NSDate *date1 = goalStep1[@"date"];
+      NSDate *date2 = goalStep2[@"date"];
+      
+      return [date1 compare:date2];
+    }];
+    weakSelf.dateStart = paramMission[@"dateBegins"];
+    [weakSelf carouselDidEndDecelerating:weakSelf.carousel];
+    [weakSelf.carousel reloadData];
+  }];
 }
 
 - (void)layoutSubviews{
@@ -158,14 +177,14 @@ static const CGFloat kHeightRatioLabelToSelf = 0.3f;
   
   NSCalendar *calendar = [NSCalendar currentCalendar];
   
-  NSDateComponents *dateComponentsStart = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit
+  NSDateComponents *dateComponentsStart = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
                                                       fromDate:self.dateStart];
   
-  dateComponentsStart.day += 7 * weeksOffset;
+  dateComponentsStart.day += 6 * weeksOffset;
   
   NSDate *dateStart = [calendar dateFromComponents:dateComponentsStart];
 
-  dateComponentsStart.day += 7;
+  dateComponentsStart.day += 6;
 
   NSDate *dateFinish = [calendar dateFromComponents:dateComponentsStart];
   

@@ -70,11 +70,14 @@ static const CGFloat kItemsSpacing = 1.0f;
   
   [arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
 
-    CFAbsoluteTime absoluteTime = CFAbsoluteTimeGetCurrent();
-    CFTimeZoneRef timeZone = CFTimeZoneCopySystem();
-    SInt32 dayNumber = CFAbsoluteTimeGetDayOfWeek(absoluteTime, timeZone);
+//    CFAbsoluteTime absoluteTime = CFAbsoluteTimeGetCurrent();
+//    CFTimeZoneRef timeZone = CFTimeZoneCopySystem();
+//    SInt32 dayNumber = CFAbsoluteTimeGetDayOfWeek(absoluteTime, timeZone);
     
-    CEIDailyChoresView *dailyChoresView = [weakSelf.dictionaryDailyChoresView objectForKey:[CEIDay dayNameWithDayNumber:dayNumber]];
+//    NSLog(@"%@",[CEIDay dayNameWithDayNumber:dayNumber]);
+//    NSLog(@"%@",goalStep);
+    
+    CEIDailyChoresView *dailyChoresView = [weakSelf.dictionaryDailyChoresView objectForKey:goalStep[@"day"]];
     [dailyChoresView configureWithGoalStep:goalStep];
   }];
 }

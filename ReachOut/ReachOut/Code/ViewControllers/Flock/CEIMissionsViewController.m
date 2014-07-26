@@ -146,6 +146,7 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   self.indexPathSelected = indexPath;
 }
 

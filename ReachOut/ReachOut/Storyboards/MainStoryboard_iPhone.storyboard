@@ -1494,9 +1494,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KRG-VR-QRc">
-                                <rect key="frame" x="0.0" y="64" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="85"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="fw1-ei-j8b"/>
+                                    <constraint firstAttribute="height" constant="85" id="fw1-ei-j8b"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VT9-cQ-oPx">
@@ -1507,35 +1507,39 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BT-gM-EAk">
-                                <rect key="frame" x="230" y="132" width="90" height="20"/>
+                                <rect key="frame" x="230" y="124" width="90" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="j1I-oS-eaF"/>
                                     <constraint firstAttribute="height" constant="20" id="ndF-ds-sjd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVi-L9-de1">
-                                <rect key="frame" x="20" y="88" width="222" height="21"/>
+                                <rect key="frame" x="20" y="99" width="222" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="j1k-Hc-MBq"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFI-Bs-4a8">
-                                <rect key="frame" x="20" y="117" width="222" height="20.5"/>
+                                <rect key="frame" x="20" y="118" width="222" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20.5" id="V8u-9V-rMX"/>
+                                    <constraint firstAttribute="height" constant="20" id="V8u-9V-rMX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="KG9-7F-Rz9">
-                                <rect key="frame" x="0.0" y="164" width="320" height="355"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="KG9-7F-Rz9">
+                                <rect key="frame" x="0.0" y="149" width="320" height="370"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="GDb-Wt-bLw" id="KsZ-ae-S9O"/>
@@ -1554,10 +1558,10 @@
                             <constraint firstAttribute="trailing" secondItem="KG9-7F-Rz9" secondAttribute="trailing" id="QDL-eL-gnZ"/>
                             <constraint firstItem="KRG-VR-QRc" firstAttribute="leading" secondItem="LGD-mS-vgb" secondAttribute="leading" id="S49-nA-AaZ"/>
                             <constraint firstAttribute="trailing" secondItem="KRG-VR-QRc" secondAttribute="trailing" id="Vwj-Se-tKj"/>
-                            <constraint firstItem="2BT-gM-EAk" firstAttribute="top" secondItem="VT9-cQ-oPx" secondAttribute="bottom" constant="8" id="dgm-DG-h1R"/>
+                            <constraint firstItem="2BT-gM-EAk" firstAttribute="top" secondItem="VT9-cQ-oPx" secondAttribute="bottom" id="dgm-DG-h1R"/>
                             <constraint firstItem="KG9-7F-Rz9" firstAttribute="top" secondItem="KRG-VR-QRc" secondAttribute="bottom" id="fmG-vM-NHh"/>
-                            <constraint firstItem="EVi-L9-de1" firstAttribute="top" secondItem="vUK-ZJ-DVk" secondAttribute="bottom" constant="24" id="mVw-Ys-Dtn"/>
-                            <constraint firstItem="eFI-Bs-4a8" firstAttribute="top" secondItem="EVi-L9-de1" secondAttribute="bottom" constant="8" id="mdj-A3-EEq"/>
+                            <constraint firstItem="EVi-L9-de1" firstAttribute="top" secondItem="vUK-ZJ-DVk" secondAttribute="bottom" constant="35" id="mVw-Ys-Dtn"/>
+                            <constraint firstItem="eFI-Bs-4a8" firstAttribute="top" secondItem="EVi-L9-de1" secondAttribute="bottom" constant="-2" id="mdj-A3-EEq"/>
                             <constraint firstItem="KG9-7F-Rz9" firstAttribute="leading" secondItem="LGD-mS-vgb" secondAttribute="leading" id="qNi-Wb-GOk"/>
                             <constraint firstItem="EVi-L9-de1" firstAttribute="leading" secondItem="LGD-mS-vgb" secondAttribute="leading" constant="20" id="qf2-ns-oDS"/>
                             <constraint firstAttribute="trailing" secondItem="VT9-cQ-oPx" secondAttribute="trailing" constant="20" id="tfY-yI-H4m"/>
@@ -2675,12 +2679,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ZM5-te-FK0"/>
+        <segue reference="FbI-Om-JAD"/>
         <segue reference="lbr-ma-Rjx"/>
         <segue reference="Gty-YO-6eE"/>
-        <segue reference="1Bj-0O-Kc0"/>
-        <segue reference="FbI-Om-JAD"/>
+        <segue reference="ZM5-te-FK0"/>
         <segue reference="4q1-Vo-cTc"/>
         <segue reference="biv-Bn-3hS"/>
+        <segue reference="kq1-ES-DfJ"/>
     </inferredMetricsTieBreakers>
 </document>

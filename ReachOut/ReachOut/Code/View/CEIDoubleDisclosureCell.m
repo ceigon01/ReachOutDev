@@ -54,14 +54,17 @@ static CGFloat const kLabelsHeightRatio = 0.6f;
   
   self.detailTextLabel.backgroundColor = [UIColor clearColor];
   self.labelLowerDetail.backgroundColor = [UIColor clearColor];
+  
+  self.detailTextLabel.textAlignment = NSTextAlignmentCenter;
+  self.labelLowerDetail.textAlignment = NSTextAlignmentCenter;
 }
 
 - (void)layoutSubviews{
   [super layoutSubviews];
   
-  self.detailTextLabel.frame = CGRectMake(self.contentView.frame.size.width * 0.7f,
+  self.detailTextLabel.frame = CGRectMake(self.contentView.frame.size.width * 0.8f,
                                           0.0f,
-                                          self.contentView.frame.size.width * 0.3f,
+                                          self.contentView.frame.size.width * 0.2f,
                                           self.detailTextLabel.frame.size.height);
   
   self.labelLowerDetail.frame = CGRectMake(self.detailTextLabel.frame.origin.x,

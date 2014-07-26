@@ -7,6 +7,7 @@
 //
 
 #import "CEIGoalStepViewCheckup.h"
+#import "CEIColor.h"
 
 @implementation CEIGoalStepViewCheckup
 
@@ -30,6 +31,8 @@
   
   self.layer.cornerRadius = 4.0f;
   self.layer.masksToBounds = YES;
+  self.layer.borderWidth = 1.0f;
+  self.layer.borderColor = [CEIColor colorBlue].CGColor;
 }
 
 #pragma mark - Action Handling
