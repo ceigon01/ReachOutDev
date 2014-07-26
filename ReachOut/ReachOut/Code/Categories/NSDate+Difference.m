@@ -2,7 +2,7 @@
 //  NSDate+Difference.m
 //  ReachOut
 //
-//  Created by Piotr Nietrzebka on 12.06.2014.
+//  Created by Jason Smith on 12.06.2014.
 //  Copyright (c) 2014 CEIGON. All rights reserved.
 //
 

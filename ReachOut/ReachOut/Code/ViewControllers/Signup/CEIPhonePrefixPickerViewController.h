@@ -2,7 +2,7 @@
 //  CEIPhonePrefixPickerViewController.h
 //  ReachOut
 //
-//  Created by Piotr Nietrzebka on 12.07.2014.
+//  Created by Jason Smith on 12.07.2014.
 //  Copyright (c) 2014 CEIGON. All rights reserved.
 //
 
