@@ -1636,32 +1636,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="kIdentifierCellUsersFound" textLabel="EnX-1l-gvT" detailTextLabel="pzG-mU-0tV" imageView="K97-Vn-XQF" style="IBUITableViewCellStyleValue1" id="vg6-ft-KTO">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kIdentifierCellUsersFound" id="vg6-ft-KTO" customClass="CEIUserTableViewCell">
                                         <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vg6-ft-KTO" id="Q26-d6-uYP">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EnX-1l-gvT">
-                                                    <rect key="frame" x="73" y="11" width="33" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pzG-mU-0tV">
-                                                    <rect key="frame" x="241" y="11" width="44" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="sheepPhoto.png" id="K97-Vn-XQF">
-                                                    <rect key="frame" x="15" y="0.0" width="43" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -1809,6 +1789,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="tapButtonTryAgain:" destination="9EQ-gs-ZGW" eventType="touchUpInside" id="t4e-TF-byp"/>
                                     <segue destination="FYM-7R-YKV" kind="unwind" unwindAction="unwindCustomUserFound:" id="gDN-il-Vf8"/>
                                 </connections>
                             </button>
@@ -2607,7 +2588,6 @@
         <image name="headerMountain" width="410" height="408"/>
         <image name="imgUserPhoto" width="75" height="75"/>
         <image name="imgUserPlaceholder" width="60" height="60"/>
-        <image name="sheepPhoto.png" width="120" height="120"/>
         <image name="tabEncouragements" width="50" height="50"/>
         <image name="tabFollowers" width="50" height="50"/>
         <image name="tabMentors" width="50" height="50"/>
@@ -2620,11 +2600,11 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="jKs-Gj-82x"/>
+        <segue reference="4q1-Vo-cTc"/>
+        <segue reference="kq1-ES-DfJ"/>
+        <segue reference="vxi-M6-ghC"/>
+        <segue reference="ZM5-te-FK0"/>
         <segue reference="lbr-ma-Rjx"/>
         <segue reference="Gty-YO-6eE"/>
-        <segue reference="ZM5-te-FK0"/>
-        <segue reference="4q1-Vo-cTc"/>
-        <segue reference="biv-Bn-3hS"/>
-        <segue reference="kq1-ES-DfJ"/>
     </inferredMetricsTieBreakers>
 </document>

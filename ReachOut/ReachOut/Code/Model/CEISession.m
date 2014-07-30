@@ -54,20 +54,23 @@
                                 }
                                 else {
 
-                                  PFUser *user = [PFUser user];
+                                  [progressHud hide:YES];
+                                  
+                                  PFUser *user = [PFUser currentUser];
+                                  if (user == nil) {
+
+                                    user = [PFUser user];
+                                  }
+                                  
                                   user[@"fullName"] = [NSString stringWithFormat:@"%@ %@",[userData objectForKey:@"first_name"],[userData objectForKey:@"last_name"]];
                                   NSString *imageURLString = [[[userData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
                                   
-                                  UIImageView *imageView = [[UIImageView alloc] init];
-                                  [imageView setImageWithURL:[NSURL URLWithString:imageURLString]
-                                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-#warning TODO: nested and clunky; leavs a lot of space for improvements
-                                                     
-                                                     user[@"image"] = [PFFile fileWithData:UIImagePNGRepresentation(image)];
-                                                     
-                                                     [progressHud hide:YES];
-                                                     paramCompletionHandler(user);
-                                                   }];
+                                  NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURLString]];
+                                  
+                                  user[@"facebookSignin"] = @YES;
+                                  user[@"image"] = [PFFile fileWithData:data];
+                                  
+                                  paramCompletionHandler(user);
                                 }
                               }];
         }
@@ -82,34 +85,67 @@ withCompletionHandler:(void (^)(void))paramCompletionHandler
   __block MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:paramView animated:YES];
   progressHud.labelText = @"Signing up...";
   
-  [paramUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+  if ([paramUser[@"facebookSignin"] boolValue]) {
     
+//    PFACL *roleACL = [PFACL ACL];
+//    [roleACL setPublicReadAccess:YES];
+//    PFRole *role = [PFRole roleWithName:[paramUser[@"isMentor"] boolValue] ? @"Mentor" : @"Follower"
+//                                    acl:roleACL];
+//    [role saveInBackground];
+//    [role.users addObject:[PFUser currentUser]];
+//    [role saveInBackground];
+    
+    PFInstallation *instalation = [PFInstallation currentInstallation];
+    instalation[@"user"] = paramUser;
+    [instalation save];
+    PFRelation *relation = paramUser[@"installations"];
+    [relation addObject:instalation];
+    [paramUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+
+      [progressHud hide:YES];
       if (error) {
         
-        [progressHud hide:YES];
         paramErrorHandler(error);
       }
       else{
         
-        PFACL *roleACL = [PFACL ACL];
-        [roleACL setPublicReadAccess:YES];
-        PFRole *role = [PFRole roleWithName:[paramUser[@"isMentor"] boolValue] ? @"Mentor" : @"Follower"
-                                        acl:roleACL];
-        [role saveInBackground];
-        [role.users addObject:[PFUser currentUser]];
-        [role saveInBackground];
-        
-        PFInstallation *instalation = [PFInstallation currentInstallation];
-        instalation[@"user"] = paramUser;
-        [instalation save];
-        PFRelation *relation = paramUser[@"installations"];
-        [relation addObject:instalation];
-        [paramUser save];
-        
-        [progressHud hide:YES];
         paramCompletionHandler();
       }
-  }];
+
+      
+    }];
+  }
+  else{
+  
+    [paramUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    
+        if (error) {
+          
+          [progressHud hide:YES];
+          paramErrorHandler(error);
+        }
+        else{
+          
+//          PFACL *roleACL = [PFACL ACL];
+//          [roleACL setPublicReadAccess:YES];
+//          PFRole *role = [PFRole roleWithName:[paramUser[@"isMentor"] boolValue] ? @"Mentor" : @"Follower"
+//                                          acl:roleACL];
+//          [role saveInBackground];
+//          [role.users addObject:[PFUser currentUser]];
+//          [role saveInBackground];
+          
+          PFInstallation *instalation = [PFInstallation currentInstallation];
+          instalation[@"user"] = paramUser;
+          [instalation save];
+          PFRelation *relation = paramUser[@"installations"];
+          [relation addObject:instalation];
+          [paramUser save];
+          
+          [progressHud hide:YES];
+          paramCompletionHandler();
+        }
+    }];
+  }
 }
 
 + (void)loginUserInView:(UIView *)paramView

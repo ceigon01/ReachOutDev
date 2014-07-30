@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import "CEIAlertView.h"
 #import "CEINotificationNames.h"
+#import "CEIAddUserViewController.h"
 
 @interface CEICustomUserFoundViewController ()
 
@@ -54,60 +55,59 @@
     }
   }
   else{
-    
-  }
   
 #warning TODO: localization
-  __block MBProgressHUD *progressView = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  progressView.labelText = @"Looking for your Mentor...";
-  
-  PFQuery *query = [PFUser query];
-  [query whereKey:@"mobilePhone" equalTo:self.mobileNumber];
-  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    __block MBProgressHUD *progressView = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    progressView.labelText = @"Looking for your Mentor...";
     
-    [progressView hide:YES];
-    
-    if (error) {
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"mobilePhone" equalTo:self.mobileNumber];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
-      [CEIAlertView showAlertViewWithError:error];
-    }
-    else
-      if (objects.count == 0){
+      [progressView hide:YES];
+      
+      if (error) {
         
-#warning TODO: strings
-        [CEIAlertView showAlertViewWithValidationMessage:@"There are no ReachOut users with this mobile number"];
-        
-        self.labelTitle.text = @"Can't find your Mentor. :(";
-        self.labelFullName.text = @"Mr Mentor";
+        [CEIAlertView showAlertViewWithError:error];
       }
-      else {
-        
-        self.user = [objects lastObject];
-        self.labelTitle.text = self.user[@"title"];
-        self.labelFullName.text = self.user[@"fullName"];
-        
-        if (self.user[@"image"]) {
+      else
+        if (objects.count == 0){
           
-          PFFile *file = self.user[@"image"];
+  #warning TODO: strings
+          [CEIAlertView showAlertViewWithValidationMessage:@"There are no ReachOut users with this mobile number"];
           
-          __weak typeof (self) weakSelf = self;
+          self.labelTitle.text = @"Can't find your Mentor. :(";
+          self.labelFullName.text = @"Mr Mentor";
+        }
+        else {
           
-          [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+          self.user = [objects lastObject];
+          self.labelTitle.text = self.user[@"title"];
+          self.labelFullName.text = self.user[@"fullName"];
+          
+          if (self.user[@"image"]) {
             
-            weakSelf.imageView.image = [UIImage imageWithData:data];
-            weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
-            weakSelf.imageView.layer.masksToBounds = YES;
-          }];
-          
+            PFFile *file = self.user[@"image"];
+            
+            __weak typeof (self) weakSelf = self;
+            
+            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+              
+              weakSelf.imageView.image = [UIImage imageWithData:data];
+              weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
+              weakSelf.imageView.layer.masksToBounds = YES;
+            }];
+            
+          }
+          else{
+            
+            self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+            self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
+            self.imageView.layer.masksToBounds = YES;
+          }
         }
-        else{
-          
-          self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-          self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
-          self.imageView.layer.masksToBounds = YES;
-        }
-      }
-  }];
+    }];
+  }
 }
 
 #pragma mark - Action Handling
@@ -121,32 +121,60 @@
   
   if (self.isMentor) {
     
-    relationFrom = [PFUser currentUser][@"mentors"];
+    relationFrom = [[PFUser currentUser] relationForKey:@"mentors"];
     [relationFrom addObject:self.user];
     
-    relationTo = self.user[@"followers"];
+    relationTo = [self.user relationForKey:@"followers"];
     [relationTo addObject:[PFUser currentUser]];
     
     notificationName = kNotificationNameUserMentorAdded;
   }
   else{
     
-    relationTo = [PFUser currentUser][@"followers"];
+    relationTo = [[PFUser currentUser] relationForKey:@"followers"];
     [relationTo addObject:self.user];
     
-    relationFrom = [PFUser currentUser][@"mentors"];
+    relationFrom = [self.user relationForKey:@"mentors"];
     [relationFrom addObject:[PFUser currentUser]];
     
     notificationName = kNotificationNameUserFollowerAdded;
   }
   
-  [self.user saveInBackground];
-  [[PFUser currentUser] saveInBackground];
+//  [self.user saveInBackground];
+  [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName
+                                                        object:self.user];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+  }];
+}
+
+#pragma mark - Action Handling
+
+- (IBAction)tapButtonTryAgain:(id)paramSender{
   
-  [[NSNotificationCenter defaultCenter] postNotificationName:notificationName
-                                                      object:self.user];
+  if (self.user) {
+   
+    __block UIViewController *viewController = nil;
+    [[self.navigationController viewControllers] enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
+    
+      if ([vc isKindOfClass:[CEIAddUserViewController class]]) {
+        
+        viewController = vc;
+        *stop = YES;
+      }
+    }];
+    
+    if (viewController) {
+      
+      [self.navigationController popToViewController:viewController animated:YES];
+    }
+  }
+  else{
   
-  [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+  }
 }
 
 @end

@@ -212,6 +212,7 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
                 }
                          errorHandler:^(NSError *error) {
                            
+                           [PFUser logOut];
                            [CEIAlertView showAlertViewWithError:error];
                          }];
 

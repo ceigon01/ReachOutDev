@@ -13,6 +13,7 @@
 #import "CEIAlertView.h"
 #import "CEICustomUserFoundViewController.h"
 #import "CEIAddCustomUserViewController.h"
+#import "CEIUserTableViewCell.h"
 
 static NSString *const kIdentifierCellUsersFound = @"kIdentifierCellUsersFound";
 static NSString *const kIdentifierSegueAddUserToAddCustomUser = @"kIdentifierSegueAddUserToAddCustomUser";
@@ -32,6 +33,10 @@ static NSString *const kIdentifierSegueAddUserToCustomUserFound = @"kIdentifierS
 - (void)viewDidLoad{
   [super viewDidLoad];
 
+  [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
+                                             bundle:[NSBundle mainBundle]]
+       forCellReuseIdentifier:kIdentifierCellUsersFound];
+  
   ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
 
 #warning TODO: localizations
@@ -108,34 +113,12 @@ static NSString *const kIdentifierSegueAddUserToCustomUserFound = @"kIdentifierS
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifierCellUsersFound
-                                                          forIndexPath:indexPath];
+  CEIUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifierCellUsersFound
+                                                               forIndexPath:indexPath];
   
   PFUser *user = [self.arrayUsersFound objectAtIndex:indexPath.row];
   
-  if (user[@"image"]) {
-    
-    PFFile *file = user[@"image"];
-    
-    __weak UITableViewCell *weakCell = cell;
-    
-    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-      
-      weakCell.imageView.image = [UIImage imageWithData:data];
-      weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
-      weakCell.imageView.layer.masksToBounds = YES;
-    }];
-    
-  }
-  else{
-    
-    cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-    cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
-    cell.imageView.layer.masksToBounds = YES;
-  }
-  
-  cell.textLabel.text = user[@"fullName"];
-  cell.detailTextLabel.text = user[@"title"];
+  [cell configureWithUser:user];
   
   return cell;
 }
@@ -186,6 +169,7 @@ static NSString *const kIdentifierSegueAddUserToCustomUserFound = @"kIdentifierS
 
       phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
                      componentsJoinedByString:@""];
+      phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
 
       [self.arrayPhoneNumbers addObject:phoneNumber];
     }
@@ -205,19 +189,15 @@ static NSString *const kIdentifierSegueAddUserToCustomUserFound = @"kIdentifierS
   
   __weak typeof (self) weakSelf = self;
   
-  PFQuery *query = [PFUser query];
-  if (query && [PFUser currentUser]) {
+  PFQuery *queryMobileNumber = [PFUser query];
+  PFQuery *queryMobileNumberWithPrefix = [PFUser query];
+  if ([PFUser currentUser]) {
     
-//    if (self.isMentor) {
-//    
-//      [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
-//    }
-//    else{
-//    
-//      [query whereKey:@"followers" equalTo:[PFUser currentUser]];
-//    }
+    [queryMobileNumber whereKey:@"mobileNumber" containedIn:self.arrayPhoneNumbers];
+    [queryMobileNumberWithPrefix whereKey:@"mobilePhoneWithPrefix" containedIn:self.arrayPhoneNumbers];
     
-    [query whereKey:@"mobileNumber" containedIn:self.arrayPhoneNumbers];
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[queryMobileNumber, queryMobileNumberWithPrefix]];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       [progressHUD hide:YES];

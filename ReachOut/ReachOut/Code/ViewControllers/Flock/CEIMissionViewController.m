@@ -59,7 +59,6 @@ static const CGFloat kHeightCell = 100.0f;
   
   __weak typeof (self) weakSelf = self;
   
-  
   UIColor *colorTop = [UIColor colorWithWhite:1.0 alpha:0.1];
   UIColor *colorBottom = [UIColor colorWithWhite:0.0 alpha:0.8];
   NSArray *colors =  [NSArray arrayWithObjects:(id)colorTop.CGColor, colorBottom.CGColor, nil];

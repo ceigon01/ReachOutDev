@@ -64,6 +64,7 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
   [CEISession fetchFacebookDataInView:self.view
                 withCompletionHandler:^(PFUser *user) {
                   
+                  weakSelf.user = user;
                   weakSelf.user[@"fullName"] = user[@"fullName"];
                   weakSelf.user[@"image"] = user[@"image"];
                   
@@ -218,6 +219,11 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
                
 #warning TODO: implement phone verification
                [weakSelf dismissViewControllerAnimated:YES completion:NULL];
+               
+               [weakSelf.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                 
+                 NSLog(@"double save, no idea why");
+               }];
              }
                       errorHandler:^(NSError *error) {
                         

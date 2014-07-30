@@ -77,7 +77,9 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
   PFQuery *query = [PFUser query];
   if (query && [PFUser currentUser]) {
    
-    [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
+//    [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
+    
+    query = [[[PFUser currentUser] relationForKey:@"followers"] query];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       [weakSelf.tableView stopRefreshAnimation];
