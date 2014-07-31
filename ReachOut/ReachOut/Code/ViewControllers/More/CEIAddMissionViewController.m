@@ -16,6 +16,7 @@
 #import "CEITextField.h"
 #import "UIImage+Crop.h"
 #import "CEIUserTableViewCell.h"
+#import "CEINotificationNames.h"
 
 typedef NS_ENUM(NSInteger, CEIAddMissionPickerViewComponent){
   
@@ -82,8 +83,69 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
 @implementation CEIAddMissionViewController
 
+- (void)dealloc{
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMissionAdded
+                                                      object:@{
+                                                               @"mission" : self.mission,
+                                                               @"goals"   : self.arrayGoals,
+                                                               @"flock"   : self.arrayFlock
+                                                               }];
+
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)notificationFollowerAdded:(NSNotification *)paramNotification{
+  
+  self.arrayFlock = paramNotification.object;
+  
+  __block PFRelation *relationFlock = [self.mission relationForKey:@"usersAsignees"];
+  
+  [self.arrayFlock enumerateObjectsUsingBlock:^(PFUser *user, NSUInteger idx, BOOL *stop) {
+    
+    [relationFlock addObject:user];
+  }];
+  
+  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionFlock]
+                withRowAnimation:UITableViewRowAnimationMiddle];
+}
+
+- (void)notificationGoalAdded:(NSNotification *)paramNotification{
+  
+  PFObject *goal = paramNotification.object;
+  
+  __weak typeof(self) weakSelf = self;
+  
+  goal[@"mission"] = self.mission;
+  goal[@"orderIndex"] = [NSNumber numberWithInteger:self.arrayGoals.count];
+  [self.arrayGoals addObject:goal];
+  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
+                withRowAnimation:UITableViewRowAnimationMiddle];
+  
+  [goal saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    
+    if (error) {
+      
+      [weakSelf.arrayGoals removeObject:goal];
+      [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
+                        withRowAnimation:UITableViewRowAnimationMiddle];
+      
+      [CEIAlertView showAlertViewWithError:error];
+    }
+  }];
+}
+
 - (void)viewDidLoad{
   [super viewDidLoad];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(notificationGoalAdded:)
+                                               name:kNotificationNameGoalAdded
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(notificationFollowerAdded:)
+                                               name:kNotificationNameFollowerAddedToMission
+                                             object:nil];
   
   self.tableView.editing = YES;
   [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
@@ -168,6 +230,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
     
     CEIAddFlockToMissionViewController *addFlockViewController = (CEIAddFlockToMissionViewController *)segue.destinationViewController;
     
+    addFlockViewController.arrayFollowersSelected = [NSMutableArray arrayWithArray:self.arrayFlock];
     addFlockViewController.mission = self.mission;
   }
 }
@@ -176,66 +239,10 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
   if ([fromViewController isKindOfClass:[CEIAddGoalViewController class]]) {
     
-    CEIAddGoalViewController *addGoalViewController = (CEIAddGoalViewController *)fromViewController;
-    
-    PFObject *goal = addGoalViewController.goalAdded;
-    
-    NSString *caption = goal[@"caption"];
-    if (caption.length < 1) {
-      
-      [CEIAlertView showAlertViewWithValidationMessage:@"Please put a caption."];
-      return NO;
-    }
-    
-    NSArray *arrayDays = addGoalViewController.arrayButtonNamesSelected;
-    BOOL isRecurring = [goal[@"isRecurring"] boolValue];
-    if (!isRecurring && arrayDays.count == 0) {
-      
-      [CEIAlertView showAlertViewWithValidationMessage:@"Select days you want the goal to take place, or press 'repeat everyday'."];
-      return NO;
-    }
-    
-    [arrayDays enumerateObjectsUsingBlock:^(NSString *dayName, NSUInteger idx, BOOL *stop) {
-      
-      [goal addUniqueObject:dayName forKey:@"days"];
-    }];
-    
-    __weak typeof(self) weakSelf = self;
-    
-    goal[@"mission"] = self.mission;
-    goal[@"orderIndex"] = [NSNumber numberWithInteger:self.arrayGoals.count];
-    [self.arrayGoals addObject:goal];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
-                        withRowAnimation:UITableViewRowAnimationMiddle];
-    
-    [goal saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-      
-      if (error) {
-        
-      [weakSelf.arrayGoals removeObject:goal];
-      [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
-                        withRowAnimation:UITableViewRowAnimationMiddle];
-        
-        [CEIAlertView showAlertViewWithError:error];
-      }
-    }];
   }
   else
     if ([fromViewController isKindOfClass:[CEIAddFlockToMissionViewController class]]) {
      
-      CEIAddFlockToMissionViewController *addFlockToMissionViewController = (CEIAddFlockToMissionViewController *)fromViewController;
-      
-      self.arrayFlock = addFlockToMissionViewController.arrayFollowersSelected;
-      
-      __block PFRelation *relationFlock = [self.mission relationForKey:@"usersAsignees"];
-
-      [self.arrayFlock enumerateObjectsUsingBlock:^(PFUser *user, NSUInteger idx, BOOL *stop) {
-  
-        [relationFlock addObject:user];
-      }];
-      
-      [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionFlock]
-                    withRowAnimation:UITableViewRowAnimationMiddle];
     }
     else
       if ([fromViewController isKindOfClass:[CEIAddMissionViewController class]]) {

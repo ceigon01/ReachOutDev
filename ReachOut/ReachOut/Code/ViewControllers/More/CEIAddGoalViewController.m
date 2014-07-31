@@ -11,6 +11,8 @@
 #import "CEIColor.h"
 #import <Parse/Parse.h>
 #import <QuartzCore/QuartzCore.h>
+#import "CEIAlertView.h"
+#import "CEINotificationNames.h"
 
 static const NSUInteger kTagOffsetButtonDay = 1000;
 static const NSUInteger kNumerbOfDayButtons = 7;
@@ -68,6 +70,34 @@ static const NSUInteger kNumerbOfDayButtons = 7;
   
   UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
   [self.view addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+  [super viewWillDisappear:animated];
+  
+  PFObject *goal = self.goalAdded;
+  
+  NSString *caption = goal[@"caption"];
+  if (caption.length < 1) {
+    
+    [CEIAlertView showAlertViewWithValidationMessage:@"Please put a caption."];
+    return;
+  }
+  
+  NSArray *arrayDays = self.arrayButtonNamesSelected;
+  BOOL isRecurring = [goal[@"isRecurring"] boolValue];
+  if (!isRecurring && arrayDays.count == 0) {
+    
+    [CEIAlertView showAlertViewWithValidationMessage:@"Select days you want the goal to take place, or press 'repeat everyday'."];
+    return;
+  }
+  
+  [arrayDays enumerateObjectsUsingBlock:^(NSString *dayName, NSUInteger idx, BOOL *stop) {
+    
+    [goal addUniqueObject:dayName forKey:@"days"];
+  }];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameGoalAdded object:self.goalAdded];
 }
 
 #pragma mark - UITextView Delegate

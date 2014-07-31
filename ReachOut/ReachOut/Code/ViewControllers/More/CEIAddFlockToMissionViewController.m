@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CEIUserTableViewCell.h"
+#import "CEINotificationNames.h"
 
 static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFlockToMission";
 
@@ -58,6 +59,12 @@ static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFl
   }
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+  [super viewDidDisappear:animated];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameFollowerAddedToMission object:self.arrayAllFollowers];
+}
+
 #pragma mark - UITableView Datasource & Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -84,14 +91,15 @@ static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFl
   
   [cell configureWithUser:user];
 
-  if ([self.arrayFollowersSelected containsObject:user]) {
+  cell.accessoryType = UITableViewCellAccessoryNone;
+  [self.arrayFollowersSelected enumerateObjectsUsingBlock:^(PFUser *userSelected, NSUInteger idx, BOOL *stop) {
     
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-  }
-  else{
-    
-    cell.accessoryType = UITableViewCellAccessoryNone;
-  }
+    if ([userSelected.objectId isEqualToString:user.objectId]) {
+      
+      cell.accessoryType = UITableViewCellAccessoryCheckmark;
+      *stop = YES;
+    }
+  }];
   
   return cell;
 }
@@ -100,14 +108,27 @@ static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFl
   
   PFUser *user = [self.arrayAllFollowers objectAtIndex:indexPath.row];
   
-  if ([self.arrayFollowersSelected containsObject:user]) {
+  __block BOOL containsUser = NO;
+  __block PFObject *selectedUser = nil;
+  [self.arrayFollowersSelected enumerateObjectsUsingBlock:^(PFUser *userSelected, NSUInteger idx, BOOL *stop) {
     
-    [self.arrayFollowersSelected removeObject:user];
+    if ([userSelected.objectId isEqualToString:user.objectId]) {
+      
+      selectedUser = userSelected;
+      containsUser = YES;
+      *stop = YES;
+    }
+  }];
+  
+  if (containsUser) {
+    
+    [self.arrayFollowersSelected removeObject:selectedUser];
   }
   else{
     
     [self.arrayFollowersSelected addObject:user];
   }
+  
   
   [tableView reloadRowsAtIndexPaths:@[indexPath]
                    withRowAnimation:UITableViewRowAnimationFade];

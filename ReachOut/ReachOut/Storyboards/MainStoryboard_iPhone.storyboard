@@ -757,13 +757,7 @@
                             <constraint firstAttribute="trailing" secondItem="JHn-C8-swx" secondAttribute="trailing" id="Ved-R0-LQF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add a Mission" id="kWI-4d-cx7">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="vQy-nr-iHj">
-                            <connections>
-                                <segue destination="WTK-7v-2jd" kind="unwind" unwindAction="unwindAddMission:" id="cFR-aD-ORW"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Add a Mission" id="kWI-4d-cx7"/>
                     <connections>
                         <outlet property="tableView" destination="JHn-C8-swx" id="HsH-pe-pZu"/>
                         <segue destination="kcn-qy-TqE" kind="push" identifier="kIdentifierSegueAddMissionToAddGoal" id="fnS-Bk-n3E"/>
@@ -771,7 +765,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PmW-tf-CZE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="XYA-1N-wt3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2190" y="1953"/>
         </scene>
@@ -988,13 +981,7 @@
                             <constraint firstItem="MA8-sX-u6L" firstAttribute="leading" secondItem="3AC-di-aXo" secondAttribute="trailing" constant="-1" id="yhn-NC-Ur0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add a Goal" id="2yf-bR-ATV">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ex4-B3-9AS">
-                            <connections>
-                                <segue destination="XYA-1N-wt3" kind="unwind" unwindAction="unwindAddGoal:" id="Lbc-9N-FAp"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Add a Goal" id="2yf-bR-ATV"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="buttonTime" destination="4t5-f1-dSN" id="6Ek-EI-emN"/>
@@ -2291,7 +2278,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHG-nL-NUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="WTK-7v-2jd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1792" y="1953"/>
         </scene>
@@ -2563,13 +2549,7 @@
                             <constraint firstAttribute="trailing" secondItem="PuV-Jo-4M4" secondAttribute="trailing" id="rmz-Z0-tiX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Gtn-eh-fHM">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="f61-P5-o5d">
-                            <connections>
-                                <segue destination="XYA-1N-wt3" kind="unwind" unwindAction="unwindAddFlock:" id="bTE-Zk-3nS"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Gtn-eh-fHM"/>
                     <connections>
                         <outlet property="tableView" destination="PuV-Jo-4M4" id="6N8-mE-4wf"/>
                     </connections>

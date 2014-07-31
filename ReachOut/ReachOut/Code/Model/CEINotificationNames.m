@@ -8,10 +8,13 @@
 
 #import "CEINotificationNames.h"
 
-NSString *const kNotificationNameLogout = @"kNotificationNameLogout";
-NSString *const kNotificationNameMissionAdded = @"kNotificationNameMissionAdded";
-NSString *const kNotificationNameUserFollowerAdded = @"kNotificationNameUserFollowerAdded";
-NSString *const kNotificationNameUserMentorAdded = @"kNotificationNameUserMentorAdded";
+NSString *const kNotificationNameLogout                 = @"kNotificationNameLogout";
+NSString *const kNotificationNameMissionAdded           = @"kNotificationNameMissionAdded";
+NSString *const kNotificationNameUserFollowerAdded      = @"kNotificationNameUserFollowerAdded";
+NSString *const kNotificationNameUserMentorAdded        = @"kNotificationNameUserMentorAdded";
+NSString *const kNotificationNameGoalAdded              = @"kNotificationNameGoalAdded";
+NSString *const kNotificationNameFollowerAddedToMission = @"kNotificationNameFollowerAddedToMission";
+NSString *const kNotificationNameEncouragementAdded     = @"kNotificationNameEncouragementAdded";
 
 @implementation CEINotificationNames
 
