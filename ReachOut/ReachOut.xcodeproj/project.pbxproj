@@ -77,6 +77,7 @@
 		FD53C787197809A000107F09 /* CEICustomUserFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD53C786197809A000107F09 /* CEICustomUserFoundViewController.m */; };
 		FD5833CF1960A9FD008782D8 /* CEIDay.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5833CE1960A9FD008782D8 /* CEIDay.m */; };
 		FD5833D21960BAC6008782D8 /* CEIAddGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5833D11960BAC6008782D8 /* CEIAddGoalViewController.m */; };
+		FD92EC52198A523C00601F38 /* UIImage+Crop.m in Sources */ = {isa = PBXBuildFile; fileRef = FD92EC51198A523C00601F38 /* UIImage+Crop.m */; };
 		FDA20041197575A900DC8BDA /* CEIAddUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA20040197575A900DC8BDA /* CEIAddUserViewController.m */; };
 		FDA2004419757F2D00DC8BDA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA2004219757F2D00DC8BDA /* AddressBook.framework */; };
 		FDA2004519757F2D00DC8BDA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA2004319757F2D00DC8BDA /* AddressBookUI.framework */; };
@@ -218,6 +219,8 @@
 		FD5833CE1960A9FD008782D8 /* CEIDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIDay.m; sourceTree = "<group>"; };
 		FD5833D01960BAC6008782D8 /* CEIAddGoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddGoalViewController.h; sourceTree = "<group>"; };
 		FD5833D11960BAC6008782D8 /* CEIAddGoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddGoalViewController.m; sourceTree = "<group>"; };
+		FD92EC50198A523C00601F38 /* UIImage+Crop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Crop.h"; sourceTree = "<group>"; };
+		FD92EC51198A523C00601F38 /* UIImage+Crop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Crop.m"; sourceTree = "<group>"; };
 		FDA2003F197575A900DC8BDA /* CEIAddUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIAddUserViewController.h; sourceTree = "<group>"; };
 		FDA20040197575A900DC8BDA /* CEIAddUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIAddUserViewController.m; sourceTree = "<group>"; };
 		FDA2004219757F2D00DC8BDA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -517,6 +520,8 @@
 				A4CAB08E193B4C3D00CC7B12 /* UIView+FirstResponder.m */,
 				FD1190C11949EDEF005A1AE1 /* NSDate+Difference.h */,
 				FD1190C21949EDEF005A1AE1 /* NSDate+Difference.m */,
+				FD92EC50198A523C00601F38 /* UIImage+Crop.h */,
+				FD92EC51198A523C00601F38 /* UIImage+Crop.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -780,6 +785,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD2E9AE919577E76005B074A /* CEIGoalTableViewCell.m in Sources */,
+				FD92EC52198A523C00601F38 /* UIImage+Crop.m in Sources */,
 				FD1190A819487C03005A1AE1 /* CEIEncouragementViewController.m in Sources */,
 				FD1190B4194899C2005A1AE1 /* CEIMissionsViewController.m in Sources */,
 				FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */,

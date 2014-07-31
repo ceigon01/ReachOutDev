@@ -14,6 +14,7 @@
 #import "CEISession.h"
 #import "UIImageView+WebCache.h"
 #import "CEIAlertView.h"
+#import "UIImage+Crop.h"
 #import "MBProgressHUD.h"
 
 #warning TODO: redundant
@@ -330,6 +331,11 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
   
   UIImage *image = info[UIImagePickerControllerOriginalImage];
+  
+  image = [image imageCroppedWithRect:CGRectMake((self.buttonUserImage.frame.size.width - image.size.width) * 0.5f,
+                                                 (self.buttonUserImage.frame.size.height - image.size.height) * 0.5f,
+                                                 self.buttonUserImage.frame.size.width,
+                                                 self.buttonUserImage.frame.size.height)];
   
   [self.buttonUserImage setBackgroundImage:image forState:UIControlStateNormal];
   

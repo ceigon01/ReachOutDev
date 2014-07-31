@@ -14,6 +14,7 @@
 #import "CEIAddGoalViewController.h"
 #import "UIImageView+WebCache.h"
 #import "CEITextField.h"
+#import "UIImage+Crop.h"
 
 typedef NS_ENUM(NSInteger, CEIAddMissionPickerViewComponent){
   
@@ -734,6 +735,11 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
   
   UIImage *image = info[UIImagePickerControllerOriginalImage];
+  
+  image = [image imageCroppedWithRect:CGRectMake((self.imageViewHeader.frame.size.width - image.size.width) * 0.5f,
+                                                 (self.imageViewHeader.frame.size.height - image.size.height) * 0.5f,
+                                                 self.imageViewHeader.frame.size.width,
+                                                 self.imageViewHeader.frame.size.height)];
   
   self.imageViewHeader.image = image;
   
