@@ -87,7 +87,7 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
   __weak typeof (self) weakSelf = self;
   
   PFQuery *query = [PFUser query];
-  [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
+  query = [[[PFUser currentUser] relationForKey:@"followers"] query];
   [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
     
     weakSelf.labelMentorsCount.text = [NSString stringWithFormat:@"%d",number];

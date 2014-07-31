@@ -15,6 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "CEITextField.h"
 #import "UIImage+Crop.h"
+#import "CEIUserTableViewCell.h"
 
 typedef NS_ENUM(NSInteger, CEIAddMissionPickerViewComponent){
   
@@ -85,6 +86,9 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   [super viewDidLoad];
   
   self.tableView.editing = YES;
+  [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
+                                             bundle:[NSBundle mainBundle]]
+       forCellReuseIdentifier:@"kIdentifierCellAddMission3"];
   
   if (self.mission) {
    
@@ -101,9 +105,6 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
     self.switchNeverEnding.on = [self.mission[@"isNeverending"] boolValue];
     
     [self.buttonEndsIn setTitle:self.mission[@"timeCount"] forState:UIControlStateNormal];
-  
-    
-    
   }
   
   [self fetchGoals];
@@ -441,28 +442,10 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
     
     PFUser *user = [self.arrayFlock objectAtIndex:indexPath.row];
     
-    if (user[@"image"]) {
-      
-      PFFile *file = user[@"image"];
-      
-      __weak UITableViewCell *weakCell = cell;
-      
-      [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        
-        weakCell.imageView.image = [UIImage imageWithData:data];
-        weakCell.imageView.layer.cornerRadius = weakCell.contentView.frame.size.height * 0.5f;
-        weakCell.imageView.layer.masksToBounds = YES;
-      }];
-      
-    }
-    else{
-      
-      cell.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-      cell.imageView.layer.cornerRadius = cell.contentView.frame.size.height * 0.5f;
-      cell.imageView.layer.masksToBounds = YES;
-    }
-
-    cell.textLabel.text = user[@"fullName"];
+    CEIUserTableViewCell *cellUser = (CEIUserTableViewCell *)cell;
+    
+    [cellUser configureWithUser:user];
+    cellUser.accessoryType = UITableViewCellAccessoryNone;
   }
   else
     if (indexPath.section == CEIAddMissionSectionGoals){
