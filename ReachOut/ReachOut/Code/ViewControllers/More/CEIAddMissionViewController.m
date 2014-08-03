@@ -413,6 +413,9 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   
   UIView *view = nil;
   
+  [self hidePicker];
+  [self.textFieldCaption resignFirstResponder];
+  
   if ([paramSender isKindOfClass:[UITapGestureRecognizer class]]) {
     
     view = ((UITapGestureRecognizer *)paramSender).view;
@@ -541,7 +544,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
-  [self textFieldShouldReturn:self.textFieldCaption];
+  [self.textFieldCaption resignFirstResponder];
   [self hidePicker];
   
   self.selectedIndexPath = indexPath;
@@ -726,14 +729,14 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   
   UIImage *image = info[UIImagePickerControllerOriginalImage];
   
-  image = [image imageCroppedWithRect:CGRectMake((self.imageViewHeader.frame.size.width - image.size.width) * 0.5f,
-                                                 (self.imageViewHeader.frame.size.height - image.size.height) * 0.5f,
-                                                 self.imageViewHeader.frame.size.width,
-                                                 self.imageViewHeader.frame.size.height)];
-  
+//  image = [image imageCroppedWithRect:CGRectMake((self.imageViewHeader.frame.size.width - image.size.width) * 0.5f,
+//                                                 (self.imageViewHeader.frame.size.height - image.size.height) * 0.5f,
+//                                                 self.imageViewHeader.frame.size.width,
+//                                                 self.imageViewHeader.frame.size.height)];
+//  
   self.imageViewHeader.image = image;
   
-  PFFile *imageFile = [PFFile fileWithName:@"cover.png" data:UIImagePNGRepresentation(image)];
+  PFFile *imageFile = [PFFile fileWithName:@"cover.png" data:UIImageJPEGRepresentation(image, 0.5f)];
   
   self.mission[@"image"] = imageFile;
   
