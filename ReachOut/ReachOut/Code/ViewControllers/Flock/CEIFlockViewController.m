@@ -16,6 +16,7 @@
 #import "CEIAddUserViewController.h"
 #import "CEINotificationNames.h"
 #import "CEIUserTableViewCell.h"
+#import "PFQuery+FollowersAndMentors.h"
 
 static NSString *const kCellIdentifierFollower = @"kCellIdentifierFollower";
 static NSString *const kSegueIdentifierFlockToMissions = @"kSegueIdentifier_Flock_Missions";
@@ -74,12 +75,9 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
   
   __weak CEIFlockViewController *weakSelf = self;
   
-  PFQuery *query = [PFUser query];
-  if (query && [PFUser currentUser]) {
-   
-//    [query whereKey:@"mentors" equalTo:[PFUser currentUser]];
+  if ([PFUser currentUser]) {
     
-    query = [[[PFUser currentUser] relationForKey:@"followers"] query];
+    PFQuery *query = [PFQuery followers];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       [weakSelf.tableView stopRefreshAnimation];

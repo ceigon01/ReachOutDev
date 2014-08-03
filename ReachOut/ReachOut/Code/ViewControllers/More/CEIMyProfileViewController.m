@@ -9,6 +9,7 @@
 #import "CEIMyProfileViewController.h"
 #import <Parse/Parse.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import "PFQuery+FollowersAndMentors.h"
 
 #warning TODO: redundant
 NSString *const kTitleButtonImageSourceCameraRollCameraRoll4 = @"Camera roll";
@@ -78,8 +79,7 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
 
   __weak typeof (self) weakSelf = self;
   
-  PFQuery *query = [PFUser query];
-  [query whereKey:@"followers" equalTo:[PFUser currentUser]];
+  PFQuery *query = [PFQuery mentors];
   [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
     
     weakSelf.labelMentorsCount.text = [NSString stringWithFormat:@"%d",number];
@@ -90,8 +90,7 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
   
   __weak typeof (self) weakSelf = self;
   
-  PFQuery *query = [PFUser query];
-  query = [[[PFUser currentUser] relationForKey:@"followers"] query];
+  PFQuery *query = [PFQuery followers];
   [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
     
     weakSelf.labelFollowersCount.text = [NSString stringWithFormat:@"%d",number];

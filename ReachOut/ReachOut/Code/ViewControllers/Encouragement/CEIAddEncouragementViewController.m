@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "CEIAlertView.h"
 #import "CEIUserTableViewCell.h"
+#import "PFQuery+FollowersAndMentors.h"
 
 static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEncouragement";
 
@@ -34,10 +35,9 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
   
     __weak CEIAddEncouragementViewController *weakSelf = self;
     
-    PFQuery *query = [PFUser query];
+    PFQuery *query = [PFQuery followers];
     if (query && [PFUser currentUser]) {
       
-      query = [[[PFUser currentUser] relationForKey:@"followers"] query];
       [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if (error) {

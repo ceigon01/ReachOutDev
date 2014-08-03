@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CEIUserTableViewCell.h"
 #import "CEINotificationNames.h"
+#import "PFQuery+FollowersAndMentors.h"
 
 static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFlockToMission";
 
@@ -40,10 +41,9 @@ static NSString *const kCellIdentifierAddFlockToMission = @"kCellIdentifierAddFl
   
   __weak typeof (self) weakSelf = self;
   
-  PFQuery *query = [PFUser query];
+  PFQuery *query = [PFQuery followers];
   if (query && [PFUser currentUser]) {
     
-    query = [[[PFUser currentUser] relationForKey:@"followers"] query];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       if (error) {

@@ -228,7 +228,7 @@
                         <outlet property="imageView" destination="jtU-jN-wRY" id="Uzg-rl-0Wb"/>
                         <outlet property="labelSubTitle" destination="us7-sY-Ely" id="veH-n8-K3w"/>
                         <outlet property="labelTitle" destination="F5x-P5-FBn" id="tEK-fK-6LC"/>
-                        <segue destination="S3j-dZ-hxi" kind="modal" identifier="kIdentifierSegueRoleSelectToMotto" id="7aa-Rm-Hm2"/>
+                        <segue destination="S3j-dZ-hxi" kind="modal" identifier="kIdentifierSegueRoleSelectToMotto" animates="NO" id="7aa-Rm-Hm2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PE7-yV-jEo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1298,7 +1298,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="5tf-Nw-JlT" kind="modal" identifier="kSegueIdentifier_Root_Signup" id="lhe-a2-Kzf"/>
+                        <segue destination="5tf-Nw-JlT" kind="modal" identifier="kSegueIdentifier_Root_Signup" animates="NO" id="lhe-a2-Kzf"/>
                         <segue destination="Xwq-Ja-Ckq" kind="relationship" relationship="viewControllers" id="rAR-he-gsw"/>
                         <segue destination="g71-ZA-e7e" kind="relationship" relationship="viewControllers" id="epP-tP-zOs"/>
                         <segue destination="Gvg-BW-QqA" kind="relationship" relationship="viewControllers" id="tbA-SF-jhy"/>
@@ -2579,12 +2579,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="lbr-ma-Rjx"/>
         <segue reference="jKs-Gj-82x"/>
         <segue reference="4q1-Vo-cTc"/>
         <segue reference="kq1-ES-DfJ"/>
         <segue reference="vxi-M6-ghC"/>
-        <segue reference="ZM5-te-FK0"/>
-        <segue reference="lbr-ma-Rjx"/>
+        <segue reference="7aa-Rm-Hm2"/>
         <segue reference="Gty-YO-6eE"/>
     </inferredMetricsTieBreakers>
 </document>

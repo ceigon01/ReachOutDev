@@ -16,6 +16,7 @@
 #import "CEIAddUserViewController.h"
 #import "CEINotificationNames.h"
 #import "CEIUserTableViewCell.h"
+#import "PFQuery+FollowersAndMentors.h"
 
 static NSString *const kCellIdentifierMentor = @"kCellIdentifierMentor";
 static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Mentors_Missions";
@@ -76,11 +77,9 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
   
   __weak CEIMentorsViewController *weakSelf = self;
   
-//      query = [[[PFUser currentUser] relationForKey:@"followers"] query];
-  
-  PFQuery *query = [[[PFUser currentUser] relationForKey:@"mentors"] query];
-  if (query && [PFUser currentUser]) {
+  if ([PFUser currentUser]) {
     
+    PFQuery *query = [PFQuery mentors];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       [weakSelf.tableView stopRefreshAnimation];

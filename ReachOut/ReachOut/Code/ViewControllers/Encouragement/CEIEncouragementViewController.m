@@ -105,6 +105,10 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   __weak CEIEncouragementViewController *weakSelf = self;
   
   PFQuery *query = [PFQuery queryWithClassName:@"Encouragement"];
+
+//  PFQuery *query1 = [PFUser query];
+//  [query1 whereKey:@"followers" equalTo:[PFUser currentUser]];
+//  PFQuery *query2 = [[[PFUser currentUser] relationForKey:@"mentors"] query];  
   
   [query whereKey:@"followerID" equalTo:[PFUser currentUser]];
   [query includeKey:@"mentorID"];
