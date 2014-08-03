@@ -30,7 +30,11 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
   
   self.textFieldTitle.text = userCurrent[@"title"];
   self.textFieldFullName.text = userCurrent[@"fullName"];
-  self.labelPhoneNumber.text = [NSString stringWithFormat:@"+(%@) %@",userCurrent[@"phonePrefix"],userCurrent[@"mobilePhone"]];
+  
+  NSString *prefix = userCurrent[@"phonePrefix"] ? userCurrent[@"phonePrefix"] : @"-";
+  NSString *phoneNumber = userCurrent[@"mobilePhone"] ? userCurrent[@"mobilePhone"] : @"-";
+  
+  self.labelPhoneNumber.text = [NSString stringWithFormat:@"Phone number: +(%@) %@",prefix,phoneNumber];
   
   self.buttonUserImage.layer.cornerRadius = self.buttonUserImage.frame.size.width * 0.5f;
   self.buttonUserImage.layer.borderColor = [UIColor grayColor].CGColor;
@@ -90,7 +94,7 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
   query = [[[PFUser currentUser] relationForKey:@"followers"] query];
   [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
     
-    weakSelf.labelMentorsCount.text = [NSString stringWithFormat:@"%d",number];
+    weakSelf.labelFollowersCount.text = [NSString stringWithFormat:@"%d",number];
   }];
 }
 

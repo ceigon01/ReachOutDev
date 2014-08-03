@@ -76,8 +76,9 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
   
   __weak CEIMentorsViewController *weakSelf = self;
   
-  PFQuery *query = [[[PFUser currentUser] relationForKey:@"mentors"] query];
+//      query = [[[PFUser currentUser] relationForKey:@"followers"] query];
   
+  PFQuery *query = [[[PFUser currentUser] relationForKey:@"mentors"] query];
   if (query && [PFUser currentUser]) {
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
