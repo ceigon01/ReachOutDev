@@ -38,6 +38,9 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
 
 - (void)notificationAddMission:(NSNotification *)paramNotification{
   
+  MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  progressHUD.labelText = @"Updating mission...";
+  
   NSDictionary *dictionary = paramNotification.object;
   
   PFObject *mission = [dictionary objectForKey:@"mission"];
@@ -46,9 +49,12 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   
   PFFile *fileImage = mission[@"image"];
   if (fileImage == nil) {
-    
-    [CEIAlertView showAlertViewWithValidationMessage:@"Please use a background image."];
-    return;
+
+    UIImage *image = [UIImage imageNamed:@"cathedral"];
+    PFFile *defaultCover = [PFFile fileWithData:UIImageJPEGRepresentation(image, 0.6f)];
+    mission[@"image"] = defaultCover;
+//    [CEIAlertView showAlertViewWithValidationMessage:@"Please use a background image."];
+//    return;
   }
   
   NSString *caption = mission[@"caption"];
@@ -71,9 +77,6 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
     [CEIAlertView showAlertViewWithValidationMessage:@"Please select followers, that you want on this mission."];
     return;
   }
-  
-  MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  progressHUD.labelText = @"Updating mission...";
   
   if (arrayGoals.count == 0) {
     
