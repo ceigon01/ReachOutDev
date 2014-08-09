@@ -26,6 +26,7 @@ PODS:
   - SDWebImage (3.6):
     - SDWebImage/Core
   - SDWebImage/Core (3.6)
+  - SWTableViewCell (0.3.0)
   - UzysAnimatedGifPullToRefresh (0.9.1):
     - AnimatedGIFImageSerialization (~> 0.0.1)
 
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - iCarousel (~> 1.7.6)
   - MBProgressHUD (~> 0.8)
   - SDWebImage (~> 3.6.0)
+  - SWTableViewCell
   - UzysAnimatedGifPullToRefresh (~> 0.9.1)
 
 SPEC CHECKSUMS:
@@ -46,6 +48,7 @@ SPEC CHECKSUMS:
   iCarousel: c35a4e26b3c657847e523012b593e70ddbd84992
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
+  SWTableViewCell: 1725f7607ce4c154264c18aeb78e4636b11b0b29
   UzysAnimatedGifPullToRefresh: 05e4ca9e2e59b51c70dd3e88b3f0e16d0d05476e
 
 COCOAPODS: 0.33.1

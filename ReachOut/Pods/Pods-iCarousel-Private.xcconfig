@@ -1,5 +1,5 @@
 #include "Pods-iCarousel.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/iCarousel" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/ASDepthModal" "${PODS_ROOT}/Headers/AnimatedGIFImageSerialization" "${PODS_ROOT}/Headers/CRToast" "${PODS_ROOT}/Headers/MBProgressHUD" "${PODS_ROOT}/Headers/SDWebImage" "${PODS_ROOT}/Headers/UzysAnimatedGifPullToRefresh" "${PODS_ROOT}/Headers/iCarousel"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/iCarousel" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/ASDepthModal" "${PODS_ROOT}/Headers/AnimatedGIFImageSerialization" "${PODS_ROOT}/Headers/CRToast" "${PODS_ROOT}/Headers/MBProgressHUD" "${PODS_ROOT}/Headers/SDWebImage" "${PODS_ROOT}/Headers/SWTableViewCell" "${PODS_ROOT}/Headers/UzysAnimatedGifPullToRefresh" "${PODS_ROOT}/Headers/iCarousel"
 OTHER_LDFLAGS = -ObjC ${PODS_ICAROUSEL_OTHER_LDFLAGS}
 PODS_ROOT = ${SRCROOT}

@@ -586,7 +586,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     
     PFObject *goal = [self.arrayGoals objectAtIndex:indexPath.row];
-    [goal deleteEventually];
+    [goal deleteInBackground];
     [self.arrayGoals removeObjectAtIndex:indexPath.row];
     
     [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]

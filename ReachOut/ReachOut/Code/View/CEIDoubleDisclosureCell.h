@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 
-@interface CEIDoubleDisclosureCell : UITableViewCell
+@interface CEIDoubleDisclosureCell : SWTableViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel *labelLowerDetail;
 

@@ -19,6 +19,7 @@
 #import "CEINotificationNames.h"
 
 static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCellAllMissionsToAddMission";
+static NSUInteger kTagButtonOffset = 1234;
 
 @interface CEIAllMissionsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -85,7 +86,10 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   }
   else{
     
+    PFRelation *relationGoals = [mission relationForKey:@"goals"];
     [arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
+      
+      [relationGoals addObject:goal];
       if (![goal[@"stepsGenerated"] boolValue]) {
         
         NSMutableArray *arrayGoalSteps = [[NSMutableArray alloc] init];
@@ -303,6 +307,18 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   cell.textLabel.text = mission[@"caption"];
   cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",mission[@"asigneesCount"]];
   cell.labelLowerDetail.text = @"Followers";
+  cell.delegate = self;
+  
+#warning TODO: localizations
+  UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+  button.backgroundColor = [UIColor redColor];
+  [button setTitle:@"Delete" forState:UIControlStateNormal];
+  [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+  button.tag = indexPath.row;
+  
+  [cell setRightUtilityButtons:@[
+                                 button,
+                                 ]];
   
   return cell;
 }
@@ -314,6 +330,42 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   self.indexPathSelected = indexPath;
   [self performSegueWithIdentifier:kIdentifierCellAllMissionsToAddMission
                             sender:self];
+}
+
+#pragma mark - SWTableView Delegate
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+  
+  NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+
+  __block PFObject *mission = [self.arrayMissions objectAtIndex:cellIndexPath.row];
+  
+  [self.arrayMissions removeObjectAtIndex:cellIndexPath.row];
+  
+  [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+  
+  PFQuery *query = [[mission relationForKey:@"goals"] query];
+  [query findObjectsInBackgroundWithBlock:^(NSArray *goals, NSError *error) {
+    
+    if (!error) {
+      
+      [goals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
+        
+        PFQuery *query = [[goal relationForKey:@"goalSteps"] query];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *goalSteps, NSError *error) {
+          
+          [goalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
+            
+            [goalStep deleteInBackground];
+          }];
+        }];
+        
+        [goal deleteInBackground];
+      }];
+    }
+    
+    [mission deleteInBackground];
+  }];
 }
 
 @end

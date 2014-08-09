@@ -8,10 +8,6 @@
 
 #import "CEIDoubleDisclosureCell.h"
 
-static CGFloat const kLabelsYOffset = 0.0f;
-static CGFloat const kLabelsWidth = 40.0f;
-static CGFloat const kLabelsHeightRatio = 0.6f;
-
 @interface CEIDoubleDisclosureCell ()
 
 - (void)setup;

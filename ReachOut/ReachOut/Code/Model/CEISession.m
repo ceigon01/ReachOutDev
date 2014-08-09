@@ -20,8 +20,6 @@
   __block MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:paramView animated:YES];
   progressHud.labelText = @"Initializing Facebook...";
   
-  [PFFacebookUtils initializeFacebook];
-  
   NSArray *permissions = [NSArray arrayWithObjects:@"public_profile",@"user_photos",@"email",nil];
   [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
     

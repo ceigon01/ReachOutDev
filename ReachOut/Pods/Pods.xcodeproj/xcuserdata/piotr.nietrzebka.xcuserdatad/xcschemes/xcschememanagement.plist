@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SWTableViewCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-UzysAnimatedGifPullToRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,47 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0112ADD182964FA685A26EB0</key>
+		<key>2A8DDD9D38F547098E74FC08</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0CAC7272BC064525AF665B00</key>
+		<key>6C34727EA2D74C3EAC59E74E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>68A79F5515A4453583E4E71E</key>
+		<key>8CF96477E96A43EA9B73AE9D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>83B53D0B29C84707BF9DA3A9</key>
+		<key>8D4F3BC009AC4EDAB48DB7E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8A16709AD1714EDEA4199C5B</key>
+		<key>A96279609FA74124BED4ABDA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9DF718DB2ACB4756A9EE5C7E</key>
+		<key>AAA88074746A486E92B37EFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A97952E4758D40C4B7B024D5</key>
+		<key>B5A3BDFD348B4875AC3DC3BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D8E8B12303A1431B9E5AF3BC</key>
+		<key>EF7E060643C64F0DB9833BE2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E58DAFEA6F8A462D9D64095E</key>
+		<key>FF5932F3E7764EF3B1229184</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF5B5A01B0F64BEEB79FA6B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

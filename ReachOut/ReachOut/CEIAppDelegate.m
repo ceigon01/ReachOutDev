@@ -19,6 +19,8 @@
     
   [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
   
+  [PFFacebookUtils initializeFacebook];
+  
   [application registerForRemoteNotificationTypes:
    UIRemoteNotificationTypeBadge |
    UIRemoteNotificationTypeAlert |
@@ -50,7 +52,20 @@
 - (void)applicationWillResignActive:(UIApplication *)application{}
 - (void)applicationDidEnterBackground:(UIApplication *)application{}
 - (void)applicationWillEnterForeground:(UIApplication *)application{}
-- (void)applicationDidBecomeActive:(UIApplication *)application{}
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+  
+  return [FBAppCall handleOpenURL:url
+                sourceApplication:sourceApplication
+                      withSession:[PFFacebookUtils session]];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  
+  [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+}
 - (void)applicationWillTerminate:(UIApplication *)application{}
 
 @end

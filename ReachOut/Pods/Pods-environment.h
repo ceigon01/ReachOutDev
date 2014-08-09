@@ -84,6 +84,12 @@
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 6
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 0
 
+// SWTableViewCell
+#define COCOAPODS_POD_AVAILABLE_SWTableViewCell
+#define COCOAPODS_VERSION_MAJOR_SWTableViewCell 0
+#define COCOAPODS_VERSION_MINOR_SWTableViewCell 3
+#define COCOAPODS_VERSION_PATCH_SWTableViewCell 0
+
 // UzysAnimatedGifPullToRefresh
 #define COCOAPODS_POD_AVAILABLE_UzysAnimatedGifPullToRefresh
 #define COCOAPODS_VERSION_MAJOR_UzysAnimatedGifPullToRefresh 0
