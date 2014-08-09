@@ -1420,9 +1420,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="GDb-Wt-bLw" kind="push" identifier="kSegueIdentifier_Missions_Mission" id="4Ff-UC-lIw"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1442,6 +1439,7 @@
                     <navigationItem key="navigationItem" title="Missions" id="MZR-Gh-VmK"/>
                     <connections>
                         <outlet property="tableView" destination="ey2-YR-tvN" id="4Ri-Ha-MCN"/>
+                        <segue destination="GDb-Wt-bLw" kind="push" identifier="kSegueIdentifier_Missions_Mission" id="gDA-XN-EfC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oSK-Vo-qLE" userLabel="First Responder" sceneMemberID="firstResponder"/>

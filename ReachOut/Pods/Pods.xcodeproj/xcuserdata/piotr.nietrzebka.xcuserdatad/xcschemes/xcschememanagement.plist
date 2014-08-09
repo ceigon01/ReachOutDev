@@ -9,17 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ASDepthModal.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-AnimatedGIFImageSerialization.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-CRToast.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-KLCPopup.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -57,52 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2A8DDD9D38F547098E74FC08</key>
+		<key>2E634B005C574DC8A496524F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C34727EA2D74C3EAC59E74E</key>
+		<key>3F0CCA784D2B4A67A3A47560</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8CF96477E96A43EA9B73AE9D</key>
+		<key>5734D11F75FB47ACB4E2FBB1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D4F3BC009AC4EDAB48DB7E6</key>
+		<key>65AB9224489449CDB2790158</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A96279609FA74124BED4ABDA</key>
+		<key>79F9CF5B51954AF6A34B1FA9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AAA88074746A486E92B37EFD</key>
+		<key>95D9DBC6B5FB4E829C4F4244</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B5A3BDFD348B4875AC3DC3BB</key>
+		<key>CC69B363ABEB43B1BB1674C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EF7E060643C64F0DB9833BE2</key>
+		<key>CDDD4C826F1D4CE3A82D40EB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FF5932F3E7764EF3B1229184</key>
+		<key>F775114761F74EBE9A8BB632</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FF5B5A01B0F64BEEB79FA6B9</key>
+		<key>F8B86E6CAD9A46588F09C5F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

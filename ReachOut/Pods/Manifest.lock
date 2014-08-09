@@ -19,9 +19,9 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AnimatedGIFImageSerialization (0.0.1)
-  - ASDepthModal (1.0.0)
   - CRToast (0.0.7)
   - iCarousel (1.7.6)
+  - KLCPopup (1.0)
   - MBProgressHUD (0.8)
   - SDWebImage (3.6):
     - SDWebImage/Core
@@ -32,9 +32,9 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - ASDepthModal
   - CRToast (~> 0.0.7)
   - iCarousel (~> 1.7.6)
+  - KLCPopup
   - MBProgressHUD (~> 0.8)
   - SDWebImage (~> 3.6.0)
   - SWTableViewCell
@@ -43,9 +43,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
   AnimatedGIFImageSerialization: 59d27f2411f5669d35c8d99f32b1b7ff6bd892d0
-  ASDepthModal: 643841a570c2e04bb195581dbee0a65ee40c98f3
   CRToast: f9f2c4b29776d68ba24c4d621cba59a83fea921b
   iCarousel: c35a4e26b3c657847e523012b593e70ddbd84992
+  KLCPopup: 23548d0454ca156b0eb684f791f234b9c2134369
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   SWTableViewCell: 1725f7607ce4c154264c18aeb78e4636b11b0b29

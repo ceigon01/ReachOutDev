@@ -16,7 +16,7 @@
 #import "UIImageView+WebCache.h"
 #import "CEIGoalStepViewCheckin.h"
 #import "CEIGoalStepViewCheckup.h"
-#import "ASDepthModalViewController.h"
+#import "KLCPopup.h"
 #import "CEIDailyChoresView.h"
 #import "CEIColor.h"
 #import "CEIAddEncouragementViewController.h"
@@ -379,6 +379,11 @@ static const CGFloat kHeightCell = 100.0f;
   self.selectedCell = paramGoalTableViewCell;
   self.selectedDailyChoresView = paramDailyChoresView;
   
+  UIView *contentView = nil;
+  KLCPopupLayout layout = KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter,
+                                             KLCPopupVerticalLayoutCenter);
+  
+  
   if (self.isMentor) {
     
     CEIGoalStepViewCheckup *goalStepViewCheckup = [[[NSBundle mainBundle] loadNibNamed:kNibNameCEIGoalStepViewCheckup
@@ -426,11 +431,9 @@ static const CGFloat kHeightCell = 100.0f;
       
     }
     
-    [ASDepthModalViewController presentView:goalStepViewCheckup
-                            backgroundColor:[UIColor whiteColor]
-                                    options:ASDepthModalOptionAnimationGrow | ASDepthModalOptionBlur | ASDepthModalOptionTapOutsideToClose
-                          completionHandler:NULL];
-  }
+    contentView = goalStepViewCheckup;
+    
+      }
   else{
     
     CEIGoalStepViewCheckin *goalStepViewCheckin = [[[NSBundle mainBundle] loadNibNamed:kNibNameCEIGoalStepViewCheckin
@@ -445,12 +448,16 @@ static const CGFloat kHeightCell = 100.0f;
     
     if (self.selectedDailyChoresView.goalStep[@"done"] != nil) {
   
+      layout = KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter,
+                                  KLCPopupVerticalLayoutCenter);
+      
       goalStepViewCheckin.textView.text = self.selectedDailyChoresView.goalStep[@"caption"];
       goalStepViewCheckin.labelGoalCharactersRemaining.text = @"Already checked in!";
       
       goalStepViewCheckin.textView.editable = NO;
       goalStepViewCheckin.buttonNo.enabled = NO;
       goalStepViewCheckin.buttonYes.enabled = NO;
+      
       
       if ([self.selectedDailyChoresView.goalStep[@"done"] boolValue]) {
 
@@ -461,11 +468,28 @@ static const CGFloat kHeightCell = 100.0f;
         [goalStepViewCheckin tapButtonNo:nil];
       }
     }
+    else{
+      
+      layout = KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter,
+                                  KLCPopupVerticalLayoutTop);
+    }
     
-    [ASDepthModalViewController presentView:goalStepViewCheckin
-                            backgroundColor:[UIColor whiteColor]
-                                    options:ASDepthModalOptionAnimationGrow | ASDepthModalOptionBlur | ASDepthModalOptionTapOutsideToClose
-                          completionHandler:NULL];
+    contentView = goalStepViewCheckin;
+  }
+  
+  KLCPopup *popup = [KLCPopup popupWithContentView:contentView
+                                          showType:KLCPopupShowTypeBounceInFromTop
+                                       dismissType:KLCPopupDismissTypeSlideOutToBottom
+                                          maskType:KLCPopupMaskTypeDimmed
+                          dismissOnBackgroundTouch:NO
+                             dismissOnContentTouch:NO];
+  
+  [popup showWithLayout:layout];
+  
+  if ([contentView isKindOfClass:[CEIGoalStepViewCheckin class]]) {
+    
+    CEIGoalStepViewCheckin *view = (CEIGoalStepViewCheckin *)contentView;
+    [view.textView becomeFirstResponder];
   }
 }
 
@@ -473,12 +497,12 @@ static const CGFloat kHeightCell = 100.0f;
 
 - (void)goalStepViewCheckupDidTapDone:(CEIGoalStepViewCheckup *)paramGoalStepViewCheckup{
   
-  [ASDepthModalViewController dismiss];
+  [KLCPopup dismissAllPopups];
 }
 
 - (void)goalStepViewCheckupDidTapEncourage:(CEIGoalStepViewCheckup *)paramGoalStepViewCheckup{
   
-  [ASDepthModalViewController dismiss];
+  [KLCPopup dismissAllPopups];
   [self performSegueWithIdentifier:kIdentifierSegueMissionAddEncouragement sender:self];
 }
 
@@ -520,12 +544,12 @@ static const CGFloat kHeightCell = 100.0f;
     }];
   }
   
-  [ASDepthModalViewController dismiss];
+  [KLCPopup dismissAllPopups];
 }
 
 - (void)goalStepViewCheckinDidTapCancel:(CEIGoalStepViewCheckin *)paramGoalStepViewCheckin{
 
-  [ASDepthModalViewController dismiss];
+  [KLCPopup dismissAllPopups];
 }
 
 @end

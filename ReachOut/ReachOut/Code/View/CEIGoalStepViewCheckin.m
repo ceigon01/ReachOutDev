@@ -48,11 +48,11 @@ static const NSInteger kMaxTextLength = 140;
   self.textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
   self.textView.layer.borderWidth = 1.0f;
   
-  UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                         action:@selector(tapGesture:)];
-  tapGestureRecognizer.numberOfTapsRequired = 1;
-  [self addGestureRecognizer:tapGestureRecognizer];
-  
+//  UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+//                                                                                         action:@selector(tapGesture:)];
+//  tapGestureRecognizer.numberOfTapsRequired = 1;
+//  [self addGestureRecognizer:tapGestureRecognizer];
+
   self.labelGoalCharactersRemaining.text = [NSString stringWithFormat:@"%d characters remaining",kMaxTextLength];
 }
 
@@ -69,7 +69,6 @@ static const NSInteger kMaxTextLength = 140;
 - (void)textViewDidEndEditing:(UITextView *)textView{
   
   [self textViewDidChange:textView];
-  [textView resignFirstResponder];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
@@ -94,17 +93,16 @@ static const NSInteger kMaxTextLength = 140;
     
     textView.textColor = [UIColor lightGrayColor];
     textView.text = @"Do you have anything in mind?";
-    [textView resignFirstResponder];
     self.labelGoalCharactersRemaining.text = [NSString stringWithFormat:@"%d characters remaining",kMaxTextLength];
   }
 }
 
 #pragma mark - Action Handling
 
-- (void)tapGesture:(id)sender{
-  
-  [self.textView resignFirstResponder];
-}
+//- (void)tapGesture:(id)sender{
+//  
+//  [self.textView resignFirstResponder];
+//}
 
 - (IBAction)tapButtonYes:(id)sender{
   
@@ -113,7 +111,6 @@ static const NSInteger kMaxTextLength = 140;
 
   self.buttonNo.backgroundColor = [UIColor clearColor];
   self.buttonYes.backgroundColor = [CEIColor colorGreen];
-  [self.textView resignFirstResponder];
 }
 
 - (IBAction)tapButtonNo:(id)sender{
@@ -123,7 +120,6 @@ static const NSInteger kMaxTextLength = 140;
   
   self.buttonYes.backgroundColor = [UIColor clearColor];
   self.buttonNo.backgroundColor = [CEIColor colorRed];
-  [self.textView resignFirstResponder];
 }
 
 - (IBAction)tapButtonCancel:(id)sender{

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B5A3BDFD348B4875AC3DC3BB"
-               BuildableName = "libPods-ASDepthModal.a"
-               BlueprintName = "Pods-ASDepthModal"
+               BlueprintIdentifier = "95D9DBC6B5FB4E829C4F4244"
+               BuildableName = "libPods-KLCPopup.a"
+               BlueprintName = "Pods-KLCPopup"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

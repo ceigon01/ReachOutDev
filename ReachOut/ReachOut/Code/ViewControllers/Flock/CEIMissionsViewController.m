@@ -20,7 +20,7 @@
 static NSString *const kSegueIdentifierMissionsToMission = @"kSegueIdentifier_Missions_Mission";
 static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
 
-@interface CEIMissionsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface CEIMissionsViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *arrayMissions;
@@ -132,6 +132,7 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   PFObject *mission = [self.arrayMissions objectAtIndex:indexPath.row];
   
   cell.textLabel.text = mission[@"caption"];
+  cell.delegate = self;
   
   NSArray *arrayCountAndSeason = [mission[@"timeCount"] componentsSeparatedByString:@" "];
   
@@ -148,6 +149,9 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   self.indexPathSelected = indexPath;
+  [self performSegueWithIdentifier:kSegueIdentifierMissionsToMission sender:self];
 }
+
+#pragma mark - SWTableViewCell Delegate
 
 @end
