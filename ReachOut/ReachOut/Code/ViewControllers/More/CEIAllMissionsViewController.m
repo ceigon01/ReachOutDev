@@ -96,7 +96,6 @@ static NSUInteger kTagButtonOffset = 1234;
         
 #warning TODO: neverending set to 3 years...
         NSUInteger totalDays = 0;
-        
         if (isNeverending) {
           
           totalDays = 1000;  //around three years, also it's the Parse fetch cap
@@ -104,56 +103,56 @@ static NSUInteger kTagButtonOffset = 1234;
         else{
           
           totalDays = [NSDate totalDaysCountForMission:mission];
-          
-          NSCalendar *calendar = [NSCalendar currentCalendar];
-          
+        }
+      
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        
 #warning TODO: dunno why +1...
-          PFRelation *relation = [goal relationForKey:@"goalSteps"];
-          for (NSUInteger daysCount = 1; daysCount < totalDays + 1; daysCount++) {
-            
-            PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
-            goalStep[@"goal"] = goal;
-            goalStep[@"mission"] = mission;
-            
-            NSDateComponents *dateComponents = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
-                                                           fromDate:[NSDate date]];
-            
-            dateComponents.day += daysCount;
+        PFRelation *relation = [goal relationForKey:@"goalSteps"];
+        for (NSUInteger daysCount = 1; daysCount < totalDays + 1; daysCount++) {
+          
+          PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
+          goalStep[@"goal"] = goal;
+          goalStep[@"mission"] = mission;
+          
+          NSDateComponents *dateComponents = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
+                                                         fromDate:[NSDate date]];
+          
+          dateComponents.day += daysCount;
 #warning TODO: dunno why -2...
-            dateComponents.weekday = (dateComponents.weekday + daysCount - 2)%7;
+          dateComponents.weekday = (dateComponents.weekday + daysCount - 2)%7;
+          
+          goalStep[@"date"] = [calendar dateFromComponents:dateComponents];
+          
+          goalStep[@"day"] = [CEIDay dayNameWithDayNumber:(dateComponents.weekday)];
+          
+          if ([goal[@"isRecurring"] boolValue]) {
             
-            goalStep[@"date"] = [calendar dateFromComponents:dateComponents];
+            goalStep[@"available"] = @YES;
+          }
+          else{
             
-            goalStep[@"day"] = [CEIDay dayNameWithDayNumber:(dateComponents.weekday)];
+            NSArray *arrayDays = goal[@"days"];
             
-            if ([goal[@"isRecurring"] boolValue]) {
+            if ([arrayDays indexOfObject:goalStep[@"day"]] == NSNotFound) {
               
-              goalStep[@"available"] = @YES;
+              goalStep[@"available"] = @NO;
             }
             else{
               
-              NSArray *arrayDays = goal[@"days"];
-              
-              if ([arrayDays indexOfObject:goalStep[@"day"]] == NSNotFound) {
-                
-                goalStep[@"available"] = @NO;
-              }
-              else{
-                
-                goalStep[@"available"] = @YES;
-              }
+              goalStep[@"available"] = @YES;
             }
-            
-            [arrayGoalSteps addObject:goalStep];
           }
           
-          [PFObject saveAll:arrayGoalSteps];
-          [arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
-            
-            [relation addObject:goalStep];
-          }];
-          [arrayGoalSteps removeAllObjects];
+          [arrayGoalSteps addObject:goalStep];
         }
+        
+        [PFObject saveAll:arrayGoalSteps];
+        [arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
+          
+          [relation addObject:goalStep];
+        }];
+        [arrayGoalSteps removeAllObjects];
         
         goal[@"stepsGenerated"] = @YES;
         [goal save];

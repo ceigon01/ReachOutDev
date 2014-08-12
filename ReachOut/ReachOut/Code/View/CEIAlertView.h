@@ -12,5 +12,6 @@
 
 + (void)showAlertViewWithValidationMessage:(NSString *)paramValidationMessage;
 + (void)showAlertViewWithError:(NSError *)paramError;
++ (void)showAlertViewCantRelateToSelfWithDelegate:(id<UIAlertViewDelegate>)paramDelegate;
 
 @end

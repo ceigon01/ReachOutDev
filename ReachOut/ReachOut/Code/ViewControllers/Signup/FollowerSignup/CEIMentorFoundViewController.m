@@ -61,29 +61,38 @@ static NSString* const kSegueIdentifierMentorFuondFollowerSignup = @"kSegueIdent
         }
         else {
           
-          self.userMentor = [objects lastObject];
-          self.labelPosition.text = self.userMentor[@"title"];
-          self.labelFullName.text = self.userMentor[@"fullName"];
+          PFUser *user = [objects lastObject];
           
-          if (self.userMentor[@"image"]) {
+          if ([[PFUser currentUser].objectId isEqualToString:user.objectId]) {
             
-            PFFile *file = self.userMentor[@"image"];
-            
-            __weak typeof (self) weakSelf = self;
-            
-            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-              
-              weakSelf.imageView.image = [UIImage imageWithData:data];
-              weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
-              weakSelf.imageView.layer.masksToBounds = YES;
-            }];
-            
+            [CEIAlertView showAlertViewCantRelateToSelfWithDelegate:nil];
           }
           else{
+          
+            self.userMentor = user;
+            self.labelPosition.text = self.userMentor[@"title"];
+            self.labelFullName.text = self.userMentor[@"fullName"];
             
-            self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-            self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
-            self.imageView.layer.masksToBounds = YES;
+            if (self.userMentor[@"image"]) {
+              
+              PFFile *file = self.userMentor[@"image"];
+              
+              __weak typeof (self) weakSelf = self;
+              
+              [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                
+                weakSelf.imageView.image = [UIImage imageWithData:data];
+                weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
+                weakSelf.imageView.layer.masksToBounds = YES;
+              }];
+              
+            }
+            else{
+              
+              self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+              self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
+              self.imageView.layer.masksToBounds = YES;
+            }
           }
         }
   }];

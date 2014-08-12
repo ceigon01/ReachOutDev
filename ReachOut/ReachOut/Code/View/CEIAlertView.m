@@ -33,4 +33,15 @@
                     otherButtonTitles:nil] show];
 }
 
++ (void)showAlertViewCantRelateToSelfWithDelegate:(id<UIAlertViewDelegate>)paramDelegate{
+  
+#warning TODO: validate strings & localizations
+  
+  [[[UIAlertView alloc] initWithTitle:@"Oh snap!"
+                              message:@"You are pretty cool, but we can't allow you to be your own Mentor. Wink."
+                             delegate:paramDelegate
+                    cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil] show];
+}
+
 @end

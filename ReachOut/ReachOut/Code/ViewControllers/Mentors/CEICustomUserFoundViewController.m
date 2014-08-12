@@ -13,7 +13,7 @@
 #import "CEINotificationNames.h"
 #import "CEIAddUserViewController.h"
 
-@interface CEICustomUserFoundViewController ()
+@interface CEICustomUserFoundViewController () <UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UILabel *labelTitle;
@@ -81,33 +81,50 @@
         }
         else {
           
-          self.user = [objects lastObject];
-          self.labelTitle.text = self.user[@"title"];
-          self.labelFullName.text = self.user[@"fullName"];
+          PFUser *user = [objects lastObject];
           
-          if (self.user[@"image"]) {
-            
-            PFFile *file = self.user[@"image"];
-            
-            __weak typeof (self) weakSelf = self;
-            
-            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if ([[PFUser currentUser].objectId isEqualToString:user.objectId]) {
               
-              weakSelf.imageView.image = [UIImage imageWithData:data];
-              weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
-              weakSelf.imageView.layer.masksToBounds = YES;
-            }];
+              [CEIAlertView showAlertViewCantRelateToSelfWithDelegate:self];
+              self.buttonContinue.enabled = NO;
+            }
+            else{
             
-          }
-          else{
+            self.user = user;
+            self.labelTitle.text = self.user[@"title"];
+            self.labelFullName.text = self.user[@"fullName"];
             
-            self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
-            self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
-            self.imageView.layer.masksToBounds = YES;
+            if (self.user[@"image"]) {
+              
+              PFFile *file = self.user[@"image"];
+              
+              __weak typeof (self) weakSelf = self;
+              
+              [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                
+                weakSelf.imageView.image = [UIImage imageWithData:data];
+                weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
+                weakSelf.imageView.layer.masksToBounds = YES;
+              }];
+              
+            }
+            else{
+              
+              self.imageView.image = [UIImage imageNamed:@"sheepPhoto"];
+              self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
+              self.imageView.layer.masksToBounds = YES;
+            }
           }
         }
     }];
   }
+}
+
+#pragma mark - UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+  
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Action Handling
