@@ -544,6 +544,8 @@ static const CGFloat kHeightCell = 100.0f;
     }];
   }
   
+  [self.tableView reloadData];
+  
   [KLCPopup dismissAllPopups];
 }
 

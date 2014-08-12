@@ -58,9 +58,9 @@
 - (void)layoutSubviews{
   [super layoutSubviews];
   
-  self.detailTextLabel.frame = CGRectMake(self.contentView.frame.size.width * 0.8f,
+  self.detailTextLabel.frame = CGRectMake(self.contentView.frame.size.width * 0.76f,
                                           self.contentView.frame.size.height * 0.1f,
-                                          self.contentView.frame.size.width * 0.2f,
+                                          self.contentView.frame.size.width * 0.24f,
                                           self.contentView.frame.size.height * 0.4f);
   
   self.labelLowerDetail.frame = CGRectMake(self.detailTextLabel.frame.origin.x,

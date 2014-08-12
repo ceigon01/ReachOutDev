@@ -14,5 +14,6 @@
 @property (nonatomic, strong) PFObject *mission;
 @property (nonatomic, strong) NSMutableArray *arrayGoals;
 @property (nonatomic, strong) NSMutableArray *arrayFlock;
+@property (nonatomic, assign) BOOL isEditing;
 
 @end

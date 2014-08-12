@@ -79,23 +79,30 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureOutsidePicker;
 
+@property (nonatomic, assign) BOOL missionDidChange;
+
 @end
 
 @implementation CEIAddMissionViewController
 
 - (void)dealloc{
   
-  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMissionAdded
-                                                      object:@{
-                                                               @"mission" : self.mission,
-                                                               @"goals"   : self.arrayGoals,
-                                                               @"flock"   : self.arrayFlock
-                                                               }];
-
+  if (self.isEditing && self.missionDidChange) {
+  
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMissionAdded
+                                                        object:@{
+                                                                 @"mission" : self.mission,
+                                                                 @"goals"   : self.arrayGoals,
+                                                                 @"flock"   : self.arrayFlock
+                                                                 }];
+  }
+  
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)notificationFollowerAdded:(NSNotification *)paramNotification{
+  
+  self.missionDidChange = YES;
   
   self.arrayFlock = paramNotification.object;
   
@@ -111,6 +118,8 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 }
 
 - (void)notificationGoalAdded:(NSNotification *)paramNotification{
+  
+  self.missionDidChange = YES;
   
   PFObject *goal = paramNotification.object;
   
@@ -137,6 +146,8 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
 - (void)viewDidLoad{
   [super viewDidLoad];
+  
+  self.missionDidChange = NO;
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(notificationGoalAdded:)
@@ -604,13 +615,14 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
 - (void)tapSwitchNeverending:(id)paramSender{
   
+  self.missionDidChange = YES;
+  
   [self hidePicker];
   
   self.mission[@"isNeverending"] = [NSNumber numberWithBool:self.switchNeverEnding.on];
   if (self.switchNeverEnding.on) {
     
     [self.buttonEndsIn setTitle:@"neverending" forState:self.buttonEndsIn.state];
-    
   }
   else{
   
@@ -729,6 +741,8 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   
   UIImage *image = info[UIImagePickerControllerOriginalImage];
   
+  self.missionDidChange = YES;
+  
 //  image = [image imageCroppedWithRect:CGRectMake((self.imageViewHeader.frame.size.width - image.size.width) * 0.5f,
 //                                                 (self.imageViewHeader.frame.size.height - image.size.height) * 0.5f,
 //                                                 self.imageViewHeader.frame.size.width,
@@ -758,6 +772,8 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 }
 
 - (void)didChangeText:(id)sender{
+  
+  self.missionDidChange = YES;
   
   self.mission[@"caption"] = self.textFieldCaption.text;
 }

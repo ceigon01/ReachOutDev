@@ -141,6 +141,11 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
     cell.detailTextLabel.text = [arrayCountAndSeason objectAtIndex:0];
     cell.labelLowerDetail.text = [arrayCountAndSeason objectAtIndex:1];
   }
+  else if (arrayCountAndSeason.count == 1){
+    
+    cell.detailTextLabel.text = @"-";
+    cell.labelLowerDetail.text = [arrayCountAndSeason objectAtIndex:0];
+  }
   
   return cell;
 }
@@ -151,7 +156,5 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   self.indexPathSelected = indexPath;
   [self performSegueWithIdentifier:kSegueIdentifierMissionsToMission sender:self];
 }
-
-#pragma mark - SWTableViewCell Delegate
 
 @end

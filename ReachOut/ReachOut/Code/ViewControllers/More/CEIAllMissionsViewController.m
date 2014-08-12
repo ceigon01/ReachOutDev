@@ -19,9 +19,8 @@
 #import "CEINotificationNames.h"
 
 static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCellAllMissionsToAddMission";
-static NSUInteger kTagButtonOffset = 1234;
 
-@interface CEIAllMissionsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CEIAllMissionsViewController () <UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -73,6 +72,11 @@ static NSUInteger kTagButtonOffset = 1234;
     return;
   }
   
+  if (isNeverending) {
+    
+    mission[@"timeCount"] = @"neverending";
+  }
+  
   if (arrayFlock.count == 0) {
     
     [CEIAlertView showAlertViewWithValidationMessage:@"Please select followers, that you want on this mission."];
@@ -90,73 +94,77 @@ static NSUInteger kTagButtonOffset = 1234;
     [arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
       
       [relationGoals addObject:goal];
-      if (![goal[@"stepsGenerated"] boolValue]) {
-        
-        NSMutableArray *arrayGoalSteps = [[NSMutableArray alloc] init];
-        
-#warning TODO: neverending set to 3 years...
-        NSUInteger totalDays = 0;
-        if (isNeverending) {
-          
-          totalDays = 1000;  //around three years, also it's the Parse fetch cap
-        }
-        else{
-          
-          totalDays = [NSDate totalDaysCountForMission:mission];
-        }
       
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        
-#warning TODO: dunno why +1...
-        PFRelation *relation = [goal relationForKey:@"goalSteps"];
-        for (NSUInteger daysCount = 1; daysCount < totalDays + 1; daysCount++) {
-          
-          PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
-          goalStep[@"goal"] = goal;
-          goalStep[@"mission"] = mission;
-          
-          NSDateComponents *dateComponents = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
-                                                         fromDate:[NSDate date]];
-          
-          dateComponents.day += daysCount;
-#warning TODO: dunno why -2...
-          dateComponents.weekday = (dateComponents.weekday + daysCount - 2)%7;
-          
-          goalStep[@"date"] = [calendar dateFromComponents:dateComponents];
-          
-          goalStep[@"day"] = [CEIDay dayNameWithDayNumber:(dateComponents.weekday)];
-          
-          if ([goal[@"isRecurring"] boolValue]) {
-            
-            goalStep[@"available"] = @YES;
-          }
-          else{
-            
-            NSArray *arrayDays = goal[@"days"];
-            
-            if ([arrayDays indexOfObject:goalStep[@"day"]] == NSNotFound) {
-              
-              goalStep[@"available"] = @NO;
-            }
-            else{
-              
-              goalStep[@"available"] = @YES;
-            }
-          }
-          
-          [arrayGoalSteps addObject:goalStep];
-        }
-        
-        [PFObject saveAll:arrayGoalSteps];
-        [arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
-          
-          [relation addObject:goalStep];
-        }];
-        [arrayGoalSteps removeAllObjects];
-        
-        goal[@"stepsGenerated"] = @YES;
-        [goal save];
-      }
+      goal[@"mission"] = mission;
+      
+      [goal saveInBackground];
+//      if (![goal[@"stepsGenerated"] boolValue]) {
+//        
+//        NSMutableArray *arrayGoalSteps = [[NSMutableArray alloc] init];
+//        
+//#warning TODO: neverending set to 3 years...
+//        NSUInteger totalDays = 0;
+//        if (isNeverending) {
+//          
+//          totalDays = 1000;  //around three years, also it's the Parse fetch cap
+//        }
+//        else{
+//          
+//          totalDays = [NSDate totalDaysCountForMission:mission];
+//        }
+//      
+//        NSCalendar *calendar = [NSCalendar currentCalendar];
+//        
+//#warning TODO: dunno why +1...
+//        PFRelation *relation = [goal relationForKey:@"goalSteps"];
+//        for (NSUInteger daysCount = 1; daysCount < totalDays + 1; daysCount++) {
+//          
+//          PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
+//          goalStep[@"goal"] = goal;
+//          goalStep[@"mission"] = mission;
+//          
+//          NSDateComponents *dateComponents = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
+//                                                         fromDate:[NSDate date]];
+//          
+//          dateComponents.day += daysCount;
+//#warning TODO: dunno why -2...
+//          dateComponents.weekday = (dateComponents.weekday + daysCount - 2)%7;
+//          
+//          goalStep[@"date"] = [calendar dateFromComponents:dateComponents];
+//          
+//          goalStep[@"day"] = [CEIDay dayNameWithDayNumber:(dateComponents.weekday)];
+//          
+//          if ([goal[@"isRecurring"] boolValue]) {
+//            
+//            goalStep[@"available"] = @YES;
+//          }
+//          else{
+//            
+//            NSArray *arrayDays = goal[@"days"];
+//            
+//            if ([arrayDays indexOfObject:goalStep[@"day"]] == NSNotFound) {
+//              
+//              goalStep[@"available"] = @NO;
+//            }
+//            else{
+//              
+//              goalStep[@"available"] = @YES;
+//            }
+//          }
+//          
+//          [arrayGoalSteps addObject:goalStep];
+//        }
+//        
+//        [PFObject saveAll:arrayGoalSteps];
+//        [arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
+//          
+//          [relation addObject:goalStep];
+//        }];
+//        [arrayGoalSteps removeAllObjects];
+//        
+//        goal[@"stepsGenerated"] = @YES;
+//        [goal save];
+//      }
     }];
   }
   
@@ -256,6 +264,7 @@ static NSUInteger kTagButtonOffset = 1234;
   if ([segue.identifier isEqual:kIdentifierCellAllMissionsToAddMission] && self.indexPathSelected != nil) {
    
     ((CEIAddMissionViewController *)segue.destinationViewController).mission = [self.arrayMissions objectAtIndex:self.indexPathSelected.row];
+    ((CEIAddMissionViewController *)segue.destinationViewController).isEditing = YES;
     self.indexPathSelected = nil;
   }
 }
