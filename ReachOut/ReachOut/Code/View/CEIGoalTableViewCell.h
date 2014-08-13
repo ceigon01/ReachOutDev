@@ -23,6 +23,6 @@
 @property (nonatomic, weak) id<CEIGoalTableViewCellDelegate> delegateGoalStep;
 @property (nonatomic, strong) PFObject *goal;
 
-- (void)configureWithGoal:(PFObject *)paramGoal mission:(PFObject *)paramMission;
+- (void)configureWithGoal:(PFObject *)paramGoal mission:(PFObject *)paramMission arrayGoalSteps:(NSArray *)paramGoalSteps;
 
 @end

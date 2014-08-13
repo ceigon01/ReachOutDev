@@ -126,7 +126,7 @@
      dateGoalStep.month == dateToday.month &&
      dateGoalStep.year == dateToday.year){
 
-    NSLog(@"today:%@ date:%@",dateGoalStep,dateToday);
+//    NSLog(@"today:%@ date:%@",dateGoalStep,dateToday);
     
     self.layer.borderColor = [CEIColor colorBlue].CGColor;
     self.layer.borderWidth = 2.0f;

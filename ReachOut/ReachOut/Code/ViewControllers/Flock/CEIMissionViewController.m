@@ -42,7 +42,7 @@ static const CGFloat kHeightCell = 100.0f;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *arrayGoals;
-@property (nonatomic, strong) NSArray *arrayGoalSteps;
+@property (nonatomic, strong) NSMutableArray *arrayGoalSteps;
 
 @property (nonatomic, strong) CEIGoalTableViewCell *selectedCell;
 @property (nonatomic, strong) CEIDailyChoresView *selectedDailyChoresView;
@@ -167,7 +167,7 @@ static const CGFloat kHeightCell = 100.0f;
           }
           else{
             
-            weakSelf.arrayGoalSteps = [NSArray arrayWithArray:objects];
+            weakSelf.arrayGoalSteps = [NSMutableArray arrayWithArray:objects];
             
             [weakSelf.tableView reloadData];
           }
@@ -277,7 +277,9 @@ static const CGFloat kHeightCell = 100.0f;
   
   PFObject *goal = [self.arrayGoals objectAtIndex:indexPath.section];
   
-  [cell configureWithGoal:goal mission:self.mission];
+  [cell configureWithGoal:goal
+                  mission:self.mission
+           arrayGoalSteps:[self arrayGoalStepsForGoal:goal]];
   
   return cell;
 }
@@ -332,7 +334,7 @@ static const CGFloat kHeightCell = 100.0f;
 
 #pragma mark - Convinience Methods
 
-- (NSArray *)arrayGoalStepsForGoal:(PFObject *)paramGoal{
+- (NSMutableArray *)arrayGoalStepsForGoal:(PFObject *)paramGoal{
   
   NSMutableArray *arrayGoalsFiltered = [[NSMutableArray alloc] init];
   
@@ -348,10 +350,10 @@ static const CGFloat kHeightCell = 100.0f;
     }
   }];
   
-  return [NSArray arrayWithArray:arrayGoalsFiltered];
+  return arrayGoalsFiltered;
 }
 
-- (NSArray *)arrayGoalStepsForGoal:(PFObject *)paramGoal withDone:(BOOL)paramDone{
+- (NSMutableArray *)arrayGoalStepsForGoal:(PFObject *)paramGoal withDone:(BOOL)paramDone{
   
   NSMutableArray *arrayGoalsFiltered = [[NSMutableArray alloc] init];
   
@@ -369,7 +371,7 @@ static const CGFloat kHeightCell = 100.0f;
     }
   }];
   
-  return [NSArray arrayWithArray:arrayGoalsFiltered];
+  return arrayGoalsFiltered;
 }
 
 #pragma mark - CEIGoalTableViewCell Delegate
@@ -407,28 +409,37 @@ static const CGFloat kHeightCell = 100.0f;
     }
     else{
       
-      goalStepViewCheckup.textView.text = goalStep[@"caption"];
-      
-      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-      dateFormatter.dateStyle = NSDateFormatterShortStyle;
-      dateFormatter.timeStyle = NSDateFormatterShortStyle;
-      
-#warning TODO: improove handling
-      goalStepViewCheckup.labelResponseTime.text = [dateFormatter stringFromDate:goalStep.createdAt];
-      goalStepViewCheckup.labelDay.text = goalStep[@"day"];
-      goalStepViewCheckup.labelDone.text = [goalStep[@"done"] boolValue] ? @"Yes" : @"No";
-      
-      if ([goalStep[@"done"] boolValue]) {
+      if (goalStep[@"done"] != nil) {
         
-        goalStepViewCheckup.labelDone.backgroundColor = [CEIColor colorGreen];
-        goalStepViewCheckup.labelDay.backgroundColor = [CEIColor colorGreen];
+        goalStepViewCheckup.textView.text = goalStep[@"caption"];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        dateFormatter.timeStyle = NSDateFormatterShortStyle;
+        
+  #warning TODO: improove handling
+        goalStepViewCheckup.labelResponseTime.text = [dateFormatter stringFromDate:goalStep.createdAt];
+        goalStepViewCheckup.labelDay.text = goalStep[@"day"];
+        goalStepViewCheckup.labelDone.text = [goalStep[@"done"] boolValue] ? @"Yes" : @"No";
+        
+        if ([goalStep[@"done"] boolValue]) {
+          
+          goalStepViewCheckup.labelDone.backgroundColor = [CEIColor colorGreen];
+          goalStepViewCheckup.labelDay.backgroundColor = [CEIColor colorGreen];
+        }
+        else{
+          
+          goalStepViewCheckup.labelDone.backgroundColor = [CEIColor colorRed];
+          goalStepViewCheckup.labelDay.backgroundColor = [CEIColor colorRed];
+        }
       }
       else{
         
-        goalStepViewCheckup.labelDone.backgroundColor = [CEIColor colorRed];
-        goalStepViewCheckup.labelDay.backgroundColor = [CEIColor colorRed];
+#warning TODO: localization
+        goalStepViewCheckup.textView.text = @"This has not been checked in yet!";
+        goalStepViewCheckup.labelDay.text = goalStep[@"day"];
+        goalStepViewCheckup.labelDone.text = @"-";
       }
-      
     }
     
     contentView = goalStepViewCheckup;
@@ -518,11 +529,14 @@ static const CGFloat kHeightCell = 100.0f;
       return;
     }
     
+    __weak typeof (self) weakSelf = self;
+    
     PFObject *goalStep = self.selectedDailyChoresView.goalStep;
     
     goalStep[@"caption"] = paramGoalStepViewCheckin.textView.text;
     goalStep[@"done"] = [NSNumber numberWithBool:paramGoalStepViewCheckin.done];
     
+    [self.arrayGoalSteps addObject:goalStep];
     [self.selectedDailyChoresView configureWithGoalStep:goalStep];
     
     [goalStep saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -533,13 +547,13 @@ static const CGFloat kHeightCell = 100.0f;
       }
       else{
 
-        [self.selectedDailyChoresView updateWithDone:paramGoalStepViewCheckin.done
+        [weakSelf.selectedDailyChoresView updateWithDone:paramGoalStepViewCheckin.done
                                              comment:paramGoalStepViewCheckin.textView.text];
         
         PFQuery *query = [PFInstallation query];
-        [query whereKey:@"user" equalTo:self.user];
+        [query whereKey:@"user" equalTo:weakSelf.user];
         
-        [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@: %@ %@",[PFUser currentUser][@"fullName"],paramGoalStepViewCheckin.done ? @"Done:" : @"Didn't do it:",self.selectedCell.goal[@"caption"]]];
+        [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@: %@ %@",[PFUser currentUser][@"fullName"],paramGoalStepViewCheckin.done ? @"Done:" : @"Didn't do it:",weakSelf.selectedCell.goal[@"caption"]]];
       }
     }];
   }

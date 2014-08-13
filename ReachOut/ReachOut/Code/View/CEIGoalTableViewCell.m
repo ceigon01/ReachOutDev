@@ -12,6 +12,7 @@
 #import "NSDate+Difference.h"
 #import "CEIDailyChoresWeekView.h"
 #import <Parse/Parse.h>
+#import "CEIDay.h"
 
 static const CGFloat kHeightRatioLabelToSelf = 0.3f;
 
@@ -22,6 +23,7 @@ static const CGFloat kHeightRatioLabelToSelf = 0.3f;
 @property (nonatomic, assign) NSUInteger numberOfDays;
 @property (nonatomic, strong) NSArray *arrayGoalSteps;
 @property (nonatomic, strong) NSDate *dateStart;
+@property (nonatomic, strong) PFObject *mission;
 
 @end
 
@@ -64,34 +66,42 @@ static const CGFloat kHeightRatioLabelToSelf = 0.3f;
   [self.contentView addSubview:self.labelDatesPeriod];
 }
 
-- (void)configureWithGoal:(PFObject *)paramGoal mission:(PFObject *)paramMission{
+- (void)configureWithGoal:(PFObject *)paramGoal mission:(PFObject *)paramMission arrayGoalSteps:(NSArray *)paramGoalSteps{
   
   self.goal = paramGoal;
+  self.mission = paramMission;
   self.numberOfDays = [NSDate totalDaysCountForMission:paramMission];
   
-  __weak typeof (self) weakSelf = self;
+  self.arrayGoalSteps = paramGoalSteps;
   
-  PFRelation *relation = [self.goal relationForKey:@"goalSteps"];
-  PFQuery *query = [relation query];
-  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-    
-    if (error) {
-      
-      NSLog(@"%@",error);
-    }
-    
-    weakSelf.arrayGoalSteps = [NSMutableArray arrayWithArray:objects];
-    weakSelf.arrayGoalSteps = [weakSelf.arrayGoalSteps sortedArrayUsingComparator:^NSComparisonResult(PFObject *goalStep1, PFObject *goalStep2) {
-      
-      NSDate *date1 = goalStep1[@"date"];
-      NSDate *date2 = goalStep2[@"date"];
-      
-      return [date1 compare:date2];
-    }];
-    weakSelf.dateStart = paramMission[@"dateBegins"];
-    [weakSelf carouselDidScroll:weakSelf.carousel];
-    [weakSelf.carousel reloadData];
-  }];
+  [self carouselDidScroll:self.carousel];
+  [self.carousel reloadData];
+  
+  self.dateStart = paramMission[@"dateBegins"];
+  
+//  __weak typeof (self) weakSelf = self;
+//
+//  PFRelation *relation = [self.goal relationForKey:@"goalSteps"];
+//  PFQuery *query = [relation query];
+//  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//    
+//    if (error) {
+//      
+//      NSLog(@"%@",error);
+//    }
+//    
+//    weakSelf.arrayGoalSteps = [NSMutableArray arrayWithArray:objects];
+//    weakSelf.arrayGoalSteps = [weakSelf.arrayGoalSteps sortedArrayUsingComparator:^NSComparisonResult(PFObject *goalStep1, PFObject *goalStep2) {
+//      
+//      NSDate *date1 = goalStep1[@"date"];
+//      NSDate *date2 = goalStep2[@"date"];
+//      
+//      return [date1 compare:date2];
+//    }];
+//    weakSelf.dateStart = paramMission[@"dateBegins"];
+//    [weakSelf carouselDidScroll:weakSelf.carousel];
+//    [weakSelf.carousel reloadData];
+//  }];
 }
 
 - (void)layoutSubviews{
@@ -120,23 +130,84 @@ static const CGFloat kHeightRatioLabelToSelf = 0.3f;
     dailyChoresWeekView.delegate = self;
   }
   
+  __block NSCalendar *calendar = [NSCalendar currentCalendar];
+  
   NSMutableArray *arrayGoalSteps = [[NSMutableArray alloc] init];
-  for (NSInteger daysCounter = 0; daysCounter<kNumberOfDaysInWeek; daysCounter++) {
+  
+  for (NSInteger day = 0; day < 7; day++) {
     
-    NSInteger goalStepIndex = daysCounter + kNumberOfDaysInWeek * index;
+    NSDateComponents *dateComponentsToAdd = [calendar components:NSDayCalendarUnit | NSWeekCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
+                                                        fromDate:self.dateStart];
     
-    if (goalStepIndex >= self.arrayGoalSteps.count) {
-      
-      break;
+    dateComponentsToAdd.day += day + 1 + (index * 7);//weeks offset
+#warning TODO: ^^ dunno why +1
+    
+    NSDate *dateNew = [calendar dateFromComponents:dateComponentsToAdd];
+    
+    NSInteger day = [calendar components:NSWeekdayCalendarUnit fromDate:dateNew].weekday;
+    
+    PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
+    goalStep[@"date"] = dateNew;
+    goalStep[@"goal"] = self.goal;
+    goalStep[@"mission"] = self.mission;
+    goalStep[@"day"] = [CEIDay dayNameWithDayNumber:(day-1)];
+#warning TODO: ^^ dunno why -1
+    
+    if ([self.goal[@"isRecurring"] boolValue]) {
+
+      goalStep[@"available"] = @YES;
+    }
+    else{
+
+      NSArray *arrayDays = self.goal[@"days"];
+
+      if ([arrayDays indexOfObject:goalStep[@"day"]] == NSNotFound) {
+
+        goalStep[@"available"] = @NO;
+      }
+      else{
+
+        goalStep[@"available"] = @YES;
+      }
     }
     
-    [arrayGoalSteps addObject:[self.arrayGoalSteps objectAtIndex:goalStepIndex]];
+    [arrayGoalSteps addObject:goalStep];
   }
   
-  [dailyChoresWeekView configureWithArrayGoalSteps:[NSArray arrayWithArray:arrayGoalSteps]];
+  __block NSMutableArray *goalStepsMerged = [NSMutableArray arrayWithArray:arrayGoalSteps];
+  
+#warning TODO: prearrange the array to make filtering faster
+  [self.arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx1, BOOL *stop1) {
+    
+    NSDate *dateStep = goalStep[@"date"];
+    NSDateComponents *dateComponentsStep = [calendar components:NSWeekCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:dateStep];
+    [arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStepLocal, NSUInteger idx2, BOOL *stop2) {
+      
+      NSDate *dateLocal = goalStepLocal[@"date"];
+      NSDateComponents *dateComponents = [calendar components:NSWeekCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:dateLocal];
+      if (dateComponents.day    == dateComponentsStep.day &&
+          dateComponents.month  == dateComponentsStep.month &&
+          dateComponents.year   == dateComponentsStep.year) {
+        
+        NSUInteger index = [goalStepsMerged indexOfObject:goalStepLocal];
+        
+        NSLog(@"index: %d",index);
+        
+        if (index != NSNotFound) {
+          
+          [goalStepsMerged replaceObjectAtIndex:index withObject:goalStep];
+        }
+        *stop2 = YES;
+      }
+    }];
+  }];
+  
+  [dailyChoresWeekView configureWithArrayGoalSteps:[NSArray arrayWithArray:goalStepsMerged]];
   
   return dailyChoresWeekView;
 }
+
+
 
 - (CGFloat)carousel:(iCarousel *)_carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value{
   
