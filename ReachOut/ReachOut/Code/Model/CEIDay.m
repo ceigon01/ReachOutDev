@@ -12,6 +12,16 @@
 
 + (NSString *)dayNameWithDayNumber:(NSInteger)paramDayNumber{
 
+  while (paramDayNumber < CEIDayNameSunday) {
+    
+    paramDayNumber += 7;
+  }
+  
+  while (paramDayNumber > CEIDayNameSaturday) {
+    
+    paramDayNumber -= 7;
+  }
+  
 #warning TODO: localizations
   
   switch (paramDayNumber) {

@@ -38,9 +38,6 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
 
 - (void)notificationAddMission:(NSNotification *)paramNotification{
   
-  MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  progressHUD.labelText = @"Updating mission...";
-  
   NSDictionary *dictionary = paramNotification.object;
   
   PFObject *mission = [dictionary objectForKey:@"mission"];
@@ -83,9 +80,13 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
     return;
   }
   
+  MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  progressHUD.labelText = @"Updating mission...";
+  
   if (arrayGoals.count == 0) {
     
     [CEIAlertView showAlertViewWithValidationMessage:@"Please set some goals."];
+    [progressHUD hide:YES];
     return;
   }
   else{

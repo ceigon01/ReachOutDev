@@ -47,7 +47,7 @@ static const NSUInteger kNumerbOfDayButtons = 7;
 #warning TODO: localization
   self.title = @"Add a Goal";
   
-  for (NSInteger dayNumber = 0; dayNumber < kNumerbOfDayButtons; dayNumber++) {
+  for (NSInteger dayNumber = 1; dayNumber <= kNumerbOfDayButtons; dayNumber++) {
     
     UIButton *button = (UIButton *)[self.view viewWithTag:(dayNumber + kTagOffsetButtonDay)];
     button.layer.borderColor = [UIColor lightGrayColor].CGColor;

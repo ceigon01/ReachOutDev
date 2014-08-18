@@ -89,12 +89,7 @@
 
 - (void)prepareForReuse{
   
-  self.labelDay.backgroundColor = [CEIColor colorIdle];
-  self.labelY.backgroundColor = [CEIColor colorIdle];
-  self.labelN.backgroundColor = [CEIColor colorIdle];
-  self.labelDay.textColor = [UIColor darkGrayColor];
-  self.labelY.textColor = [UIColor darkGrayColor];
-  self.labelN.textColor = [UIColor darkGrayColor];
+  [self setIdle:YES];
   
   self.viewCorner.hidden = YES;
   
@@ -102,10 +97,27 @@
   _done = NO;
 }
 
+- (void)setIdle:(BOOL)paramidle{
+  
+  if (paramidle) {
+    
+    self.labelDay.backgroundColor = [CEIColor colorIdle];
+    self.labelY.backgroundColor = [CEIColor colorIdle];
+    self.labelN.backgroundColor = [CEIColor colorIdle];
+    self.labelDay.textColor = [UIColor darkGrayColor];
+    self.labelY.textColor = [UIColor darkGrayColor];
+    self.labelN.textColor = [UIColor darkGrayColor];
+  }
+  else{
+    
+    
+  }
+}
+
 - (void)configureWithGoalStep:(PFObject *)paramGoalStep{
   
   self.available = [paramGoalStep[@"available"] boolValue];
-  if (self.available) {
+  if (!self.available) {
     
     self.backgroundColor = [UIColor lightGrayColor];
     self.labelDay.backgroundColor = [UIColor lightGrayColor];
@@ -122,11 +134,9 @@
 
   NSDateComponents *dateGoalStep = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:paramGoalStep[@"date"]];
   NSDateComponents *dateToday = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
-  if (dateGoalStep.day == dateToday.day &&
+  if (dateGoalStep.day == (dateToday.day+1) &&
      dateGoalStep.month == dateToday.month &&
      dateGoalStep.year == dateToday.year){
-
-//    NSLog(@"today:%@ date:%@",dateGoalStep,dateToday);
     
     self.layer.borderColor = [CEIColor colorBlue].CGColor;
     self.layer.borderWidth = 2.0f;
@@ -181,12 +191,39 @@
 - (void)tapGesture:(id)paramSender{
   
   NSDate *date = self.goalStep[@"date"];
+  NSDate *dateToday = [NSDate date];
   
-  NSLog(@"%@",date);
+  NSCalendar *calendar = [NSCalendar currentCalendar];
   
-  BOOL laterThanToday = ([date timeIntervalSinceDate:[NSDate date]] - 60.0f * 60.0f * 24.0f) > 0;
+  NSDateComponents *componentsDate = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit
+                                                 fromDate:date];
   
-  NSLog(@"%f",[date timeIntervalSinceDate:[NSDate date]]);
+  NSDateComponents *componentsToday = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit
+                                                  fromDate:dateToday];
+  
+  BOOL laterThanToday = NO;
+  
+  if (componentsDate.year > componentsToday.year) {
+    
+    laterThanToday = YES;
+  }
+  else
+    if (componentsDate.year == componentsToday.year &&
+        componentsDate.month > componentsToday.month){
+      
+      laterThanToday = YES;
+    }
+    else
+      if (componentsDate.year == componentsToday.year &&
+          componentsDate.month == componentsToday.month &&
+          componentsDate.day > componentsToday.day){
+        
+        laterThanToday = YES;
+      }
+      else{
+        
+        laterThanToday = NO;
+      }
   
   if ([self.delegate respondsToSelector:@selector(didTapDailyChoresView:)] &&
       self.available &&

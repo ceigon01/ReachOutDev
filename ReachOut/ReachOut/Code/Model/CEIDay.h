@@ -12,13 +12,13 @@
 typedef NS_ENUM(NSInteger, CEIDayName){
   
   CEIDayUnknown       = -1,
-  CEIDayNameSunday    = 0,
-  CEIDayNameMonday    = 1,
-  CEIDayNameTuesday   = 2,
-  CEIDayNameWednesday = 3,
-  CEIDayNameThursday  = 4,
-  CEIDayNameFriday    = 5,
-  CEIDayNameSaturday  = 6,
+  CEIDayNameSunday    = 1,
+  CEIDayNameMonday    = 2,
+  CEIDayNameTuesday   = 3,
+  CEIDayNameWednesday = 4,
+  CEIDayNameThursday  = 5,
+  CEIDayNameFriday    = 6,
+  CEIDayNameSaturday  = 7,
 };
 
 @interface CEIDay : NSObject

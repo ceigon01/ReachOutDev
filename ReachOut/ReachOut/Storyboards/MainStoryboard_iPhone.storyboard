@@ -1309,11 +1309,11 @@
             </objects>
             <point key="canvasLocation" x="425" y="-673"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Followers-->
         <scene sceneID="CJM-Vn-KC2">
             <objects>
                 <navigationController id="Xwq-Ja-Ckq" customClass="CEINavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tabFollowers" id="6gM-1r-b29"/>
+                    <tabBarItem key="tabBarItem" title="Followers" image="tabFollowers" id="6gM-1r-b29"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6x7-gw-7m1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1822,11 +1822,11 @@
             </objects>
             <point key="canvasLocation" x="2599" y="-20"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Mentors-->
         <scene sceneID="sH1-DN-AYK">
             <objects>
                 <navigationController id="g71-ZA-e7e" customClass="CEINavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tabMentors" id="c06-1z-5tc"/>
+                    <tabBarItem key="tabBarItem" title="Mentors" image="tabMentors" id="c06-1z-5tc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="v9h-fP-pOr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1839,11 +1839,11 @@
             </objects>
             <point key="canvasLocation" x="929" y="-20"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Encouragements-->
         <scene sceneID="OuE-mb-Kff">
             <objects>
                 <navigationController id="Gvg-BW-QqA" customClass="CEINavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tabEncouragements" id="JtI-LU-dQu"/>
+                    <tabBarItem key="tabBarItem" title="Encouragements" image="tabEncouragements" id="JtI-LU-dQu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cxe-uX-CJR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2075,11 +2075,11 @@
             </objects>
             <point key="canvasLocation" x="1774" y="640"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - More-->
         <scene sceneID="xmc-7z-wMb">
             <objects>
                 <navigationController id="JCZ-yE-QyA" customClass="CEINavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tabMore" id="zAr-TA-csW"/>
+                    <tabBarItem key="tabBarItem" title="More" image="tabMore" id="zAr-TA-csW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bk2-Oz-tLN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

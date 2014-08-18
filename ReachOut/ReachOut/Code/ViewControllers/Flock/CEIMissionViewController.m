@@ -340,10 +340,25 @@ static const CGFloat kHeightCell = 100.0f;
   labelRight.textAlignment = NSTextAlignmentRight;
   labelRight.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];
   
-#warning TODO: which to use?
-//  label.text = [NSString stringWithFormat:@"%.0f %% of goal",([self totalDaysCountForTodayForMission:self.mission] * 100.0f / [self totalDaysCountForMission:self.mission])];
+  __block NSInteger goalsChecked = 0;
+  [self.arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
+    
+    if ([goalStep[@"done"] boolValue]) {
+      
+      goalsChecked++;
+    }
+  }];
   
-  labelRight.text = [NSString stringWithFormat:@"%.0f %% of goal\t",fabs((arrayGoalSteps.count * 100.0f / [NSDate totalDaysCountForMission:self.mission]))];
+  NSInteger totalGoalsToCheck = [NSDate totalDaysCountForMission:self.mission];
+  
+  if (![goal[@"isRecurring"] boolValue]) {
+    
+    NSArray *arrayDays = goal[@"days"];
+    
+    totalGoalsToCheck *= ((CGFloat)arrayDays.count) / 7.0f;
+  }
+  
+  labelRight.text = [NSString stringWithFormat:@"%.0f %% of goal\t",fabs((goalsChecked * 100.0f / ((CGFloat)totalGoalsToCheck)))];
   labelRight.textColor = [UIColor blackColor];
   [view addSubview:labelRight];
   

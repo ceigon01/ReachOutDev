@@ -43,7 +43,7 @@ static const CGFloat kItemsSpacing = 0.0f;
   CGFloat segmentOffset = kItemsSpacing;
   
   self.dictionaryDailyChoresView = [[NSMutableDictionary alloc] init];
-  for (NSInteger dayCounter = 0; dayCounter < kNumberOfDaysInWeek; dayCounter++) {
+  for (NSInteger dayCounter = 1; dayCounter <= kNumberOfDaysInWeek; dayCounter++) {
     
     CEIDailyChoresView *dailyChoresView = [[CEIDailyChoresView alloc] initWithFrame:CGRectMake(segmentOffset - dayCounter,
                                                                                                0.0f,
