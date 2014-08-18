@@ -87,7 +87,14 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
 - (void)dealloc{
   
-  if (self.isEditing && self.missionDidChange) {
+  BOOL shouldUpdate = YES;
+  
+  if (self.isEditing) {
+    
+    shouldUpdate = self.missionDidChange;
+  }
+  
+  if (shouldUpdate) {
   
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMissionAdded
                                                         object:@{

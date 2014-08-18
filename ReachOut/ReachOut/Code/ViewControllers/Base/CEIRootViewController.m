@@ -32,14 +32,6 @@ static NSString *const kSegueIdentifierRootSignup = @"kSegueIdentifier_Root_Sign
                                              object:nil];
   
   APP_DELEGATE.window.backgroundColor = [UIColor whiteColor];
-  
-#warning TODO: hiding the labels & setting the images insets?
-  
-  [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem *tabBarItem, NSUInteger idx, BOOL *stop) {
-
-    [tabBarItem setImageInsets:UIEdgeInsetsMake(10.0f, 0.0f, 0.0f, 0.0f)];
-    [tabBarItem setTitlePositionAdjustment:UIOffsetMake(0.0f, 300.0f)];
-  }];
 }
 
 - (void)viewDidAppear:(BOOL)animated{

@@ -180,7 +180,17 @@
 
 - (void)tapGesture:(id)paramSender{
   
-  if ([self.delegate respondsToSelector:@selector(didTapDailyChoresView:)] && self.available) {
+  NSDate *date = self.goalStep[@"date"];
+  
+  NSLog(@"%@",date);
+  
+  BOOL laterThanToday = ([date timeIntervalSinceDate:[NSDate date]] - 60.0f * 60.0f * 24.0f) > 0;
+  
+  NSLog(@"%f",[date timeIntervalSinceDate:[NSDate date]]);
+  
+  if ([self.delegate respondsToSelector:@selector(didTapDailyChoresView:)] &&
+      self.available &&
+      !laterThanToday) {
     
     [self.delegate didTapDailyChoresView:self];
   }

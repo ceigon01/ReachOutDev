@@ -29,7 +29,7 @@ static NSString *const kIdentifierSegueMissionAddEncouragement = @"kIdentifierSe
 
 static NSString *const kIdentifierCellMission = @"kIdentifierCellMission";
 static const CGFloat kHeightHeader = 20.0f;
-static const CGFloat kHeightFooter = 20.0f;
+static const CGFloat kHeightFooter = 14.0f;
 static const CGFloat kHeightCell = 100.0f;
 
 @interface CEIMissionViewController () <UITableViewDataSource, UITableViewDelegate, CEIGoalStepViewCheckinDelegate, CEIGoalTableViewCellDelegate, CEIGoalStepViewCheckupDelegate>
@@ -312,24 +312,42 @@ static const CGFloat kHeightCell = 100.0f;
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
   
+  UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
+                                                          0.0f,
+                                                          tableView.frame.size.width,
+                                                          kHeightFooter)];
+  
   PFObject *goal = [self.arrayGoals objectAtIndex:section];
   
   NSArray *arrayGoalSteps = [self arrayGoalStepsForGoal:goal withDone:YES];
   
-  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
+#warning TODO: localizations
+  UILabel *labelLeft = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
+                                                                 0.0f,
+                                                                 tableView.frame.size.width * 0.6f,
+                                                                 kHeightFooter)];
+  
+  
+  labelLeft.textAlignment = NSTextAlignmentLeft;
+  labelLeft.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];
+  labelLeft.text = [NSString stringWithFormat:@"  Must be completed %@ daily",goal[@"time"]];
+  [view addSubview:labelLeft];
+  
+  UILabel *labelRight = [[UILabel alloc] initWithFrame:CGRectMake(tableView.frame.size.width * 0.6f,
                                                              0.0f,
-                                                             tableView.frame.size.width,
+                                                             tableView.frame.size.width * 0.4f,
                                                              kHeightFooter)];
-  label.textAlignment = NSTextAlignmentRight;
-  label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
+  labelRight.textAlignment = NSTextAlignmentRight;
+  labelRight.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];
   
 #warning TODO: which to use?
 //  label.text = [NSString stringWithFormat:@"%.0f %% of goal",([self totalDaysCountForTodayForMission:self.mission] * 100.0f / [self totalDaysCountForMission:self.mission])];
   
-  label.text = [NSString stringWithFormat:@"%.0f %% of goal\t",fabs((arrayGoalSteps.count * 100.0f / [NSDate totalDaysCountForMission:self.mission]))];
-  label.textColor = [UIColor blackColor];
+  labelRight.text = [NSString stringWithFormat:@"%.0f %% of goal\t",fabs((arrayGoalSteps.count * 100.0f / [NSDate totalDaysCountForMission:self.mission]))];
+  labelRight.textColor = [UIColor blackColor];
+  [view addSubview:labelRight];
   
-  return label;
+  return view;
 }
 
 #pragma mark - Convinience Methods
@@ -417,7 +435,6 @@ static const CGFloat kHeightCell = 100.0f;
         dateFormatter.dateStyle = NSDateFormatterShortStyle;
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
         
-  #warning TODO: improove handling
         goalStepViewCheckup.labelResponseTime.text = [dateFormatter stringFromDate:goalStep.createdAt];
         goalStepViewCheckup.labelDay.text = goalStep[@"day"];
         goalStepViewCheckup.labelDone.text = [goalStep[@"done"] boolValue] ? @"Yes" : @"No";

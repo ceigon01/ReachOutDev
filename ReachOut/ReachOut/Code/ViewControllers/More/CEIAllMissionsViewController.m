@@ -98,73 +98,6 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
       goal[@"mission"] = mission;
       
       [goal saveInBackground];
-//      if (![goal[@"stepsGenerated"] boolValue]) {
-//        
-//        NSMutableArray *arrayGoalSteps = [[NSMutableArray alloc] init];
-//        
-//#warning TODO: neverending set to 3 years...
-//        NSUInteger totalDays = 0;
-//        if (isNeverending) {
-//          
-//          totalDays = 1000;  //around three years, also it's the Parse fetch cap
-//        }
-//        else{
-//          
-//          totalDays = [NSDate totalDaysCountForMission:mission];
-//        }
-//      
-//        NSCalendar *calendar = [NSCalendar currentCalendar];
-//        
-//#warning TODO: dunno why +1...
-//        PFRelation *relation = [goal relationForKey:@"goalSteps"];
-//        for (NSUInteger daysCount = 1; daysCount < totalDays + 1; daysCount++) {
-//          
-//          PFObject *goalStep = [PFObject objectWithClassName:@"GoalStep"];
-//          goalStep[@"goal"] = goal;
-//          goalStep[@"mission"] = mission;
-//          
-//          NSDateComponents *dateComponents = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit
-//                                                         fromDate:[NSDate date]];
-//          
-//          dateComponents.day += daysCount;
-//#warning TODO: dunno why -2...
-//          dateComponents.weekday = (dateComponents.weekday + daysCount - 2)%7;
-//          
-//          goalStep[@"date"] = [calendar dateFromComponents:dateComponents];
-//          
-//          goalStep[@"day"] = [CEIDay dayNameWithDayNumber:(dateComponents.weekday)];
-//          
-//          if ([goal[@"isRecurring"] boolValue]) {
-//            
-//            goalStep[@"available"] = @YES;
-//          }
-//          else{
-//            
-//            NSArray *arrayDays = goal[@"days"];
-//            
-//            if ([arrayDays indexOfObject:goalStep[@"day"]] == NSNotFound) {
-//              
-//              goalStep[@"available"] = @NO;
-//            }
-//            else{
-//              
-//              goalStep[@"available"] = @YES;
-//            }
-//          }
-//          
-//          [arrayGoalSteps addObject:goalStep];
-//        }
-//        
-//        [PFObject saveAll:arrayGoalSteps];
-//        [arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
-//          
-//          [relation addObject:goalStep];
-//        }];
-//        [arrayGoalSteps removeAllObjects];
-//        
-//        goal[@"stepsGenerated"] = @YES;
-//        [goal save];
-//      }
     }];
   }
   
@@ -340,7 +273,7 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
                             sender:self];
 }
 
-#pragma mark - SWTableView Delegate
+#pragma mark - SWTableViewCell Delegate
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
   

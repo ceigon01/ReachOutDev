@@ -70,6 +70,9 @@ static const NSUInteger kNumerbOfDayButtons = 7;
   
   UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
   [self.view addGestureRecognizer:tapGestureRecognizer];
+  
+  self.switchRepeatEveryday.on = YES;
+  [self tapSwitch:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

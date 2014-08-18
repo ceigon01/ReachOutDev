@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 
 @class PFUser;
 
-@interface CEIUserTableViewCell : UITableViewCell
+@interface CEIUserTableViewCell : SWTableViewCell
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageViewProfile;
 @property (nonatomic, weak) IBOutlet UILabel *labelFullName;

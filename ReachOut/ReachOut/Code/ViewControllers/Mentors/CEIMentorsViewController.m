@@ -22,7 +22,7 @@ static NSString *const kCellIdentifierMentor = @"kCellIdentifierMentor";
 static NSString *const kSegueIdentifierMentorsToMissions = @"kSegueIdentifier_Mentors_Missions";
 static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMentorsToAddUser";
 
-@interface CEIMentorsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CEIMentorsViewController () <UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *arrayMentors;
@@ -139,6 +139,20 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
 
   [cell configureWithUser:user];
   
+  cell.delegate = self;
+  
+#warning TODO: localizations
+  UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+  button.backgroundColor = [UIColor redColor];
+  [button setTitle:@"Delete" forState:UIControlStateNormal];
+  [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+  button.tag = indexPath.row;
+  
+  [cell setRightUtilityButtons:@[
+                                 button,
+                                 ]];
+  
+  
   return cell;
 }
 
@@ -148,6 +162,34 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
   self.indexPathSelected = indexPath;
   [self performSegueWithIdentifier:kSegueIdentifierMentorsToMissions
                             sender:self];
+}
+
+#pragma mark - SWTableViewCell Delegate
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+  
+  NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+  
+  PFUser *user = [self.arrayMentors objectAtIndex:cellIndexPath.row];
+  
+  [self.arrayMentors removeObjectAtIndex:cellIndexPath.row];
+  [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+
+  [PFCloud callFunctionInBackground:@"removeMentorFollowerRelation" withParameters:@{
+                                                                                     @"follower" : [PFUser currentUser].objectId,
+                                                                                     @"mentor" : user.objectId
+                                                                                     }
+                              block:^(NSDictionary *results, NSError *error) {
+                                
+                                if (error) {
+                                  
+                                  [CEIAlertView showAlertViewWithError:error];
+                                }
+                                else{
+                                  
+                                  NSLog(@"%@",results);
+                                }
+                              }];
 }
 
 #pragma mark - Notification Handling

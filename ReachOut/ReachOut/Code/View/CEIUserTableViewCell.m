@@ -20,6 +20,8 @@
 
 - (void)configureWithUser:(PFUser *)paramUser{
 
+  self.accessoryType = UITableViewCellAccessoryNone;
+  
   self.labelFullName.text = paramUser[@"fullName"];
   self.labelTitle.text = paramUser[@"title"];
   
