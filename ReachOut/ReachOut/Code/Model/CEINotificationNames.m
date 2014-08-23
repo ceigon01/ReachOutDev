@@ -13,6 +13,7 @@ NSString *const kNotificationNameMissionAdded           = @"kNotificationNameMis
 NSString *const kNotificationNameUserFollowerAdded      = @"kNotificationNameUserFollowerAdded";
 NSString *const kNotificationNameUserMentorAdded        = @"kNotificationNameUserMentorAdded";
 NSString *const kNotificationNameGoalAdded              = @"kNotificationNameGoalAdded";
+NSString *const kNotificationNameGoalEdited             = @"kNotificationNameGoalEdited";
 NSString *const kNotificationNameFollowerAddedToMission = @"kNotificationNameFollowerAddedToMission";
 NSString *const kNotificationNameEncouragementAdded     = @"kNotificationNameEncouragementAdded";
 

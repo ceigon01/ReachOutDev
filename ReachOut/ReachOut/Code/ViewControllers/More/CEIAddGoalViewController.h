@@ -13,6 +13,7 @@
 @interface CEIAddGoalViewController : CEIBaseViewController
 
 @property (nonatomic, strong) PFObject *goalAdded;
+@property (nonatomic, assign, getter = isEditing) BOOL editing;
 @property (nonatomic, strong) NSMutableArray *arrayButtonNamesSelected;
 
 @end

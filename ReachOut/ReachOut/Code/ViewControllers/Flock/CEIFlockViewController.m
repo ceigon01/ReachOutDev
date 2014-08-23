@@ -53,22 +53,22 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
   [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
                                             bundle:[NSBundle mainBundle]]
        forCellReuseIdentifier:kCellIdentifierFollower];
-  
-  [self fetchFlock];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   
-    __weak typeof(self) weakSelf =self;
-    [self.tableView addPullToRefreshActionHandler:^{
-      
-      [weakSelf fetchFlock];
-    }
-                            ProgressImagesGifName:@"run@2x.gif"
-                             LoadingImagesGifName:@"run@2x.gif"
-                          ProgressScrollThreshold:60
-                            LoadingImageFrameRate:30];
+  [self fetchFlock];
+  
+  __weak typeof(self) weakSelf = self;
+  [self.tableView addPullToRefreshActionHandler:^{
+    
+    [weakSelf fetchFlock];
+  }
+                          ProgressImagesGifName:@"run@2x.gif"
+                           LoadingImagesGifName:@"run@2x.gif"
+                        ProgressScrollThreshold:60
+                          LoadingImageFrameRate:30];
 }
 
 - (void)fetchFlock{

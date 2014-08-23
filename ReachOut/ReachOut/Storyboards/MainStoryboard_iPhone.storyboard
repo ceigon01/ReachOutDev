@@ -1542,6 +1542,7 @@
                         <outlet property="labelUserName" destination="2BT-gM-EAk" id="35m-zS-eD9"/>
                         <outlet property="tableView" destination="KG9-7F-Rz9" id="RB9-up-Qdt"/>
                         <segue destination="IIq-RI-CQM" kind="push" identifier="kIdentifierSegueMissionAddEncouragement" id="kq1-ES-DfJ"/>
+                        <segue destination="kcn-qy-TqE" kind="push" identifier="kIdentifierSegueMissionToAddGoal" id="qpa-ED-Np8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Yh-vQ-f45" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1724,7 +1725,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuz-ze-FnR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FYM-7R-YKV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2190" y="-20"/>
+            <point key="canvasLocation" x="2578" y="-20"/>
         </scene>
         <!--Custom User Found View Controller-->
         <scene sceneID="bmN-eO-TMP">
@@ -1820,7 +1821,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRe-UW-T0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2599" y="-20"/>
+            <point key="canvasLocation" x="2987" y="-20"/>
         </scene>
         <!--Navigation Controller - Mentors-->
         <scene sceneID="sH1-DN-AYK">
@@ -2480,13 +2481,7 @@
                             <constraint firstItem="api-b9-oGS" firstAttribute="top" secondItem="h8s-iG-AZe" secondAttribute="bottom" constant="8" id="xtk-hy-SNv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ogl-oA-vG7">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="P9B-xS-AO9">
-                            <connections>
-                                <segue destination="wq7-dK-fZJ" kind="unwind" unwindAction="unwindMyProfile:" id="xl2-0i-ach"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="ogl-oA-vG7"/>
                     <connections>
                         <outlet property="buttonUserImage" destination="E0x-0v-5jR" id="YSr-ll-mVi"/>
                         <outlet property="labelFollowers" destination="5Pr-MN-HBn" id="dyF-VI-rLL"/>
@@ -2578,11 +2573,12 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="GMr-Jq-4fe"/>
-        <segue reference="FbI-Om-JAD"/>
-        <segue reference="vxi-M6-ghC"/>
-        <segue reference="kq1-ES-DfJ"/>
         <segue reference="7aa-Rm-Hm2"/>
         <segue reference="lbr-ma-Rjx"/>
         <segue reference="Gty-YO-6eE"/>
+        <segue reference="FbI-Om-JAD"/>
+        <segue reference="kq1-ES-DfJ"/>
+        <segue reference="qpa-ED-Np8"/>
+        <segue reference="biv-Bn-3hS"/>
     </inferredMetricsTieBreakers>
 </document>

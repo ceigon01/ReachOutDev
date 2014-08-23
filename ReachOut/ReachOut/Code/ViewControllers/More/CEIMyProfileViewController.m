@@ -10,12 +10,15 @@
 #import <Parse/Parse.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "PFQuery+FollowersAndMentors.h"
+#import "CEIAlertView.h"
 
 #warning TODO: redundant
 NSString *const kTitleButtonImageSourceCameraRollCameraRoll4 = @"Camera roll";
 NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a picture";
 
 @interface CEIMyProfileViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, assign) BOOL didEdit;
 
 @end
 
@@ -60,8 +63,9 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
   }
   else{
     
-//    [weakSelf.buttonUserImage setImage:[UIImage imageNamed:@"sheepPhoto"] forState:UIControlStateNormal];
   }
+  
+  self.didEdit = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -71,6 +75,36 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
   [self fetchNumberOfFolowers];
   [self fetchNumberOfMissionsInProgress];
   [self fetchNumberOfAssignedMissions];
+}
+
+- (void)dealloc{
+  
+  if (self.didEdit) {
+    
+    PFUser *user = [PFUser currentUser];
+    
+    user.password = self.textFieldPassword.text;
+    user[@"fullName"] = self.textFieldFullName.text;
+    user[@"title"] = self.textFieldTitle.text;
+    
+    if (self.imageChanged) {
+      
+      UIImage *image = [self.buttonUserImage backgroundImageForState:self.buttonUserImage.state];
+      PFFile *file = [PFFile fileWithData:UIImagePNGRepresentation(image)];
+      user[@"image"] = file;
+    }
+    
+    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+      
+      if (error) {
+        
+        [CEIAlertView showAlertViewWithError:error];
+      }
+      else{
+        
+      }
+    }];
+  }
 }
 
 #pragma mark - Networking
@@ -173,13 +207,11 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
   
   self.imageChanged = YES;
+  self.didEdit = YES;
   
   UIImage *image = info[UIImagePickerControllerOriginalImage];
   
   [self.buttonUserImage setBackgroundImage:image forState:UIControlStateNormal];
-  
-//  PFFile *imageFile = [PFFile fileWithName:@"image.png" data:UIImagePNGRepresentation(image)];
-//  self.user[@"image"] = imageFile;
   
   [picker dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -207,6 +239,13 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
         
           [self slideViewToOrigin];
         }
+  
+  return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+  
+  self.didEdit = YES;
   
   return YES;
 }

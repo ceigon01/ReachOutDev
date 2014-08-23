@@ -55,12 +55,12 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
        forCellReuseIdentifier:kCellIdentifierMentor];
   
   self.automaticallyAdjustsScrollViewInsets = NO;
-  
-  [self fetchMentors];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
+  
+  [self fetchMentors];
   
   __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshActionHandler:^{

@@ -190,40 +190,22 @@
 
 - (void)tapGesture:(id)paramSender{
   
-  NSDate *date = self.goalStep[@"date"];
-  NSDate *dateToday = [NSDate date];
+  NSDateComponents *dateGoalStep = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:self.goalStep[@"date"]];
   
-  NSCalendar *calendar = [NSCalendar currentCalendar];
-  
-  NSDateComponents *componentsDate = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit
-                                                 fromDate:date];
-  
-  NSDateComponents *componentsToday = [calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit
-                                                  fromDate:dateToday];
+  NSDate *dateNew = [[NSCalendar currentCalendar] dateFromComponents:dateGoalStep];
   
   BOOL laterThanToday = NO;
   
-  if (componentsDate.year > componentsToday.year) {
+  if (self.today){
     
-    laterThanToday = YES;
+    laterThanToday = NO;
   }
   else
-    if (componentsDate.year == componentsToday.year &&
-        componentsDate.month > componentsToday.month){
+    if ([[NSDate date] compare:dateNew] == NSOrderedAscending) {
       
       laterThanToday = YES;
-    }
-    else
-      if (componentsDate.year == componentsToday.year &&
-          componentsDate.month == componentsToday.month &&
-          componentsDate.day > componentsToday.day){
-        
-        laterThanToday = YES;
-      }
-      else{
-        
-        laterThanToday = NO;
-      }
+  }
+  
   
   if ([self.delegate respondsToSelector:@selector(didTapDailyChoresView:)] &&
       self.available &&

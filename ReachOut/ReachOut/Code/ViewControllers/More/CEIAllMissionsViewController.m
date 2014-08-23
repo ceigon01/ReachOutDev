@@ -145,8 +145,6 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
 
   self.indexPathSelected = nil;
   
-  [self fetchMissions];
-  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(notificationAddMission:)
                                                name:kNotificationNameMissionAdded
@@ -155,6 +153,8 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
 
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
+  
+  [self fetchMissions];
   
   __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshActionHandler:^{

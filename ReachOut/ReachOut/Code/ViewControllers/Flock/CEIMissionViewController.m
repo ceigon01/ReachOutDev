@@ -21,16 +21,21 @@
 #import "CEIColor.h"
 #import "CEIAddEncouragementViewController.h"
 #import <CoreGraphics/CoreGraphics.h>
+#import "CEINotificationNames.h"
+#import "CEIAddGoalViewController.h"
 
 static NSString *const kNibNameCEIGoalStepViewCheckin = @"CEIGoalStepViewCheckin";
 static NSString *const kNibNameCEIGoalStepViewCheckup = @"CEIGoalStepViewCheckup";
 
 static NSString *const kIdentifierSegueMissionAddEncouragement = @"kIdentifierSegueMissionAddEncouragement";
+static NSString *const kIdentifierSegueMissionToAddGoal = @"kIdentifierSegueMissionToAddGoal";
 
 static NSString *const kIdentifierCellMission = @"kIdentifierCellMission";
 static const CGFloat kHeightHeader = 20.0f;
 static const CGFloat kHeightFooter = 14.0f;
 static const CGFloat kHeightCell = 100.0f;
+
+static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
 
 @interface CEIMissionViewController () <UITableViewDataSource, UITableViewDelegate, CEIGoalStepViewCheckinDelegate, CEIGoalTableViewCellDelegate, CEIGoalStepViewCheckupDelegate>
 
@@ -47,12 +52,51 @@ static const CGFloat kHeightCell = 100.0f;
 @property (nonatomic, strong) CEIGoalTableViewCell *selectedCell;
 @property (nonatomic, strong) CEIDailyChoresView *selectedDailyChoresView;
 
+@property (nonatomic, strong) PFObject *goalSelected;
+
 @end
 
 @implementation CEIMissionViewController
 
+- (void)dealloc{
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)notificationGoalModified:(NSNotification *)paramNotification{
+  
+  PFObject *goal = paramNotification.object;
+  
+  __weak typeof(self) weakSelf = self;
+  
+  [self.tableView reloadData];
+  
+  [goal saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    
+    if (error) {
+      
+      [weakSelf.tableView reloadData];
+      [CEIAlertView showAlertViewWithError:error];
+    }
+    else{
+      
+      [weakSelf fetchGoals];
+      
+      PFQuery *query = [PFInstallation query];
+      [query whereKey:@"user" equalTo:weakSelf.user];
+      
+      [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@ did edit goal %@",[PFUser currentUser][@"fullName"],weakSelf.selectedCell.goal[@"caption"]]];
+    }
+  }];
+}
+
 - (void)viewDidLoad{
   [super viewDidLoad];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(notificationGoalModified:)
+                                               name:kNotificationNameGoalEdited
+                                             object:nil];
   
   [self.tableView registerClass:[CEIGoalTableViewCell class]
          forCellReuseIdentifier:kIdentifierCellMission];
@@ -116,6 +160,20 @@ static const CGFloat kHeightCell = 100.0f;
   self.labelUserName.textColor = [UIColor whiteColor];
   
   self.tableView.backgroundColor = [UIColor whiteColor];
+  
+  [self fetchGoals];
+  
+#warning TODO: a bit hacky way, but nowthing else seems to work...
+  if (self.isMentor) {
+  
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLabelTableViewHeader:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
+  }
+}
+
+- (void)refresh{
   
   [self fetchGoals];
 }
@@ -195,6 +253,13 @@ static const CGFloat kHeightCell = 100.0f;
     
     addEncouragementViewController.arrayFollowersAvailable = [NSMutableArray arrayWithObjects:self.user, nil];
   }
+  else
+    if ([segue.identifier isEqualToString:kIdentifierSegueMissionToAddGoal]) {
+      
+      ((CEIAddGoalViewController *)segue.destinationViewController).goalAdded = self.goalSelected;
+      ((CEIAddGoalViewController *)segue.destinationViewController).editing = YES;
+      self.goalSelected = nil;
+    }
 }
 
 - (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
@@ -296,8 +361,42 @@ static const CGFloat kHeightCell = 100.0f;
   label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
   label.text = [NSString stringWithFormat:@"  %@",goal[@"caption"]];
   label.textColor = [UIColor blackColor];
+  label.tag = kTagOffsetLabelTableViewHeader + section;
   
   return label;
+}
+
+- (void)tapLabelTableViewHeader:(id)paramSender{
+  
+  if ([paramSender isKindOfClass:[UITapGestureRecognizer class]]) {
+    
+    UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer *)paramSender;
+    
+    UIView *view = tapGestureRecognizer.view;
+    
+    CGPoint tapPoint = [tapGestureRecognizer locationInView:view];
+    
+    __block UIView *viewSelected = nil;
+    
+    [view.subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
+      
+      if (CGRectContainsPoint(view.frame, tapPoint) && view.tag >= kTagOffsetLabelTableViewHeader) {
+        
+        viewSelected = view;
+        *stop = YES;
+      }
+    }];
+    
+    if (viewSelected == nil) {
+      
+      return;
+    }
+    
+    NSInteger tag = viewSelected.tag;
+    
+    self.goalSelected = [self.arrayGoals objectAtIndex:(tag - kTagOffsetLabelTableViewHeader)];
+    [self performSegueWithIdentifier:kIdentifierSegueMissionToAddGoal sender:self];
+  }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -484,6 +583,14 @@ static const CGFloat kHeightCell = 100.0f;
                                                                               options:nil]
                                                    lastObject];
     goalStepViewCheckin.delegate = self;
+    
+    if (IS_IPHONE_5) {
+      
+      goalStepViewCheckin.frame = CGRectMake(goalStepViewCheckin.frame.origin.x,
+                                             goalStepViewCheckin.frame.origin.y,
+                                             goalStepViewCheckin.frame.size.width,
+                                             goalStepViewCheckin.frame.size.height + 88.0f);
+    }
     
     PFObject *goal = paramGoalTableViewCell.goal;
     

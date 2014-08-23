@@ -208,10 +208,7 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameLogout
                                                         object:nil];
     
-#warning TODO: check, if this instalation needs the user field to be removed
     PFInstallation *instalation = [PFInstallation currentInstallation];
-//    instalation[@"user"] = nil;
-//    [instalation save];
     PFRelation *relation = [PFUser currentUser][@"installations"];
     [relation removeObject:instalation];
     [[PFUser currentUser] save];

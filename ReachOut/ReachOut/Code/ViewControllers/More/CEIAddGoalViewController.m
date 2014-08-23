@@ -47,6 +47,12 @@ static const NSUInteger kNumerbOfDayButtons = 7;
 #warning TODO: localization
   self.title = @"Add a Goal";
   
+  if (self.isEditing) {
+
+    self.arrayButtonNamesSelected = [NSMutableArray arrayWithArray:self.goalAdded[@"days"]];
+  }
+  
+  
   for (NSInteger dayNumber = 1; dayNumber <= kNumerbOfDayButtons; dayNumber++) {
     
     UIButton *button = (UIButton *)[self.view viewWithTag:(dayNumber + kTagOffsetButtonDay)];
@@ -55,24 +61,49 @@ static const NSUInteger kNumerbOfDayButtons = 7;
     [button setTitle:[CEIDay dayNameWithDayNumber:dayNumber] forState:UIControlStateNormal];
     [button setTitle:[CEIDay dayNameWithDayNumber:dayNumber] forState:UIControlStateSelected];
     [button addTarget:self action:@selector(tapButtonDay:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (self.isEditing) {
+      
+      if ([self.arrayButtonNamesSelected indexOfObject:[CEIDay dayNameWithDayNumber:dayNumber]] != NSNotFound) {
+        
+        button.backgroundColor = [UIColor lightGrayColor];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      }
+    }
+    
     [self.arrayButtonsDays addObject:button];
   }
   
-  self.textViewTitle.text = @"Put your goal caption here.";
-  self.textViewTitle.textColor = [UIColor lightGrayColor];
-  self.textViewTitle.layer.borderColor = [UIColor lightGrayColor].CGColor;
   self.textViewTitle.layer.borderWidth = 0.5f;
   self.textViewTitle.layer.cornerRadius = 4.0f;
   
-  self.switchRepeatEveryday.on = NO;
-  [self.buttonTime setTitle:@"12:00 AM" forState:UIControlStateNormal];
-  self.goalAdded[@"time"] = @"12:00 AM";
   
   UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
   [self.view addGestureRecognizer:tapGestureRecognizer];
   
-  self.switchRepeatEveryday.on = YES;
-  [self tapSwitch:nil];
+  if (self.isEditing) {
+    
+    self.textViewTitle.text = self.goalAdded[@"caption"];
+    [self.buttonTime setTitle:self.goalAdded[@"time"] forState:UIControlStateNormal];
+    if ([self.goalAdded[@"isRecurring"] boolValue ]) {
+      
+      self.switchRepeatEveryday.on = YES;
+      [self tapSwitch:nil];
+    }
+  }
+  else{
+    
+    self.textViewTitle.text = @"Put your goal caption here.";
+    self.textViewTitle.textColor = [UIColor lightGrayColor];
+    self.textViewTitle.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    
+    [self.buttonTime setTitle:@"12:00 AM" forState:UIControlStateNormal];
+    self.goalAdded[@"time"] = @"12:00 AM";
+    
+    self.switchRepeatEveryday.on = YES;
+    [self tapSwitch:nil];
+  }
+  
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -100,7 +131,14 @@ static const NSUInteger kNumerbOfDayButtons = 7;
     [goal addUniqueObject:dayName forKey:@"days"];
   }];
   
-  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameGoalAdded object:self.goalAdded];
+  if (self.isEditing) {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameGoalEdited object:self.goalAdded];
+  }
+  else{
+   
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameGoalAdded object:self.goalAdded];
+  }
 }
 
 #pragma mark - UITextView Delegate

@@ -7,6 +7,8 @@
 //
 
 #import "CEIAppDelegate.h"
+#import "CEIRootViewController.h"
+#import "CEIMissionViewController.h"
 
 #import <Parse/Parse.h>
 
@@ -46,6 +48,17 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 
+  CEIRootViewController *rootViewController = (CEIRootViewController *)self.window.rootViewController;
+  
+  UINavigationController *navigationViewController = (UINavigationController *)rootViewController.selectedViewController;
+  
+  if ([[navigationViewController topViewController] isKindOfClass:[CEIMissionViewController class]]) {
+    
+    CEIMissionViewController *missionViewController = (CEIMissionViewController *)[navigationViewController topViewController];
+    
+    [missionViewController refresh];
+  }
+  
   [PFPush handlePush:userInfo];
 }
 

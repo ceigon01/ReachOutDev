@@ -16,4 +16,6 @@
 @property (nonatomic, strong) PFObject *user;
 @property (nonatomic, assign, getter=isMentor) BOOL mentor;
 
+- (void)refresh;
+
 @end

@@ -45,12 +45,13 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   self.title = @"Encouragement";
   
   self.automaticallyAdjustsScrollViewInsets = NO;
-  [self fetchEncouragementsReceived];
-  [self fetchEncouragementsSent];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
+  
+  [self fetchEncouragementsReceived];
+  [self fetchEncouragementsSent];
   
   __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshActionHandler:^{
