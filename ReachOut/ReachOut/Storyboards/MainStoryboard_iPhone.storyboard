@@ -174,7 +174,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="0lh-y3-jwp" kind="push" id="QXK-gw-Tpw"/>
+                                    <segue destination="d42-xY-dXW" kind="push" id="RMC-oE-wUb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7x-oE-jMH">
@@ -602,6 +602,62 @@
             </objects>
             <point key="canvasLocation" x="2142" y="-2309"/>
         </scene>
+        <!--Find Mentor In Contacts View Controller-->
+        <scene sceneID="BRJ-aW-scV">
+            <objects>
+                <viewController id="d42-xY-dXW" customClass="CEIFindMentorInContactsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cro-Ob-MYT"/>
+                        <viewControllerLayoutGuide type="bottom" id="yKb-83-eWd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dny-CF-E0H">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="A03-g2-uYk">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kIdentifierCellUsersFound1" id="avf-G7-mcq">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="avf-G7-mcq" id="ahS-Ql-QWP">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="d42-xY-dXW" id="CNf-cj-DtQ"/>
+                                    <outlet property="delegate" destination="d42-xY-dXW" id="FnW-vH-Hxx"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="A03-g2-uYk" firstAttribute="top" secondItem="dny-CF-E0H" secondAttribute="top" id="4BU-wk-1wJ"/>
+                            <constraint firstAttribute="trailing" secondItem="A03-g2-uYk" secondAttribute="trailing" id="81F-hM-UoI"/>
+                            <constraint firstItem="yKb-83-eWd" firstAttribute="top" secondItem="A03-g2-uYk" secondAttribute="bottom" id="DGy-eJ-dpe"/>
+                            <constraint firstItem="A03-g2-uYk" firstAttribute="leading" secondItem="dny-CF-E0H" secondAttribute="leading" id="VLd-Gb-Hej"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WLb-e4-fGZ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="YRk-qO-Eyl">
+                            <connections>
+                                <segue destination="0lh-y3-jwp" kind="push" identifier="kIdentifierSegueAddUserToAddCustomUser1" id="R3n-9X-EdG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="A03-g2-uYk" id="Y9o-nV-WyM"/>
+                        <segue destination="LTs-N7-YWp" kind="push" identifier="kIdentifierSegueAddUserToCustomUserFound1" id="WR6-Sh-fnr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eel-Vq-euP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1744" y="-1646"/>
+        </scene>
         <!--Find Mentor View Controller-->
         <scene sceneID="hDa-Zu-vpQ">
             <objects>
@@ -726,7 +782,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJ6-mn-yrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="7My-64-ndA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1744" y="-1646"/>
+            <point key="canvasLocation" x="2142" y="-1210"/>
         </scene>
         <!--Add Mission View Controller - Add a Mission-->
         <scene sceneID="pyY-lt-hBR">
@@ -1100,7 +1156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Peo-5p-tpS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2142" y="-1646"/>
+            <point key="canvasLocation" x="2540" y="-1646"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="fnb-HK-AcL">
@@ -1285,7 +1341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bo7-fc-vvy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2547" y="-1646"/>
+            <point key="canvasLocation" x="2945" y="-1646"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="Olg-A0-bAx">
@@ -1725,7 +1781,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuz-ze-FnR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FYM-7R-YKV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2578" y="-20"/>
+            <point key="canvasLocation" x="2190" y="-20"/>
         </scene>
         <!--Custom User Found View Controller-->
         <scene sceneID="bmN-eO-TMP">
@@ -1821,7 +1877,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRe-UW-T0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2987" y="-20"/>
+            <point key="canvasLocation" x="2599" y="-20"/>
         </scene>
         <!--Navigation Controller - Mentors-->
         <scene sceneID="sH1-DN-AYK">
@@ -2575,10 +2631,11 @@
         <segue reference="GMr-Jq-4fe"/>
         <segue reference="7aa-Rm-Hm2"/>
         <segue reference="lbr-ma-Rjx"/>
-        <segue reference="Gty-YO-6eE"/>
+        <segue reference="WvR-kh-tAH"/>
+        <segue reference="KE2-V4-3Eg"/>
         <segue reference="FbI-Om-JAD"/>
         <segue reference="kq1-ES-DfJ"/>
         <segue reference="qpa-ED-Np8"/>
-        <segue reference="biv-Bn-3hS"/>
+        <segue reference="vxi-M6-ghC"/>
     </inferredMetricsTieBreakers>
 </document>
