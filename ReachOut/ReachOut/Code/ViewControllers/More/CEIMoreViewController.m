@@ -18,10 +18,11 @@
 typedef NS_ENUM(NSInteger, CEIMoreRow){
   
   CEIMoreRowMissions = 0,
-  CEIMoreRowUpdateProfile = 1,
-  CEIMoreRowAbout = 2,
-  CEIMoreRowMotto = 3,
-  CEIMoreRowLogout = 4,
+  CEIMoreRowGoalNotifications = 1,
+  CEIMoreRowUpdateProfile = 2,
+  CEIMoreRowAbout = 3,
+  CEIMoreRowMotto = 4,
+  CEIMoreRowLogout = 5,
 };
 static const NSInteger kNumberOfMoreRows = 5;
 
@@ -30,6 +31,7 @@ static NSString *const kIdentifierSegueMoreToWebViewCeigon = @"kIdentifierSegueM
 static NSString *const kIdentifierSegueMoreToAllMissions = @"kIdentifierSegueMoreToAllMissions";
 static NSString *const kIdentifierSegueMoreToMotto = @"kIdentifierSegueMoreToMotto";
 static NSString *const kIdentifierSegueMoreToMyProfile = @"kIdentifierSegueMoreToMyProfile";
+static NSString *const kIdentifierSegueMoreToGoalNotifications = @"kIdentifierSegueMoreToGoalNotifications";
 
 static NSString *const kURLWebsiteCEIGON = @"http://www.ceigon.com/";
 static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
@@ -183,6 +185,12 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
       break;
     }
       
+    case CEIMoreRowGoalNotifications:{
+      
+      [self performSegueWithIdentifier:kIdentifierSegueMoreToGoalNotifications sender:self];
+      break;
+    }
+      
     case CEIMoreRowLogout:{
       
       [[[UIAlertView alloc] initWithTitle:@"Logout"
@@ -224,6 +232,7 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
 #warning TODO: localization
   switch (paramIndexPath.row) {
     case CEIMoreRowMissions: return @"Missions";
+    case CEIMoreRowGoalNotifications: return @"Goal Notifications";
     case CEIMoreRowUpdateProfile: return @"Update Profile";
     case CEIMoreRowAbout: return @"About";
     case CEIMoreRowMotto: return @"Motto";

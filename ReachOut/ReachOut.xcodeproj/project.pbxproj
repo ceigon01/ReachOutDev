@@ -65,6 +65,8 @@
 		FD160C0A1983E7D600696320 /* CEIUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD160C081983E7D600696320 /* CEIUserTableViewCell.m */; };
 		FD160C0B1983E7D600696320 /* CEIUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD160C091983E7D600696320 /* CEIUserTableViewCell.xib */; };
 		FD1F592A19A8ABAA00D017CB /* CEIFindMentorInContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1F592919A8ABAA00D017CB /* CEIFindMentorInContactsViewController.m */; };
+		FD1F592D19A8D7F200D017CB /* CEIGoalNotificationSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1F592C19A8D7F200D017CB /* CEIGoalNotificationSetupViewController.m */; };
+		FD1F593019A8D9B500D017CB /* CEIGoalNotificationsPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1F592F19A8D9B500D017CB /* CEIGoalNotificationsPreviewViewController.m */; };
 		FD25C0FB198EB5E100D19BB7 /* PFQuery+FollowersAndMentors.m in Sources */ = {isa = PBXBuildFile; fileRef = FD25C0FA198EB5E100D19BB7 /* PFQuery+FollowersAndMentors.m */; };
 		FD2E9AD9195731F7005B074A /* run@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD2E9AD7195731F7005B074A /* run@2x.gif */; };
 		FD2E9ADD1957371C005B074A /* sheepPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = FD2E9ADC1957371C005B074A /* sheepPhoto.png */; };
@@ -199,6 +201,10 @@
 		FD160C091983E7D600696320 /* CEIUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEIUserTableViewCell.xib; sourceTree = "<group>"; };
 		FD1F592819A8ABAA00D017CB /* CEIFindMentorInContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIFindMentorInContactsViewController.h; sourceTree = "<group>"; };
 		FD1F592919A8ABAA00D017CB /* CEIFindMentorInContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIFindMentorInContactsViewController.m; sourceTree = "<group>"; };
+		FD1F592B19A8D7F200D017CB /* CEIGoalNotificationSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIGoalNotificationSetupViewController.h; sourceTree = "<group>"; };
+		FD1F592C19A8D7F200D017CB /* CEIGoalNotificationSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIGoalNotificationSetupViewController.m; sourceTree = "<group>"; };
+		FD1F592E19A8D9B500D017CB /* CEIGoalNotificationsPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIGoalNotificationsPreviewViewController.h; sourceTree = "<group>"; };
+		FD1F592F19A8D9B500D017CB /* CEIGoalNotificationsPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIGoalNotificationsPreviewViewController.m; sourceTree = "<group>"; };
 		FD25C0F9198EB5E100D19BB7 /* PFQuery+FollowersAndMentors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PFQuery+FollowersAndMentors.h"; sourceTree = "<group>"; };
 		FD25C0FA198EB5E100D19BB7 /* PFQuery+FollowersAndMentors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PFQuery+FollowersAndMentors.m"; sourceTree = "<group>"; };
 		FD2E9AD7195731F7005B074A /* run@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "run@2x.gif"; sourceTree = "<group>"; };
@@ -625,6 +631,10 @@
 				FD2E9AF71958C5BA005B074A /* CEIAddFlockToMissionViewController.m */,
 				FDA200AE1977213600DC8BDA /* CEIMyProfileViewController.h */,
 				FDA200AF1977213600DC8BDA /* CEIMyProfileViewController.m */,
+				FD1F592E19A8D9B500D017CB /* CEIGoalNotificationsPreviewViewController.h */,
+				FD1F592F19A8D9B500D017CB /* CEIGoalNotificationsPreviewViewController.m */,
+				FD1F592B19A8D7F200D017CB /* CEIGoalNotificationSetupViewController.h */,
+				FD1F592C19A8D7F200D017CB /* CEIGoalNotificationSetupViewController.m */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -812,8 +822,10 @@
 				FDA200B01977213600DC8BDA /* CEIMyProfileViewController.m in Sources */,
 				FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */,
 				FD5833D21960BAC6008782D8 /* CEIAddGoalViewController.m in Sources */,
+				FD1F592D19A8D7F200D017CB /* CEIGoalNotificationSetupViewController.m in Sources */,
 				FD25C0FB198EB5E100D19BB7 /* PFQuery+FollowersAndMentors.m in Sources */,
 				A440A1971937F33900D7CC0D /* main.m in Sources */,
+				FD1F593019A8D9B500D017CB /* CEIGoalNotificationsPreviewViewController.m in Sources */,
 				A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */,
 				FDD65EAD1972AA4200DAC841 /* CEITextField.m in Sources */,
 				A440A19B1937F33900D7CC0D /* CEIAppDelegate.m in Sources */,

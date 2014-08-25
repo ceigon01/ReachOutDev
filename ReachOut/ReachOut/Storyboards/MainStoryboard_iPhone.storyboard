@@ -782,7 +782,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJ6-mn-yrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="7My-64-ndA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2142" y="-1210"/>
+            <point key="canvasLocation" x="2142" y="-1322"/>
         </scene>
         <!--Add Mission View Controller - Add a Mission-->
         <scene sceneID="pyY-lt-hBR">
@@ -1781,7 +1781,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuz-ze-FnR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FYM-7R-YKV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2190" y="-20"/>
+            <point key="canvasLocation" x="2190" y="300"/>
         </scene>
         <!--Custom User Found View Controller-->
         <scene sceneID="bmN-eO-TMP">
@@ -2195,6 +2195,7 @@
                         <segue destination="tfT-jD-B8H" kind="push" identifier="kIdentifierSegueMoreToAllMissions" id="V82-4w-YMw"/>
                         <segue destination="S3j-dZ-hxi" kind="modal" identifier="kIdentifierSegueMoreToMotto" id="ZM5-te-FK0"/>
                         <segue destination="Vdb-hU-ILc" kind="push" identifier="kIdentifierSegueMoreToMyProfile" id="WHr-WW-a5i"/>
+                        <segue destination="Evn-GM-r7K" kind="push" identifier="kIdentifierSegueMoreToGoalNotifications" id="n9a-ZZ-hwh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLd-Kb-GVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2335,6 +2336,174 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHG-nL-NUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1792" y="1953"/>
+        </scene>
+        <!--Goal Notifications Preview View Controller-->
+        <scene sceneID="dJe-ZK-gU3">
+            <objects>
+                <viewController id="Evn-GM-r7K" customClass="CEIGoalNotificationsPreviewViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pgk-gX-NeM"/>
+                        <viewControllerLayoutGuide type="bottom" id="0zg-Bb-NpK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ie9-n8-wGT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="syb-n3-ka4">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kCellIdentifierGoalNotificationPreview" textLabel="i6s-tK-Sbl" detailTextLabel="01e-CY-r6D" style="IBUITableViewCellStyleSubtitle" id="gXd-ps-sFu">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gXd-ps-sFu" id="nU1-0z-4so">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i6s-tK-Sbl">
+                                                    <rect key="frame" x="15" y="3" width="34" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="01e-CY-r6D">
+                                                    <rect key="frame" x="15" y="25" width="43" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Evn-GM-r7K" id="B5g-fS-lXL"/>
+                                    <outlet property="delegate" destination="Evn-GM-r7K" id="T5b-1f-rAc"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ubo-ZD-QzU">
+                        <barButtonItem key="rightBarButtonItem" title="Reset all" id="VD6-cl-rgn">
+                            <connections>
+                                <action selector="tapButtonResetNotifications:" destination="Evn-GM-r7K" id="KUe-zy-9Dp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="syb-n3-ka4" id="54N-gf-Hli"/>
+                        <segue destination="DuG-IC-1ng" kind="push" identifier="kIdentifierSegueNotificationsPreviewToNotificationSetup" id="0Sq-7o-3jJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hu-1W-9ce" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1792" y="3308"/>
+        </scene>
+        <!--Goal Notification Setup View Controller-->
+        <scene sceneID="EZC-Hd-O3e">
+            <objects>
+                <viewController id="DuG-IC-1ng" customClass="CEIGoalNotificationSetupViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="264-Qy-99Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="cim-eS-RCJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="N9N-Yo-yTB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FwH-YU-Ly4">
+                                <rect key="frame" x="20" y="84" width="280" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="lpZ-vh-gKQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mp0-MB-llG">
+                                <rect key="frame" x="0.0" y="357" width="320" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="162" id="D2N-Sa-lBN"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="DuG-IC-1ng" id="NtD-f3-pre"/>
+                                    <outlet property="delegate" destination="DuG-IC-1ng" id="bSV-ya-0qx"/>
+                                </connections>
+                            </pickerView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours before:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amm-uc-5dS">
+                                <rect key="frame" x="20" y="311" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6Gh-9f-Kbw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Put text here" translatesAutoresizingMaskIntoConstraints="NO" id="97R-Yh-REL">
+                                <rect key="frame" x="20" y="182" width="280" height="126"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="DuG-IC-1ng" id="LSY-ay-xDM"/>
+                                </connections>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5d-b9-Bao">
+                                <rect key="frame" x="20" y="148" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4QY-rN-iZO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="amm-uc-5dS" secondAttribute="trailing" constant="20" id="3fu-pQ-x7y"/>
+                            <constraint firstItem="cim-eS-RCJ" firstAttribute="top" secondItem="mp0-MB-llG" secondAttribute="bottom" id="5vQ-Et-HgW"/>
+                            <constraint firstAttribute="trailing" secondItem="FwH-YU-Ly4" secondAttribute="trailing" constant="20" id="6nm-1X-0EU"/>
+                            <constraint firstItem="N5d-b9-Bao" firstAttribute="top" secondItem="FwH-YU-Ly4" secondAttribute="bottom" constant="4" id="AEr-J3-Wvt"/>
+                            <constraint firstItem="mp0-MB-llG" firstAttribute="leading" secondItem="N9N-Yo-yTB" secondAttribute="leading" id="J6m-fU-AVy"/>
+                            <constraint firstItem="N5d-b9-Bao" firstAttribute="leading" secondItem="N9N-Yo-yTB" secondAttribute="leading" constant="20" id="M2f-VZ-5ZV"/>
+                            <constraint firstItem="97R-Yh-REL" firstAttribute="top" secondItem="N5d-b9-Bao" secondAttribute="bottom" constant="4" id="MAp-xo-Bae"/>
+                            <constraint firstAttribute="trailing" secondItem="97R-Yh-REL" secondAttribute="trailing" constant="20" id="Rfh-Z5-TLB"/>
+                            <constraint firstAttribute="trailing" secondItem="mp0-MB-llG" secondAttribute="trailing" id="WwM-U2-aIt"/>
+                            <constraint firstItem="amm-uc-5dS" firstAttribute="leading" secondItem="N9N-Yo-yTB" secondAttribute="leading" constant="20" id="cTa-L3-RAK"/>
+                            <constraint firstItem="FwH-YU-Ly4" firstAttribute="leading" secondItem="N9N-Yo-yTB" secondAttribute="leading" constant="20" id="jYO-VD-BEz"/>
+                            <constraint firstItem="FwH-YU-Ly4" firstAttribute="top" secondItem="264-Qy-99Z" secondAttribute="bottom" constant="20" id="mei-Yw-imS"/>
+                            <constraint firstAttribute="trailing" secondItem="N5d-b9-Bao" secondAttribute="trailing" constant="20" id="niv-a4-FZA"/>
+                            <constraint firstItem="mp0-MB-llG" firstAttribute="top" secondItem="amm-uc-5dS" secondAttribute="bottom" constant="16" id="qUz-Oj-f1N"/>
+                            <constraint firstItem="97R-Yh-REL" firstAttribute="leading" secondItem="N9N-Yo-yTB" secondAttribute="leading" constant="20" id="qc3-cJ-Oti"/>
+                            <constraint firstItem="amm-uc-5dS" firstAttribute="top" secondItem="97R-Yh-REL" secondAttribute="bottom" constant="3" id="z3y-ao-nyI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="D7N-Ii-Etz">
+                        <barButtonItem key="rightBarButtonItem" title="Reset" id="bxE-WQ-3w0">
+                            <connections>
+                                <action selector="tapButtonReset:" destination="DuG-IC-1ng" id="kIS-Ap-Vhl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="labelGoalTitle" destination="FwH-YU-Ly4" id="6Ur-iH-qBb"/>
+                        <outlet property="labelHoursBefore" destination="amm-uc-5dS" id="iMa-2d-MDh"/>
+                        <outlet property="labelReminder" destination="N5d-b9-Bao" id="ayT-5L-8l0"/>
+                        <outlet property="pickerView" destination="mp0-MB-llG" id="yrU-sC-TCs"/>
+                        <outlet property="textViewCustomDescription" destination="97R-Yh-REL" id="pwt-Ao-aws"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xob-uV-oqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2208" y="3308"/>
         </scene>
         <!--My Profile View Controller-->
         <scene sceneID="Fte-Eb-uug">
@@ -2628,14 +2797,14 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="GMr-Jq-4fe"/>
-        <segue reference="7aa-Rm-Hm2"/>
+        <segue reference="ZM5-te-FK0"/>
         <segue reference="lbr-ma-Rjx"/>
         <segue reference="WvR-kh-tAH"/>
         <segue reference="KE2-V4-3Eg"/>
         <segue reference="FbI-Om-JAD"/>
+        <segue reference="GMr-Jq-4fe"/>
         <segue reference="kq1-ES-DfJ"/>
         <segue reference="qpa-ED-Np8"/>
-        <segue reference="vxi-M6-ghC"/>
+        <segue reference="biv-Bn-3hS"/>
     </inferredMetricsTieBreakers>
 </document>
