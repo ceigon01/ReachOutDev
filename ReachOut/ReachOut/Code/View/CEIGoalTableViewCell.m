@@ -56,12 +56,13 @@ static const CGFloat kHeightRatioLabelToSelf = 0.3f;
   self.carousel.decelerationRate = 0.0f;
   [self.contentView addSubview:self.carousel];
   
-  self.labelDatesPeriod = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
+  self.labelDatesPeriod = [[UILabel alloc] initWithFrame:CGRectMake(-10,
                                                                     0.0f,
                                                                     self.contentView.frame.size.width,
                                                                     self.contentView.frame.size.height * kHeightRatioLabelToSelf)];
   self.labelDatesPeriod.text = @"dates period";
   self.labelDatesPeriod.textAlignment = NSTextAlignmentRight;
+    self.labelDatesPeriod.textColor = [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:1];
   self.labelDatesPeriod.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12];
   [self.contentView addSubview:self.labelDatesPeriod];
 }

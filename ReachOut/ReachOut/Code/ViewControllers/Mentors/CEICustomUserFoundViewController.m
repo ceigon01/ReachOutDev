@@ -20,14 +20,15 @@
 @property (nonatomic, weak) IBOutlet UILabel *labelFullName;
 @property (nonatomic, weak) IBOutlet UIButton *buttonTryAgain;
 @property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
-
+@property (nonatomic, weak) IBOutlet UIImageView *imageBackground;
 @end
 
 @implementation CEICustomUserFoundViewController
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"imgBackground"]]];
+    
   if (self.user) {
     
     self.labelTitle.text = self.user[@"title"];
@@ -43,7 +44,9 @@
         
         weakSelf.imageView.image = [UIImage imageWithData:data];
         weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.height * 0.5f;
-        weakSelf.imageView.layer.masksToBounds = YES;
+          weakSelf.imageView.layer.borderWidth = 6.0f;
+          weakSelf.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+          weakSelf.imageView.layer.masksToBounds = YES;
       }];
       
     }

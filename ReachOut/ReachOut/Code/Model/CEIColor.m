@@ -36,8 +36,13 @@
 
 + (UIColor *)colorIdle{
   
-  return [UIColor lightGrayColor];
+    return [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:.3];//[UIColor lightGrayColor];
 }
++ (UIColor *)colorPurpleText{
+    
+    return [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:1];
+}
+
 
 + (UIColor *)colorDarkBlue{
 

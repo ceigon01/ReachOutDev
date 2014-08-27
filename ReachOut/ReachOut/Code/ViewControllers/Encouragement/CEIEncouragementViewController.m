@@ -223,7 +223,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   
 #warning TODO: estimate height
   
-  CGSize maximumLabelSize = CGSizeMake(tableView.frame.size.width, 9999.9f);
+  CGSize maximumLabelSize = CGSizeMake(250, 9999.9f);
   
   NSArray *array = (self.segmentControll.selectedSegmentIndex == CEIEncouragementTypeSent) ? self.arraySent : self.arrayReceived;
   
@@ -232,8 +232,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   
 #warning TODO: hardcoded & deprecated :/
   CGSize expectedLabelSize = [caption sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:14]
-                                 constrainedToSize:maximumLabelSize
-                                     lineBreakMode:NSLineBreakByTruncatingTail];
+                                 constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
   
   return expectedLabelSize.height + kHeightCellOffset;
 }
@@ -257,7 +256,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
     encouragement = [self.arraySent objectAtIndex:indexPath.row];
     user = encouragement[@"followerID"];
 #warning TODO: title unnecessary?
-    cell.labelTitle.text = @"";
+    cell.labelTitle.text = user[@"title"];
   }
   
   if (user[@"image"]) {
@@ -269,9 +268,11 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
       
       weakCell.imageViewProfile.image = [UIImage imageWithData:data];
+        weakCell.imageViewProfile.layer.cornerRadius = weakCell.imageViewProfile.frame.size.height * 0.5f;
+        weakCell.imageViewProfile.layer.masksToBounds = YES;
     }];
   }
-  
+  cell.labelCaption.numberOfLines = 0;
   cell.labelCaption.text = encouragement[@"caption"];
   cell.labelFullName.text = user[@"fullName"];
 
@@ -298,7 +299,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
 - (IBAction)valueChangeSegmentedControll:(id)sender{
   
   [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-                withRowAnimation:UITableViewRowAnimationTop];
+                withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

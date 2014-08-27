@@ -9,6 +9,7 @@
 #import "CEIGoalNotificationsPreviewViewController.h"
 #import <Parse/Parse.h>
 #import "CEIAlertView.h"
+#import "CEIColor.h"
 #import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
 #import "CEIGoalNotificationSetupViewController.h"
 #import "MBProgressHUD.h"
@@ -146,7 +147,20 @@ static NSString *const kIdentifierSegueNotificationsPreviewToNotificationSetup =
   
   return arrayGoals.count;
 }
-
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    [headerView setBackgroundColor:[CEIColor colorIdle]];
+    PFObject *mission = [self.arrayMissions objectAtIndex:section];
+    UILabel *missionText = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, tableView.bounds.size.width, 30)];
+    missionText.textColor = [UIColor whiteColor];
+    missionText.text = mission[@"caption"];
+    missionText.numberOfLines = 0;
+    [missionText sizeToFit];
+    
+    [headerView addSubview:missionText];
+    
+    return headerView;
+}
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
   
   PFObject *mission = [self.arrayMissions objectAtIndex:section];
@@ -165,6 +179,7 @@ static NSString *const kIdentifierSegueNotificationsPreviewToNotificationSetup =
   
   PFObject *goal = [arrayGoals objectAtIndex:indexPath.row];
   
+[cell.imageView setImage:[UIImage imageNamed:@"noticeIcon"]];
   cell.textLabel.text = goal[@"caption"];
   
   UILocalNotification *notification = [self.dictionaryNotifications objectForKey:goal.objectId];

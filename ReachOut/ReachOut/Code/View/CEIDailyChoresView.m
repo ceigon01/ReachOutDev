@@ -119,15 +119,16 @@
   self.available = [paramGoalStep[@"available"] boolValue];
   if (!self.available) {
     
-    self.backgroundColor = [UIColor lightGrayColor];
-    self.labelDay.backgroundColor = [UIColor lightGrayColor];
-    self.labelN.backgroundColor = [UIColor lightGrayColor];
-    self.labelY.backgroundColor = [UIColor lightGrayColor];
+    self.backgroundColor = [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:.3];
+    self.labelDay.backgroundColor = [CEIColor colorIdle];//[UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:.3];
+    self.labelN.backgroundColor = [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:.3];
+    self.labelY.backgroundColor = [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:.3];
+    self.alpha = .3f;
   }
   else{
     
     self.backgroundColor = [UIColor whiteColor];
-    self.labelDay.backgroundColor = [UIColor whiteColor];
+      self.labelDay.backgroundColor = [CEIColor colorIdle];//[UIColor whiteColor];
     self.labelN.backgroundColor = [UIColor whiteColor];
     self.labelY.backgroundColor = [UIColor whiteColor];
   }
@@ -138,13 +139,16 @@
      dateGoalStep.month == dateToday.month &&
      dateGoalStep.year == dateToday.year){
     
-    self.layer.borderColor = [CEIColor colorBlue].CGColor;
-    self.layer.borderWidth = 2.0f;
+    self.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.labelDay.backgroundColor = [CEIColor colorIdle];
+    self.labelN.backgroundColor = [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:.2];
+    self.labelY.backgroundColor = [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:.2];
+    self.layer.borderWidth = 1.0f;
     self.today = YES;
   }
   else{
     
-    self.layer.borderColor = [UIColor grayColor].CGColor;
+    self.layer.borderColor = [UIColor whiteColor].CGColor;
     self.layer.borderWidth = 1.0f;
     self.today = NO;
   }

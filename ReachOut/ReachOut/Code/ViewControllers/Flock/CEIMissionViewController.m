@@ -31,7 +31,7 @@ static NSString *const kIdentifierSegueMissionAddEncouragement = @"kIdentifierSe
 static NSString *const kIdentifierSegueMissionToAddGoal = @"kIdentifierSegueMissionToAddGoal";
 
 static NSString *const kIdentifierCellMission = @"kIdentifierCellMission";
-static const CGFloat kHeightHeader = 20.0f;
+static const CGFloat kHeightHeader = 25.0f;
 static const CGFloat kHeightFooter = 14.0f;
 static const CGFloat kHeightCell = 100.0f;
 
@@ -104,11 +104,11 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
   __weak typeof (self) weakSelf = self;
   
   UIColor *colorTop = [UIColor colorWithWhite:1.0 alpha:0.1];
-  UIColor *colorBottom = [UIColor colorWithWhite:0.0 alpha:0.8];
+  UIColor *colorBottom = [UIColor colorWithWhite:0.0 alpha:0.7];
   NSArray *colors =  [NSArray arrayWithObjects:(id)colorTop.CGColor, colorBottom.CGColor, nil];
   
-  NSNumber *stopTop = [NSNumber numberWithFloat:0.4];
-  NSNumber *stopBottom = [NSNumber numberWithFloat:1.0];
+  NSNumber *stopTop = [NSNumber numberWithFloat:-0.4];
+  NSNumber *stopBottom = [NSNumber numberWithFloat:0.8];
   NSArray *locations = [NSArray arrayWithObjects:stopTop, stopBottom, nil];
   
   CAGradientLayer *headerLayer = [CAGradientLayer layer];
@@ -139,9 +139,12 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
     
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
       
-      weakSelf.imageViewProfile.image = [UIImage imageWithData:data];
-      weakSelf.imageViewProfile.layer.cornerRadius = weakSelf.imageViewProfile.frame.size.height * 0.5f;
-      weakSelf.imageViewProfile.layer.masksToBounds = YES;
+        weakSelf.imageViewProfile.image = [UIImage imageWithData:data];
+        weakSelf.imageViewProfile.layer.cornerRadius = weakSelf.imageViewProfile.frame.size.height * 0.5f;
+        weakSelf.imageViewProfile.layer.masksToBounds = YES;
+        weakSelf.imageViewProfile.layer.borderWidth = 1.0f;
+        weakSelf.imageViewProfile.layer.borderColor = [[UIColor whiteColor]CGColor];
+        
     }];
     
   }
@@ -156,9 +159,11 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
   self.labelMissionName.text = self.mission[@"caption"];
   self.labelUserName.text = self.user[@"fullName"];
   self.labelMissionDuration.textColor = [UIColor whiteColor];
+  self.labelMissionDuration.alpha = 0.8f;
+    
   self.labelMissionName.textColor = [UIColor whiteColor];
-  self.labelUserName.textColor = [UIColor whiteColor];
-  
+  self.labelUserName.textColor = [UIColor whiteColor ];
+
   self.tableView.backgroundColor = [UIColor whiteColor];
   
   [self fetchGoals];
@@ -350,7 +355,6 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-  
   PFObject *goal = [self.arrayGoals objectAtIndex:section];
   
   UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
@@ -358,9 +362,11 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
                                                              tableView.frame.size.width,
                                                              kHeightHeader)];
   label.textAlignment = NSTextAlignmentLeft;
-  label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
+  label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];
   label.text = [NSString stringWithFormat:@"  %@",goal[@"caption"]];
-  label.textColor = [UIColor blackColor];
+  label.textColor = [UIColor whiteColor];
+  label.alpha = 0.7f;
+  label.backgroundColor = [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:1];
   label.tag = kTagOffsetLabelTableViewHeader + section;
   
   return label;
@@ -373,6 +379,7 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer *)paramSender;
     
     UIView *view = tapGestureRecognizer.view;
+      
     
     CGPoint tapPoint = [tapGestureRecognizer locationInView:view];
     
@@ -422,7 +429,7 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
   
 #warning TODO: localizations
   UILabel *labelLeft = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
-                                                                 0.0f,
+                                                                 -8,
                                                                  tableView.frame.size.width * 0.6f,
                                                                  kHeightFooter)];
   
@@ -430,15 +437,17 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
   labelLeft.textAlignment = NSTextAlignmentLeft;
   labelLeft.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];
   labelLeft.text = [NSString stringWithFormat:@"  Must be completed %@ daily",goal[@"time"]];
+  labelLeft.textColor = [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:1];
   [view addSubview:labelLeft];
   
-  UILabel *labelRight = [[UILabel alloc] initWithFrame:CGRectMake(tableView.frame.size.width * 0.6f,
-                                                             0.0f,
+  UILabel *labelRight = [[UILabel alloc] initWithFrame:CGRectMake((tableView.frame.size.width * 0.6f)-10,
+                                                             -8,
                                                              tableView.frame.size.width * 0.4f,
                                                              kHeightFooter)];
   labelRight.textAlignment = NSTextAlignmentRight;
   labelRight.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];
   
+    
   __block NSInteger goalsChecked = 0;
   [self.arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
     
@@ -457,8 +466,8 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
     totalGoalsToCheck *= ((CGFloat)arrayDays.count) / 7.0f;
   }
   
-  labelRight.text = [NSString stringWithFormat:@"%.0f %% of goal\t",fabs((goalsChecked * 100.0f / ((CGFloat)totalGoalsToCheck)))];
-  labelRight.textColor = [UIColor blackColor];
+  labelRight.text = [NSString stringWithFormat:@"%.0f %% of goal",fabs((goalsChecked * 100.0f / ((CGFloat)totalGoalsToCheck)))];
+  labelRight.textColor = [UIColor colorWithRed:0.412 green:0.427 blue:0.592 alpha:1];
   [view addSubview:labelRight];
   
   return view;

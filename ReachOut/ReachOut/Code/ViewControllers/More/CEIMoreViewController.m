@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, CEIMoreRow){
   CEIMoreRowMotto = 4,
   CEIMoreRowLogout = 5,
 };
-static const NSInteger kNumberOfMoreRows = 5;
+static const NSInteger kNumberOfMoreRows = 6;
 
 static NSString *const kIdentifierCellMore = @"kIdentifierCellMore";
 static NSString *const kIdentifierSegueMoreToWebViewCeigon = @"kIdentifierSegueMoreToWebViewCeigon";
@@ -149,9 +149,15 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
   
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifierCellMore
                                                           forIndexPath:indexPath];
-  
- 
-  cell.textLabel.text = [self rowNameForIndexPath:indexPath];
+    if(indexPath.row == 0)[cell.imageView setImage:[UIImage imageNamed:@"missionIcon"]];
+    if(indexPath.row == 1)[cell.imageView setImage:[UIImage imageNamed:@"goalIcon"]];
+    if(indexPath.row == 2)[cell.imageView setImage:[UIImage imageNamed:@"profileIcon"]];
+    if(indexPath.row == 3)[cell.imageView setImage:[UIImage imageNamed:@"aboutIcon"]];
+    if(indexPath.row == 4)[cell.imageView setImage:[UIImage imageNamed:@"mottoIcon"]];
+    if(indexPath.row == 5)[cell.imageView setImage:[UIImage imageNamed:@"logouticon"]];
+    
+    cell.textLabel.textColor = [CEIColor colorPurpleText];
+    cell.textLabel.text = [self rowNameForIndexPath:indexPath];
   
   return cell;
 }
