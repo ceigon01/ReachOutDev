@@ -231,7 +231,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   NSString *caption = encouragement[@"caption"];
   
 #warning TODO: hardcoded & deprecated :/
-  CGSize expectedLabelSize = [caption sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:14]
+  CGSize expectedLabelSize = [caption sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:17]
                                  constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
   
   return expectedLabelSize.height + kHeightCellOffset;

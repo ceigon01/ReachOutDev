@@ -471,7 +471,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
     PFUser *user = [self.arrayFlock objectAtIndex:indexPath.row];
     
     CEIUserTableViewCell *cellUser = (CEIUserTableViewCell *)cell;
-    
+    [cellUser.imageView setImage:[UIImage imageNamed:@"spacer"]];
     [cellUser configureWithUser:user];
     cellUser.accessoryType = UITableViewCellAccessoryNone;
   }
@@ -927,8 +927,8 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
                                                                        self.tableView.frame.size.width * 0.92f,
                                                                        kHeightDefaultCell * 0.8f)];
     _textFieldCaption.placeholder = @"Mission Title";
+    [_textFieldCaption setBorderStyle:UITextBorderStyleRoundedRect];
     _textFieldCaption.delegate = self;
-    [_textFieldCaption setBackground:[UIImage imageNamed:@"btnBckgndSide"]];
     [_textFieldCaption addTarget:self action:@selector(didChangeText:) forControlEvents:UIControlEventEditingChanged];
   }
  

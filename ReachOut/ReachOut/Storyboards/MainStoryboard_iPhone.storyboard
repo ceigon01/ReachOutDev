@@ -248,7 +248,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="IEV-ok-85V" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="IEV-ok-85V" customClass="CEITextField">
                                 <rect key="frame" x="20" y="229" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="12A-qi-gy5"/>
@@ -268,7 +268,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone number" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="vQf-FR-Us4" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="vQf-FR-Us4" customClass="CEITextField">
                                 <rect key="frame" x="20" y="191" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="RbG-E7-lrh"/>
@@ -367,7 +367,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="7iG-8r-kHw" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="7iG-8r-kHw" customClass="CEITextField">
                                 <rect key="frame" x="20" y="202" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="VFe-VP-bER"/>
@@ -378,7 +378,7 @@
                                     <outlet property="delegate" destination="XRi-TS-xt2" id="CPa-y8-nL3"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="fJ7-8c-BNZ" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="fJ7-8c-BNZ" customClass="CEITextField">
                                 <rect key="frame" x="20" y="240" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1q2-4r-uE9"/>
@@ -389,7 +389,7 @@
                                     <outlet property="delegate" destination="XRi-TS-xt2" id="crH-WO-JS7"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone number" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="9im-Or-m66" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="9im-Or-m66" customClass="CEITextField">
                                 <rect key="frame" x="20" y="316" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Keq-e0-oGr"/>
@@ -400,7 +400,7 @@
                                     <outlet property="delegate" destination="XRi-TS-xt2" id="aUd-bP-m0g"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="ObH-YY-XBY" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="ObH-YY-XBY" customClass="CEITextField">
                                 <rect key="frame" x="20" y="354" width="135" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9QP-UQ-LAI"/>
@@ -412,7 +412,7 @@
                                     <outlet property="delegate" destination="XRi-TS-xt2" id="0n5-47-JTu"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-type" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="u6I-ej-BFI" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-type" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="u6I-ej-BFI" customClass="CEITextField">
                                 <rect key="frame" x="170" y="354" width="130" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="eFt-Ff-p3l"/>
@@ -456,7 +456,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="QlN-Vo-ke2"/>
                                 </constraints>
-                                <state key="normal" title="United States (+1)" backgroundImage="btnBckgndSide">
+                                <state key="normal" title="United States (+1)">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -721,7 +721,7 @@
                                     <segue destination="LTs-N7-YWp" kind="push" identifier="kSegueIdentifier_FindMentor_MentorFuond" id="KE2-V4-3Eg"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="555-555-555" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="kOy-Zr-Vla" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="555-555-555" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="kOy-Zr-Vla" customClass="CEITextField">
                                 <rect key="frame" x="20" y="331" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="akt-v4-gQM"/>
@@ -737,7 +737,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="o5G-As-lwU"/>
                                 </constraints>
-                                <state key="normal" title="United States (+1)" backgroundImage="btnBckgndSide">
+                                <state key="normal" title="United States (+1)">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1170,7 +1170,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="oh9-ML-zn7" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="oh9-ML-zn7" customClass="CEITextField">
                                 <rect key="frame" x="20" y="279" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HHJ-RU-0kf"/>
@@ -1181,7 +1181,7 @@
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="P1a-uZ-USj"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="4RH-Sx-7FB" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="4RH-Sx-7FB" customClass="CEITextField">
                                 <rect key="frame" x="20" y="317" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Mk8-KW-hgU"/>
@@ -1193,7 +1193,7 @@
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="pMh-TG-aAT"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ5-4q-6Ty" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ5-4q-6Ty" customClass="CEITextField">
                                 <rect key="frame" x="20" y="355" width="135" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="DQo-C1-6fs"/>
@@ -1205,7 +1205,7 @@
                                     <outlet property="delegate" destination="vDB-Wp-Q3y" id="4Ix-3J-0xM"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-type" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="ptE-ac-pPU" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-type" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="ptE-ac-pPU" customClass="CEITextField">
                                 <rect key="frame" x="170" y="355" width="130" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2gW-Nc-bgM"/>
@@ -1750,7 +1750,7 @@
                                     <segue destination="9EQ-gs-ZGW" kind="push" identifier="kIdentifierSegueAddCustomUserToCustomUserFound" id="biv-Bn-3hS"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="555-555-555" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="xJi-S3-Djn" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="555-555-555" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xJi-S3-Djn" customClass="CEITextField">
                                 <rect key="frame" x="20" y="189" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2bD-jt-jeo"/>
@@ -2012,7 +2012,7 @@
                                                 <constraint firstItem="Vfn-B8-slS" firstAttribute="leading" secondItem="ppx-ge-h6h" secondAttribute="trailing" constant="10" id="4AB-uh-6Y6"/>
                                                 <constraint firstAttribute="trailing" secondItem="Vfn-B8-slS" secondAttribute="trailing" constant="20" id="DXO-Af-Xsy"/>
                                                 <constraint firstItem="RdC-TQ-yyr" firstAttribute="top" secondItem="CfW-Q3-8Gu" secondAttribute="top" constant="15" id="L8g-WH-4hW"/>
-                                                <constraint firstAttribute="trailing" secondItem="RdC-TQ-yyr" secondAttribute="trailing" constant="20" id="N2e-ob-D2T"/>
+                                                <constraint firstAttribute="trailing" secondItem="RdC-TQ-yyr" secondAttribute="trailing" constant="10" id="N2e-ob-D2T"/>
                                                 <constraint firstItem="RdC-TQ-yyr" firstAttribute="leading" secondItem="SZm-sn-eE1" secondAttribute="trailing" constant="8" id="NWi-K8-zGs"/>
                                                 <constraint firstItem="ppx-ge-h6h" firstAttribute="top" secondItem="CfW-Q3-8Gu" secondAttribute="top" constant="10" id="RWM-nE-Wn6"/>
                                                 <constraint firstItem="SZm-sn-eE1" firstAttribute="top" secondItem="CfW-Q3-8Gu" secondAttribute="top" constant="33" id="UMK-Vb-yGk"/>
@@ -2526,7 +2526,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="N8j-Fr-Iy3" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="N8j-Fr-Iy3" customClass="CEITextField">
                                 <rect key="frame" x="20" y="158" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="P5g-EM-GcE"/>
@@ -2537,7 +2537,7 @@
                                     <outlet property="delegate" destination="Vdb-hU-ILc" id="J7B-VM-hWR"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="h8s-iG-AZe" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="h8s-iG-AZe" customClass="CEITextField">
                                 <rect key="frame" x="20" y="196" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="hn5-XS-VvP"/>
@@ -2548,7 +2548,7 @@
                                     <outlet property="delegate" destination="Vdb-hU-ILc" id="sKs-Cb-5bo"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="emN-IN-5dc" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="emN-IN-5dc" customClass="CEITextField">
                                 <rect key="frame" x="20" y="234" width="135" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="iTO-No-pZJ"/>
@@ -2560,7 +2560,7 @@
                                     <outlet property="delegate" destination="Vdb-hU-ILc" id="ktJ-WG-YXY"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-type" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="api-b9-oGS" customClass="CEITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-type" minimumFontSize="17" background="btnBckgndSide" translatesAutoresizingMaskIntoConstraints="NO" id="api-b9-oGS" customClass="CEITextField">
                                 <rect key="frame" x="170" y="234" width="130" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="HnP-0p-VIm"/>
@@ -2807,14 +2807,14 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="KE2-V4-3Eg"/>
+        <segue reference="WvR-kh-tAH"/>
+        <segue reference="qQu-SH-1fm"/>
         <segue reference="FbI-Om-JAD"/>
         <segue reference="GMr-Jq-4fe"/>
-        <segue reference="qpa-ED-Np8"/>
-        <segue reference="vxi-M6-ghC"/>
-        <segue reference="1Bj-0O-Kc0"/>
+        <segue reference="kq1-ES-DfJ"/>
+        <segue reference="biv-Bn-3hS"/>
         <segue reference="ZM5-te-FK0"/>
-        <segue reference="WR6-Sh-fnr"/>
-        <segue reference="Gty-YO-6eE"/>
-        <segue reference="lbr-ma-Rjx"/>
+        <segue reference="fnS-Bk-n3E"/>
     </inferredMetricsTieBreakers>
 </document>
