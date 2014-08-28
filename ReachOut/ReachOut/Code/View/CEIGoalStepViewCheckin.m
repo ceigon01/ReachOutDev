@@ -38,14 +38,14 @@ static const NSInteger kMaxTextLength = 140;
 
 - (void)setup{
   
-  self.layer.cornerRadius = 4.0f;
+  self.layer.cornerRadius = 8.0f;
   self.layer.masksToBounds = YES;
-  self.layer.borderWidth = 2.0f;
-  self.layer.borderColor = [CEIColor colorBlue].CGColor;
+  self.layer.borderWidth = 1.0f;
+  self.layer.borderColor = [CEIColor colorIdle].CGColor;
   
   self.textView.text = kTextViewTextPlaceholder;
   self.textView.textColor = [UIColor lightGrayColor];
-  self.textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+  self.textView.layer.borderColor = [CEIColor colorIdle].CGColor;
   self.textView.layer.borderWidth = 1.0f;
   
 //  UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self

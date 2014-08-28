@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02FBE9AC19AF5BDB00620B8E /* CEIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBE9AB19AF5BDB00620B8E /* CEIButton.m */; };
+		02FBE9AF19AF639800620B8E /* CEIButtonCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBE9AE19AF639800620B8E /* CEIButtonCancel.m */; };
 		A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3AC19393DE60039750B /* CEIBaseViewController.m */; };
 		A403F3B019393DFA0039750B /* CEINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3AF19393DFA0039750B /* CEINavigationController.m */; };
 		A403F3B319393E3A0039750B /* CEIRoleSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3B219393E3A0039750B /* CEIRoleSelectViewController.m */; };
@@ -112,6 +114,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02FBE9AA19AF5BDB00620B8E /* CEIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEIButton.h; path = Base/CEIButton.h; sourceTree = "<group>"; };
+		02FBE9AB19AF5BDB00620B8E /* CEIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CEIButton.m; path = Base/CEIButton.m; sourceTree = "<group>"; };
+		02FBE9AD19AF639800620B8E /* CEIButtonCancel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEIButtonCancel.h; path = Base/CEIButtonCancel.h; sourceTree = "<group>"; };
+		02FBE9AE19AF639800620B8E /* CEIButtonCancel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CEIButtonCancel.m; path = Base/CEIButtonCancel.m; sourceTree = "<group>"; };
 		224F1343C32B4C2496EC140A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF810CB89BA4BC99C77774C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A403F3AB19393DE60039750B /* CEIBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIBaseViewController.h; sourceTree = "<group>"; };
@@ -307,6 +313,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02FBE9A919AF5B9500620B8E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				02FBE9AA19AF5BDB00620B8E /* CEIButton.h */,
+				02FBE9AB19AF5BDB00620B8E /* CEIButton.m */,
+				02FBE9AD19AF639800620B8E /* CEIButtonCancel.h */,
+				02FBE9AE19AF639800620B8E /* CEIButtonCancel.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
 		A403F3A819393D670039750B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +432,7 @@
 		A440A1901937F33900D7CC0D /* ReachOut */ = {
 			isa = PBXGroup;
 			children = (
+				02FBE9A919AF5B9500620B8E /* Base */,
 				FD2E9AD5195731EF005B074A /* Assets */,
 				FD0C850A193E0A49004C006B /* External */,
 				A45E4B861938008E008D7EA6 /* Storyboards */,
@@ -854,8 +872,10 @@
 				FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */,
 				FDD65EAA19719A9500DAC841 /* CEIPhonePrefixPickerViewController.m in Sources */,
 				FD53C787197809A000107F09 /* CEICustomUserFoundViewController.m in Sources */,
+				02FBE9AF19AF639800620B8E /* CEIButtonCancel.m in Sources */,
 				FDE162AD19715EB600E9FD8F /* CEIMottoViewController.m in Sources */,
 				FD11906E19465578005A1AE1 /* CEIFlockViewController.m in Sources */,
+				02FBE9AC19AF5BDB00620B8E /* CEIButton.m in Sources */,
 				A403F3BA19393EAB0039750B /* CEIFindMentorViewController.m in Sources */,
 				FDC8D25A1956EF9F00B60BEF /* CEIEncouragementTableViewCell.m in Sources */,
 				FD53C7841978084D00107F09 /* CEIAddCustomUserViewController.m in Sources */,

@@ -29,10 +29,12 @@
 
 - (void)setup{
   
-  self.layer.cornerRadius = 4.0f;
-  self.layer.masksToBounds = YES;
-  self.layer.borderWidth = 2.0f;
-  self.layer.borderColor = [CEIColor colorBlue].CGColor;
+    self.layer.cornerRadius = 8.0f;
+    self.layer.masksToBounds = YES;
+    self.layer.borderWidth = 1.0f;
+    self.layer.borderColor = [CEIColor colorIdle].CGColor;
+
+    self.textView.textColor = [UIColor lightGrayColor];
 }
 
 #pragma mark - Action Handling
