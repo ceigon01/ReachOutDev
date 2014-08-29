@@ -230,7 +230,9 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
         
         PFQuery *queryGoalSteps = [PFQuery queryWithClassName:@"GoalStep"];
         [queryGoalSteps whereKey:@"mission" equalTo:self.mission];
+        [queryGoalSteps whereKey:@"userAsignee" equalTo:user];
         [queryGoalSteps includeKey:@"goal"];
+
         [queryGoalSteps findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
           
           [weakSelf.tableView stopRefreshAnimation];
@@ -469,7 +471,9 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
   __block NSInteger goalsChecked = 0;
   [self.arrayGoalSteps enumerateObjectsUsingBlock:^(PFObject *goalStep, NSUInteger idx, BOOL *stop) {
     
-    if ([goalStep[@"done"] boolValue]) {
+    PFObject *goalAssigned = goalStep[@"goal"];
+    
+    if ([goalStep[@"done"] boolValue] && [goal.objectId isEqualToString:goalAssigned.objectId]) {
       
       goalsChecked++;
     }
@@ -702,6 +706,7 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
     goalStep[@"caption"] = paramGoalStepViewCheckin.textView.text;
     goalStep[@"done"] = [NSNumber numberWithBool:paramGoalStepViewCheckin.done];
     goalStep[@"goal"] = self.selectedCell.goal;
+    goalStep[@"userAsignee"] = [PFUser currentUser];
     
     [self.arrayGoalSteps addObject:goalStep];
     [self.selectedDailyChoresView configureWithGoalStep:goalStep];
