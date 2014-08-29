@@ -701,7 +701,7 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
     
     goalStep[@"caption"] = paramGoalStepViewCheckin.textView.text;
     goalStep[@"done"] = [NSNumber numberWithBool:paramGoalStepViewCheckin.done];
-    goalStep[@"goal"] = self.goalSelected;
+    goalStep[@"goal"] = self.selectedCell.goal;
     
     [self.arrayGoalSteps addObject:goalStep];
     [self.selectedDailyChoresView configureWithGoalStep:goalStep];
