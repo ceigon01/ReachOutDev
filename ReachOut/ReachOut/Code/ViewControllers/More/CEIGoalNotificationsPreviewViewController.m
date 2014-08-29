@@ -97,7 +97,8 @@ static NSString *const kIdentifierSegueNotificationsPreviewToNotificationSetup =
       weakSelf.arrayMissions = [NSMutableArray arrayWithArray:objects];
       [weakSelf.arrayMissions enumerateObjectsUsingBlock:^(PFObject *mission, NSUInteger idx, BOOL *stop) {
 
-        PFQuery *query = [[mission relationForKey:@"goals"] query];
+        PFQuery *query = [PFQuery queryWithClassName:@"Goal"];
+        [query whereKey:@"user" equalTo:[PFUser currentUser]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
           
           [objects enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
