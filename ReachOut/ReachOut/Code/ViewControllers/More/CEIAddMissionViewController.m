@@ -182,7 +182,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
     }];
 
     self.textFieldCaption.text = self.mission[@"caption"];
-    
+      self.textFieldCaption.textColor = [CEIColor colorPurpleText];
     self.switchNeverEnding.on = [self.mission[@"isNeverending"] boolValue];
     
     [self.buttonEndsIn setTitle:self.mission[@"timeCount"] forState:UIControlStateNormal];
@@ -336,6 +336,23 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
       self.imageViewHeader.contentMode = UIViewContentModeScaleAspectFill;
       self.imageViewHeader.clipsToBounds = YES;
       
+        UIColor *colorTop = [UIColor colorWithWhite:1.0 alpha:0.1];
+        UIColor *colorBottom = (self.mission[@"image"])?[UIColor colorWithWhite:0.0 alpha:0.7]:[CEIColor colorIdle];
+        NSArray *colors =  [NSArray arrayWithObjects:(id)colorTop.CGColor, colorBottom.CGColor, nil];
+        
+        NSNumber *stopTop = [NSNumber numberWithFloat:-0.4];
+        NSNumber *stopBottom = [NSNumber numberWithFloat:0.8];
+        NSArray *locations = [NSArray arrayWithObjects:stopTop, stopBottom, nil];
+        
+        CAGradientLayer *headerLayer = [CAGradientLayer layer];
+        headerLayer.colors = colors;
+        headerLayer.locations = locations;
+        
+        headerLayer.frame = self.imageViewHeader.bounds;
+        
+        [self.imageViewHeader.layer insertSublayer:headerLayer atIndex:0];
+        
+        
       if (self.mission[@"image"]) {
         
         PFFile *file = self.mission[@"image"];
@@ -344,7 +361,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
       }
       
       self.buttonImageHeader = [UIButton buttonWithType:UIButtonTypeCustom];
-      [self.buttonImageHeader setImage:[UIImage imageNamed:@"btnEditPhoto"] forState:UIControlStateNormal];
+        [self.buttonImageHeader setImage:(self.mission[@"image"])?[UIImage imageNamed:@"btnEditPhoto"]:[UIImage imageNamed:@"btnAddPhoto"] forState:UIControlStateNormal];
       [self.buttonImageHeader setAlpha:0.7f];
       self.buttonImageHeader.frame = self.imageViewHeader.bounds;
       [self.buttonImageHeader addTarget:self
@@ -360,12 +377,13 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
     case CEIAddMissionSectionDetails: {
      
       view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.frame.size.width, kHeightHeaderView)];
-      
+      view.backgroundColor = [CEIColor colorIdle];
       UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
                                                                  kHeightHeaderView * 0.25f,
                                                                  tableView.frame.size.width,
                                                                  kHeightHeaderView * 0.5f)];
       label.text = @"  Mission Details";
+      label.textColor = [UIColor whiteColor];
       label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
       [view addSubview:label];
       
@@ -375,12 +393,13 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
     case CEIAddMissionSectionFlock:   {
 
       view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.frame.size.width, kHeightHeaderView)];
-      
+      view.backgroundColor = [CEIColor colorIdle];
       UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
                                                                  kHeightHeaderView * 0.25f,
                                                                  tableView.frame.size.width,
                                                                  kHeightHeaderView * 0.5f)];
       label.text = @"  Followers";
+      label.textColor = [UIColor whiteColor];
       label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
       [view addSubview:label];
       
@@ -398,12 +417,13 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
     case CEIAddMissionSectionGoals:   {
      
       view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.frame.size.width, kHeightHeaderView * 2.0f)];
-      
+      view.backgroundColor = [CEIColor colorIdle];
       UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,
                                                                  kHeightHeaderView * 0.25f,
                                                                  tableView.frame.size.width,
                                                                  kHeightHeaderView * 0.5f)];
       label.text = @"  Goals";
+      label.textColor = [UIColor whiteColor];
       label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
       [view addSubview:label];
       
@@ -505,6 +525,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                  reuseIdentifier:[self cellIdentifierForIndexPath:paramIndexPath]];
   
+  cell.textLabel.textColor = [CEIColor colorPurpleText];
   switch (paramIndexPath.section) {
     case CEIAddMissionSectionImage:{
       
@@ -519,7 +540,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
           [cell.contentView addSubview:self.textFieldCaption];
           break;
         }
-          
+        
         case CEIAddMissionRowIsNeverending:{
           
           cell.textLabel.text = @"Neverending mission";

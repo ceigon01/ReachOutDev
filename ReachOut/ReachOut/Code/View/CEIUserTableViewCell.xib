@@ -31,9 +31,10 @@
                         <rect key="frame" x="61" y="37" width="237" height="12"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="12" id="zvo-bu-AkL"/>
+                            <constraint firstAttribute="height" constant="14" id="zvo-bu-AkL"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                        <color key="textColor" red="0.41176471110000001" green="0.42745098469999998" blue="0.59215688710000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GD-Ds-mhl">
@@ -49,11 +50,11 @@
                     <constraint firstItem="xpm-1b-Tak" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="1Tg-Ig-AUd"/>
                     <constraint firstAttribute="trailing" secondItem="g7t-kN-z4x" secondAttribute="trailing" constant="18" id="9jg-zT-Gd7"/>
                     <constraint firstItem="6W8-Bx-asA" firstAttribute="top" secondItem="g7t-kN-z4x" secondAttribute="bottom" id="BLd-mr-jxh"/>
-                    <constraint firstItem="g7t-kN-z4x" firstAttribute="leading" secondItem="xpm-1b-Tak" secondAttribute="trailing" constant="4" id="Cfd-AI-CbP"/>
+                    <constraint firstItem="g7t-kN-z4x" firstAttribute="leading" secondItem="xpm-1b-Tak" secondAttribute="trailing" constant="8" id="Cfd-AI-CbP"/>
                     <constraint firstItem="xpm-1b-Tak" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="Nur-VY-0FI"/>
                     <constraint firstAttribute="bottom" secondItem="xpm-1b-Tak" secondAttribute="bottom" constant="3" id="bbQ-tx-jfl"/>
                     <constraint firstItem="g7t-kN-z4x" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="eFh-cU-hbH"/>
-                    <constraint firstItem="6W8-Bx-asA" firstAttribute="leading" secondItem="xpm-1b-Tak" secondAttribute="trailing" constant="4" id="etQ-9s-VLu"/>
+                    <constraint firstItem="6W8-Bx-asA" firstAttribute="leading" secondItem="xpm-1b-Tak" secondAttribute="trailing" constant="8" id="etQ-9s-VLu"/>
                     <constraint firstAttribute="trailing" secondItem="6W8-Bx-asA" secondAttribute="trailing" constant="18" id="hYc-dd-cZL"/>
                     <constraint firstAttribute="bottom" secondItem="6W8-Bx-asA" secondAttribute="bottom" constant="8" id="ySM-gx-DmW"/>
                 </constraints>

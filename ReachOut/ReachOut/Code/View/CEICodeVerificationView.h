@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CEIButton.h"
 
 @interface CEICodeVerificationView : UIView
 
 @property (nonatomic, weak) IBOutlet UILabel *labelTitle;
 @property (nonatomic, weak) IBOutlet UILabel *labelSubtitle;
 @property (nonatomic, weak) IBOutlet UITextField *textField;
-@property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
+@property (nonatomic, weak) IBOutlet CEIButton *buttonContinue;
 
 @end
