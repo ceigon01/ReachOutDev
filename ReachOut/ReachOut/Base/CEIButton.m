@@ -42,7 +42,23 @@
     
 	return self;
 }
-
+- (id)initWithFrame:(CGRect)frame{
+    // Call the parent implementation of initWithCoder
+	self = [super initWithFrame:frame];
+    
+    // Custom drawing methods
+	if (self)
+    {
+		[self drawButton];
+        [self drawInnerGlow];
+        [self drawBackgroundLayer];
+        [self drawHighlightBackgroundLayer];
+		
+		_highlightBackgroundLayer.hidden = YES;
+	}
+    
+	return self;
+}
 - (void)layoutSubviews{
     // Set inner glow frame (1pt inset)
     _innerGlow.frame = CGRectInset(self.bounds, 1, 1);

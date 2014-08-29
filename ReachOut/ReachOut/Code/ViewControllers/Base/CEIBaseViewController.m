@@ -25,7 +25,7 @@ static const CGFloat kHeightKeyboardHeight = 216.0f;
 
 - (void)viewDidLoad{
 	[super viewDidLoad];
-  
+      [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"imgBackground"]]];
   if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
     self.edgesForExtendedLayout = UIRectEdgeNone;
 	

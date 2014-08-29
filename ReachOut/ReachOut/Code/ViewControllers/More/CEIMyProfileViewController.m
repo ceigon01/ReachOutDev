@@ -41,8 +41,8 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
   self.labelPhoneNumber.text = [NSString stringWithFormat:@"Phone number: +(%@) %@",prefix,phoneNumber];
   
   self.buttonUserImage.layer.cornerRadius = self.buttonUserImage.frame.size.width * 0.5f;
-  self.buttonUserImage.layer.borderColor = [UIColor grayColor].CGColor;
-  self.buttonUserImage.layer.borderWidth = 1.0f;
+  self.buttonUserImage.layer.borderColor = [UIColor whiteColor].CGColor;
+  self.buttonUserImage.layer.borderWidth = 3.0f;
   self.buttonUserImage.layer.masksToBounds = YES;
 
   if (userCurrent[@"image"]) {

@@ -8,6 +8,7 @@
 
 #import "CEIAddMissionViewController.h"
 #import <Parse/Parse.h>
+#import "CEIButtonCancel.h"
 #import "CEIAlertView.h"
 #import "CEIMissionsViewController.h"
 #import "CEIAddFlockToMissionViewController.h"
@@ -947,16 +948,17 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   return _textFieldCaption;
 }
 
-- (UIButton *)buttonEndsIn{
+- (CEIButtonCancel *)buttonEndsIn{
   
   if (_buttonEndsIn == nil) {
 
-    _buttonEndsIn = [[UIButton alloc] initWithFrame:CGRectMake(0.0f,
+    _buttonEndsIn = [[CEIButtonCancel alloc] initWithFrame:CGRectMake(0.0f,
                                                                kHeightDefaultCell * 0.1f,
                                                                kWidthButtonEndsIs,
                                                                kHeightDefaultCell * 0.8f)];
-    [_buttonEndsIn setBackgroundImage:[UIImage imageNamed:@"btnBckgndSide"] forState:UIControlStateNormal];
-    [_buttonEndsIn setTitleColor:[CEIColor colorBlue] forState:UIControlStateNormal];
+      
+    //[_buttonEndsIn setBackgroundImage:[UIImage imageNamed:@"btnBckgndSide"] forState:UIControlStateNormal];
+    //[_buttonEndsIn setTitleColor:[CEIColor colorBlue] forState:UIControlStateNormal];
     if (!self.mission[@"timeCount"]) {
       
       self.mission[@"timeCount"] = @"30 days";
