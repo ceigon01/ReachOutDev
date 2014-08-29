@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 
-@interface CEIEncouragementTableViewCell : UITableViewCell
+@interface CEIEncouragementTableViewCell : SWTableViewCell
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageViewProfile;
 @property (nonatomic, weak) IBOutlet UILabel *labelFullName;

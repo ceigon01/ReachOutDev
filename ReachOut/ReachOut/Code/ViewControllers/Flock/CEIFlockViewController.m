@@ -137,7 +137,6 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
   
   [cell configureWithUser:user];
   
-  
   cell.delegate = self;
   
 #warning TODO: localizations
@@ -150,7 +149,6 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
   [cell setRightUtilityButtons:@[
                                  button,
                                  ]];
-  
   
   return cell;
 }

@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, CEIEncouragementType){
 
 static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncouragement";
 
-@interface CEIEncouragementViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CEIEncouragementViewController () <UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate>
 
 @property (nonatomic, strong) PFObject *encouragementNew;
 
@@ -291,6 +291,23 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   
   cell.constraintHeightLabelCaption.constant = cell.frame.size.height - kHeightCellOffset;
   
+  
+  
+  cell.delegate = self;
+  
+#warning TODO: localizations
+  UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+  button.backgroundColor = [UIColor redColor];
+  [button setTitle:@"Delete" forState:UIControlStateNormal];
+  [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+  button.tag = indexPath.row;
+  
+  [cell setRightUtilityButtons:@[
+                                 button,
+                                 ]];
+  
+  
+  
   return cell;
 }
 
@@ -302,4 +319,31 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
                 withRowAnimation:UITableViewRowAnimationFade];
 }
 
+#pragma mark - SWTableViewCellDelegate
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+  
+  NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+  
+  __block NSMutableArray *array = (self.segmentControll.selectedSegmentIndex == CEIEncouragementTypeReceived) ?
+  self.arrayReceived :
+  self.arraySent;
+  
+  __weak typeof (self) weakSelf = self;
+  
+  PFObject *encouragement = [array objectAtIndex:cellIndexPath.row];
+  
+  [array removeObjectAtIndex:cellIndexPath.row];
+  [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+  
+  [encouragement deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    
+    if (error) {
+      
+      [CEIAlertView showAlertViewWithError:error];
+      [array addObject:encouragement];
+      [weakSelf.tableView reloadData];
+    }
+  }];
+}
 @end
