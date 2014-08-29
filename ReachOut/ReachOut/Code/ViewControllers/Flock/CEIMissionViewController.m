@@ -166,8 +166,6 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
 
   self.tableView.backgroundColor = [UIColor whiteColor];
   
-  [self fetchGoals];
-  
 #warning TODO: a bit hacky way, but nowthing else seems to work...
   if (self.isMentor) {
   
@@ -185,6 +183,8 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
 
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
+  
+  [self refresh];
   
   __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshActionHandler:^{
@@ -204,6 +204,9 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
   PFQuery *queryGoals = [PFQuery queryWithClassName:@"Goal"];
   if (queryGoals && [PFUser currentUser]) {
     
+    PFUser *user = self.isMentor ? self.user : [PFUser currentUser];
+    
+    [queryGoals whereKey:@"user" equalTo:user];
     [queryGoals whereKey:@"mission" equalTo:self.mission];
     [queryGoals findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
@@ -271,7 +274,6 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
       
       ((CEIAddGoalViewController *)segue.destinationViewController).goalAdded = self.goalSelected;
       ((CEIAddGoalViewController *)segue.destinationViewController).editing = YES;
-      self.goalSelected = nil;
     }
 }
 
@@ -699,6 +701,7 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
     
     goalStep[@"caption"] = paramGoalStepViewCheckin.textView.text;
     goalStep[@"done"] = [NSNumber numberWithBool:paramGoalStepViewCheckin.done];
+    goalStep[@"goal"] = self.goalSelected;
     
     [self.arrayGoalSteps addObject:goalStep];
     [self.selectedDailyChoresView configureWithGoalStep:goalStep];

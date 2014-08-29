@@ -89,20 +89,25 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
     [progressHUD hide:YES];
     return;
   }
-  else{
     
     PFRelation *relationGoals = [mission relationForKey:@"goals"];
-    [arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
-      
-      [relationGoals addObject:goal];
-      
-      goal[@"mission"] = mission;
-      
-      [goal saveInBackground];
-    }];
-  }
+
+    __weak typeof (self) weakSelf = self;
   
-  __weak typeof (self) weakSelf = self;
+  [arrayFlock enumerateObjectsUsingBlock:^(PFUser *user, NSUInteger idx, BOOL *stop) {
+
+    [arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
+  
+      PFObject *goalNew = [weakSelf goalWithGoal:goal];
+
+      goalNew[@"mission"] = mission;
+      goalNew[@"user"] = user;
+      [goalNew saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        [relationGoals addObject:goalNew];
+      }];
+    }];
+  }];
   
   mission[@"dateBegins"] = [NSDate date];
   mission[@"userReporter"] = [PFUser currentUser];
@@ -137,7 +142,6 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
       }];
     }
   }];
-  
 }
 
 - (void)viewDidLoad{
@@ -308,6 +312,43 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
     
     [mission deleteInBackground];
   }];
+}
+
+- (PFObject *)goalWithGoal:(PFObject *)paramGoal{
+  
+  PFObject *goal = [PFObject objectWithClassName:@"Goal"];
+  
+  if (paramGoal[@"caption"]) {
+  
+    goal[@"caption"] = paramGoal[@"caption"];
+  }
+  
+  if (paramGoal[@"isRecurring"]) {
+    
+    goal[@"isRecurring"] = paramGoal[@"isRecurring"];
+  }
+  
+  if (paramGoal[@"orderIndex"]) {
+    
+    goal[@"orderIndex"] = paramGoal[@"orderIndex"];
+  }
+  
+  if (paramGoal[@"mission"]) {
+    
+    goal[@"mission"] = paramGoal[@"mission"];
+  }
+  
+  if (paramGoal[@"time"]) {
+    
+    goal[@"time"] = paramGoal[@"time"];
+  }
+  
+  if (paramGoal[@"days"]) {
+    
+    goal[@"days"] = paramGoal[@"days"];
+  }
+  
+  return goal;
 }
 
 @end
