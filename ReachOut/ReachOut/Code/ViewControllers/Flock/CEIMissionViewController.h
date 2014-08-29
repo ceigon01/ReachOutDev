@@ -9,11 +9,12 @@
 #import "CEIBaseViewController.h"
 
 @class PFObject;
+@class PFUser;
 
 @interface CEIMissionViewController : CEIBaseViewController
 
 @property (nonatomic, strong) PFObject *mission;
-@property (nonatomic, strong) PFObject *user;
+@property (nonatomic, strong) PFUser *user;
 @property (nonatomic, assign, getter=isMentor) BOOL mentor;
 
 - (void)refresh;

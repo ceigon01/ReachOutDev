@@ -52,7 +52,6 @@ static const NSUInteger kNumerbOfDayButtons = 7;
     self.arrayButtonNamesSelected = [NSMutableArray arrayWithArray:self.goalAdded[@"days"]];
   }
   
-  
   for (NSInteger dayNumber = 1; dayNumber <= kNumerbOfDayButtons; dayNumber++) {
     
     UIButton *button = (UIButton *)[self.view viewWithTag:(dayNumber + kTagOffsetButtonDay)];
@@ -76,7 +75,6 @@ static const NSUInteger kNumerbOfDayButtons = 7;
   
   self.textViewTitle.layer.borderWidth = 0.5f;
   self.textViewTitle.layer.cornerRadius = 4.0f;
-  
   
   UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
   [self.view addGestureRecognizer:tapGestureRecognizer];
