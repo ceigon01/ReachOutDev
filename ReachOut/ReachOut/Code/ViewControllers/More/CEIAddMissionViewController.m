@@ -101,7 +101,8 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
                                                         object:@{
                                                                  @"mission" : self.mission,
                                                                  @"goals"   : self.arrayGoals,
-                                                                 @"flock"   : self.arrayFlock
+                                                                 @"flock"   : self.arrayFlock,
+                                                                 @"editing" : [NSNumber numberWithBool:self.isEditing]
                                                                  }];
   }
   
@@ -131,7 +132,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   
   PFObject *goal = paramNotification.object;
   
-  __weak typeof(self) weakSelf = self;
+//  __weak typeof(self) weakSelf = self;
   
   goal[@"mission"] = self.mission;
   goal[@"orderIndex"] = [NSNumber numberWithInteger:self.arrayGoals.count];
@@ -139,17 +140,17 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
                 withRowAnimation:UITableViewRowAnimationMiddle];
   
-  [goal saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-    
-    if (error) {
-      
-      [weakSelf.arrayGoals removeObject:goal];
-      [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
-                        withRowAnimation:UITableViewRowAnimationMiddle];
-      
-      [CEIAlertView showAlertViewWithError:error];
-    }
-  }];
+//  [goal saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//    
+//    if (error) {
+//      
+//      [weakSelf.arrayGoals removeObject:goal];
+//      [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:CEIAddMissionSectionGoals]
+//                        withRowAnimation:UITableViewRowAnimationMiddle];
+//      
+//      [CEIAlertView showAlertViewWithError:error];
+//    }
+//  }];
 }
 
 - (void)viewDidLoad{
@@ -199,6 +200,11 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 }
 
 - (void)fetchGoals{
+  
+  if (self.isEditing) {
+    
+    return;
+  }
   
   __weak typeof (self) weakSelf = self;
   
@@ -423,8 +429,16 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
                                                                  tableView.frame.size.width,
                                                                  kHeightHeaderView * 0.5f)];
       label.text = @"  Goals";
-      label.textColor = [UIColor whiteColor];
-      label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
+      if (self.isEditing) {
+        
+        label.textColor = [UIColor lightGrayColor];
+        label.font = [UIFont fontWithName:@"HelveticaNeue-LightItalic" size:22];
+      }
+      else{
+        
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
+      }
       [view addSubview:label];
       
       UIButton *buttonAdd = [UIButton buttonWithType:UIButtonTypeContactAdd];
@@ -740,6 +754,14 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
   [self.textFieldCaption resignFirstResponder];
   [self hidePicker];
+
+  if (self.isEditing) {
+    
+#warning TODO: localizations
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You cannot edit the goals on an already created mission - do it separately for each Follower!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    return;
+  }
+  
   
   [self performSegueWithIdentifier:kIdentifierSegueAddMissionToAddGoal sender:self];
 }
@@ -885,6 +907,8 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   NSString *time = [self pickerView:self.pickerView
                         titleForRow:[self.pickerView selectedRowInComponent:CEIAddMissionPickerViewComponentTime]
                        forComponent:CEIAddMissionPickerViewComponentTime];
+  
+  self.missionDidChange = YES;
   
   self.mission[@"timeCount"] = [NSString stringWithFormat:@"%@ %@",counter,time];
   [self.buttonEndsIn setTitle:self.mission[@"timeCount"] forState:UIControlStateNormal];

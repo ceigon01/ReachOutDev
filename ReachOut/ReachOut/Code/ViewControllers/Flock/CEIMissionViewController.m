@@ -357,15 +357,7 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
   
   cell.delegateGoalStep = self;
   
-  NSArray *arraySorted = [NSMutableArray arrayWithArray:[self.arrayGoals sortedArrayUsingComparator:^NSComparisonResult(PFObject *goal1, PFObject *goal2) {
-    
-    NSNumber *number1 = goal1[@"orderIndex"];
-    NSNumber *number2 = goal2[@"orderIndex"];
-    
-    return [number1 compare:number2];
-  }]];
-  
-  PFObject *goal = [arraySorted objectAtIndex:indexPath.section];
+  PFObject *goal = [self.arrayGoals objectAtIndex:indexPath.section];
   
   [cell configureWithGoal:goal
                   mission:self.mission
@@ -738,6 +730,26 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
 - (void)goalStepViewCheckinDidTapCancel:(CEIGoalStepViewCheckin *)paramGoalStepViewCheckin{
 
   [KLCPopup dismissAllPopups];
+}
+
+#pragma mark - Custom Getters
+
+- (NSArray *)arrayGoals{
+  
+  if (_arrayGoals) {
+    
+    NSArray *arraySorted = [NSMutableArray arrayWithArray:[_arrayGoals sortedArrayUsingComparator:^NSComparisonResult(PFObject *goal1, PFObject *goal2) {
+      
+      NSNumber *number1 = goal1[@"orderIndex"];
+      NSNumber *number2 = goal2[@"orderIndex"];
+      
+      return [number1 compare:number2];
+    }]];
+    
+    _arrayGoals = [NSArray arrayWithArray:arraySorted];
+  }
+  
+  return _arrayGoals;
 }
 
 @end

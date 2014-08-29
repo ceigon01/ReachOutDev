@@ -43,6 +43,7 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   PFObject *mission = [dictionary objectForKey:@"mission"];
   NSArray *arrayGoals = [dictionary objectForKey:@"goals"];
   NSArray *arrayFlock = [dictionary objectForKey:@"flock"];
+  BOOL isEditing = [[dictionary objectForKey:@"editing"] boolValue];
   
   PFFile *fileImage = mission[@"image"];
   if (fileImage == nil) {
@@ -83,40 +84,44 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   MBProgressHUD *progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   progressHUD.labelText = @"Updating mission...";
   
-  if (arrayGoals.count == 0) {
+  if (arrayGoals.count == 0 && !isEditing) {
     
     [CEIAlertView showAlertViewWithValidationMessage:@"Please set some goals."];
     [progressHUD hide:YES];
     return;
   }
+  
+  __weak typeof (self) weakSelf = self;
+  
+  if (!isEditing) {
     
     PFRelation *relationGoals = [mission relationForKey:@"goals"];
 
-    __weak typeof (self) weakSelf = self;
-  
-  [arrayFlock enumerateObjectsUsingBlock:^(PFUser *user, NSUInteger idx, BOOL *stop) {
+    [arrayFlock enumerateObjectsUsingBlock:^(PFUser *user, NSUInteger idx, BOOL *stop) {
 
-    [arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
-  
-      PFObject *goalNew = [weakSelf goalWithGoal:goal];
+      [arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
+    
+        PFObject *goalNew = [weakSelf goalWithGoal:goal];
 
-      goalNew[@"mission"] = mission;
-      goalNew[@"user"] = user;
-      [goalNew saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        [relationGoals addObject:goalNew];
+        goalNew[@"mission"] = mission;
+        goalNew[@"user"] = user;
+        [goalNew saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+          
+          [relationGoals addObject:goalNew];
+        }];
       }];
     }];
-  }];
+  }
+  if (!isEditing) {
+    
+    mission[@"dateBegins"] = [NSDate date];
+  }
   
-  mission[@"dateBegins"] = [NSDate date];
   mission[@"userReporter"] = [PFUser currentUser];
   mission[@"asigneesCount"] = [NSNumber numberWithInteger:arrayFlock.count];
   [mission saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
     
     [progressHUD hide:YES];
-    
-    BOOL isEditing = [weakSelf.arrayMissions indexOfObject:mission] != NSNotFound;
     
     if (!isEditing) {
       

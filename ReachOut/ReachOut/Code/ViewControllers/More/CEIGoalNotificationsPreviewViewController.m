@@ -222,6 +222,7 @@ static NSString *const kIdentifierSegueNotificationsPreviewToNotificationSetup =
   
   [progressHUD performSelector:@selector(hide:) withObject:nil afterDelay:1.0f];
   
+  [self.dictionaryNotifications removeAllObjects];
   [self.tableView reloadData];
 }
 

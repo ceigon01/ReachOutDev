@@ -62,13 +62,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReachOut/Code/ViewControllers/Flock/CEIMissionViewController.m"
-            timestampString = "431018181.036572"
+            timestampString = "431043244.403615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "422"
-            endingLineNumber = "422"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "-tapLabelTableViewHeader:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ReachOut/Code/ViewControllers/More/CEIGoalNotificationsPreviewViewController.m"
+            timestampString = "431033605.939515"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-numberOfSectionsInTableView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ReachOut/Code/ViewControllers/More/CEIGoalNotificationsPreviewViewController.m"
+            timestampString = "431033484.821829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "-fetchGoals"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CEIGoalNotificationsPreviewViewController fetchGoals]"
+                  moduleName = "ReachOut"
+                  urlString = "file:///Users/piotr.nietrzebka/Documents/CEIGON/ReachOut/ReachOut/ReachOut/Code/ViewControllers/More/CEIGoalNotificationsPreviewViewController.m"
+                  timestampString = "431048704.684874"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "363">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__55-[CEIGoalNotificationsPreviewViewController fetchGoals]_block_invoke"
+                  moduleName = "ReachOut"
+                  urlString = "file:///Users/piotr.nietrzebka/Documents/CEIGON/ReachOut/ReachOut/ReachOut/Code/ViewControllers/More/CEIGoalNotificationsPreviewViewController.m"
+                  timestampString = "431048704.685081"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "86">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
