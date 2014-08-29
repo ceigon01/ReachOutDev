@@ -156,7 +156,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   [super viewDidLoad];
   
   self.missionDidChange = NO;
-  
+  self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(notificationGoalAdded:)
                                                name:kNotificationNameGoalAdded
@@ -330,6 +330,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   switch (section) {
     case CEIAddMissionSectionImage:   {
       
+    
       self.imageViewHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.frame.size.width, [self tableView:tableView heightForHeaderInSection:section])];
       self.imageViewHeader.userInteractionEnabled = YES;
       self.imageViewHeader.contentMode = UIViewContentModeScaleAspectFill;
@@ -343,7 +344,8 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
       }
       
       self.buttonImageHeader = [UIButton buttonWithType:UIButtonTypeCustom];
-      [self.buttonImageHeader setImage:[UIImage imageNamed:@"btnAddPhoto"] forState:UIControlStateNormal];
+      [self.buttonImageHeader setImage:[UIImage imageNamed:@"btnEditPhoto"] forState:UIControlStateNormal];
+      [self.buttonImageHeader setAlpha:0.7f];
       self.buttonImageHeader.frame = self.imageViewHeader.bounds;
       [self.buttonImageHeader addTarget:self
                                  action:@selector(tapButtonSetImage:)

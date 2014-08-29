@@ -144,7 +144,6 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   [super viewDidLoad];
 
   self.indexPathSelected = nil;
-  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(notificationAddMission:)
                                                name:kNotificationNameMissionAdded
