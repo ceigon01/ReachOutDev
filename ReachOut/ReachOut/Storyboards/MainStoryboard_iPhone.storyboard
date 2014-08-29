@@ -1890,7 +1890,7 @@
         <scene sceneID="sH1-DN-AYK">
             <objects>
                 <navigationController id="g71-ZA-e7e" customClass="CEINavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Mentors" image="tabMentors" id="c06-1z-5tc"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Mentors" image="tabMentors" id="c06-1z-5tc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="v9h-fP-pOr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1907,7 +1907,7 @@
         <scene sceneID="OuE-mb-Kff">
             <objects>
                 <navigationController id="Gvg-BW-QqA" customClass="CEINavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Encourage" image="tabEncouragements" id="JtI-LU-dQu"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Encourage" image="tabEncouragements" id="JtI-LU-dQu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cxe-uX-CJR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2145,7 +2145,7 @@
         <scene sceneID="xmc-7z-wMb">
             <objects>
                 <navigationController id="JCZ-yE-QyA" customClass="CEINavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="More" image="tabMore" id="zAr-TA-csW"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="More" image="tabMore" id="zAr-TA-csW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bk2-Oz-tLN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2801,6 +2801,7 @@
         <image name="tabMentors" width="30" height="30"/>
         <image name="tabMore" width="30" height="30"/>
     </resources>
+    <color key="tintColor" red="0.21568627450980393" green="0.22745098039215686" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
