@@ -213,6 +213,14 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
       }
       else{
         
+        weakSelf.arrayGoals = [NSMutableArray arrayWithArray:[objects sortedArrayUsingComparator:^NSComparisonResult(PFObject *goal1, PFObject *goal2) {
+          
+          NSNumber *number1 = goal1[@"orderIndex"];
+          NSNumber *number2 = goal2[@"orderIndex"];
+          
+          return [number1 compare:number2];
+        }]];
+        
         weakSelf.arrayGoals = [NSArray arrayWithArray:objects];
         
 #warning TODO: double fetch, not so cool :(
@@ -229,7 +237,7 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
             [CEIAlertView showAlertViewWithError:error];
           }
           else{
-            
+
             weakSelf.arrayGoalSteps = [NSMutableArray arrayWithArray:objects];
             
             [weakSelf.tableView reloadData];
@@ -345,7 +353,15 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
   
   cell.delegateGoalStep = self;
   
-  PFObject *goal = [self.arrayGoals objectAtIndex:indexPath.section];
+  NSArray *arraySorted = [NSMutableArray arrayWithArray:[self.arrayGoals sortedArrayUsingComparator:^NSComparisonResult(PFObject *goal1, PFObject *goal2) {
+    
+    NSNumber *number1 = goal1[@"orderIndex"];
+    NSNumber *number2 = goal2[@"orderIndex"];
+    
+    return [number1 compare:number2];
+  }]];
+  
+  PFObject *goal = [arraySorted objectAtIndex:indexPath.section];
   
   [cell configureWithGoal:goal
                   mission:self.mission

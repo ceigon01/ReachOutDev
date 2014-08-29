@@ -599,6 +599,18 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   }
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
+  
+  if (proposedDestinationIndexPath.section == CEIAddMissionSectionGoals) {
+    
+    return proposedDestinationIndexPath;
+  }
+  else{
+    
+    return sourceIndexPath;
+  }
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
   
   if (editingStyle == UITableViewCellEditingStyleDelete) {
