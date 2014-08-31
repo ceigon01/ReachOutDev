@@ -172,7 +172,9 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
                                              bundle:[NSBundle mainBundle]]
        forCellReuseIdentifier:@"kIdentifierCellAddMission3"];
   
-  if (self.mission) {
+    NSLog(@"timecount: %@",self.mission[@"timeCount"] );
+    
+  if (self.mission.objectId) {
    
     __weak typeof (self) weakSelf = self;
     
@@ -203,9 +205,9 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
   
   __weak typeof (self) weakSelf = self;
   
-  PFQuery *query = [[self.mission relationForKey:@"goals"] query];
+
   if (self.mission.objectId) {
-    
+    PFQuery *query = [[self.mission relationForKey:@"goals"] query];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       if (error) {
