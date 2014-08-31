@@ -11,6 +11,7 @@
 #import "CEIAlertView.h"
 #import "NSDate+Difference.h"
 #import "CEIDay.h"
+#import "MBProgressHUD.h"
 
 NSString *kKeyGoalLocalNotification = @"kKeyGoalLocalNotification";
 NSString *kKeyGoalLocalNotificationDescription = @"kKeyGoalLocalNotificationDescription";
@@ -48,8 +49,6 @@ static NSString *const kCustomNotificationText = @"Put custom notification text 
 
 - (void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
-  
-  [self tapButtonReset:nil];
   
   if (self.mission[@"dateBegins"]) {
     
@@ -96,20 +95,20 @@ static NSString *const kCustomNotificationText = @"Put custom notification text 
                                        kKeyGoalLocalNotificationDescription : description,
                                        };
         
-        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        NSDateComponents *dateComponentsGoal = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond
+                                                                               fromDate:goalDate];
+        dateComponentsGoal.day += day;
+        dateComponentsGoal.hour = hourValue - hour;
+        dateComponentsGoal.minute = minutesValue - hour;
         
-        dateComponents.day = day;
-        dateComponents.hour = hourValue - hour;
-        dateComponents.minute = minutesValue - minute;
-        
-        NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents
-                                                                     toDate:goalDate
-                                                                    options:NSCalendarWrapComponents];
-        
-        localNotification.fireDate = date;
+        localNotification.fireDate = [[NSCalendar currentCalendar] dateFromComponents:dateComponentsGoal];
         
         localNotification.alertBody = self.textViewCustomDescription.text;
         localNotification.soundName = UILocalNotificationDefaultSoundName;
+        localNotification.repeatInterval = 0;
+        
+        NSLog(@"notification: %@",localNotification);
+        
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
       }
     }

@@ -75,7 +75,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 @property (nonatomic, strong) NSString *period;
 @property (nonatomic, strong) UIImageView *imageViewHeader;
 @property (nonatomic, strong) UIButton *buttonImageHeader;
-@property (nonatomic, strong) UIButton *buttonEndsIn;
+@property (nonatomic, strong) CEIButton *buttonEndsIn;
 
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureOutsidePicker;
