@@ -63,11 +63,7 @@ static NSString *const kIdentifierSegueNotificationsPreviewToNotificationSetup =
   
   __weak typeof (self) weakSelf = self;
   
-  NSLog(@"fetch notifications");
-  
   [[[UIApplication sharedApplication] scheduledLocalNotifications] enumerateObjectsUsingBlock:^(UILocalNotification *localNotification, NSUInteger idx, BOOL *stop) {
-    
-    NSLog(@"%@",localNotification);
     
     NSString *goalID = [localNotification.userInfo objectForKey:kKeyGoalLocalNotification];
     if (goalID) {

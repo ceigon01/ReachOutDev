@@ -75,7 +75,7 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 @property (nonatomic, strong) NSString *period;
 @property (nonatomic, strong) UIImageView *imageViewHeader;
 @property (nonatomic, strong) UIButton *buttonImageHeader;
-@property (nonatomic, strong) CEIButton *buttonEndsIn;
+@property (nonatomic, strong) CEIButtonCancel *buttonEndsIn;
 
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureOutsidePicker;
@@ -201,17 +201,11 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
 - (void)fetchGoals{
   
-  if (self.isEditing) {
-    
-    return;
-  }
-  
   __weak typeof (self) weakSelf = self;
   
-  PFQuery *query = [PFQuery queryWithClassName:@"Goal"];
+  PFQuery *query = [[self.mission relationForKey:@"goals"] query];
   if (self.mission.objectId) {
     
-    [query whereKey:@"mission" equalTo:self.mission];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       if (error) {
@@ -429,16 +423,8 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
                                                                  tableView.frame.size.width,
                                                                  kHeightHeaderView * 0.5f)];
       label.text = @"  Goals";
-      if (self.isEditing) {
-        
-        label.textColor = [UIColor lightGrayColor];
-        label.font = [UIFont fontWithName:@"HelveticaNeue-LightItalic" size:22];
-      }
-      else{
-        
-        label.textColor = [UIColor whiteColor];
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
-      }
+      label.textColor = [UIColor whiteColor];
+      label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
       [view addSubview:label];
       
       UIButton *buttonAdd = [UIButton buttonWithType:UIButtonTypeContactAdd];
@@ -754,14 +740,6 @@ static const NSUInteger kNumberOfRowsInPickerViewForComponent1 = 12;
 
   [self.textFieldCaption resignFirstResponder];
   [self hidePicker];
-
-  if (self.isEditing) {
-    
-#warning TODO: localizations
-    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You cannot edit the goals on an already created mission - do it separately for each Follower!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-    return;
-  }
-  
   
   [self performSegueWithIdentifier:kIdentifierSegueAddMissionToAddGoal sender:self];
 }

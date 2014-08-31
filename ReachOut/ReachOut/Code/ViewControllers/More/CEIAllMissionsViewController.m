@@ -93,25 +93,18 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
   
   __weak typeof (self) weakSelf = self;
   
-  if (!isEditing) {
-    
-    PFRelation *relationGoals = [mission relationForKey:@"goals"];
+  PFRelation *relationGoals = [mission relationForKey:@"goals"];
 
-    [arrayFlock enumerateObjectsUsingBlock:^(PFUser *user, NSUInteger idx, BOOL *stop) {
-
-      [arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
-    
-        PFObject *goalNew = [weakSelf goalWithGoal:goal];
-
-        goalNew[@"mission"] = mission;
-        goalNew[@"user"] = user;
-        [goalNew saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-          
-          [relationGoals addObject:goalNew];
-        }];
-      }];
+  [arrayGoals enumerateObjectsUsingBlock:^(PFObject *goal, NSUInteger idx, BOOL *stop) {
+  
+    goal[@"mission"] = mission;
+    [goal saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+      [relationGoals addObject:goal];
+      [mission saveInBackground];
     }];
-  }
+  }];
+  
   if (!isEditing) {
     
     mission[@"dateBegins"] = [NSDate date];

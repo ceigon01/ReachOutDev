@@ -201,13 +201,13 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
   
   __weak CEIMissionViewController *weakSelf = self;
   
-  PFQuery *queryGoals = [PFQuery queryWithClassName:@"Goal"];
+  PFQuery *queryGoals = [[self.mission relationForKey:@"goals"] query];
   if (queryGoals && [PFUser currentUser]) {
     
     PFUser *user = self.isMentor ? self.user : [PFUser currentUser];
     
-    [queryGoals whereKey:@"user" equalTo:user];
-    [queryGoals whereKey:@"mission" equalTo:self.mission];
+//    [queryGoals whereKey:@"user" equalTo:user];
+//    [queryGoals whereKey:@"mission" equalTo:self.mission];
     [queryGoals findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       if (error) {

@@ -107,8 +107,6 @@ static NSString *const kCustomNotificationText = @"Put custom notification text 
         localNotification.soundName = UILocalNotificationDefaultSoundName;
         localNotification.repeatInterval = 0;
         
-        NSLog(@"notification: %@",localNotification);
-        
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
       }
     }
