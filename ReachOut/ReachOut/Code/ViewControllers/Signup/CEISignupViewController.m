@@ -108,7 +108,8 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
     }
   }
   else {
-
+    self.imageViewMentor.layer.cornerRadius = self.imageViewMentor.frame.size.height * 0.5f;
+    self.imageViewMentor.layer.masksToBounds = YES;
     self.labelTitle.text = @"Sheppard";
     self.labelFullName.text = @"Mr Mentor";
   }

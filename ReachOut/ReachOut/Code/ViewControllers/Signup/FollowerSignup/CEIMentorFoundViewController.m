@@ -60,6 +60,8 @@ static NSString* const kSegueIdentifierMentorFuondFollowerSignup = @"kSegueIdent
           self.labelTitle.text = @"Can't find your Mentor. :(";
           self.labelPosition.text = @"Chief Mentoring Officer";
           self.labelFullName.text = @"Mr Mentor";
+          self.imageView.layer.cornerRadius = self.imageView.frame.size.height * 0.5f;
+          self.imageView.layer.masksToBounds = YES;
         }
         else {
           
