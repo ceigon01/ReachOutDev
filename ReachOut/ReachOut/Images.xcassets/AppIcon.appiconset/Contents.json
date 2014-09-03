@@ -3,19 +3,19 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "ReachOut3-29x29.png",
+      "filename" : "ReachOut5-Small.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "ReachOut3-29x29@2x.png",
+      "filename" : "ReachOut5-Small@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "ReachOut3-Small-40@2x.png",
+      "filename" : "ReachOut5-Small-40@2x.png",
       "scale" : "2x"
     },
     {
@@ -24,14 +24,15 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "iphone",
       "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "ReachOut5-76@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "ReachOut3-60@2x.png",
+      "filename" : "ReachOut5-60@2x.png",
       "scale" : "2x"
     },
     {

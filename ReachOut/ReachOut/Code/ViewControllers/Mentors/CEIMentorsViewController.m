@@ -92,6 +92,16 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
         
         weakSelf.arrayMentors = [NSMutableArray arrayWithArray:objects];
         [weakSelf.tableView reloadData];
+          if(weakSelf.arrayMentors.count ==0){
+              UIView *background = [[UIView alloc] initWithFrame:self.tableView.bounds];
+              background.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mentorBack"]];
+              self.tableView.backgroundView = background;
+              
+          }else{
+              UIView *background = [[UIView alloc] initWithFrame:self.tableView.bounds];
+              background.backgroundColor = [UIColor whiteColor];
+              self.tableView.backgroundView = background;
+          }
       }
     }];
   }
@@ -186,7 +196,7 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
                                   [CEIAlertView showAlertViewWithError:error];
                                 }
                                 else{
-                                  
+                                  [self.tableView reloadData];
                                   NSLog(@"%@",results);
                                 }
                               }];

@@ -49,7 +49,6 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
   
 #warning TODO: localization
   self.title = @"My Flock";
-  
   [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
                                             bundle:[NSBundle mainBundle]]
        forCellReuseIdentifier:kCellIdentifierFollower];
@@ -90,6 +89,16 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
         
         weakSelf.arrayFlock = [NSMutableArray arrayWithArray:objects];
         [weakSelf.tableView reloadData];
+          
+          if(weakSelf.arrayFlock.count ==0){
+              UIView *background = [[UIView alloc] initWithFrame:self.tableView.bounds];
+              background.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"flockBack"]];
+              self.tableView.backgroundView = background;
+          }else{
+              UIView *background = [[UIView alloc] initWithFrame:self.tableView.bounds];
+              background.backgroundColor = [UIColor whiteColor];
+              self.tableView.backgroundView = background;
+          }
       }
     }];
   }
