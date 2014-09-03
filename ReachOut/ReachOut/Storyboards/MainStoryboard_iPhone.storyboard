@@ -1470,7 +1470,7 @@
             </objects>
             <point key="canvasLocation" x="929" y="-673"/>
         </scene>
-        <!--Flock View Controller - Flock-->
+        <!--Flock View Controller - My Flock-->
         <scene sceneID="pCa-76-Xlk">
             <objects>
                 <viewController id="QaX-dd-gej" customClass="CEIFlockViewController" sceneMemberID="viewController">
@@ -1509,7 +1509,7 @@
                             <constraint firstItem="5SY-mA-8Cs" firstAttribute="leading" secondItem="l4c-Gw-fLN" secondAttribute="leading" id="ePR-7f-nFx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Flock" id="AIR-vQ-Zyz">
+                    <navigationItem key="navigationItem" title="My Flock" id="AIR-vQ-Zyz">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xyn-w3-N9m">
                             <connections>
                                 <segue destination="uB4-Am-gU8" kind="push" identifier="kIdentifierSegueFlockToAddUser" id="4q1-Vo-cTc"/>
@@ -1972,11 +1972,11 @@
             </objects>
             <point key="canvasLocation" x="2599" y="-20"/>
         </scene>
-        <!--Navigation Controller - Mentors-->
+        <!--Navigation Controller - My Mentors-->
         <scene sceneID="sH1-DN-AYK">
             <objects>
                 <navigationController id="g71-ZA-e7e" customClass="CEINavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="Mentors" image="tabMentors" id="c06-1z-5tc"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="My Mentors" image="tabMentors" id="c06-1z-5tc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="v9h-fP-pOr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2903,11 +2903,11 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="KE2-V4-3Eg"/>
-        <segue reference="FbI-Om-JAD"/>
-        <segue reference="GMr-Jq-4fe"/>
-        <segue reference="biv-Bn-3hS"/>
         <segue reference="ZM5-te-FK0"/>
         <segue reference="fnS-Bk-n3E"/>
+        <segue reference="jKs-Gj-82x"/>
+        <segue reference="4q1-Vo-cTc"/>
+        <segue reference="biv-Bn-3hS"/>
         <segue reference="1Bj-0O-Kc0"/>
         <segue reference="Gty-YO-6eE"/>
         <segue reference="9b3-rF-RHF"/>

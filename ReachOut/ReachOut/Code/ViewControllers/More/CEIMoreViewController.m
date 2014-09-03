@@ -238,7 +238,7 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
 #warning TODO: localization
   switch (paramIndexPath.row) {
     case CEIMoreRowMissions: return @"Missions";
-    case CEIMoreRowGoalNotifications: return @"Goal Notifications";
+    case CEIMoreRowGoalNotifications: return @"Goal Reminders";
     case CEIMoreRowUpdateProfile: return @"Update Profile";
     case CEIMoreRowAbout: return @"About";
     case CEIMoreRowMotto: return @"Motto";

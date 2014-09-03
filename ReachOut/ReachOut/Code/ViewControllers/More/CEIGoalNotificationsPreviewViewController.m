@@ -37,7 +37,7 @@ static NSString *const kIdentifierSegueNotificationsPreviewToNotificationSetup =
   [super viewDidLoad];
   
 #warning TODO: localizations
-  self.title = @"Goal Notifications";
+  self.title = @"Goal Reminders";
 }
 
 - (void)viewWillAppear:(BOOL)animated{

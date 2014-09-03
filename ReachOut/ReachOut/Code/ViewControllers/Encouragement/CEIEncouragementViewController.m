@@ -42,7 +42,7 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
   [super viewDidLoad];
   
 #warning TODO: localization
-  self.title = @"Encouragement";
+  self.title = @"Encourage";
   
   self.automaticallyAdjustsScrollViewInsets = NO;
 }

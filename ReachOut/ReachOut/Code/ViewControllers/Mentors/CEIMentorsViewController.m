@@ -48,7 +48,7 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
                                              object:nil];
   
 #warning TODO: localization
-  self.title = @"Mentors";
+  self.title = @"My Mentors";
   
   [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
                                              bundle:[NSBundle mainBundle]]
