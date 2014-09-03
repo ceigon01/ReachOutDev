@@ -24,13 +24,12 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-  
+
   [self.tableView registerNib:[UINib nibWithNibName:@"CEIUserTableViewCell"
                                              bundle:[NSBundle mainBundle]]
        forCellReuseIdentifier:kIdentifierCellAddEncouragement];
   
   self.encouragementInPlace = NO;
-  
   if (self.arrayFollowersAvailable.count == 0) {
   
     __weak CEIAddEncouragementViewController *weakSelf = self;
@@ -125,7 +124,7 @@ static NSString *const kIdentifierCellAddEncouragement = @"kIdentifierCellAddEnc
   NSInteger selected = [self.arrayFollowersSelected indexOfObject:user];
   
   cell.accessoryType = (selected == NSNotFound) ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
-  
+
   return cell;
 }
 

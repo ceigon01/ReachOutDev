@@ -195,9 +195,18 @@ static NSString *const kIdentifierCellEncouragement = @"kIdentifierCellEncourage
         
         PFQuery *query = [PFInstallation query];
         [query whereKey:@"user" equalTo:user];
-        
-        [PFPush sendPushMessageToQueryInBackground:query
-                                       withMessage:[NSString stringWithFormat:@"%@: %@",[PFUser currentUser][@"fullName"],vc.textView.text]];
+
+        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSString stringWithFormat:@"%@: %@",[PFUser currentUser][@"fullName"],vc.textView.text], @"alert",
+                                @"Increment", @"badge",
+                                nil];
+          
+       PFPush *push = [[PFPush alloc] init];
+       [push setChannels:[NSArray arrayWithObjects:@"PublicMessage", nil]];
+       [push setData:data];
+       [push setQuery:query];
+       [push sendPushInBackground];
+   
         [weakSelf.arraySent insertObject:encouragement atIndex:0];
         [weakSelf.tableView reloadData];
       }

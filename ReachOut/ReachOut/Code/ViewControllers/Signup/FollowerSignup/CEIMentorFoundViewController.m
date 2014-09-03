@@ -12,6 +12,8 @@
 #import <Parse/Parse.h>
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
+#import "CEIButton.h"
+#import "CEIButtonCancel.h"
 
 static NSString* const kSegueIdentifierMentorFuondFollowerSignup = @"kSegueIdentifier_MentorFuond_FollowerSignup";
 
@@ -21,8 +23,8 @@ static NSString* const kSegueIdentifierMentorFuondFollowerSignup = @"kSegueIdent
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UILabel *labelPosition;
 @property (nonatomic, weak) IBOutlet UILabel *labelFullName;
-@property (nonatomic, weak) IBOutlet UIButton *buttonTryAgain;
-@property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
+@property (nonatomic, weak) IBOutlet CEIButtonCancel *buttonTryAgain;
+@property (nonatomic, weak) IBOutlet CEIButton *buttonContinue;
 
 @property (nonatomic, strong) PFUser *userMentor;
 
@@ -97,7 +99,12 @@ static NSString* const kSegueIdentifierMentorFuondFollowerSignup = @"kSegueIdent
         }
   }];
 }
+- (IBAction)tapButtonTryAgain:(id)paramSender{
 
+        
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -107,5 +114,6 @@ static NSString* const kSegueIdentifierMentorFuondFollowerSignup = @"kSegueIdent
     ((CEISignupViewController *)segue.destinationViewController).mentor = self.userMentor;
   }
 }
+
 
 @end

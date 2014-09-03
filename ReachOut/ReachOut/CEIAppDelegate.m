@@ -29,8 +29,8 @@
    UIRemoteNotificationTypeSound];
   
   self.signupIsUp = NO;
-  
-	return YES;
+  //[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+  return YES;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
@@ -45,9 +45,21 @@
 #warning TODO: remember update the profile!
   NSLog(@"did fail to register notifications %@",error);
 }
+-(void) incrementOneBadge{
+    NSInteger numberOfBadges = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    numberOfBadges +=1;
+    [PFInstallation currentInstallation].badge = numberOfBadges;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:numberOfBadges];
+}
 
+-(void) decrementOneBdge{
+    NSInteger numberOfBadges = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    numberOfBadges -=1;
+    [PFInstallation currentInstallation].badge = numberOfBadges;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:numberOfBadges];
+}
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-
+    [self incrementOneBadge];
   CEIRootViewController *rootViewController = (CEIRootViewController *)self.window.rootViewController;
   
   UINavigationController *navigationViewController = (UINavigationController *)rootViewController.selectedViewController;
@@ -76,8 +88,12 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-  
-  [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    if (currentInstallation.badge != 0) {
+        currentInstallation.badge = 0;
+        [currentInstallation saveEventually];
+    }
 }
 - (void)applicationWillTerminate:(UIApplication *)application{}
 

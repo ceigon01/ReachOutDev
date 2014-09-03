@@ -14,14 +14,14 @@
 #import "CEIPhonePrefixPickerViewController.h"
 #import "MBProgressHUD.h"
 #import "UIImage+Crop.h"
-
+#import "UIImage+ResizeMagick.h"
 static const NSInteger kTagAlertViewVerificationCode1 = 12345;
 
 #warning TODO: redundant
 NSString *const kTitleButtonImageSourceCameraRollCameraRoll2 = @"Camera roll";
 NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a picture";
 
-@interface CEIMentorSignupViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
+@interface CEIMentorSignupViewController () <UIActionSheetDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIButton *buttonUserImage;
 @property (nonatomic, weak) IBOutlet UILabel *labelTitle;
@@ -34,6 +34,13 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
 @property (nonatomic, weak) IBOutlet UIButton *buttonFacebook;
 @property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
 @property (nonatomic, weak) IBOutlet UIButton *buttonMoblieNumberPrefix;
+@property (nonatomic, weak) IBOutlet UILabel *labelValidMsg;
+@property (nonatomic, assign) BOOL *isPhoneValid;
+@property (nonatomic, assign) BOOL *isFullNameValid;
+@property (nonatomic, assign) BOOL *isPasswordValid;
+@property (nonatomic, assign) BOOL *isPasswordRetypeValid;
+@property (nonatomic, assign) BOOL *isValid;
+@property (nonatomic, strong) NSString *alertMsg;
 @property (nonatomic, copy) NSString *phonePrefix;
 
 @property (nonatomic, strong) PFUser *user;
@@ -46,12 +53,19 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-
+  [self.buttonContinue setEnabled:NO];
+  [self.buttonContinue setAlpha:.5f];
   self.buttonUserImage.layer.cornerRadius = self.buttonUserImage.frame.size.width * 0.5f;
-  self.buttonUserImage.layer.borderColor = [UIColor grayColor].CGColor;
-  self.buttonUserImage.layer.borderWidth = 1.0f;
+  self.buttonUserImage.layer.borderColor = [UIColor whiteColor].CGColor;
+  self.buttonUserImage.layer.borderWidth = 2.0f;
   self.buttonUserImage.layer.masksToBounds = YES;
-  
+  self.isPhoneValid = NO;
+  self.isFullNameValid = NO;
+  self.isPasswordValid = NO;
+  self.isPasswordRetypeValid = NO;
+  self.isValid = NO;
+  _alertMsg = @"";
+    
   self.slideToOriginAfterTap = YES;
   self.phonePrefix = @"1";  //US
 }
@@ -168,8 +182,9 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
 }
 
 - (IBAction)tapButtonContinue:(id)sender{
-  
-  [self sendSMS];
+    if(self.isValid){
+        [self sendSMS];
+    }
 }
 
 - (void)validateAndSave{
@@ -234,7 +249,68 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
 }
 
 #pragma mark - UITextField delegate
-
+- (IBAction)textDidChange:(UITextField*)textField {
+    int textLength = [textField.text length];
+    if (textField == self.textFieldMobileNumber && textLength < 10){
+        [self.buttonContinue setEnabled:NO];
+        [self.buttonContinue setAlpha:.5f];
+        self.isPhoneValid = NO;
+        textField.layer.borderColor = [UIColor redColor].CGColor;
+        textField.layer.borderWidth = 1.0f;
+        textField.layer.cornerRadius=5.5f;
+        textField.layer.masksToBounds=YES;
+    }else if(textField == self.textFieldMobileNumber){
+        self.isPhoneValid = YES;
+        self.labelValidMsg.alpha = 0.0f;
+        textField.layer.borderColor = [[UIColor clearColor]CGColor];
+    }
+    if(textField == self.textFieldFullName && textLength < 2){
+        [self.buttonContinue setEnabled:NO];
+        [self.buttonContinue setAlpha:.5f];
+        self.isFullNameValid = NO;
+        textField.layer.borderColor = [UIColor redColor].CGColor;
+        textField.layer.borderWidth = 1.0f;
+        textField.layer.cornerRadius=5.5f;
+        textField.layer.masksToBounds=YES;
+    }else if(textField == self.textFieldFullName){
+        self.isFullNameValid = YES;
+        self.labelValidMsg.alpha = 0.0f;
+        textField.layer.borderColor = [[UIColor clearColor]CGColor];
+    }
+    if(textField == self.textFieldPassword  && textLength <= 5){
+        [self.buttonContinue setEnabled:NO];
+        [self.buttonContinue setAlpha:.5f];
+        self.isPasswordValid = NO;
+        textField.layer.borderColor = [UIColor redColor].CGColor;
+        textField.layer.borderWidth = 1.0f;
+        textField.layer.cornerRadius=5.5f;
+        textField.layer.masksToBounds=YES;
+    }else if(textField == self.textFieldPassword){
+        self.isPasswordValid = YES;
+        self.labelValidMsg.alpha = 0.0f;
+        textField.layer.borderColor = [[UIColor clearColor]CGColor];
+    }
+    if(textField == self.textFieldPasswordRetype && ![textField.text isEqualToString:self.textFieldPassword.text]){
+        [self.buttonContinue setEnabled:NO];
+        [self.buttonContinue setAlpha:.5f];
+        self.isPasswordRetypeValid = NO;
+        textField.layer.borderColor = [UIColor redColor].CGColor;
+        textField.layer.borderWidth = 1.0f;
+        textField.layer.cornerRadius=5.5f;
+        textField.layer.masksToBounds=YES;
+    }else if(textField == self.textFieldPasswordRetype){
+        self.isPasswordRetypeValid = YES;
+        textField.layer.borderColor = [[UIColor clearColor]CGColor];
+        textField.layer.borderWidth = 1.0f;
+    }
+    
+    if(self.isPhoneValid && self.isFullNameValid && self.isPasswordValid && self.isPasswordRetypeValid){
+        [self.buttonContinue setEnabled:YES];
+        [self.buttonContinue setAlpha:1.0f];
+        self.labelValidMsg.alpha = 0.0f;
+        self.isValid = YES;
+    }
+}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
   
   if (textField == self.textFieldTitle) {
@@ -276,7 +352,7 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
 
   [actionSheet showInView:self.view];
 }
-
+\
 #pragma mark - UIActionSheet Delegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -307,19 +383,14 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture2 = @"Take a pictur
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
   
-  UIImage *image = info[UIImagePickerControllerOriginalImage];
+  UIImage* resizedImage = [info[UIImagePickerControllerOriginalImage] resizedImageByMagick: @"150x150#"];
   
-  image = [image imageCroppedWithRect:CGRectMake((self.buttonUserImage.frame.size.width - image.size.width) * 0.5f,
-                                                 (self.buttonUserImage.frame.size.height - image.size.height) * 0.5f,
-                                                 self.buttonUserImage.frame.size.width,
-                                                 self.buttonUserImage.frame.size.height)];
-  
-  [self.buttonUserImage setBackgroundImage:image forState:UIControlStateNormal];
-  
-  PFFile *imageFile = [PFFile fileWithName:@"image.png" data:UIImagePNGRepresentation(image)];
-  
+  //[self.buttonUserImage setBackgroundImage:image forState:UIControlStateNormal];
+
+  PFFile *imageFile = [PFFile fileWithName:@"image.png" data:UIImagePNGRepresentation(resizedImage)];
+  [self.buttonUserImage setBackgroundImage:resizedImage forState:UIControlStateNormal];
   self.user[@"image"] = imageFile;
-  
+    
   [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 

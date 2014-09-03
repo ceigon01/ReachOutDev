@@ -14,7 +14,9 @@
 #import "UIImageView+WebCache.h"
 #import "CEIAlertView.h"
 #import "UIImage+Crop.h"
+#import "CEIPhonePrefixPickerViewController.h"
 #import "MBProgressHUD.h"
+#import "UIImage+ResizeMagick.h"
 
 #warning TODO: redundant
 NSString *const kTitleButtonImageSourceCameraRollCameraRoll3 = @"Camera roll";
@@ -24,18 +26,30 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
 
 @interface CEISignupViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+- (IBAction)textDidChange:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *textFieldTitle;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldFullName;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldMobileNumber;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldPassword;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldPasswordRetype;
+@property (nonatomic, weak) IBOutlet UIButton *buttonMoblieNumberPrefix;
 @property (nonatomic, weak) IBOutlet UIButton *buttonFacebook;
 @property (nonatomic, weak) IBOutlet UIButton *buttonContinue;
 @property (nonatomic, weak) IBOutlet UIButton *buttonUserImage;
+
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageViewMentor;
 @property (nonatomic, weak) IBOutlet UILabel *labelRelation;
 @property (nonatomic, weak) IBOutlet UILabel *labelTitle;
 @property (nonatomic, weak) IBOutlet UILabel *labelFullName;
+@property (nonatomic, weak) IBOutlet UILabel *labelValidMsg;
+@property (nonatomic, assign) BOOL *isPhoneValid;
+@property (nonatomic, assign) BOOL *isFullNameValid;
+@property (nonatomic, assign) BOOL *isPasswordValid;
+@property (nonatomic, assign) BOOL *isPasswordRetypeValid;
+@property (nonatomic, assign) BOOL *isValid;
+@property (nonatomic, strong) NSString *alertMsg;
+@property (nonatomic, copy) NSString *phonePrefix;
 
 @property (nonatomic, strong) CEICodeVerificationView *codeVerificationView;
 
@@ -49,12 +63,20 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-  
+  [self.buttonContinue setEnabled:NO];
+  [self.buttonContinue setAlpha:.5f];
+  self.isPhoneValid = NO;
+  self.isFullNameValid = NO;
+  self.isPasswordValid = NO;
+  self.isPasswordRetypeValid = NO;
+  self.isValid = NO;
+  self.phonePrefix = @"1";  //US
+  _alertMsg = @"";
 #warning TODO: add prefix field
   
   self.buttonUserImage.layer.cornerRadius = self.buttonUserImage.frame.size.width * 0.5f;
-  self.buttonUserImage.layer.borderColor = [UIColor grayColor].CGColor;
-  self.buttonUserImage.layer.borderWidth = 1.0f;
+  self.buttonUserImage.layer.borderColor = [UIColor whiteColor].CGColor;
+  self.buttonUserImage.layer.borderWidth = 2.0f;
   self.buttonUserImage.layer.masksToBounds = YES;
   
 #warning TODO: localizations
@@ -132,6 +154,10 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
 - (void)validateAndSave{
   
 #warning TODO: localizations
+if (self.textFieldTitle.text.length == 0) {
+    
+    [CEIAlertView showAlertViewWithValidationMessage:@"Please put your job title"];
+}
   if (self.textFieldFullName.text.length == 0){
     
     [CEIAlertView showAlertViewWithValidationMessage:@"Please tell us your name"];
@@ -156,12 +182,15 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
           self.user.username = self.textFieldMobileNumber.text;
           self.user.password = self.textFieldPassword.text;
           self.user[@"mobilePhone"] = self.textFieldMobileNumber.text;
+          self.user[@"title"] = self.textFieldTitle.text;
           self.user[@"fullName"] = self.textFieldFullName.text;
           
-          //            NSString *prefix = [[[self.butt titleForState:self.buttonMoblieNumberPrefix.state] componentsSeparatedByCharactersInSet:
-          //                                 [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
-          //                                componentsJoinedByString:@""];
-          //            self.user[@"phonePrefix"] = prefix;
+            NSString *prefix = [[[self.buttonMoblieNumberPrefix titleForState:self.buttonMoblieNumberPrefix.state] componentsSeparatedByCharactersInSet:
+                                 [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                                componentsJoinedByString:@""];
+            self.user[@"phonePrefix"] = prefix;
+            
+            self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",prefix,self.user[@"mobilePhone"]];
           
 #warning TODO: mobile number prefix
           self.user[@"mobilePhoneWithPrefix"] = [NSString stringWithFormat:@"%@%@",@"1",self.user[@"mobilePhone"]];
@@ -190,37 +219,54 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
 #pragma mark - Action Handling
 
 - (IBAction)tapButtonFacebook:(id)sender{
-  
-  __weak CEISignupViewController *weakSelf = self;
-  
-  [CEISession fetchFacebookDataInView:self.view
-                withCompletionHandler:^(PFUser *user) {
-                  
-                  weakSelf.user[@"fullName"] = user[@"fullName"];
-                  weakSelf.user[@"imageURL"] = user[@"imageURL"];
-
-                  weakSelf.textFieldFullName.text = user[@"fullName"];
-                  
-                  PFFile *file = user[@"image"];
-                  
-                  [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                    
-                    [weakSelf.buttonUserImage setImage:[UIImage imageWithData:data]
-                                              forState:UIControlStateNormal];
-                  }];
-                  
-                }
-                         errorHandler:^(NSError *error) {
-                           
-                           [PFUser logOut];
-                           [CEIAlertView showAlertViewWithError:error];
-                         }];
-
+    
+    __weak CEISignupViewController *weakSelf = self;
+    
+    [CEISession fetchFacebookDataInView:self.view
+                  withCompletionHandler:^(PFUser *user) {
+                      
+                      weakSelf.user = user;
+                      weakSelf.user[@"fullName"] = user[@"fullName"];
+                      weakSelf.user[@"image"] = user[@"image"];
+                      
+                      weakSelf.textFieldFullName.text = user[@"fullName"];
+                      if (weakSelf.user[@"image"]) {
+                          
+                          PFFile *file = self.user[@"image"];
+                          
+                          __weak typeof (self) weakSelf = self;
+                          
+                          [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                              
+                              [weakSelf.buttonUserImage setBackgroundImage:[UIImage imageWithData:data]
+                                                                  forState:UIControlStateNormal];
+                          }];
+                          
+                      }
+                      else{
+                          
+                          [weakSelf.buttonUserImage setBackgroundImage:[UIImage imageNamed:@"thumbMentor"]
+                                                              forState:UIControlStateNormal];
+                      }
+                  }
+                           errorHandler:^(NSError *error) {
+                               
+#warning TODO: handle error
+                               NSLog(@"%@",error);
+                           }];
 }
 
 - (IBAction)tapButtonContinue:(id)sender{
-  
-  [self sendSMS];
+
+    if(self.isValid){
+        [self sendSMS];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Houstin we have a problem!"
+                                                            message:_alertMsg
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"OK", nil];
+    }
 }
 
 #pragma mark - UIAlertView delegate
@@ -246,9 +292,10 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
 }
 
 #pragma mark - UITextField delegate
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-	
+    if (textField == self.textFieldTitle) {
+        [self.textFieldFullName becomeFirstResponder];
+    }
 	if (textField == self.textFieldFullName) {
     
 		[self.textFieldMobileNumber becomeFirstResponder];
@@ -298,7 +345,21 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
   
   [actionSheet showInView:self.view];
 }
-
+- (IBAction)unwindFindPrefix:(UIStoryboardSegue *)unwindSegue{
+	
+#warning TODO: there is a bug, when going back :/
+    
+    CEIPhonePrefixPickerViewController *pppvc = (CEIPhonePrefixPickerViewController *)unwindSegue.sourceViewController;
+    
+    if (pppvc.dictionarySelected) {
+        
+        NSString *countryCode = [pppvc.dictionarySelected objectForKey:@"countryShort"];
+        self.phonePrefix = [pppvc.dictionarySelected objectForKey:@"code"];
+        
+        [self.buttonMoblieNumberPrefix setTitle:[NSString stringWithFormat:@"%@: (+%@)",countryCode,self.phonePrefix]
+                                       forState:UIControlStateNormal];
+    }
+}
 #pragma mark - UIActionSheet Delegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -329,16 +390,11 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
   
-  UIImage *image = info[UIImagePickerControllerOriginalImage];
+  UIImage* resizedImage = [info[UIImagePickerControllerOriginalImage] resizedImageByMagick: @"150x150#"];
   
-  image = [image imageCroppedWithRect:CGRectMake((self.buttonUserImage.frame.size.width - image.size.width) * 0.5f,
-                                                 (self.buttonUserImage.frame.size.height - image.size.height) * 0.5f,
-                                                 self.buttonUserImage.frame.size.width,
-                                                 self.buttonUserImage.frame.size.height)];
+  [self.buttonUserImage setBackgroundImage:resizedImage forState:UIControlStateNormal];
   
-  [self.buttonUserImage setBackgroundImage:image forState:UIControlStateNormal];
-  
-  PFFile *imageFile = [PFFile fileWithName:@"image.png" data:UIImagePNGRepresentation(image)];
+  PFFile *imageFile = [PFFile fileWithName:@"image.png" data:UIImagePNGRepresentation(resizedImage)];
   
   self.user[@"image"] = imageFile;
   
@@ -364,4 +420,74 @@ static const NSInteger kTagAlertViewVerificationCode = 1234;
   return _user;
 }
 
+- (IBAction)textDidChange:(UITextField*)textField {
+    int textLength = [textField.text length];
+    if (textField == self.textFieldMobileNumber && textLength < 10){
+        [self.buttonContinue setEnabled:NO];
+        [self.buttonContinue setAlpha:.5f];
+        self.isPhoneValid = NO;
+        self.labelValidMsg.text = @"The phone number you entered is not valid";
+        //self.labelValidMsg.alpha = 1.0f;
+        textField.layer.borderColor = [UIColor redColor].CGColor;
+        textField.layer.borderWidth = 1.0f;
+        textField.layer.cornerRadius=5.5f;
+        textField.layer.masksToBounds=YES;
+    }else if(textField == self.textFieldMobileNumber){
+        self.isPhoneValid = YES;
+        self.labelValidMsg.alpha = 0.0f;
+        textField.layer.borderColor = [[UIColor clearColor]CGColor];
+    }
+    if(textField == self.textFieldFullName && textLength < 2){
+        [self.buttonContinue setEnabled:NO];
+        [self.buttonContinue setAlpha:.5f];
+        self.isFullNameValid = NO;
+        textField.layer.borderColor = [UIColor redColor].CGColor;
+        textField.layer.borderWidth = 1.0f;
+        textField.layer.cornerRadius=5.5f;
+        textField.layer.masksToBounds=YES;
+        self.labelValidMsg.text = @"Make sure you enter your full name before continuing";
+        //self.labelValidMsg.alpha = 1.0f;
+    }else if(textField == self.textFieldFullName){
+        self.isFullNameValid = YES;
+        self.labelValidMsg.alpha = 0.0f;
+        textField.layer.borderColor = [[UIColor clearColor]CGColor];
+    }
+    if(textField == self.textFieldPassword  && textLength <= 5){
+        [self.buttonContinue setEnabled:NO];
+        [self.buttonContinue setAlpha:.5f];
+        self.isPasswordValid = NO;
+        textField.layer.borderColor = [UIColor redColor].CGColor;
+        textField.layer.borderWidth = 1.0f;
+        textField.layer.cornerRadius=5.5f;
+        textField.layer.masksToBounds=YES;
+        self.labelValidMsg.text = @"Your password must greater than 5 characters long";
+        //self.labelValidMsg.alpha = 1.0f;
+    }else if(textField == self.textFieldPassword){
+        self.isPasswordValid = YES;
+        self.labelValidMsg.alpha = 0.0f;
+        textField.layer.borderColor = [[UIColor clearColor]CGColor];
+    }
+    if(textField == self.textFieldPasswordRetype && ![textField.text isEqualToString:self.textFieldPassword.text]){
+        [self.buttonContinue setEnabled:NO];
+        [self.buttonContinue setAlpha:.5f];
+        self.isPasswordRetypeValid = NO;
+        textField.layer.borderColor = [UIColor redColor].CGColor;
+        textField.layer.borderWidth = 1.0f;
+        textField.layer.cornerRadius=5.5f;
+        textField.layer.masksToBounds=YES;
+        self.labelValidMsg.text = @"Oops make sure the password matches the password re-type field";
+        //self.labelValidMsg.alpha = 1.0f;
+    }else if(textField == self.textFieldPasswordRetype){
+        self.isPasswordRetypeValid = YES;
+        textField.layer.borderColor = [[UIColor clearColor]CGColor];
+        textField.layer.borderWidth = 1.0f;
+    }
+    
+    if(self.isPhoneValid && self.isFullNameValid && self.isPasswordValid && self.isPasswordRetypeValid){
+        [self.buttonContinue setEnabled:YES];
+        [self.buttonContinue setAlpha:1.0f];
+        self.labelValidMsg.alpha = 0.0f;
+        self.isValid = YES;
+    }
+}
 @end

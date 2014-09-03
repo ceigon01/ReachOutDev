@@ -85,7 +85,15 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
       PFQuery *query = [PFInstallation query];
       [query whereKey:@"user" equalTo:weakSelf.user];
       
-      [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@ did edit goal %@",[PFUser currentUser][@"fullName"],weakSelf.selectedCell.goal[@"caption"]]];
+      //[PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@ did edit goal %@",[PFUser currentUser][@"fullName"],weakSelf.selectedCell.goal[@"caption"]]];
+        
+        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@ did edit goal %@",[PFUser currentUser][@"fullName"],weakSelf.selectedCell.goal[@"caption"]], @"alert",@"Increment", @"badge", nil];
+        
+        PFPush *push = [[PFPush alloc] init];
+        [push setChannels:[NSArray arrayWithObjects:@"PublicMessage", nil]];
+        [push setQuery:query];
+        [push setData:data];
+        [push sendPushInBackground];
     }
   }];
 }
@@ -325,8 +333,15 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
         PFQuery *query = [PFInstallation query];
         [query whereKey:@"user" equalTo:user];
         
-        [PFPush sendPushMessageToQueryInBackground:query
-                                       withMessage:[NSString stringWithFormat:@"%@: %@",[PFUser currentUser][@"fullName"],vc.textView.text]];
+        //[PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@: %@",[PFUser currentUser][@"fullName"],vc.textView.text]];
+          
+          NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@: %@",[PFUser currentUser][@"fullName"],vc.textView.text], @"alert",@"Increment", @"badge", nil];
+          
+          PFPush *push = [[PFPush alloc] init];
+          [push setChannels:[NSArray arrayWithObjects:@"PublicMessage", nil]];
+          [push setQuery:query];
+          [push setData:data];
+          [push sendPushInBackground];
       }
     }];
   }];
@@ -716,8 +731,16 @@ static const NSInteger kTagOffsetLabelTableViewHeader = 1235;
         
         PFQuery *query = [PFInstallation query];
         [query whereKey:@"user" equalTo:weakSelf.user];
-        
+        /*
         [PFPush sendPushMessageToQueryInBackground:query withMessage:[NSString stringWithFormat:@"%@: %@ %@",[PFUser currentUser][@"fullName"],paramGoalStepViewCheckin.done ? @"Done:" : @"Didn't do it:",weakSelf.selectedCell.goal[@"caption"]]];
+          */
+          NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@: %@ %@",[PFUser currentUser][@"fullName"],paramGoalStepViewCheckin.done ? @"Done:" : @"Didn't do it:",weakSelf.selectedCell.goal[@"caption"]], @"alert",@"Increment", @"badge", nil];
+          
+          PFPush *push = [[PFPush alloc] init];
+          [push setQuery:query];
+          [push setChannels:[NSArray arrayWithObjects:@"PublicMessage", nil]];
+          [push setData:data];
+          [push sendPushInBackground];
       }
     }];
   }

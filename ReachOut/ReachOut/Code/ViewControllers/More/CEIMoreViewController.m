@@ -202,8 +202,8 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
       [[[UIAlertView alloc] initWithTitle:@"Logout"
                                   message:@"Are you sure?"
                                  delegate:self
-                        cancelButtonTitle:@"Nope"
-                        otherButtonTitles:@"Yup", nil]
+                        cancelButtonTitle:@"Cancel"
+                        otherButtonTitles:@"Yes", nil]
        show];
       break;
     }

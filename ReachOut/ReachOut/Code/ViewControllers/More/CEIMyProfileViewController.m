@@ -11,6 +11,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "PFQuery+FollowersAndMentors.h"
 #import "CEIAlertView.h"
+#import "UIImage+ResizeMagick.h"
 
 #warning TODO: redundant
 NSString *const kTitleButtonImageSourceCameraRollCameraRoll4 = @"Camera roll";
@@ -154,7 +155,20 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
     weakSelf.labelMissionsAssignedCount.text = [NSString stringWithFormat:@"%d",number];
   }];
 }
-
+-(UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float) i_width
+{
+    float oldWidth = sourceImage.size.width;
+    float scaleFactor = i_width / oldWidth;
+    
+    float newHeight = sourceImage.size.height * scaleFactor;
+    float newWidth = oldWidth * scaleFactor;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 #pragma mark - Action Handling
 
 - (IBAction)tapButtonUserImage:(id)sender{
@@ -208,10 +222,9 @@ NSString *const kTitleButtonImageSourceCameraRollTakeAPicture4 = @"Take a pictur
   
   self.imageChanged = YES;
   self.didEdit = YES;
-  
-  UIImage *image = info[UIImagePickerControllerOriginalImage];
-  
-  [self.buttonUserImage setBackgroundImage:image forState:UIControlStateNormal];
+  UIImage* resizedImage = [info[UIImagePickerControllerOriginalImage] resizedImageByMagick: @"150x150#"];
+    
+  [self.buttonUserImage setBackgroundImage:resizedImage forState:UIControlStateNormal];
   
   [picker dismissViewControllerAnimated:YES completion:NULL];
 }

@@ -45,6 +45,7 @@
     layer.cornerRadius = 5;
     layer.borderWidth = 1;
     layer.masksToBounds = YES;
+    layer.backgroundColor = [UIColor whiteColor].CGColor;
     layer.borderColor = [CEIColor colorPurpleText].CGColor;
     [self setTitleColor:[CEIColor colorPurpleText] forState:UIControlStateNormal];
 }

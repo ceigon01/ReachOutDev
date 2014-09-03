@@ -135,8 +135,17 @@ static NSString *const kIdentifierCellAllMissionsToAddMission = @"kIdentifierCel
         
         NSString *pushText = [NSString stringWithFormat:@"%@ has %@ mission: %@",[PFUser currentUser][@"fullName"],(isEditing ? @"edited a" : @"assigned you a new"), mission[@"caption"]];
         
-        [PFPush sendPushMessageToQueryInBackground:query
-                                       withMessage:pushText];
+        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                pushText, @"alert",
+                                @"Increment", @"badge",
+                                nil];
+          
+        PFPush *push = [[PFPush alloc] init];
+        [push setQuery:query];
+        [push setChannels:[NSArray arrayWithObjects:@"PublicMessage", nil]];
+        [push setData:data];
+        [push sendPushInBackground];
+
       }];
     }
   }];

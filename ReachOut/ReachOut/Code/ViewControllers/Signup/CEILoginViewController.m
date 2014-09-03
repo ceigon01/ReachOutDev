@@ -69,7 +69,7 @@
   if (self.textFieldUsername.text.length == 0 ||
       self.textFieldPassword.text.length == 0) {
 
-    [CEIAlertView showAlertViewWithValidationMessage:@"Please fill in both fields"];
+    [CEIAlertView showAlertViewWithValidationMessage:@"Oops! Your phone number or password was left blank"];
     return;
   }
   
