@@ -149,7 +149,7 @@ static NSString *const kIdentifierSegueNotificationsPreviewToNotificationSetup =
 }
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    [headerView setBackgroundColor:[CEIColor colorIdle]];
+    [headerView setBackgroundColor:[CEIColor colorPurpleText]];
     PFObject *mission = [self.arrayMissions objectAtIndex:section];
     UILabel *missionText = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, tableView.bounds.size.width, 30)];
     missionText.textColor = [UIColor whiteColor];

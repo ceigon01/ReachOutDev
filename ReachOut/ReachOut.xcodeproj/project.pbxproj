@@ -11,6 +11,7 @@
 		02A5374219B6C35C0086DC66 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A5373E19B6C35C0086DC66 /* UIImage+Resize.m */; };
 		02A5374319B6C35C0086DC66 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A5374019B6C35C0086DC66 /* UIImage+RoundedCorner.m */; };
 		02A5374619B6C8000086DC66 /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A5374519B6C8000086DC66 /* UIImage+ResizeMagick.m */; };
+		02A5382C19BF513B0086DC66 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A5382B19BF513B0086DC66 /* MessageUI.framework */; };
 		02FBE9AC19AF5BDB00620B8E /* CEIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBE9AB19AF5BDB00620B8E /* CEIButton.m */; };
 		02FBE9AF19AF639800620B8E /* CEIButtonCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBE9AE19AF639800620B8E /* CEIButtonCancel.m */; };
 		A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3AC19393DE60039750B /* CEIBaseViewController.m */; };
@@ -125,6 +126,7 @@
 		02A5374019B6C35C0086DC66 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		02A5374419B6C8000086DC66 /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
 		02A5374519B6C8000086DC66 /* UIImage+ResizeMagick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeMagick.m"; sourceTree = "<group>"; };
+		02A5382B19BF513B0086DC66 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		02FBE9AA19AF5BDB00620B8E /* CEIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEIButton.h; path = Base/CEIButton.h; sourceTree = "<group>"; };
 		02FBE9AB19AF5BDB00620B8E /* CEIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CEIButton.m; path = Base/CEIButton.m; sourceTree = "<group>"; };
 		02FBE9AD19AF639800620B8E /* CEIButtonCancel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEIButtonCancel.h; path = Base/CEIButtonCancel.h; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A5382C19BF513B0086DC66 /* MessageUI.framework in Frameworks */,
 				FDA2004419757F2D00DC8BDA /* AddressBook.framework in Frameworks */,
 				FDA2004519757F2D00DC8BDA /* AddressBookUI.framework in Frameworks */,
 				FD0C852F193E5C84004C006B /* Accounts.framework in Frameworks */,
@@ -432,6 +435,7 @@
 		A440A1891937F33900D7CC0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02A5382B19BF513B0086DC66 /* MessageUI.framework */,
 				FDA2004219757F2D00DC8BDA /* AddressBook.framework */,
 				FDA2004319757F2D00DC8BDA /* AddressBookUI.framework */,
 				FD0C852E193E5C84004C006B /* Accounts.framework */,

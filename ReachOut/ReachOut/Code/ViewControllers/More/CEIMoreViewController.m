@@ -14,17 +14,20 @@
 #import "CEIAlertView.h"
 #import "CEIAddMissionViewController.h"
 #import "CEIAddGoalViewController.h"
+#import <MessageUI/MessageUI.h>
+
 
 typedef NS_ENUM(NSInteger, CEIMoreRow){
   
   CEIMoreRowMissions = 0,
   CEIMoreRowGoalNotifications = 1,
   CEIMoreRowUpdateProfile = 2,
-  CEIMoreRowAbout = 3,
-  CEIMoreRowMotto = 4,
-  CEIMoreRowLogout = 5,
+  CEIMoreRowInvite = 3,
+  CEIMoreRowAbout = 4,
+  CEIMoreRowMotto = 5,
+  CEIMoreRowLogout = 6,
 };
-static const NSInteger kNumberOfMoreRows = 6;
+static const NSInteger kNumberOfMoreRows = 7;
 
 static NSString *const kIdentifierCellMore = @"kIdentifierCellMore";
 static NSString *const kIdentifierSegueMoreToWebViewCeigon = @"kIdentifierSegueMoreToWebViewCeigon";
@@ -152,16 +155,45 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
     if(indexPath.row == 0)[cell.imageView setImage:[UIImage imageNamed:@"missionIcon"]];
     if(indexPath.row == 1)[cell.imageView setImage:[UIImage imageNamed:@"goalIcon"]];
     if(indexPath.row == 2)[cell.imageView setImage:[UIImage imageNamed:@"profileIcon"]];
-    if(indexPath.row == 3)[cell.imageView setImage:[UIImage imageNamed:@"aboutIcon"]];
-    if(indexPath.row == 4)[cell.imageView setImage:[UIImage imageNamed:@"mottoIcon"]];
-    if(indexPath.row == 5)[cell.imageView setImage:[UIImage imageNamed:@"logouticon"]];
+    if(indexPath.row == 3)[cell.imageView setImage:[UIImage imageNamed:@"shareIcon"]];
+    if(indexPath.row == 4)[cell.imageView setImage:[UIImage imageNamed:@"aboutIcon"]];
+    if(indexPath.row == 5)[cell.imageView setImage:[UIImage imageNamed:@"mottoIcon"]];
+    if(indexPath.row == 6)[cell.imageView setImage:[UIImage imageNamed:@"logouticon"]];
     
     cell.textLabel.textColor = [CEIColor colorPurpleText];
     cell.textLabel.text = [self rowNameForIndexPath:indexPath];
   
   return cell;
 }
-
+- (void)inviteOthers{
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    
+    
+	if([MFMessageComposeViewController canSendText])
+	{
+		controller.body = @"Check out ReaachOut for your smartphone. Download it today from http://blah";
+		controller.messageComposeDelegate = self;
+        [self presentViewController:controller animated:YES completion:nil];
+	}
+}
+#pragma mark - UIAlertView Delegate
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+	switch (result) {
+		case MessageComposeResultCancelled:
+			NSLog(@"Cancelled");
+			break;
+		case MessageComposeResultFailed:
+			break;
+		case MessageComposeResultSent:
+            
+			break;
+		default:
+			break;
+	}
+    
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -178,7 +210,12 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
       [self performSegueWithIdentifier:kIdentifierSegueMoreToWebViewCeigon sender:self];
       break;
     }
-      
+      case CEIMoreRowInvite:{
+          
+          [self inviteOthers];
+          break;
+      }
+          
     case CEIMoreRowMotto:{
       
       [self performSegueWithIdentifier:kIdentifierSegueMoreToMotto sender:self];
@@ -241,6 +278,7 @@ static NSString *const kTitleWebsiteCEIGON = @"CEIGON";
     case CEIMoreRowGoalNotifications: return @"Goal Reminders";
     case CEIMoreRowUpdateProfile: return @"Update Profile";
     case CEIMoreRowAbout: return @"About";
+    case CEIMoreRowInvite: return @"Tell a Friend";
     case CEIMoreRowMotto: return @"Motto";
     case CEIMoreRowLogout: return @"Logout";
       

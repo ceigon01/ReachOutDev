@@ -39,10 +39,9 @@ static NSString *const kCustomNotificationText = @"Put custom notification text 
   self.labelGoalTitle.text = self.goal[@"caption"];
 
   self.textViewCustomDescription.text = [NSString stringWithFormat:@"%@ is due!",self.labelGoalTitle.text];
-  self.textViewCustomDescription.layer.borderColor = [CEIColor colorBlue].CGColor;
-  self.textViewCustomDescription.layer.borderWidth = 2.0f;
+  self.textViewCustomDescription.layer.borderWidth = 0.5f;
   self.textViewCustomDescription.layer.cornerRadius = 4.0f;
-  
+    
   [self.pickerView selectRow:1 inComponent:0 animated:YES];
   [self.pickerView selectRow:1 inComponent:1 animated:YES];
 }

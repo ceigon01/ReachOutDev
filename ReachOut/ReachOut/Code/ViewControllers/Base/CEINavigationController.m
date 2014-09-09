@@ -8,7 +8,7 @@
 
 #import "CEINavigationController.h"
 #import "CEIColor.h"
-
+#import "CEIAddCustomUserViewController.h"
 @interface CEINavigationController ()
 
 @end
@@ -17,9 +17,9 @@
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-  
-  [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-  [[UINavigationBar appearance] setBarTintColor:[CEIColor colorDarkBlue]];
+    
+  [[UINavigationBar appearanceWhenContainedIn:[CEINavigationController class], nil] setTintColor:[UIColor whiteColor]];
+  [[UINavigationBar appearanceWhenContainedIn:[CEINavigationController class], nil] setBarTintColor:[CEIColor colorDarkBlue]];
 #warning TODO: check the font
   [[UINavigationBar appearance] setTitleTextAttributes: @{
                                                           NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f],
@@ -27,6 +27,8 @@
   
   [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
   self.navigationBar.translucent = NO;
+
+
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{

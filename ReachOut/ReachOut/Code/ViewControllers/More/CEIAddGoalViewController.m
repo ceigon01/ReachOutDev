@@ -55,7 +55,7 @@ static const NSUInteger kNumerbOfDayButtons = 7;
   for (NSInteger dayNumber = 1; dayNumber <= kNumerbOfDayButtons; dayNumber++) {
     
     UIButton *button = (UIButton *)[self.view viewWithTag:(dayNumber + kTagOffsetButtonDay)];
-    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    button.layer.borderColor = [CEIColor colorPurpleText].CGColor;
     button.layer.borderWidth = 1.0f;
     [button setTitle:[CEIDay dayNameWithDayNumber:dayNumber] forState:UIControlStateNormal];
     [button setTitle:[CEIDay dayNameWithDayNumber:dayNumber] forState:UIControlStateSelected];
@@ -65,7 +65,7 @@ static const NSUInteger kNumerbOfDayButtons = 7;
       
       if ([self.arrayButtonNamesSelected indexOfObject:[CEIDay dayNameWithDayNumber:dayNumber]] != NSNotFound) {
         
-        button.backgroundColor = [UIColor lightGrayColor];
+        button.backgroundColor = [CEIColor colorPurpleText];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
       }
     }
@@ -162,7 +162,7 @@ static const NSUInteger kNumerbOfDayButtons = 7;
   if (textView.text.length == 0){
     
 #warning TODO: localization
-    textView.textColor = [UIColor lightGrayColor];
+    textView.textColor = [CEIColor colorPurpleText];
     textView.text = @"Put your goal caption here.";
     [textView resignFirstResponder];
   }
@@ -191,7 +191,7 @@ static const NSUInteger kNumerbOfDayButtons = 7;
     if ([self.arrayButtonNamesSelected indexOfObject:[button titleForState:button.state]] == NSNotFound) {
       
       [self.arrayButtonNamesSelected addObject:[button titleForState:button.state]];
-      button.backgroundColor = [UIColor lightGrayColor];
+      button.backgroundColor = [CEIColor colorPurpleText];
       [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else{

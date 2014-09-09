@@ -7,7 +7,8 @@
 //
 
 #import "CEIBaseViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface CEIMoreViewController : CEIBaseViewController
+@interface CEIMoreViewController : CEIBaseViewController<MFMessageComposeViewControllerDelegate>
 
 @end

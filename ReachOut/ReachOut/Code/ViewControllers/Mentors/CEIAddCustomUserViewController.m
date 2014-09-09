@@ -8,7 +8,8 @@
 
 #import "CEIAddCustomUserViewController.h"
 #import "CEICustomUserFoundViewController.h"
-
+#import "CEIColor.h"
+#import <MessageUI/MessageUI.h>
 static NSString *const kIdentifierSegueAddCustomUserToCustomUserFound = @"kIdentifierSegueAddCustomUserToCustomUserFound";
 
 @interface CEIAddCustomUserViewController ()
@@ -40,7 +41,34 @@ static NSString *const kIdentifierSegueAddCustomUserToCustomUserFound = @"kIdent
     ((CEICustomUserFoundViewController *)segue.destinationViewController).mobileNumber = self.textField.text;
   }
 }
-
+- (IBAction)inviteOthers:(id)sender {
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    
+    
+	if([MFMessageComposeViewController canSendText])
+	{
+		controller.body = @"Check out ReaachOut for your smartphone. Download it today from http://blah";
+		controller.messageComposeDelegate = self;
+        [self presentViewController:controller animated:YES completion:nil];
+	}
+}
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+	switch (result) {
+		case MessageComposeResultCancelled:
+			NSLog(@"Cancelled");
+			break;
+		case MessageComposeResultFailed:
+			break;
+		case MessageComposeResultSent:
+            
+			break;
+		default:
+			break;
+	}
+    
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
 - (IBAction)unwindCustomUserFound:(UIStoryboardSegue *)unwindSegue{
   
   
