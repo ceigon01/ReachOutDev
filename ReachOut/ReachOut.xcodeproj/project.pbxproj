@@ -12,7 +12,6 @@
 		02A5374319B6C35C0086DC66 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A5374019B6C35C0086DC66 /* UIImage+RoundedCorner.m */; };
 		02A5374619B6C8000086DC66 /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A5374519B6C8000086DC66 /* UIImage+ResizeMagick.m */; };
 		02A5382C19BF513B0086DC66 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A5382B19BF513B0086DC66 /* MessageUI.framework */; };
-		02A5383419BFDE4A0086DC66 /* run@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 02A5383319BFDE4A0086DC66 /* run@2x.gif */; };
 		02A5383719BFE9FF0086DC66 /* MainStoryboard_iPhone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A5383619BFE9FF0086DC66 /* MainStoryboard_iPhone4.storyboard */; };
 		02FBE9AC19AF5BDB00620B8E /* CEIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBE9AB19AF5BDB00620B8E /* CEIButton.m */; };
 		02FBE9AF19AF639800620B8E /* CEIButtonCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBE9AE19AF639800620B8E /* CEIButtonCancel.m */; };
@@ -93,6 +92,9 @@
 		FDA2004419757F2D00DC8BDA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA2004219757F2D00DC8BDA /* AddressBook.framework */; };
 		FDA2004519757F2D00DC8BDA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA2004319757F2D00DC8BDA /* AddressBookUI.framework */; };
 		FDA200B01977213600DC8BDA /* CEIMyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA200AF1977213600DC8BDA /* CEIMyProfileViewController.m */; };
+		FDA5D98819C0C67F00758D6E /* run@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = FDA5D98719C0C67F00758D6E /* run@2x.gif */; };
+		FDA5D98B19C0C87F00758D6E /* CEIForgotPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA5D98A19C0C87F00758D6E /* CEIForgotPasswordView.m */; };
+		FDA5D98D19C0C8B200758D6E /* CEIForgotPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDA5D98C19C0C8B200758D6E /* CEIForgotPasswordView.xib */; };
 		FDC8D2471955D54300B60BEF /* CEILoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2461955D54300B60BEF /* CEILoginViewController.m */; };
 		FDC8D24A1955F79800B60BEF /* CEINotificationNames.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D2491955F79800B60BEF /* CEINotificationNames.m */; };
 		FDC8D24D1956007000B60BEF /* CEIProfileBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8D24C1956007000B60BEF /* CEIProfileBarButtonItem.m */; };
@@ -128,7 +130,6 @@
 		02A5374419B6C8000086DC66 /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
 		02A5374519B6C8000086DC66 /* UIImage+ResizeMagick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeMagick.m"; sourceTree = "<group>"; };
 		02A5382B19BF513B0086DC66 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		02A5383319BFDE4A0086DC66 /* run@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "run@2x.gif"; path = "../../../../../Downloads/run@2x.gif"; sourceTree = "<group>"; };
 		02A5383519BFE3100086DC66 /* ReachOut.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ReachOut.entitlements; sourceTree = "<group>"; };
 		02A5383619BFE9FF0086DC66 /* MainStoryboard_iPhone4.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone4.storyboard; path = ReachOut/Storyboards/MainStoryboard_iPhone4.storyboard; sourceTree = SOURCE_ROOT; };
 		02FBE9AA19AF5BDB00620B8E /* CEIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEIButton.h; path = Base/CEIButton.h; sourceTree = "<group>"; };
@@ -260,6 +261,10 @@
 		FDA2004319757F2D00DC8BDA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		FDA200AE1977213600DC8BDA /* CEIMyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIMyProfileViewController.h; sourceTree = "<group>"; };
 		FDA200AF1977213600DC8BDA /* CEIMyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIMyProfileViewController.m; sourceTree = "<group>"; };
+		FDA5D98719C0C67F00758D6E /* run@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "run@2x.gif"; sourceTree = "<group>"; };
+		FDA5D98919C0C87F00758D6E /* CEIForgotPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEIForgotPasswordView.h; sourceTree = "<group>"; };
+		FDA5D98A19C0C87F00758D6E /* CEIForgotPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEIForgotPasswordView.m; sourceTree = "<group>"; };
+		FDA5D98C19C0C8B200758D6E /* CEIForgotPasswordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEIForgotPasswordView.xib; sourceTree = "<group>"; };
 		FDC8D2451955D54300B60BEF /* CEILoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEILoginViewController.h; sourceTree = "<group>"; };
 		FDC8D2461955D54300B60BEF /* CEILoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEILoginViewController.m; sourceTree = "<group>"; };
 		FDC8D2481955F79800B60BEF /* CEINotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEINotificationNames.h; sourceTree = "<group>"; };
@@ -574,6 +579,9 @@
 				FDE16276196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib */,
 				FDD65EAB1972AA4200DAC841 /* CEITextField.h */,
 				FDD65EAC1972AA4200DAC841 /* CEITextField.m */,
+				FDA5D98919C0C87F00758D6E /* CEIForgotPasswordView.h */,
+				FDA5D98A19C0C87F00758D6E /* CEIForgotPasswordView.m */,
+				FDA5D98C19C0C8B200758D6E /* CEIForgotPasswordView.xib */,
 			);
 			name = Views;
 			path = View;
@@ -703,7 +711,7 @@
 		FD2E9AD5195731EF005B074A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				02A5383319BFDE4A0086DC66 /* run@2x.gif */,
+				FDA5D98719C0C67F00758D6E /* run@2x.gif */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -805,9 +813,10 @@
 				FDE16275196C35EF00E9FD8F /* CEIGoalStepViewCheckin.xib in Resources */,
 				FD160C0B1983E7D600696320 /* CEIUserTableViewCell.xib in Resources */,
 				FDE16277196C35FC00E9FD8F /* CEIGoalStepViewCheckup.xib in Resources */,
+				FDA5D98819C0C67F00758D6E /* run@2x.gif in Resources */,
 				A440A1951937F33900D7CC0D /* InfoPlist.strings in Resources */,
-				02A5383419BFDE4A0086DC66 /* run@2x.gif in Resources */,
 				A440A19D1937F33900D7CC0D /* Images.xcassets in Resources */,
+				FDA5D98D19C0C8B200758D6E /* CEIForgotPasswordView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,6 +919,7 @@
 				FDE1626D196BFDD500E9FD8F /* CEIDailyChoresWeekView.m in Sources */,
 				FDD65EAA19719A9500DAC841 /* CEIPhonePrefixPickerViewController.m in Sources */,
 				FD53C787197809A000107F09 /* CEICustomUserFoundViewController.m in Sources */,
+				FDA5D98B19C0C87F00758D6E /* CEIForgotPasswordView.m in Sources */,
 				02FBE9AF19AF639800620B8E /* CEIButtonCancel.m in Sources */,
 				FDE162AD19715EB600E9FD8F /* CEIMottoViewController.m in Sources */,
 				FD11906E19465578005A1AE1 /* CEIFlockViewController.m in Sources */,

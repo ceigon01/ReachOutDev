@@ -69,6 +69,36 @@
             endingLineNumber = "414"
             landmarkName = "-tapLabelTableViewHeader:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CEIMissionViewController tapLabelTableViewHeader:]"
+                  moduleName = "ReachOut"
+                  urlString = "file:///Users/piotr.nietrzebka/Documents/CEIGON/ReachOut/ReachOut/ReachOut/Code/ViewControllers/Flock/CEIMissionViewController.m"
+                  timestampString = "432080218.695985"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "415"
+                  endingLineNumber = "415"
+                  offsetFromSymbolStart = "266">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__52-[CEIMissionViewController tapLabelTableViewHeader:]_block_invoke"
+                  moduleName = "ReachOut"
+                  urlString = "file:///Users/piotr.nietrzebka/Documents/CEIGON/ReachOut/ReachOut/ReachOut/Code/ViewControllers/Flock/CEIMissionViewController.m"
+                  timestampString = "432080218.696234"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "415"
+                  endingLineNumber = "415"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

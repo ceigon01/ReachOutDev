@@ -293,6 +293,9 @@
                                     <color key="titleColor" red="0.2156862745" green="0.2274509804" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tapButtonForgotPassword:" destination="HTX-ya-EvX" eventType="touchUpInside" id="aLJ-sa-x5w"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -300,6 +303,7 @@
                     <navigationItem key="navigationItem" id="nTc-Js-Lgu"/>
                     <connections>
                         <outlet property="buttonBack" destination="sOu-Nr-sC3" id="A0y-pl-jKG"/>
+                        <outlet property="buttonForgotPassword" destination="zke-Pk-XBV" id="0OT-Jq-8hO"/>
                         <outlet property="buttonLogin" destination="s24-qY-Ey2" id="tgY-ZM-gJO"/>
                         <outlet property="labelTitle" destination="nyi-OX-ni5" id="svw-Ou-cg4"/>
                         <outlet property="textFieldPassword" destination="IEV-ok-85V" id="cao-4u-41d"/>
@@ -2628,14 +2632,14 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="KE2-V4-3Eg"/>
         <segue reference="FbI-Om-JAD"/>
         <segue reference="GMr-Jq-4fe"/>
         <segue reference="qpa-ED-Np8"/>
         <segue reference="kq1-ES-DfJ"/>
         <segue reference="biv-Bn-3hS"/>
         <segue reference="7aa-Rm-Hm2"/>
-        <segue reference="qQu-SH-1fm"/>
+        <segue reference="KE2-V4-3Eg"/>
         <segue reference="Gty-YO-6eE"/>
+        <segue reference="9b3-rF-RHF"/>
     </inferredMetricsTieBreakers>
 </document>
