@@ -13,6 +13,7 @@
 		02A5374619B6C8000086DC66 /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A5374519B6C8000086DC66 /* UIImage+ResizeMagick.m */; };
 		02A5382C19BF513B0086DC66 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A5382B19BF513B0086DC66 /* MessageUI.framework */; };
 		02A5383419BFDE4A0086DC66 /* run@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 02A5383319BFDE4A0086DC66 /* run@2x.gif */; };
+		02A5383719BFE9FF0086DC66 /* MainStoryboard_iPhone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A5383619BFE9FF0086DC66 /* MainStoryboard_iPhone4.storyboard */; };
 		02FBE9AC19AF5BDB00620B8E /* CEIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBE9AB19AF5BDB00620B8E /* CEIButton.m */; };
 		02FBE9AF19AF639800620B8E /* CEIButtonCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBE9AE19AF639800620B8E /* CEIButtonCancel.m */; };
 		A403F3AD19393DE60039750B /* CEIBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A403F3AC19393DE60039750B /* CEIBaseViewController.m */; };
@@ -128,6 +129,8 @@
 		02A5374519B6C8000086DC66 /* UIImage+ResizeMagick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeMagick.m"; sourceTree = "<group>"; };
 		02A5382B19BF513B0086DC66 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		02A5383319BFDE4A0086DC66 /* run@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "run@2x.gif"; path = "../../../../../Downloads/run@2x.gif"; sourceTree = "<group>"; };
+		02A5383519BFE3100086DC66 /* ReachOut.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ReachOut.entitlements; sourceTree = "<group>"; };
+		02A5383619BFE9FF0086DC66 /* MainStoryboard_iPhone4.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone4.storyboard; path = ReachOut/Storyboards/MainStoryboard_iPhone4.storyboard; sourceTree = SOURCE_ROOT; };
 		02FBE9AA19AF5BDB00620B8E /* CEIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEIButton.h; path = Base/CEIButton.h; sourceTree = "<group>"; };
 		02FBE9AB19AF5BDB00620B8E /* CEIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CEIButton.m; path = Base/CEIButton.m; sourceTree = "<group>"; };
 		02FBE9AD19AF639800620B8E /* CEIButtonCancel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEIButtonCancel.h; path = Base/CEIButtonCancel.h; sourceTree = "<group>"; };
@@ -463,6 +466,7 @@
 		A440A1901937F33900D7CC0D /* ReachOut */ = {
 			isa = PBXGroup;
 			children = (
+				02A5383519BFE3100086DC66 /* ReachOut.entitlements */,
 				02FBE9A919AF5B9500620B8E /* Base */,
 				FD2E9AD5195731EF005B074A /* Assets */,
 				FD0C850A193E0A49004C006B /* External */,
@@ -509,6 +513,7 @@
 			isa = PBXGroup;
 			children = (
 				A45E4B87193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard */,
+				02A5383619BFE9FF0086DC66 /* MainStoryboard_iPhone4.storyboard */,
 				FD0C8535193F651C004C006B /* Model */,
 				A4CAB087193A2B2A00CC7B12 /* Categories */,
 				A4CAB083193A29CC00CC7B12 /* Views */,
@@ -793,6 +798,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A5383719BFE9FF0086DC66 /* MainStoryboard_iPhone4.storyboard in Resources */,
 				FD0C8525193E5207004C006B /* CEICodeVerificationView.xib in Resources */,
 				A45E4B88193800A6008D7EA6 /* MainStoryboard_iPhone.storyboard in Resources */,
 				FD1190AB19488FBE005A1AE1 /* podfile in Resources */,
@@ -1033,6 +1039,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = ReachOut/ReachOut.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1061,6 +1068,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = ReachOut/ReachOut.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
