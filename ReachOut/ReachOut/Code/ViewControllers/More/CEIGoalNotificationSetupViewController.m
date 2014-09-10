@@ -182,7 +182,7 @@ static NSString *const kCustomNotificationText = @"Put custom notification text 
     }
   }
   
-  return [NSString stringWithFormat:@"%d",(row-1)];
+    return [NSString stringWithFormat:@"%d",(component != 0)?row-1:row];
 }
 
 #pragma mark - Action Handling

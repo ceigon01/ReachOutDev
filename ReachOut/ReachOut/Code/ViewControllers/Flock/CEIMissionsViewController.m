@@ -45,6 +45,7 @@ static NSString *const kCellIdentifierMissions = @"kCellIdentifierMissions";
   [super viewWillAppear:animated];
   
   __weak typeof(self) weakSelf = self;
+
   [self.tableView addPullToRefreshActionHandler:^{
     
     [weakSelf fetchMissions];

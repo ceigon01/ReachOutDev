@@ -48,7 +48,7 @@ static NSString *const kIdentifierSegueNotificationsPreviewToNotificationSetup =
   
   __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshActionHandler:^{
-    
+
     [weakSelf fetchGoals];
   }
                           ProgressImagesGifName:@"run@2x.gif"

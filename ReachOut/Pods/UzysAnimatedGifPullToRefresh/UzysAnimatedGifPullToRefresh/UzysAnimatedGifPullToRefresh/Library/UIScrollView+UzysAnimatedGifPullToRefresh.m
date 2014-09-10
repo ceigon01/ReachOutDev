@@ -9,6 +9,7 @@
 #import "UIScrollView+UzysAnimatedGifPullToRefresh.h"
 #import <objc/runtime.h>
 #import <AnimatedGIFImageSerialization.h>
+
 static char UIScrollViewPullToRefreshView;
 
 @implementation UIScrollView (UzysAnimatedGifPullToRefresh)

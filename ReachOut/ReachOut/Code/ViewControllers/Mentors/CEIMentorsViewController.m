@@ -63,6 +63,7 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
   [self fetchMentors];
   
   __weak typeof(self) weakSelf = self;
+    if(weakSelf.arrayMentors.count > 0){
   [self.tableView addPullToRefreshActionHandler:^{
     
     [weakSelf fetchMentors];
@@ -71,6 +72,7 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueMent
                            LoadingImagesGifName:@"run@2x.gif"
                         ProgressScrollThreshold:60
                           LoadingImageFrameRate:30];
+    }
 }
 
 - (void)fetchMentors{

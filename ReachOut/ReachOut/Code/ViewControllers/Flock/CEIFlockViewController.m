@@ -60,14 +60,16 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
   [self fetchFlock];
   
   __weak typeof(self) weakSelf = self;
-  [self.tableView addPullToRefreshActionHandler:^{
-    
-    [weakSelf fetchFlock];
-  }
-                          ProgressImagesGifName:@"run@2x.gif"
-                           LoadingImagesGifName:@"run@2x.gif"
-                        ProgressScrollThreshold:60
-                          LoadingImageFrameRate:30];
+    if(weakSelf.arrayFlock.count > 0){
+      [self.tableView addPullToRefreshActionHandler:^{
+        
+        [weakSelf fetchFlock];
+      }
+                              ProgressImagesGifName:@"run@2x.gif"
+                               LoadingImagesGifName:@"run@2x.gif"
+                            ProgressScrollThreshold:60
+                              LoadingImageFrameRate:30];
+    }
 }
 
 - (void)fetchFlock{
@@ -79,7 +81,7 @@ static NSString *const kIdentifierSegueMentorsToAddUser = @"kIdentifierSegueFloc
     PFQuery *query = [PFQuery followers];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
-      [weakSelf.tableView stopRefreshAnimation];
+      if(weakSelf.arrayFlock.count > 0)[weakSelf.tableView stopRefreshAnimation];
       
       if (error) {
         
